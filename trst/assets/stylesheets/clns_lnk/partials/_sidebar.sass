@@ -1,0 +1,69 @@
+=sidebar-title($bck: "favorite.png")
+  background:
+    image: image_url(unquote("icons/#{$bck}"))
+    position: 5px 50%
+    repeat: no-repeat
+  font:
+    style: italic
+    weight: bolder
+  margin:
+    bottom: 0.5em
+  text-indent: 2.5em
+=sidebar-content
+  line-height: 1em
+
+#sidebar
+  color: #111111
+  +column(3,last)
+  border-radius: 10px
+  +background-image(linear-gradient(left, #f5f5f5, #3e3e3e))
+  height: 500px
+  &.public
+    #address_title
+      +sidebar-title("home.png")
+    #workhours_title
+      +sidebar-title("clock.png")
+    #phone_title
+      +sidebar-title("telephone.png")
+    #email_title
+      +sidebar-title("mail.png")
+    #address, #workhours, #phone, #email
+      +sidebar-content
+      span
+        padding: 0px 20px
+        display: block
+    #google_map
+      margin-left: 5px
+      height: 250px
+      width: 250px
+  &.system
+    article
+      padding: 1.0em
+    ul
+      margin: 0px
+      list-style-type: none
+      padding: 0px
+      li
+        a
+          background: transparent
+          color: #000000
+          display: block
+          font-size: 1em
+          font-style: italic
+          margin: 0
+          padding: 0px 0.5em
+          text-decoration: none
+          width: auto
+          &:focus, &:hover, &:active
+            background: #eeeeee
+            color: #333333
+            text-decoration: none
+    .help
+      background:
+        image: image_url(unquote("icons/help.png"))
+      cursor: pointer
+      float: right
+      width: 16px
+      height: 16px
+      margin-top: -17px
+      padding: 0px

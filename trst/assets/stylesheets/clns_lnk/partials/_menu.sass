@@ -1,0 +1,70 @@
+#menu
+  background:
+    color: #c0c0c0
+    image: image_url(unquote("menu_bckgrnd.png"))
+    position: center right
+    repeat: repeat-x
+  border-top: 1px #ffffff solid
+  border-bottom: 1px #333333 solid
+  margin-bottom: 5px
+  ul
+    border-left: 1px #aaa solid
+    border-right: 1px #fff solid
+    display: inline-block
+    margin: 0px 10px
+    padding: 0
+    &:after
+      content: "."
+      display: block
+      clear: both
+      visibility: hidden
+      line-height: 0
+      height: 0
+    li
+      border-left: 1px #ffffff solid
+      border-right: 1px #aaaaaa solid
+      float: left
+      position: relative
+      font-size: 1.0em
+      line-height: 1em
+      list-style-type: none
+      margin: 0
+      padding: 0
+      a
+        background: transparent
+        color: #000000
+        display: block
+        font:
+          size: 1em
+          style: italic
+        margin: 0
+        padding: 0.2em 0.5em 0.2em 0.5em
+        text-decoration: none
+        width: auto
+        &:focus, &:hover, &:active
+          background: #eeeeee
+          color: #333333
+          text-decoration: none
+      &:hover > ul
+        display: block
+      ul
+        display: none
+        margin: 0
+        padding: 0
+        width: 150px
+        position: absolute
+        top: 16px
+        left: 0
+        background: #d6d6d6
+        border: solid 1px #3e3e3e
+        border-top: none
+        z-index: 98
+        li
+          float: none
+          margin: 0
+          padding: 2px
+          border: none
+        &:last-child
+          border-bottom-left-radius:  8px
+          border-bottom-right-radius: 8px
+          padding-bottom: 5px

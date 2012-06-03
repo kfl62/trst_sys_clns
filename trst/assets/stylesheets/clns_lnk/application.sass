@@ -1,0 +1,64 @@
+@charset "UTF-8"
+@import "blueprint/reset"
+@import "partials/base"
+@import "blueprint/grid"
+@import "compass"
+
++font-face("EmbossedBlackWideNormal", font-files("/stylesheets/fonts/Embossed_Black_Wide-webfont.woff", woff,"/stylesheets/fonts//Embossed_Black_Wide-webfont.ttf", truetype,"/stylesheets/fonts/Embossed_Black_Wide-webfont.svg", svg),"/stylesheets/fonts/Embossed_Black_Wide-webfont.eot")
+
+body
+  background-color: #3e3e3e
+.wrap
+  +container
+#content
+  +column(6)
+  background:
+    color: #F5F5F5
+    image: image_url(unquote("main_bckgrnd.png"))
+    position: center center
+    repeat: no-repeat
+  border-radius: 10px
+  height: 500px
+  position: relative
+  overflow: auto
+  color: #333333
+  #xhr_content
+    margin: 0.5em
+#xhr_msg
+  border-radius: 10px
+  box-shadow: 0.5em 0.5em #3e3e3e
+  color: black
+  display: none
+  position: absolute
+  padding: 1em
+  text-indent: 1.5em
+  top: 30px
+  z-index: 1002
+  &.loading
+    background:
+      color: rgba(230, 255, 230, 1)
+      image: image_url(unquote("icons/loading.gif"))
+      position: 0.5em 0.5em
+      repeat: no-repeat
+    display: block
+    text-indent: 2.5em
+  &.info
+    background:
+      color: rgba(230, 255, 230, 1)
+      image: image_url(unquote("icons/info.png"))
+      position: 0.5em 0.5em
+      repeat: no-repeat
+    display: block
+  &.error, &.warning
+    background:
+      color: rgba(255, 204, 204, 1)
+      image: image_url(unquote("icons/warning.png"))
+      position: 0.5em 0.5em
+      repeat: no-repeat
+    display: block
+
+@import "partials/header"
+@import "partials/menu"
+@import "partials/sidebar"
+@import "partials/footer"
+@import "partials/dialog"
