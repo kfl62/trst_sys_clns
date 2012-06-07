@@ -1,0 +1,23 @@
+%p.header_title.ce= Trst.firm.header_text
+%p.header_auth
+  %span
+    %a#login_status.st.em{href: '/utils/login',title: t('login.title')}
+      #{t('login.link_in')}
+      %i.icon-signin
+    %a.st.em{href: "http://trst.ro"}
+      TrustSys
+      %i.icon-external-link
+    %br
+  %span.small= "IP: #{request.ip}<br>"
+  %br
+  %span #{t('login.authenticated_as')}<br>
+  %span#login_name.st.em
+    %i.icon-lock
+    #{@current_user.login_name rescue 'Anonymous'}
+%span#I18n
+  %a{href: '/utils/lang/ro',title: t('lang.ro')}
+    %img{src: "#{Trst.firm.images_path}/icons/ro.png",alt: t('lang.ro')}
+  %a{href: '/utils/lang/en',title: t('lang.en')}
+    %img{src: "#{Trst.firm.images_path}/icons/en.png",alt: t('lang.en')}
+  %a{href: '/utils/lang/hu',title: t('lang.hu')}
+    %img{src: "#{Trst.firm.images_path}/icons/hu.png",alt: t('lang.hu')}

@@ -1,0 +1,9 @@
+%ul
+  - @chapters.each do |chapter|
+    %li
+      %a{id: "chapter_#{chapter.id}", href: File.join(lp,chapter.path)}= chapter.name
+      - if chapter.pages.length > 0
+        %ul
+          - chapter.pages.asc(:order).each do |page|
+            %li
+              %a{id: "page_#{page.id}", href: File.join(lp,page.path)}= page.name

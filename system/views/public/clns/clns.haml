@@ -1,0 +1,23 @@
+!!! 5
+%html
+  = partial('layout/html-head')
+
+  %body{id: "public"}
+    #main.wrap
+      %article#xhr_msg{class: (flash[:msg][:msg][:class] rescue 'loading')}= flash[:msg][:msg][:txt] rescue '...'
+      %header#header.public
+        = partial('layout/header')
+
+      %nav#menu.public
+        = partial('layout/menu')
+
+      %section#content
+        %article#xhr_content
+          = yield
+      %section#sidebar.public
+        = partial('layout/sidebar')
+
+      %section#main_footer.wrap
+
+    %footer#footer.wrap
+      = partial('layout/footer')
