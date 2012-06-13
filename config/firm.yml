@@ -1,15 +1,27 @@
 firm:
-  layout:       'layout'
-  sass_dir:     'trst/assets/stylesheets/asrv'
-  css_dir:      'public/stylesheets/asrv'
-  images_dir:   'public/images/asrv'
-  css_path:     '/stylesheets/asrv'
-  images_path:  '/images/asrv'
-  i18n_path:    'trst'
-  head_title:   'TrustSys'
-  header_text:  'TrustSys AutoSrv'
-  footer_text:  '&copy; 2005-2012 kfl62'
-  footer_title: 'Ferenc-Loránt Kiss'
-  db_devel:     'demo_asrv'
-  db_test:      'demo_test'
-  db_prod:      'demo_asrv'
+  public:
+    controller: 'public'
+    views:      'clns'
+    layout:     'clns'
+    page:
+      title:        'Cleantech Ltd.'
+      header:       'Cleantech motto'
+      footer_text:  '&copy; 2005-2012 Cleantech Ltd.'
+      footer_title: 'Ferenc-Loránt Kiss'
+  system:
+    page:
+      title:        'TrustSys - Cleantech'
+      header:       'TrustSys Cleantech'
+      footer_text:  '&copy; 2005-2012 kfl62'
+      footer_title: 'Ferenc-Loránt Kiss'
+
+  sass_dir:     'system/assets/stylesheets/clns'
+  css_dir:      'public/stylesheets/clns'
+  images_dir:   'public/images/clns'
+  css_path:     '/stylesheets/clns'
+  images_path:  '/images/clns'
+  i18n_path:    'clns'
+
+  db_devel:     'trst_clns'
+  db_test:      'trst_test'
+  db_prod:      'trst_clns'
