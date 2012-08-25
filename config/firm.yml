@@ -21,7 +21,9 @@ firm:
   css_path:     '/stylesheets/clns'
   images_path:  '/images/clns'
   i18n_path:    'clns'
+  js_path:      'clns'
 
+  models_path:  [trst, clns]
   db_devel:     'trst_clns'
   db_test:      'trst_test'
   db_prod:      'trst_clns'
