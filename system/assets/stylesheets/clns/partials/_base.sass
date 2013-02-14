@@ -75,5 +75,46 @@ acronym, abbr
   text-indent: 2.0em
 [class~=flri]
   float: right
+[class~=pdr-05]
+  padding-right: 5px
+[class~=pdl-05]
+  padding-left: 5px
+[class~=pdlr-05]
+  padding: 0px 5px
 .hidden
   display: none
+input[type=checkbox], input[type=radio]
+  vertical-align: middle
+  position: relative
+  bottom: 1px
+input[type=radio]
+  bottom: 2px
+input, span
+  &.width-100
+    width: 100px
+  &.width-150
+    width: 150px
+  &.width-200
+    width: 200px
+  &.width-250
+    width: 250px
+  &.width-300
+    width: 300px
+  &.width-350
+    width: 350px
+  &.width-400
+    width: 400px
+  &.width-450
+    width: 450px
+  &.width-500
+    width: 500px
+  &.width-550
+    width: 550px
+span[class*="truncate-"]
+  display: inline-block
+  overflow: hidden
+  text-overflow: ellipsis
+span.truncate-70
+  width: 70px
+span.truncate-200
+  width: 200px
