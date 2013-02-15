@@ -1,0 +1,56 @@
+ro:
+  mongoid:
+    attributes:
+      'trst/firm': &trst_firm
+        << : *trst_firm
+      'trst/person':
+        role_label: Rolul persoanei
+        role_null: Selectaţi rolul persoanei
+        role_admin: Administrator
+        role_contactp: Persoană de contact
+        role_delegate: Delegat
+      'clns/partner_firm_unit':
+        name_0: Nume scurt
+        name_1: Nume complet
+        role_label: Tip unitate
+        role_null: Tipul unităţii
+        role_dprt: Departament
+        role_pos: Punct de colectare
+        slug: Cod intern
+        chief: Responsabil
+        env_auth: Autorizaţie mediu
+        main: Principală?
+      'clns/partner_firm':
+        model_name: Partener Firmă
+        tab_title: Date firmă
+        client: Client
+        supplr: Furnizor
+        transp: Transportator
+        p03: Se reţine 3%
+        tab_notes_title: Alte date
+        tab_notes_content: |
+          Pentru a modifica/adăuga Adresă/Persoană/Unitate la
+          acest Partener (Firmă) alegeţi opţiunea &raquo;Detalii&laquo; după
+          selectarea Partenerului (Firmă).<br>
+          În cazul în care aţi făcut modificări la &raquo;Date Firmă&laquo;
+          apăsând butonul &raquo;Salvare&laquo; veţi fi automat redirecţionat
+          la ecranul în cauză.
+        tab_addresses_title: Adrese firmă
+        tab_addresses_exists: |
+          Mai jos aveţi Adresele asociate Partenerului (Firmă), pentru a le <br>
+          Viziona/Edita/Şterge folosiţi butoanele din dreapta!
+        tab_addresses_create: |
+          Ptr. a crea o &raquo;Adresă&laquo; apăsaţi butonul din dreapta!
+        tab_people_title: Persoane firmă
+        tab_people_exists: |
+          Mai jos aveţi Persoanele asociate Partenerului (Firmă), pentru a le <br>
+          Viziona/Edita/Şterge folosiţi butoanele din dreapta!
+        tab_people_create: |
+          Ptr. a crea o &raquo;Persoană&laquo; apăsaţi butonul din dreapta!
+        tab_units_title: Unităţi firmă
+        tab_units_exists: |
+          Mai jos aveţi Unităţile asociate Partenerului (Firmă), pentru a le <br>
+          Viziona/Edita/Şterge folosiţi butoanele din dreapta!
+        tab_units_create: |
+          Ptr. a crea o &raquo;Unitate&laquo; apăsaţi butonul din dreapta!
+        <<: *trst_firm

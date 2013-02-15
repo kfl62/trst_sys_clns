@@ -2,3 +2,12 @@ ro:
   clns:
     unit_info_lbl: Punct de lucru selectat
     unit_info_all: Toate unităţile
+    intro:
+      no_unit: |
+        Nu aveţi nici un Punct de lucru selectat!
+      has_unit: |
+        Punctul de lucru selectat:&nbsp;&nbsp;
+    select:
+      freight_all: Toate materialele
+      unit_all: Toate unităţile
+      desk_partner_firm: ['Alegeţi - Partener Persoană Juridică']
