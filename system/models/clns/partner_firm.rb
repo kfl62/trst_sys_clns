@@ -6,12 +6,12 @@ module Clns
     field :supplr,              type: Boolean,       default: true
     field :firm,                type: Boolean,       default: false
 
-    embeds_many :addresses,   class_name: "Clns::PartnerFirmAddress", cascade_callbacks: true
-    embeds_many :people,      class_name: "Clns::PartnerFirmPerson",  cascade_callbacks: true
-    embeds_many :units,       class_name: "Clns::PartnerFirmUnit",    cascade_callbacks: true
-    has_many    :dlns_client, class_name: "Clns::DeliveryNote",       inverse_of: :client
-    has_many    :grns_supplr, class_name: "Clns::Grn",                inverse_of: :supplr
-    has_many    :invs_client, class_name: "Clns::Invoice",            inverse_of: :client
+    embeds_many :addresses,   class_name: "Clns::PartnerFirm::Address", cascade_callbacks: true
+    embeds_many :people,      class_name: "Clns::PartnerFirm::Person",  cascade_callbacks: true
+    embeds_many :units,       class_name: "Clns::PartnerFirm::Unit",    cascade_callbacks: true
+    has_many    :dlns_client, class_name: "Clns::DeliveryNote",         inverse_of: :client
+    has_many    :grns_supplr, class_name: "Clns::Grn",                  inverse_of: :supplr
+    has_many    :invs_client, class_name: "Clns::Invoice",              inverse_of: :client
 
     accepts_nested_attributes_for :addresses, :people, :units
 
@@ -56,15 +56,16 @@ module Clns
     end
   end # PartnerFirm
 
-  class PartnerFirmAddress < Trst::Address
+  class PartnerFirm::Address < Trst::Address
 
     field :name,    type: String,   default: 'Main Address'
 
     embedded_in :firm, class_name: 'Clns::PartnerFirm', inverse_of: :addresses
 
   end # FirmAddress
+  PartnerFirmAddress = PartnerFirm::Address
 
-  class PartnerFirmPerson < Trst::Person
+  class PartnerFirm::Person < Trst::Person
 
     field :role,    type: String
 
@@ -74,8 +75,9 @@ module Clns
     has_many    :invs_client,   class_name: 'Clns::Invoice',      inverse_of: :client_d
 
   end # FirmPerson
+  PartnerFirmPerson = PartnerFirm::Person
 
-  class PartnerFirmUnit
+  class PartnerFirm::Unit
     include Mongoid::Document
     include Mongoid::Timestamps
     include Trst::ViewHelpers
@@ -114,4 +116,5 @@ module Clns
       stks.find_by(id_date: Date.new(y,m,1))
     end
   end # FirmUnit
+  PartnerFirmUnit = PartnerFirm::Unit
 end # Wstm
