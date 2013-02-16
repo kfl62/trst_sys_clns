@@ -1,0 +1,102 @@
+%tbody#tabs-firm{style: 'min-width:380px',data: {title: mat(@object, :tab_title)}}
+  - tr_show_for @object, 'id'
+  - tr_show_for @object, 'name',      {order: 0}
+  - tr_show_for @object, 'name',      {order: 1}
+  - tr_show_for @object, 'name',      {order: 2}
+  - tr_show_for @object, 'identities',{order: 'caen'}
+  - tr_show_for @object, 'identities',{order: 'chambcom'}
+  - tr_show_for @object, 'identities',{order: 'fiscal'}
+  - tr_show_for @object, 'identities',{order: 'account'}
+  - tr_show_for @object, 'identities',{order: 'itm'}
+  - tr_show_for @object, 'identities',{order: 'internet'}
+  - tr_show_for @object, 'identities',{order: 'cod'}
+  - tr_show_for @object, 'contact',   {order: 'phone'}
+  - tr_show_for @object, 'contact',   {order: 'fax'}
+  - tr_show_for @object, 'contact',   {order: 'email'}
+  - tr_show_for @object, 'contact',   {order: 'website'}
+  - tr_show_for @object, 'created_at'
+  - tr_show_for @object, 'updated_at'
+- if @object.addresses.empty?
+  %tbody{id: "tabs-addresses",data: {title: "#{mat(@object,'tab_addresses_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_addresses_not_exists')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_addresses_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/address",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+- else
+  %tbody{id: "tabs-addresses",data: {title: "#{mat(@object,'tab_addresses_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_addresses_exists')
+    - @object.addresses.each do |o|
+      %tr
+        %td
+          %span.value.ui-state-default= o.name
+        %td.buttonset
+          %button{type: "button",title: "#{t('button.show')}",  data: {url: "/sys/#{@path}/address",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'firm',action: "show",text: 'hidden',  icon: "clipboard"}}= t('button.show')
+          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}/address",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'firm',action: "edit",text: 'hidden',  icon: "document"}}= t('button.edit')
+          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}/address",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'firm',action: "delete",text: 'hidden',icon: "circle-minus"}}= t('button.delete')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_addresses_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/address",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+- if @object.people.empty?
+  %tbody{id: "tabs-people",data: {title: "#{mat(@object,'tab_people_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_people_not_exists')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_people_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/person",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 2,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+- else
+  %tbody{id: "tabs-people",data: {title: "#{mat(@object,'tab_people_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_people_exists')
+    - @object.people.asc(:role).each do |o|
+      %tr
+        %td
+          %span.value.ui-state-default= o.name
+        %td.buttonset
+          %button{type: "button",title: "#{t('button.show')}",  data: {url: "/sys/#{@path}/person",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 2,r_mdl: 'firm',action: "show",text: 'hidden',  icon: "clipboard"}}= t('button.show')
+          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}/person",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 2,r_mdl: 'firm',action: "edit",text: 'hidden',  icon: "document"}}= t('button.edit')
+          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}/person",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 2,r_mdl: 'firm',action: "delete",text: 'hidden',icon: "circle-minus"}}= t('button.delete')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_people_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/person",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 2,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+- if @object.units.empty?
+  %tbody{id: "tabs-units",data: {title: "#{mat(@object,'tab_units_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_units_not_exists')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_units_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/unit",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 3,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+- else
+  %tbody{id: "tabs-units",data: {title: "#{mat(@object,'tab_units_title')}"}}
+    %tr.pdb-05
+      %td{colspan: '2'}
+        %span.info= mat(@object,'tab_units_exists')
+    - @object.units.asc(:role, :name).each do |o|
+      %tr
+        %td
+          %span.value.ui-state-default= o.name[1]
+        %td.buttonset
+          %button{type: "button",title: "#{t('button.show')}",  data: {url: "/sys/#{@path}/unit",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 3,r_mdl: 'firm',action: "show",text: 'hidden',  icon: "clipboard"}}=    t('button.show')
+          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}/unit",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 3,r_mdl: 'firm',action: "edit",text: 'hidden',  icon: "document"}}=     t('button.edit')
+          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}/unit",oid: o.id,r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 3,r_mdl: 'firm',action: "delete",text: 'hidden',icon: "circle-minus"}}= t('button.delete')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_units_create')
+      %td.buttonset
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}/unit",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 3,r_mdl: 'firm',action: "create",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
