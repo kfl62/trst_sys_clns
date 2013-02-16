@@ -1,0 +1,15 @@
+%tbody
+  %tr
+    - td_label_for @related_object, 'name', {order: 2}
+    - td_value_for @related_object, 'name', {order: 2}
+    - td_error_for @related_object, 'name', {order: 2}
+  - tr_input_for @object,  'name', {value: 'Sediu'}
+  - tr_input_for @object,  'city'
+  - tr_input_for @object,  'street'
+  - tr_input_for @object,  'nr'
+  - tr_input_for @object,  'bl'
+  - tr_input_for @object,  'sc'
+  - tr_input_for @object,  'ap'
+  - tr_input_for @object,  'state'
+  - tr_input_for @object,  'country'
+  - tr_input_for @object,  'zip'
