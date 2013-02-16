@@ -11,3 +11,20 @@ ro:
       freight_all: Toate materialele
       unit_all: Toate unităţile
       desk_partner_firm: ['Alegeţi - Partener Persoană Juridică']
+    msg:
+      input_too_short_strt: |
+        Vă rugăm întroduceţi min. %{nr} caractere!
+      input_too_short_more: |
+        Vă rugăm întroduceţi încă %{nr} caractere!
+      input_too_short_last: |
+        Vă rugăm întroduceţi încă un caracter!
+      searching: |
+        Aveţi puţin tică răbdare...
+      no_matches: Nu există în baza de date...
+      no_freight_selected: |
+        <br>
+        Hmmm... Se pare că nu aţi ales niciun material!
+        Sau aţi uitat să introduceţi cantitatea!
+        Apăsaţi <b>"Ştergere"</b> şi încercaţi din nou :)
+      no_payments: |
+        Nu există nici o plată!
