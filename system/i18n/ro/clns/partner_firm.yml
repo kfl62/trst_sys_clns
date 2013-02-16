@@ -9,7 +9,7 @@ ro:
         role_admin: Administrator
         role_contactp: Persoană de contact
         role_delegate: Delegat
-      'clns/partner_firm_unit':
+      'clns/partner_firm/unit':
         name_0: Nume scurt
         name_1: Nume complet
         role_label: Tip unitate
