@@ -1,0 +1,15 @@
+%tbody
+  - tr_show_for @object,        'id'
+  - tr_show_for @related_object,'name',   {order: 2}
+  - tr_show_for @object,        'role',   {type: 'enum'}
+  - tr_show_for @object,        'name'
+  - tr_show_for @object,        'id_pn'
+  - tr_show_for @object,        'id_doc', {order: 'type'}
+  - tr_show_for @object,        'id_doc', {order: 'sr'}
+  - tr_show_for @object,        'id_doc', {order: 'nr'}
+  - tr_show_for @object,        'id_doc', {order: 'by'}
+  - tr_show_for @object,        'id_doc', {order: 'on'}
+  - tr_show_for @object,        'phone'
+  - tr_show_for @object,        'email'
+  - tr_show_for @object,        'created_at'
+  - tr_show_for @object,        'updated_at'
