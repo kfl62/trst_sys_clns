@@ -1,0 +1,16 @@
+%tbody
+  %tr
+    - td_label_for @related_object, 'name', {order: 1}
+    - td_value_for @related_object, 'name', {order: 1}
+    - td_error_for @related_object, 'name', {order: 1}
+  - tr_select_for @object,'role',   {type: 'enum',select_options: %w{null dprt pos}}
+  - tr_input_for  @object,'name', {order: 0}
+  - tr_input_for  @object,'name', {order: 1}
+  - tr_input_for  @object,'slug'
+  - tr_input_for  @object,'chief'
+  - tr_input_for  @object,'env_auth'
+  %tr
+    - td_label_for @object, 'main'
+    %td.boolean
+      %input.before-yes{type: 'radio',name: "[#{@path}][main]",checked: @object.main,value: 'true'}
+      %input.before-no{type: 'radio',name: "[#{@path}][main]",checked: !@object.main,value: 'false'}
