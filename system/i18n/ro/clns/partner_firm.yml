@@ -15,7 +15,7 @@ ro:
         role_label: Tip unitate
         role_null: Tipul unităţii
         role_dprt: Departament
-        role_pos: Punct de colectare
+        role_pos: Depozit/Punct de lucru
         slug: Cod intern
         chief: Responsabil
         env_auth: Autorizaţie mediu
@@ -25,8 +25,6 @@ ro:
         tab_title: Date firmă
         client: Client
         supplr: Furnizor
-        transp: Transportator
-        p03: Se reţine 3%
         tab_notes_title: Alte date
         tab_notes_content: |
           Pentru a modifica/adăuga Adresă/Persoană/Unitate la

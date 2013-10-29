@@ -86,7 +86,6 @@ module Clns
     field :name,      type: Array,        default: ['ShortName','FullName']
     field :slug,      type: String
     field :chief,     type: String,       default: 'Lastname Firstname'
-    field :env_auth,  type: String
     field :main,      type: Boolean,      default: false
 
     embedded_in :firm,      class_name: 'Clns::PartnerFirm',  inverse_of: :units
