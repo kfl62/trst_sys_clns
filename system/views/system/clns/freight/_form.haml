@@ -1,0 +1,16 @@
+%tbody
+  - if @current_user.admin?
+    - if locals[:create]
+      = partial 'clns/shared/select_freight', locals: {label: true,error: true,id_stats: id_stats}
+      - tr_input_for  @object,      'id_stats', {value: id_stats}
+    - else
+      - tr_show_for @object,        'criteria_name'
+      - tr_show_for @object,        'id_stats'
+    - tr_input_for  @object,        'name', {style: 'focus'}
+    - tr_input_for  @object,        'um'
+    - tr_input_for  @object,        'pu'
+  - else
+    - tr_show_for   @object,        'id_stats'
+    - tr_show_for   @object,        'name'
+    - tr_show_for   @object,        'um'
+    - tr_input_for  @object,        'pu', {style: 'focus'}
