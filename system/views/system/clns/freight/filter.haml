@@ -1,0 +1,24 @@
+:ruby
+  id_stats = params[:id_stats] || "00000000"
+%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+%form{action: "/sys/#{@path}",method: "get"}
+  %table{cellspacing: "0"}
+    %tbody
+      %tr.pdb-05
+        %td
+          %span.info.width-400.ju= t("intro.filter.main",data: mat(@object,'model_name'))
+      = partial "clns/shared/select_freight", locals: {label: false,error: false,id_stats: id_stats}
+      %tr.pdb-05
+        %td
+          %select#oid
+            %option{value: "null"}= t("select.option",data: mat(@object,'model_name'))
+            - @object.default_sort.by_id_stats(id_stats).each do |o|
+              %option{value: o.view_filter.first}= o.view_filter.last
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: "button",data: {action: "create",icon: "circle-plus"}}= t('button.create')
+          %button{type: "button",data: {action: "show",  icon: "clipboard"}}= t('button.show')
+          %button{type: "button",data: {action: "edit",  icon: "document"}}= t('button.edit')
+          %button{type: "button",data: {action: "delete",icon: "circle-minus"}}= t('button.delete')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

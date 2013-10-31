@@ -1,0 +1,53 @@
+ro:
+  clns:
+    freight:
+      missing: [["00", "---"]]
+      c0: [["00", "Toate"], ["01", "Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Combustibil"], ["08", "Reparatii/Service"], ["09", "Altele"]]
+      c1:
+        "00": [["00", "Toate"]]
+        "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"]]
+        "02": [["00", "Toate"], ["01", "Carucior MONO cu presa"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["06", "Perie frecat cu miner"], ["07", "Suport pad dreptunghiular"]]
+        "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 400 mm"], ["03", "Perie PPL 400 mm"], ["04", "Perie Tynnex"], ["05", "Perie covor"], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"]]
+        "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
+        "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
+        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Pad monodisk 400mm"], ["09", "Pad dreptunghiular"], ["10", "Saci menaj"]]
+        "07": [["00", "Toate"]]
+        "08": [["00", "Toate"]]
+        "09": [["00", "Toate"]]
+      c2:
+        "00":
+          "00": [["00", "Toate"]]
+        "02":
+          "05": [["00", "Toate"], ["01", "Suport mop cu urechi"], ["02", "Suport mop cu buzunar"]]
+        "03":
+          "01": [["00", "Toate"], ["01", "Furtun 38mm"], ["02", "Furtun 40mm"]]
+          "06": [["00", "Toate"], ["01", "Coada lemn 110"], ["02", "Coada lemn 150"], ["03", "Coada metal"]]
+          "07": [["00", "Toate"], ["01", "Nilfisk GD2000"], ["02", "Nilfisk S100"], ["03", "Numatic 470"], ["04", "Numatic Henry"], ["05", "Altele"]]
+        "04":
+          "01": [["00", "Toate"], ["01", "Motor A40"], ["02", "Motor Soteco"]]
+          "02": [["00", "Toate"], ["01", "Dispersor sapun Pompa"], ["02", "Dispersor sapun Placa spate"]]
+        "05":
+          "01": [["00", "Toate"], ["01", "Sanitar"], ["02", "Mobilier"], ["03", "Pardoseala"], ["04", "Parfumat"], ["05", "Vesela"], ["06", "Automata"]]
+          "02": [["00", "Toate"], ["01", "Sanitar"], ["02", "Alcalin"], ["03", "Altele"]]
+          "03": [["00", "Toate"], ["01", "Sapun lichid"], ["02", "Dispersie polimerica"]]
+        "06":
+          "01": [["00", "Toate"], ["01", "HWCS alb"], ["02", "HWCS color"]]
+          "02": [["00", "Toate"], ["01", "HWCM alb"], ["02", "HWCM color"]]
+          "03": [["00", "Toate"], ["01", "LMF rosu"], ["02", "LMF albastru/verde"], ["03", "LMF galben"]]
+          "04": [["00", "Toate"], ["01", "BSB alb"], ["02", "BSB verde"]]
+          "06": [["00", "Toate"], ["01", "MP40 bumbac cu urechi"], ["02", "MP40 bumbac cu buzunare"], ["03", "MP40 micro cu urechi"], ["04", "MP40 micro cu buzunare"]]
+          "07": [["00", "Toate"], ["01", "MR profesional"], ["02", "MR Metro"]]
+          "08": [["00", "Toate"], ["01", "PM rosu"], ["02", "PM albastru"], ["03", "PM verde"], ["04", "PM maro"], ["05", "PM negru"]]
+          "09": [["00", "Toate"], ["01", "PD albastru"], ["02", "PD verde"], ["03", "PD maro"]]
+          "10": [["00", "Toate"], ["01", "SM 20L"], ["02", "SM 30L"], ["03", "SM 60L"], ["04", "SM 120L"], ["05", "SM altele"]]
+  mongoid:
+    attributes:
+      'trst/freight': &trst_freight
+        << : *trst_freight
+      'clns/freight':
+        criteria_name: Categoria/Grupa
+        table_all: ['Material', 'Iniţial', 'Intrări', 'Ieşiri', 'Stoc']
+        table_one: ['Data', 'Intrări', 'Ieşiri', 'Stoc']
+        stock_start: Stoc initial
+        table_all_with_pu: ['Material', 'PU', 'Iniţial', 'Valoare', 'Intrări', 'Valoare', 'Ieşiri', 'Valoare', 'Stoc', 'Valoare']
+        << : *trst_freight
