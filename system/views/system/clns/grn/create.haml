@@ -1,0 +1,88 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+- if params[:id_intern]
+  :ruby
+    unit_id  = params[:unit_id]
+    unit     = firm.units.find(unit_id)
+    dln_ary  = params[:dln_ary].split(',')
+    dln_ary.each{|id| @object.dlns << Clns::DeliveryNote.find(id)}
+  %span#hidden_data.hidden{data: {dialog: 'create',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn'}}
+  %form{action: "/sys/#{@path}/create?id_intern=true", method: 'post'}
+    %table{cellspacing: "0"}
+      %thead
+        %tr
+          %td
+            - label_for @object, 'name'
+            - input_for @object, 'name',      {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
+            - label_for @object, 'id_date'
+            - input_for @object, 'id_date',   {id: 'date_show',name: 'strip'}
+            - input_for @object, 'id_date',   {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+            - input_for @object, 'id_intern', {type: 'hidden',value: 'true'}
+            - input_for @object, 'doc_type',  {type: 'hidden',value: 'DN'}
+            - input_for @object, 'doc_name',  {type: 'hidden',value: @object.dlns.map(&:doc_name).join(', ')}
+            - input_for @object, 'doc_date',  {type: 'hidden',value: @object.dlns.last.id_date}
+            - input_for @object, 'supplr_id', {type: 'hidden',value: firm.id}
+            - input_for @object, 'transp_id', {type: 'hidden',value: firm.id}
+            - input_for @object, 'unit_id',   {type: 'hidden',value: unit_id}
+            - input_for @object, 'signed_by_id', {type: 'hidden',value: @current_user.id}
+            - dln_ary.each do |dn|
+              -input_for @object,'dln_ids',   {type: 'hidden',name: "[#{@path}][dln_ids][]",value: dn}
+        %tr.pdb-05
+          %td
+            %span= t('intro.create.desk_grn.id_intern',unit: unit.name[1])
+        %tr.pdb-05
+          %td
+            %input#transp_d_id.select2{type: 'hidden',name: '[wstm/grn][transp_d_id]', style: 'width:200px', data: {minlength: '0',ph: '3',search: 'Clns::PartnerFirm',noinit: 'true',transp_id: firm.id}}
+            - input_for @object, 'doc_plat', {style: 'ui-state-default ce',placeholder: mat(@object,'doc_plat')}
+            %button#transp_d{type: "button", data: {action: "create", icon: "circle-plus"}}=  t('button.create') + " Delegat!"
+        %tr.pdb-05
+          %td
+            %hr
+            %span.small.width-450{style: 'display:inline-block'}= mat(@object,'dlns_name').concat @object.dlns.map(&:doc_name).join(', ')
+      = partial "#{@path}/form", locals: {dlns: dln_ary,id_intern: true,unit: unit}
+      %tfoot
+        %tr
+          %td.buttonset.ce
+            %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
+            %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+- else
+  :ruby
+    unit     = firm.units.find_by(main: true)
+    supplr   = Clns::PartnerFirm.find(params[:supplr_id])
+    supplr_d = supplr.people.find(params[:supplr_d_id]) rescue nil
+    freights = Clns::Freight.options_for_grn
+  %span#hidden_data.hidden{data: {dialog: 'create',model_name: mat(@object,'model_name'),oid: 'null',js_ext: 'desk_grn'}}
+  %form{action: "/sys/#{@path}", method: 'post'}
+    %table{cellspacing: "0"}
+      %thead
+        %tr
+          %td
+            - label_for @object, 'name'
+            - input_for @object, 'name',        {value: @object.increment_name(unit.id),style: 'ui-state-default ce id_intern'}
+            - label_for @object, 'id_date'
+            - input_for @object, 'id_date',     {id: 'date_show',name: 'strip'}
+            - input_for @object, 'id_date',     {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+            - input_for @object, 'id_intern',   {id: 'id_intern',type: 'hidden',value: 'false'}
+            - input_for @object, 'supplr_id',   {id: 'supplr_id',type: 'hidden',value: supplr.id,id: 'supplr_id'}
+            - if supplr_d
+              - input_for @object,'supplr_d_id',{type: 'hidden',value: supplr_d.id}
+            - input_for @object, 'unit_id',     {type: 'hidden',value: unit.id}
+            - input_for @object, 'signed_by_id',{type: 'hidden',value: @current_user.id}
+        %tr.pdb-05
+          %td
+            - select_for @object,'doc_type',    {type: 'enum',style: 'clns doc_type focus',select_options: %w{null DN INV CRC MIN}}
+            - input_for  @object,'doc_name',    {style: 'ui-state-default ce',placeholder: mat(@object,'doc_name')}
+            - input_for  @object,'doc_plat',    {style: 'ui-state-default ce',placeholder: mat(@object,'doc_plat')}
+            - input_for  @object,'doc_date',    {type: 'hidden',value: 'strip'}
+        %tr.pdb-05
+          %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
+            = partial "clns/shared/doc_add_freight"
+        %tr.pdb-05
+          %td
+            %span.info.width-450.ju= t('intro.create.desk_grn.partner_firm',unit: unit.name[1],signed_by: @current_user.name,supplr: supplr.name[2], supplr_d: (supplr_d.name rescue 'Anonymous'))
+      = partial "#{@path}/form", locals: {id_intern: false,unit: unit}
+      %tfoot
+        %tr
+          %td.buttonset.ce
+            %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
+            %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
