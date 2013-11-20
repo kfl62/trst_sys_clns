@@ -1,0 +1,25 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/grn':
+        model_name_id_intern: NIR - Transfer gestiune
+        model_name: NIR - Notă de recepţie
+        table_header: ['Material', 'UM', 'Preţ', 'Cantitate', 'Valoare', 'TVA', 'Total','']
+        tabs_freights: 'Materiale recepţionate'
+        tabs_payments: 'Condiţii plată'
+        name: 'Nr. intern '
+        id_date: ' din data de '
+        transp_d: ' delegatul '
+        dlns_name: 'Avize nr:'
+        doc_type_null: 'Tip document'
+        doc_type_DN:   'Aviz expediţie'
+        doc_type_INV:  'Factură fiscală'
+        doc_type_CRC:  'Bon fiscală'
+        doc_type_MIN:  'Proces verbal'
+        doc_name:  'Document nr.'
+        doc_plat:  'Maşina nr.'
+        deadl:     'Termen de plată'
+        pyms_text: 'Achitat cu...'
+        pyms_val:  'Suma de...'
+        day: |
+          Note de recepţie din data de:&nbsp;
