@@ -13,6 +13,8 @@ module Clns
     field :pu,          type: Float,     default: 0.00
     field :qu,          type: Float,     default: 0.00
     field :val,         type: Float,     default: 0.00
+    field :tva,         type: Float,     default: 0.00
+    field :out,         type: Float,     default: 0.00
 
     belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :ins
     belongs_to  :doc_grn,  class_name: 'Clns::Grn',         inverse_of: :freights

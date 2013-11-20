@@ -11,6 +11,8 @@ module Clns
     field :id_intern,   type: Boolean,  default: false
     field :doc_name,    type: String
     field :sum_100,     type: Float,    default: 0.00
+    field :sum_tva,     type: Float,    default: 0.00
+    field :sum_out,     type: Float,    default: 0.00
     field :deadl,       type: Date,     default: -> {Date.today}
     field :payed,       type: Boolean,  default: false
 

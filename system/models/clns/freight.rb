@@ -2,6 +2,8 @@
 module Clns
   class Freight < Trst::Freight
 
+    field       :tva,      type: Float,     default: 0.24
+
     has_many    :ins,      class_name: "Clns::FreightIn",       inverse_of: :freight
     has_many    :outs,     class_name: "Clns::FreightOut",      inverse_of: :freight
     has_many    :stks,     class_name: "Clns::FreightStock",    inverse_of: :freight
@@ -18,7 +20,7 @@ module Clns
       end
       # @todo
       def options_for_grn
-        asc(:name).each_with_object([]){|f,a| a << [f.id,f.name,{id_stats: f.id_stats,um: f.um,pu: f.pu,p03: f.p03.to_s}]}
+        asc(:name).each_with_object([]){|f,a| a << [f.id,f.name,{id_stats: f.id_stats,um: f.um,pu: f.pu}]}
       end
       # @todo
       def options_for_dln
