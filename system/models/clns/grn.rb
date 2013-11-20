@@ -14,6 +14,7 @@ module Clns
     field :doc_date,    type: Date
     field :doc_plat,    type: String
     field :sum_100,     type: Float,    default: 0.00
+    field :sum_tva,     type: Float,    default: 0.00
     field :sum_out,     type: Float,    default: 0.00
     field :charged,     type: Boolean,  default: false
 
@@ -132,6 +133,8 @@ module Clns
           id_intern:    true,
           doc_name:     doc_name,
           sum_100:      sum_100,
+          sum_tva:      sum_tva,
+          sum_out:      sum_out,
           deadl:        self[:deadl] || Date.today + 30.days,
           payed:        false,
           client_id:    supplr_id,

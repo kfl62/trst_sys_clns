@@ -1,0 +1,103 @@
+- if id_intern
+  %tbody
+    %tr
+      %td
+        %table{cellspacing: "0",style: "width:100%;font-size:12px"}
+          %tbody.inner
+            %tr
+              - mat(@object,'table_header')[0..4].each do |label|
+                %td.ce= label
+            - data = Wstm::DeliveryNote.where(:id.in => dlns).sum_freights_grn; data.sort.each_with_index do |s,i|
+              - o = @object.freights.new
+              %tr
+                %td
+                  %span.stats= s[1][0]
+                  - input_for o, 'id_date',   {type: 'hidden',nested: 'doc_grn',index: i,value: @object.id_date}
+                  - input_for o, 'id_stats',  {type: 'hidden',nested: 'doc_grn',index: i,value: s[1][1]}
+                  - input_for o, 'id_intern', {type: 'hidden',nested: 'doc_grn',index: i,value: 'true'}
+                  - input_for o, 'freight_id',{type: 'hidden',nested: 'doc_grn',index: i,value: unit.freights.find_by(id_stats: s[1][1]).id}
+                %td
+                  %span.um kg
+                %td
+                  %span.qu= "%.2f" % s[1][2]
+                  - input_for o, 'pu',        {type: 'hidden',nested: 'doc_grn',index: i,value: s[1][2]}
+                %td
+                  %span.val= "%.2f" % s[1][3]
+                  - input_for o, 'qu',        {type: 'hidden',nested: 'doc_grn',index: i,value: s[1][3]}
+                %td
+                  %span.val= "%.2f" % s[1][4]
+                  - input_for o, 'val',       {type: 'hidden',nested: 'doc_grn',index: i,value: s[1][4]}
+            %tr.total
+              %td.ce.st{:colspan => "4"}= "Total"
+              %td
+                %span.val= "%.2f" % data.values.sum{|r| r[4]}.round(2)
+                - input_for @object, 'sum_100',{type: 'hidden',value: data.values.sum{|r| r[4]}.round(2)}
+                - input_for @object, 'sum_out',{type: 'hidden',value: data.values.sum{|r| r[4]}.round(2)}
+-else
+  %tbody{id: 'tabs-freights',data: {title: mat(@object,'tabs_freights')}}
+    %tr
+      %td
+        %table{cellspacing: "0",style: "width:100%;font-size:12px"}
+          %tbody.inner
+            %tr.grn-freight-header.hidden
+              - mat(@object,'table_header').each do |label|
+                %td.ce= label
+            %tr.grn-freight.template
+              - o = @object.freights.new
+              %td
+                %span.name Material
+                - input_for o, 'freight_id',    {type: 'hidden',nested: 'doc_grn',index: 0,style: 'freight_id',value: 'strip'}
+                - input_for o, 'id_date',       {type: 'hidden',nested: 'doc_grn',index: 0,style: 'id_date',value: 'strip'}
+                - input_for o, 'id_stats',      {type: 'hidden',nested: 'doc_grn',index: 0,style: 'id_stats',value: 'strip'}
+                - input_for o, 'id_intern',     {type: 'hidden',nested: 'doc_grn',index: 0,style: 'id_intern',value: 'false'}
+                - input_for o, 'um',            {type: 'hidden',nested: 'doc_grn',index: 0,style: 'um',value: 'strip'}
+                - input_for o, 'pu',            {type: 'hidden',nested: 'doc_grn',index: 0,style: 'pu',value: 'strip'}
+                - input_for o, 'qu',            {type: 'hidden',nested: 'doc_grn',index: 0,style: 'qu',value: 'strip'}
+                - input_for o, 'val',           {type: 'hidden',nested: 'doc_grn',index: 0,style: 'val',value: 'strip'}
+                - input_for o, 'tva',           {type: 'hidden',nested: 'doc_grn',index: 0,style: 'tva',value: 'strip'}
+                - input_for o, 'out',           {type: 'hidden',nested: 'doc_grn',index: 0,style: 'out',value: 'strip'}
+              %td
+                %span.um buc
+              %td
+                %span.pu 0.00
+              %td
+                %span.qu 0.00
+              %td
+                %span.val 0.00
+              %td
+                %span.tva 0.00
+              %td
+                %span.out 0.00
+              %td
+                %span.button.flri.red.pointer.icon-minus-sign
+            %tr.grn-freight-total.hidden
+              %td{colspan: 4}
+                %span.name TOTAL
+              %td
+                %span.val 0.00
+              %td
+                %span.tva 0.00
+              %td
+                %span.out 0.00
+              %td
+                %span &nbsp
+                - input_for @object, 'sum_100',           {type: 'hidden',style: 'val',value: 'strip'}
+                - input_for @object, 'sum_tva',           {type: 'hidden',style: 'tva',value: 'strip'}
+                - input_for @object, 'sum_out',           {type: 'hidden',style: 'out',value: 'strip'}
+  %tbody{id: 'tabs-payments',data: {title: mat(@object,'tabs_payments')}}
+    %tr.dn
+      %td
+        %span.info= t('intro.create.desk_grn.pyms_no')
+    %tr.inv
+      %td
+        %span.info= t('intro.create.desk_grn.pyms_ok')
+    %tr.inv
+      %td
+        %span.stats= mat(@object,'deadl')
+        %input.ui-state-default.ce{name: '[clns/grn][deadl]',value: (Date.today + 30.days).to_s}
+    %tr.inv.pyms
+      %td
+        %input{type: 'hidden',name: '[clns/grn][pyms][id_date]'}
+        %input{type: 'hidden',name: '[clns/grn][pyms][id_intern]',value: 'false'}
+        %input.ui-state-default.width-250{name: '[clns/grn][pyms][text]',placeholder: mat(@object,'pyms_text')}
+        %input.ui-state-default.ce{name: '[clns/grn][pyms][val]',placeholder: mat(@object,'pyms_val')}
