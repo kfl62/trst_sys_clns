@@ -2,26 +2,26 @@ ro:
   clns:
     freight:
       missing: [["00", "---"]]
-      c0: [["00", "Toate"], ["01", "Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Combustibil"], ["08", "Reparatii/Service"], ["09", "Altele"]]
+      c0: [["00", "Toate"], ["01", "Masini/Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Combustibil"], ["08", "Reparatii/Service"], ["09", "Altele"]]
       c1:
         "00": [["00", "Toate"]]
         "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"]]
         "02": [["00", "Toate"], ["01", "Carucior MONO cu presa"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["06", "Perie frecat cu miner"], ["07", "Suport pad dreptunghiular"]]
-        "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 400 mm"], ["03", "Perie PPL 400 mm"], ["04", "Perie Tynnex"], ["05", "Perie covor"], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"]]
+        "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 16\""], ["03", "Perie PPL 16\""], ["04", "Perie Tynnex 16\""], ["05", "Perie covor 16\""], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"]]
         "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
         "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
-        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Pad monodisk 400mm"], ["09", "Pad dreptunghiular"], ["10", "Saci menaj"]]
+        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["12", "Prosop"]]
         "07": [["00", "Toate"]]
         "08": [["00", "Toate"]]
-        "09": [["00", "Toate"]]
+        "09": [["00", "Toate"], ["01", "Protocol"]]
       c2:
         "00":
           "00": [["00", "Toate"]]
         "02":
           "05": [["00", "Toate"], ["01", "Suport mop cu urechi"], ["02", "Suport mop cu buzunar"]]
         "03":
-          "01": [["00", "Toate"], ["01", "Furtun 38mm"], ["02", "Furtun 40mm"]]
-          "06": [["00", "Toate"], ["01", "Coada lemn 110"], ["02", "Coada lemn 150"], ["03", "Coada metal"]]
+          "01": [["00", "Toate"], ["01", "Furtun 38mm"], ["02", "Furtun 42mm"]]
+          "06": [["00", "Toate"], ["01", "Coada lemn 110"], ["02", "Coada lemn 150"], ["03", "Coada metal Alu"], ["04", "Coada metal Altele"]]
           "07": [["00", "Toate"], ["01", "Nilfisk GD2000"], ["02", "Nilfisk S100"], ["03", "Numatic 470"], ["04", "Numatic Henry"], ["05", "Altele"]]
         "04":
           "01": [["00", "Toate"], ["01", "Motor A40"], ["02", "Motor Soteco"]]
@@ -37,9 +37,12 @@ ro:
           "04": [["00", "Toate"], ["01", "BSB alb"], ["02", "BSB verde"]]
           "06": [["00", "Toate"], ["01", "MP40 bumbac cu urechi"], ["02", "MP40 bumbac cu buzunare"], ["03", "MP40 micro cu urechi"], ["04", "MP40 micro cu buzunare"]]
           "07": [["00", "Toate"], ["01", "MR profesional"], ["02", "MR Metro"]]
-          "08": [["00", "Toate"], ["01", "PM rosu"], ["02", "PM albastru"], ["03", "PM verde"], ["04", "PM maro"], ["05", "PM negru"]]
-          "09": [["00", "Toate"], ["01", "PD albastru"], ["02", "PD verde"], ["03", "PD maro"]]
-          "10": [["00", "Toate"], ["01", "SM 20L"], ["02", "SM 30L"], ["03", "SM 60L"], ["04", "SM 120L"], ["05", "SM altele"]]
+          "09": [["00", "Toate"], ["01", "PM rosu"], ["02", "PM albastru"], ["03", "PM verde"], ["04", "PM maro"], ["05", "PM negru"]]
+          "10": [["00", "Toate"], ["01", "PD albastru"], ["02", "PD verde"], ["03", "PD maro"]]
+          "11": [["00", "Toate"], ["01", "SM 20L"], ["02", "SM 30L"], ["03", "SM 60L"], ["04", "SM 120L"], ["05", "SM altele"]]
+          "12": [["00", "Toate"], ["01", "PHS alb"], ["02", "PHS color"], ["03", "PHB rola 10M"], ["04", "PHB rola 200M"], ["05", "PHB rola 300M"], ["06", "PHI rola KC7200"]]
+        "09":
+          "01": [["00", "Toate"], ["01", "Protocol - Alimente"]]
   mongoid:
     attributes:
       'trst/freight': &trst_freight
