@@ -15,8 +15,10 @@ module Clns
     end # Class methods
 
     # @todo
-    def login
-      logins.find_or_create_by(id_date: Date.today).push(:login,Time.now)
+    def login(ip = '')
+      l = logins.find_or_create_by(id_date: Date.today)
+      l.push(:login,Time.now)
+      l.set(:ip,ip)
     end
     # @todo
     def logout
