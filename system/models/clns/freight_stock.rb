@@ -26,7 +26,7 @@ module Clns
       # @todo
       def keys(pu = true)
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort! if pu
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
         ks
       end
       # @todo
@@ -60,7 +60,7 @@ module Clns
 
     # @todo
     def key
-      "#{id_stats}_#{"%05.2f" % pu}"
+      "#{id_stats}_#{"%05.4f" % pu}"
     end
     # @todo
     def unit

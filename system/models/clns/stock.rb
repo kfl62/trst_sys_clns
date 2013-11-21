@@ -29,7 +29,7 @@ module Clns
     # @todo
     def keys(pu = true)
       ks = freights.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-      ks = freights.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort! if pu
+      ks = freights.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
       ks
     end
     # @todo

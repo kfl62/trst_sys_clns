@@ -139,7 +139,7 @@ module Clns
     end
     # @todo
     def key(p)
-      "#{id_stats}_#{"%05.2f" % p}"
+      "#{id_stats}_#{"%05.4f" % p}"
     end
     # @todo
     def criteria_name
