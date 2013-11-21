@@ -1,0 +1,25 @@
+:ruby
+  unit_id = @current_user.unit_id || session[:unit_id]
+%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_delivery_note'}}
+-if unit_id
+  - unless @current_user.unit_id
+    = partial 'clns/shared/select_unit'
+  %form{action: "/sys/#{@path}",method: "get"}
+    %table{cellspacing: "0"}
+      %tbody
+        %tr.pdb-05
+          %td
+            %span.info.width-550.ju= t("intro.filter.desk_delivery_note",data: mat(@object,'model_name'))
+        %tr.pdb-05
+          %td
+            %input#client_id.select2{type: 'hidden',style: 'width:200px',data: {minlength: '2',ph: '0',search: 'Clns::PartnerFirm'}}
+            %input#client_d_id.select2{type: 'hidden',style: 'width:200px',data: {minlength: '0',ph: '1',search: 'Clns::PartnerFirmPerson'}}
+            %button#client_d{type: "button",data: {action: "create", icon: "circle-plus"}}= t('button.create') + " Delegat!"
+      %tfoot
+        %tr
+          %td.buttonset.ce
+            %button.dn{type: "button",data: {action: "create",icon: "circle-plus"}}= t('button.create') + " Anexa!"
+            %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+-else
+  %form{action: "/sys/#{@path}",method: "get"}
+    = partial 'clns/shared/select_unit'
