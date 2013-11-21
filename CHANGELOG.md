@@ -2,10 +2,23 @@
 
 release date: **2013-xx-xx**
 
-* **feature v0.2.2**, `Clns::Grn` CRUD
-   - bump version v0.2.1
+* **feature v0.2.2.1**, `Clns::Grn` CRUD completitions
+   - feature date: **2013-11-21**
+   - bump version v0.2.2.1
    - update CHANGELOG
+   - assets added compiled javascripts
+   - assets js, `Clns.desk.grn` handling repair
+   - assets css, `_dialog.sass` changed
+   - views `/shared/_select_unit.haml` partial
+   - views `Clns::Grn` CRUD completitions
+   - i18n missing translations
+   - model `Clns::Invoice` payments text changed
+   - model `Clns::Grn` prepare prefix for 2014
+
+* **feature v0.2.2**, `Clns::Grn` CRUD
    - feature date: **2013-11-20**
+   - bump version v0.2.2
+   - update CHANGELOG
    - assets `desk_grn.coffee` Clns.desk.grn skeleton
    - assets `_font_awesome|_base|_dialog.sass` bugfix, update
    - views `_doc_add|select_freight.haml` partial
