@@ -22,9 +22,8 @@ ro:
           Puteţi modifica "Suma primită" la o &raquo;Dispoziţie de plată&laquo; după ce
           o alegeţi din listă, sau alegând <b>Creare</b> veţi crea una nouă.
         desk_delivery_note: |
-          Pentru a crea o &raquo;Anexa3 Aviz de expediţie&laquo; este nevoie să selectaţi un "Destinatar"
-          opţional un "Delegat" ptr. acest "Destinatar", un "Transportator" şi obligatoriu un "Delegat"
-          ptr. "Transportator". "Destinatar"-ul şi "Transportator"-ul pot fi aceeaşi firmă.
+          Pentru a crea o &raquo;Anexa Aviz de expediţie&laquo; este nevoie să selectaţi un "Destinatar"
+          opţional un "Delegat" ptr. acest "Destinatar"
         desk_freight: |
           Puteţi modifica preţul unitar la un &raquo;%{data}&laquo; după ce îl alegeţi din listă!
         desk_grn:
@@ -110,8 +109,7 @@ ro:
           următoarele deşeuri reciclabile:
         desk_delivery_note: |
           Firma <b>%{firm}</b> reprezentat de %{firm_d} expediază clientului,
-          <b>%{client}</b> reprezentat de %{client_d}, transportul fiind asigurat de
-          <b>%{transp}</b> delegat %{transp_d}, următoarele materiale:
+          <b>%{client}</b> reprezentat de %{client_d}, următoarele materiale:
         desk_grn:
           id_intern: |
             Transfer în gestiunea <b>%{unit}</b> prin delegatul:
@@ -152,8 +150,7 @@ ro:
         desk_delivery_note: |
           Cu Avizul de expediţie nr.<b>%{doc_name}</b> în data de <b>%{id_date}</b>.
           Firma <b>%{firm}</b> reprezentat de %{firm_d} expediază clientului,
-          <b>%{client}</b> reprezentat de %{client_d}, transportul fiind asigurat de
-          <b>%{transp}</b> delegat %{transp_d}, următoarele materiale:
+          <b>%{client}</b> reprezentat de %{client_d}, următoarele materiale:
         desk_grn: |
           În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
           <b>%{signed_by}</b> în prezenţa delegatului <b>%{supplr_d}</b>, s-au recepţionat următoarele

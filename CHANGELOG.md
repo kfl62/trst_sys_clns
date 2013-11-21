@@ -1,6 +1,15 @@
 ## v0.3.0
 
 release date: **2013-xx-xx**
+* **feature v0.2.3**, `Clns::DeliveryNote` CRUD and initiate stocks
+   - feature date: **2013-11-21**
+   - odel `Clns::Stock` initiate, and related changes
+   - model `Clns::DeliveryNote` skeleton
+   - i18n `Clns::DeliveryNote` missing translations
+   - assets js, `Clns.desk.grn` typo
+   - assets js, `Clns.desk.delivery_note` skeleton
+   - views `Clns::DeliveryNote` CRUD skeleton
+   - hotfix `Clns::Grn` pdf, background path
 
 * **feature v0.2.2.1**, `Clns::Grn` CRUD completitions
    - feature date: **2013-11-21**

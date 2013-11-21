@@ -1,0 +1,47 @@
+:ruby
+  firm    = Clns::PartnerFirm.find_by(firm: true)
+  client  = Clns::PartnerFirm.find(params[:client_id])
+  client_d= client.people.find(params[:client_d_id]) if params[:client_d_id]
+  unit_id = @current_user.unit_id || session[:unit_id]
+  freights,with_pu = (firm.id != client.id && @current_user.admin?) ? \
+      [Clns::PartnerFirm.unit_by_unit_id(unit_id).freights.options_for_dln_with_pu,true] : \
+      [Clns::PartnerFirm.unit_by_unit_id(unit_id).freights.options_for_dln,false]
+%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_delivery_note'}}
+%form{action: "/sys/#{@path}",method: "post"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td.ce
+          - label_for @object, 'name'
+          - input_for @object, 'name', {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
+          - label_for @object, 'id_date'
+          - input_for @object, 'id_date',      {id: 'date_show',name: 'strip'}
+          - input_for @object, 'id_date',      {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+          - input_for @object, 'client_id',    {type: 'hidden',value: client.id}
+          - input_for @object, 'unit_id',      {type: 'hidden',value: unit_id}
+          - input_for @object, 'id_intern',    {type: 'hidden',value: client.firm.to_s}
+          - input_for @object, 'signed_by',    {type: 'hidden',value: @current_user.id}
+          - if client_d
+            - input_for @object, 'client_d_id',{type: 'hidden',value: client_d.id}
+      %tr.pdb-05
+        %td.ce
+          - label_for @object, 'doc_name'
+          - input_for @object, 'doc_name',     {style: 'ui-state-default focus', value: "#{firm.name[0][0..2].upcase}-"}
+          - label_for @object, 'doc_plat'
+          - input_for @object, 'doc_plat'
+      %tr.pdb-05
+        %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
+          = partial "clns/shared/doc_add_freight"
+      %tr.pdb-05
+        %td
+          %span.info.width-500.ju= t('intro.create.desk_delivery_note',firm: firm.name[2],firm_d: @current_user.name,client: client.name[2],client_d: (client_d.name rescue 'Anonymous'))
+    %tbody
+      %tr
+        %td
+          %table.scroll{:cellspacing => "0", style: "font-size:12px"}
+            = partial "#{@path}/form",locals: {freights: freights,client: client,with_pu: with_pu}
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

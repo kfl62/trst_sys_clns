@@ -25,14 +25,14 @@ module Clns
     index({ doc_dln_id: 1})
     index({ doc_cas_id: 1})
 
-    # after_save    :'handle_stock(false)'
-    # after_destroy :'handle_stock(true)'
+    after_save    :'handle_stock(false)'
+    after_destroy :'handle_stock(true)'
 
     class << self
       # @todo
       def keys(pu = true)
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort! if pu
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
         ks
       end
       # @todo
@@ -74,94 +74,94 @@ module Clns
     end
     # @todo
     def key
-      "#{id_stats}_#{"%05.2f" % pu}"
+      "#{id_stats}_#{"%05.4f" % pu}"
     end
 
-  #   protected
-  #   # @todo
-  #   def handle_stock(add_delete)
-  #     today = Date.today; retro = id_date.month == today.month
-  #     stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
-  #     if add_delete
-  #       stock_to_handle.each do |stck|
-  #         f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
-  #         f.qu += qu
-  #         f.freight_id= freight_id
-  #         f.id_date   = stck.id_date
-  #         f.val       = (f.pu * f. qu).round(2)
-  #         f.save
-  #       end
-  #     else
-  #       stock_to_handle.each_with_index do |stck,i|
-  #         if pu > 0 or pu_invoice > 0
-  #           f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
-  #           f.qu -= qu
-  #           f.freight_id= freight_id
-  #           f.id_date   = stck.id_date
-  #           f.val       = (f.pu * f. qu).round(2)
-  #           f.save
-  #         else
-  #           out = qu
-  #           lpu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
-  #           fs  = stck.freights.where(id_stats: id_stats)
-  #           if fs.count == 1
-  #             f     = fs.first
-  #             f.qu -= out
-  #             f.val = (f.pu * f.qu).round(2)
-  #             f.save
-  #             self.set(:pu, f.pu)
-  #             self.set(:val, (pu * qu).round(2))
-  #           else
-  #             fspus = fs.where(:qu.ne => 0).asc(:pu).map(&:pu)
-  #             fspus.delete(lpu).nil? ? fspus : fspus.push(lpu)
-  #             fspus.delete(0).nil?   ? fspus : fspus.push(0)  if unit.main?
-  #             fspus.each do |fspu|
-  #               f = fs.find_by(pu: fspu)
-  #               if out > f.qu
-  #                 if i == 0
-  #                   self.class.new(
-  #                     id_date:    id_date,
-  #                     id_stats:   f.id_stats,
-  #                     id_intern:  id_intern,
-  #                     um:         f.um,
-  #                     pu:         f.pu,
-  #                     qu:         f.qu,
-  #                     val:        (f.pu * f.qu).round(2),
-  #                     freight_id: f.freight.id,
-  #                     doc_dln_id: (doc_dln_id if doc_dln_id),
-  #                     doc_cas_id: (doc_cas_id if doc_cas_id)
-  #                   ).upsert
-  #                 end # if stock_to_handle.first
-  #                 out -= f.qu
-  #                 f.qu = 0
-  #                 f.val= 0
-  #                 f.save
-  #               else
-  #                 if i == 0
-  #                   self.class.new(
-  #                     id_date:    id_date,
-  #                     id_stats:   f.id_stats,
-  #                     id_intern:  id_intern,
-  #                     um:         f.um,
-  #                     pu:         f.pu,
-  #                     qu:         out,
-  #                     val:        (f.pu * out).round(2),
-  #                     freight_id: f.freight.id,
-  #                     doc_dln_id: (doc_dln_id if doc_dln_id),
-  #                     doc_cas_id: (doc_cas_id if doc_cas_id)
-  #                   ).upsert unless out == 0
-  #                 end # if stock_to_handle.first
-  #                 f.qu -= out; out = 0
-  #                 f.val = (f.pu * f.qu).round(2)
-  #                 f.save
-  #               end # if out > f.qu
-  #             end # each fspu
-  #             self.delete if i == stock_to_handle.length - 1
-  #           end # if fs.count == 1
-  #         end # if pu > 0
-  #       end # each stck
-  #     end # if add_delete
-  #   end
+    protected
+    # @todo
+    def handle_stock(add_delete)
+      today = Date.today; retro = id_date.month == today.month
+      stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
+      if add_delete
+        stock_to_handle.each do |stck|
+          f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+          f.qu += qu
+          f.freight_id= freight_id
+          f.id_date   = stck.id_date
+          f.val       = (f.pu * f. qu).round(2)
+          f.save
+        end
+      else
+        stock_to_handle.each_with_index do |stck,i|
+          if pu > 0 or pu_invoice > 0
+            f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+            f.qu -= qu
+            f.freight_id= freight_id
+            f.id_date   = stck.id_date
+            f.val       = (f.pu * f. qu).round(2)
+            f.save
+          else
+            out = qu
+            lpu = freight.ins.last.pu == 0 ? freight.pu : freight.ins.last.pu
+            fs  = stck.freights.where(id_stats: id_stats)
+            if fs.count == 1
+              f     = fs.first
+              f.qu -= out
+              f.val = (f.pu * f.qu).round(2)
+              f.save
+              self.set(:pu, f.pu)
+              self.set(:val, (pu * qu).round(2))
+            else
+              fspus = fs.where(:qu.ne => 0).asc(:pu).map(&:pu)
+              fspus.delete(lpu).nil? ? fspus : fspus.push(lpu)
+              fspus.delete(0).nil?   ? fspus : fspus.push(0)  if unit.main?
+              fspus.each do |fspu|
+                f = fs.find_by(pu: fspu)
+                if out > f.qu
+                  if i == 0
+                    self.class.new(
+                      id_date:    id_date,
+                      id_stats:   f.id_stats,
+                      id_intern:  id_intern,
+                      um:         f.um,
+                      pu:         f.pu,
+                      qu:         f.qu,
+                      val:        (f.pu * f.qu).round(2),
+                      freight_id: f.freight.id,
+                      doc_dln_id: (doc_dln_id if doc_dln_id),
+                      doc_cas_id: (doc_cas_id if doc_cas_id)
+                    ).upsert
+                  end # if stock_to_handle.first
+                  out -= f.qu
+                  f.qu = 0
+                  f.val= 0
+                  f.save
+                else
+                  if i == 0
+                    self.class.new(
+                      id_date:    id_date,
+                      id_stats:   f.id_stats,
+                      id_intern:  id_intern,
+                      um:         f.um,
+                      pu:         f.pu,
+                      qu:         out,
+                      val:        (f.pu * out).round(2),
+                      freight_id: f.freight.id,
+                      doc_dln_id: (doc_dln_id if doc_dln_id),
+                      doc_cas_id: (doc_cas_id if doc_cas_id)
+                    ).upsert unless out == 0
+                  end # if stock_to_handle.first
+                  f.qu -= out; out = 0
+                  f.val = (f.pu * f.qu).round(2)
+                  f.save
+                end # if out > f.qu
+              end # each fspu
+              self.delete if i == stock_to_handle.length - 1
+            end # if fs.count == 1
+          end # if pu > 0
+        end # each stck
+      end # if add_delete
+    end
 
   end # FreightOut
 end # Clns

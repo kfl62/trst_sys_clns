@@ -23,14 +23,14 @@ module Clns
     index({ id_stats: 1, pu: 1, id_date: 1 })
     index({ doc_grn_id: 1})
 
-    # after_save    :'handle_stock(true)'
-    # after_destroy :'handle_stock(false)'
+    after_save    :'handle_stock(true)'
+    after_destroy :'handle_stock(false)'
 
     class << self
       # @todo
       def keys(pu = true)
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.2f" % f.pu}"}.uniq.sort! if pu
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
         ks
       end
       # @todo
@@ -68,26 +68,26 @@ module Clns
     end
     # @todo
     def doc
-      doc_exp || doc_grn
+      doc_grn
     end
     # @todo
     def key
-      "#{id_stats}_#{"%05.2f" % pu}"
+      "#{id_stats}_#{"%05.4f" % pu}"
     end
 
-    # protected
-    # # @todo
-    # def handle_stock(add_delete)
-    #   today = Date.today; retro = id_date.month == today.month
-    #   stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
-    #   stock_to_handle.each do |stck|
-    #     f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
-    #     add_delete ? f.qu += qu : f.qu -= qu
-    #     f.freight_id= freight_id
-    #     f.id_date   = stck.id_date
-    #     f.val       = (f.pu * f. qu).round(2)
-    #     f.save
-    #   end
-    # end
+    protected
+    # @todo
+    def handle_stock(add_delete)
+      today = Date.today; retro = id_date.month == today.month
+      stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
+      stock_to_handle.each do |stck|
+        f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+        add_delete ? f.qu += qu : f.qu -= qu
+        f.freight_id= freight_id
+        f.id_date   = stck.id_date
+        f.val       = (f.pu * f. qu).round(2)
+        f.save
+      end
+    end
   end # FreightIn
 end # Clns
