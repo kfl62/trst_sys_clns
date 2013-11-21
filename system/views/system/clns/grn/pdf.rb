@@ -80,7 +80,7 @@ end
 pdf = Prawn::Document.new(
   :page_size => 'A4',
   :page_layout => :landscape,
-  :background => "public/images/wstm/pdf/nir.jpg",
+  :background => "public/images/clns/pdf/nir.jpg",
   :margin => [0.mm],
   :info => {
     :Title => "Notă de recepţie",
