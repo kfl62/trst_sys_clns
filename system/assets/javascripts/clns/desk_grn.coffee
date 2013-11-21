@@ -36,7 +36,7 @@ define () ->
           v.find('input.um').val(r.um)
           v.find('span.um').text(r.um)
           v.find('input.pu').val(r.pu)
-          v.find('span.pu').text r.pu.toFixed(2)
+          v.find('span.pu').text r.pu.toFixed(4)
           v.find('input.qu').val(r.qu)
           v.find('span.qu').text r.qu.toFixed(2)
           v.find('input.val').val(r.sval)
@@ -57,7 +57,7 @@ define () ->
           fid  = v.filter('.name').data('freight_id')
           um   = v.filter('.um').val()
           tva  = parseFloat v.filter('.name').data('tva')
-          pu   = parseFloat v.filter('.pu').decFixed(2).val()
+          pu   = parseFloat v.filter('.pu').decFixed(4).val()
           qu   = parseFloat v.filter('.qu').decFixed(2).val()
           $val = (pu * qu).round(2)
           $tva = ($val * tva).round(2)
@@ -195,6 +195,42 @@ define () ->
                     $select.next().select2('destroy')
                     $select.next().next().hide()
                   Clns.desk.grn.validate.filter()
+            else if $select.hasClass 'repair'
+              $ph = Trst.i18n.select[Trst.desk.hdo.js_ext][$sd.ph]
+              $select.select2
+                placeholder: $ph
+                allowClear: true
+                quietMillis: 1000
+                ajax:
+                  url: "/utils/search/#{$sd.search}"
+                  dataType: 'json'
+                  data: (term)->
+                    uid: $sd.uid
+                    day: $('#date_send').val()
+                    q:   term
+                  results: (data)->
+                    results: data
+                formatResult: (d)->
+                  $markup  = "<div title='#{d.text.title}'>"
+                  $markup += "<span>Doc: </span>"
+                  $markup += "<span class='truncate-70'>#{d.text.doc_name}</span>"
+                  $markup += "<span> - Firma: </span>"
+                  $markup += "<span class='truncate-200'>#{d.text.supplier}</span>"
+                  $markup += "</div>"
+                  $markup
+                formatSelection: (d)->
+                  d.text.name
+                formatSearching: ()->
+                  Trst.i18n.msg.searching
+                formatNoMatches: (t)->
+                  Trst.i18n.msg.no_matches
+              $select.off()
+              $select.on 'change', ()->
+                if $select.select2('val') isnt ''
+                  $url  = Trst.desk.hdf.attr('action')
+                  $url += "/#{$select.select2('val')}"
+                  Trst.desk.closeDesk(false)
+                  Trst.desk.init($url)
             else
               $log 'Select not handled!'
             return
@@ -229,6 +265,9 @@ define () ->
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.grn.freightInsert()
+                  $url = "/sys/partial/clns/shared/_doc_add_freight?id_stats=00000000"
+                  $('td.add-freight-container').load $url, ()->
+                    Clns.desk.grn.selects($('select.clns.freight'))
               if $button.hasClass 'icon-minus-sign'
                 $button.off 'click'
                 $button.on 'click', ()->

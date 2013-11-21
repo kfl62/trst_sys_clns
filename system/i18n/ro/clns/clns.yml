@@ -173,6 +173,14 @@ ro:
           grn: |
             În ziua de <b>%{id_date}</b> cu Factura nr.<b>%{doc_name}</b> se recepţionează de la furnizorul
             <b>%{client}</b> următoarele materiale:
+      delete:
+        desk_delivery_note: |
+          Atenţie!!! Se va şterge &raquo;%{data}&laquo;!!!
+        desk_grn: |
+          Atenţie!!! Se va şterge &raquo;%{data}&laquo;!!!
+        desk_stock:
+          forbidden: |
+            Acest &raquo;Stoc iniţial lunar&laquo; nu se poate şterge numai de către inginerul de sistem!
     select:
       freight_all: Toate materialele
       unit_all: Toate unităţile

@@ -1,0 +1,17 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+%span#hidden_data.hidden{data: {dialog: "delete",model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_grn'}}
+%form{action: "/sys/#{@path}", method: "delete"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td{colspan: @object.id_intern == true ? '5' : '6'}
+          %span.warning.width-450.ju= t('intro.delete.desk_grn', data: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'))
+          %span.info.width-450.ju= t('intro.show.desk_grn',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,supplr: @object.supplr.name[2], supplr_d: (@object.supplr_d.name rescue 'Anonymous'))
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan:  @object.id_intern == true ? '5' : '6'}
+          %button{type: "button", data: {action: "delete",icon: "circle-minus"}}= t('button.delete')
+          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+

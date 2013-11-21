@@ -70,7 +70,7 @@ module Clns
         invs = Clns::Invoice.nonin
         if invs.count > 0
           #prefix = invs.asc(:name).last.name.split('_').last[0].next
-          prefix = '2'
+          prefix = '1'
           name = "#{firm.name[0][0..2].upcase}_INV-#{prefix}00001"
         else
           name = "#{firm.name[0][0..2].upcase}_INV-000001"
@@ -87,7 +87,15 @@ module Clns
     # @todo
     def pyms_list
       pyms.asc(:id_date).each_with_object([]) do |p,r|
-        r << "#{p.id_date.to_s}: #{p.text}, #{"%.2f" % p.val}"
+        val = p.val || 0.0
+        if
+          deadl > p.id_date
+          txt = 'La termen'
+          txt+= ": #{"%.2f" % val}" if val > 0
+          r << txt
+        else
+          r << "#{p.id_date.to_s}: #{p.text}, #{"%.2f" % val}"
+        end
       end.unshift("Termen: #{deadl.to_s}")
     end
     protected
