@@ -43,11 +43,6 @@ module Clns
         where(charged: b)
       end
       # @todo
-      def by_p03(p03 = true)
-        ids = Clns::FreightOut.where(:freight_id.in => Clns::Freight.where(p03: p03).map(&:id), :doc_dln_id.in => all.map(&:id)).map(&:doc_dln_id).uniq
-        where(:id.in => ids)
-      end
-      # @todo
       def sum_freights_grn
         all.each_with_object({}) do |dn,s|
           dn.freights.asc(:id_stats).each_with_object(s) do |f,s|
@@ -111,10 +106,10 @@ module Clns
         unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
         if dlns.count > 0
           #prefix = dlns.asc(:name).last.name.split('_').last[0].next
-          prefix = '2'
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3-#{prefix}00001"
+          prefix = '1'
+          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEAA-#{prefix}00001"
         else
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEA3-000001"
+          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEAA-000001"
         end
       end
       name
