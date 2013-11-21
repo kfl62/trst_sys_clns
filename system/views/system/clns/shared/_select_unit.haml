@@ -1,0 +1,21 @@
+:ruby
+  unit_id = session[:unit_id]
+- if unit_id
+  %div.small
+    %span.small= t('intro.has_unit')
+    %select.clns.unit
+      %option{value: 'null'}= t('select.option',data: 'Gestiunea')
+      - Clns::PartnerFirm.find_by(firm: true).units.asc(:slug).each do |unit|
+        %option{value: unit.id,selected: unit.id.to_s == unit_id}= unit.name[1]
+    %hr
+-else
+  %div.small
+    %span.info.width-250.ju= t('intro.no_unit')
+    %hr
+    %select.clns.unit.ce
+      %option{value: 'null'}= t('select.option',data: 'Gestiunea')
+      - Clns::PartnerFirm.find_by(firm: true).units.asc(:slug).each do |unit|
+        %option{value: unit.id}= unit.name[1]
+    %hr
+    %p.ce{style: 'margin:0px'}
+      %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
