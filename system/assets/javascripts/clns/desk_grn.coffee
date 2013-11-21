@@ -299,7 +299,6 @@ define () ->
             $('#date_show').datepicker 'option', 'minDate', min
           Clns.desk.grn.buttons($('button'))
           Clns.desk.grn.selects($('select.clns,input.select2,input.repair'))
-          # Clns.desk.grn.inputs($('input'))
           Clns.desk.grn.template = $('tr.template')?.remove()
           $log 'Clns.desk.grn.init() OK...'
   Clns.desk.grn
