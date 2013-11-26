@@ -50,7 +50,6 @@
     unit     = firm.units.find_by(main: true)
     supplr   = Clns::PartnerFirm.find(params[:supplr_id])
     supplr_d = supplr.people.find(params[:supplr_d_id]) rescue nil
-    freights = Clns::Freight.options_for_grn
   %span#hidden_data.hidden{data: {dialog: 'create',model_name: mat(@object,'model_name'),oid: 'null',js_ext: 'desk_grn'}}
   %form{action: "/sys/#{@path}", method: 'post'}
     %table{cellspacing: "0"}
