@@ -26,8 +26,6 @@ define () ->
           r = Clns.desk.grn.freightCalculate().result;
           v = Clns.desk.grn.template.clone().removeClass('template')
           i = $('tr.grn-freight').length; id_date = $('input#date_send').val()
-          # v.find('input').each ()->
-          #   $(@).attr('name', $(@).attr('name').replace(/\d/,i) )
           v.find('span.name').text(r.name)
           v.find('input.freight_id').val(r.freight_id)
           v.find('input.id_stats').val(r.id_stats)
@@ -82,7 +80,10 @@ define () ->
           create: ()->
             if $('select.doc_type').length
               if $('select.doc_type').val() isnt 'null' and $('input[name*="doc_name"]').val() isnt '' and $('input[name*="doc_plat"]').val() isnt ''
-                $('button[data-action="save"]').button 'option', 'disabled', false
+                if $('tr.grn-freight').length is 0
+                  $('button[data-action="save"]').button 'option', 'disabled', true
+                else
+                  $('button[data-action="save"]').button 'option', 'disabled', false
                 $('span.icon-plus-sign').show()
                 return true
             return
@@ -212,9 +213,9 @@ define () ->
                     results: data
                 formatResult: (d)->
                   $markup  = "<div title='#{d.text.title}'>"
-                  $markup += "<span>Doc: </span>"
+                  $markup += "<span class='repair'>Doc: </span>"
                   $markup += "<span class='truncate-70'>#{d.text.doc_name}</span>"
-                  $markup += "<span> - Firma: </span>"
+                  $markup += "<span class='repair'> - Firma: </span>"
                   $markup += "<span class='truncate-200'>#{d.text.supplier}</span>"
                   $markup += "</div>"
                   $markup
@@ -275,6 +276,7 @@ define () ->
                   Clns.desk.grn.grnCalculate()
                   if $('tr.grn-freight').length is 0
                     $('tr.grn-freight-header, tr.grn-freight-total').addClass('hidden')
+                    $('button[data-action="save"]').button 'option', 'disabled', true
             else if Trst.desk.hdo.dialog is 'show'
               if $bd.action is 'print'
                 $button.on 'click', ()->
