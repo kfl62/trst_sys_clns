@@ -4,6 +4,8 @@ release date: **2013-xx-xx**
 
 * **feature v0.2.3.1**, `Clns::DeliveryNote` CRUD completitions
    - feature date: **2013-11-26**
+   - bump version v0.2.3.1
+   - update CHANGELOG
    - views: `Clns::DeliveryNote` CRUD, finished
    - views `Clns::Grn` CRUD (_show,create), bugfix
    - views partials, `/shared/*.haml` Freight|FreightStock issue, cleanup
