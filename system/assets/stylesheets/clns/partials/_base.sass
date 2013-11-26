@@ -93,7 +93,13 @@ input[type=checkbox], input[type=radio]
   bottom: 1px
 input[type=radio]
   bottom: 2px
-input, span
+input, span, td
+  &.width-25
+    width: 25px
+  &.width-50
+    width: 50px
+  &.width-75
+    width: 75px
   &.width-100
     width: 100px
   &.width-150
@@ -122,3 +128,6 @@ span.truncate-70
   width: 70px
 span.truncate-200
   width: 200px
+span.repair
+  display: inline-block
+  overflow: hidden
