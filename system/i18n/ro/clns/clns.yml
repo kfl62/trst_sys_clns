@@ -206,9 +206,9 @@ ro:
       delivery_note_negative_stock: |
           Cantitatea introdusă este mai mare decât stocul disponibil!
           În cazul în care puteţi modifica cantitatea pe Aviz,
-          modificaţi avizul cu cantitatea corectă ( %{stck}kg )!
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
           În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
-          după ce faceţi o intrare de cel puţin ( %{res}kg ).
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
       delivery_note_not_complete: |
           Nu aţi completat sau aţi completat greşit
           unul din câmpurile "Aviz nr.", "maşina nr."!

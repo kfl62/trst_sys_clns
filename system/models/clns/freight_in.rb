@@ -44,7 +44,7 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:freight_id.in => Clns::PartnerFirm.pos(s).freights.ids)
+        where(:doc_grn_id.in => Clns::Grn.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
       end
       # # @todo
       # def sum_ins(*args)
@@ -67,6 +67,10 @@ module Clns
       Clns::PartnerFirm.unit_by_unit_id(doc.unit_id)
     end
     # @todo
+    def name
+      freight.name
+    end
+    # @todo
     def doc
       doc_grn
     end
@@ -81,7 +85,7 @@ module Clns
       today = Date.today; retro = id_date.month == today.month
       stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
       stock_to_handle.each do |stck|
-        f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+        f = stck.freights.find_or_create_by(id_stats: id_stats, um: um, pu: pu)
         add_delete ? f.qu += qu : f.qu -= qu
         f.freight_id= freight_id
         f.id_date   = stck.id_date

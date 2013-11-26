@@ -115,7 +115,7 @@ module Clns
     # @todo
     def freights_list
       freights.asc(:id_stats).each_with_object([]) do |f,r|
-        r << "#{f.freight.name}: #{"%.2f" % f.qu} kg ( #{"%.2f" % f.pu} )"
+        r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
       end
     end
     protected

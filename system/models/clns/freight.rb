@@ -12,31 +12,11 @@ module Clns
       # @todo
       def by_id_stats(ids,lst = false)
         c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
-        result = where(id_stats: /#{c}/).asc(:id_stats)
+        result = where(id_stats: /#{c}/).asc(:name)
         if lst
           result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
         end
         result
-      end
-      # @todo
-      def options_for_grn
-        asc(:name).each_with_object([]){|f,a| a << [f.id,f.name,{id_stats: f.id_stats,um: f.um,pu: f.pu}]}
-      end
-      # @todo
-      def options_for_dln
-        asc(:name).each_with_object([]){|f,a| a << [f.id,f.name,{key: "#{f.id_stats}-00.00",id_stats: f.id_stats,um: f.um,pu: 0.0,stck: (f.stks_now.sum(:qu) || 0)}]}
-      end
-      # @todo
-      def options_for_dln_with_pu
-        asc(:name).each_with_object([]) do |f,a|
-          f.stks_now.where(:qu.ne => 0).asc(:pu).each do |fs|
-            a << [fs.freight.id,"#{fs.freight.name}-#{"%05.2f" % fs.pu}",{key: "#{f.id_stats}-#{"%05.2f" % fs.pu}",id_stats: fs.id_stats,um: fs.freight.um,pu: fs.pu,stck: fs.qu}]
-          end
-        end
-      end
-      # @todo
-      def options_for_stk
-        asc(:name).each_with_object([]){|f,a| a << [f.id,f.name,{id_stats: f.id_stats,um: f.um,pu: f.pu}]}
       end
       # # @todo
       # def stats_pos(*args)

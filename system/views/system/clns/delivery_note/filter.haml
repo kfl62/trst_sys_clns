@@ -18,7 +18,7 @@
       %tfoot
         %tr
           %td.buttonset.ce
-            %button.dn{type: "button",data: {action: "create",icon: "circle-plus"}}= t('button.create') + " Anexa!"
+            %button.dln{type: "button",data: {action: "create",icon: "circle-plus"}}= t('button.create') + " Anexa!"
             %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
 -else
   %form{action: "/sys/#{@path}",method: "get"}

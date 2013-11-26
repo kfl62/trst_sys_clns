@@ -2,13 +2,13 @@
 - if @object.freights.count > 0
   %tbody.inner
     %tr
-      - mat(@object,'table_header') do |label|
+      - mat(@object,'table_header')[0..-2].each do |label|
         %td.ce= label
     - @object.freights.each do |o|
       %tr
         - td_value_for  o, 'freight',   {order: 'name',style: 'name',nested: 'doc_grn'}
         - td_value_for  o, 'um',        {style: 'um', nested: 'doc_grn'}
-        - td_value_for  o, 'pu',        {style: 'pu', nested: 'doc_grn'}
+        - td_value_for  o, 'pu',        {style: 'pu',precision: 4, nested: 'doc_grn'}
         - td_value_for  o, 'qu',        {style: 'qu', nested: 'doc_grn'}
         - td_value_for  o, 'val',       {style: 'val',nested: 'doc_grn'}
         - td_value_for  o, 'tva',       {style: 'val',nested: 'doc_grn'}

@@ -3,9 +3,8 @@ ro:
     attributes:
       'clns/delivery_note':
         model_name: Anexa Aviz Expediţie
-        table_header_show: ['Material', 'UM', 'Preţ<br>Cump.', 'Se livrează<br>kg', 'Valoare<br>Cump.', 'Stock<br>kg']
-        table_header_form: ['Material', 'UM', 'Stock<br>kg', 'Se livrează<br>kg', 'Rămân<br>kg', ' ']
-        table_header_form_with_pu: ['Material', 'UM', 'Preţ<br>Cump.', 'Stock<br>kg', 'Se livrează<br>kg', 'Preţ<br>Vânz.', 'Rămân<br>kg', ' ']
+        table_header_show: ['Material', 'UM', 'PU', 'Se livrează', 'Valoare']
+        table_header_form: ['Material', 'UM', 'PU', 'Stoc rămas', 'Livrat', 'Valoare', ' ']
         name: Anexa Anexa nr.
         id_date: din data de
         doc_name: Aviz nr.

@@ -9,7 +9,6 @@ ro:
         tabs_payments: 'Condiţii plată'
         name: 'Nr. intern '
         id_date: ' din data de '
-        transp_d: ' delegatul '
         dlns_name: 'Avize nr:'
         doc_type_null: 'Tip document'
         doc_type_DN:   'Aviz expediţie'

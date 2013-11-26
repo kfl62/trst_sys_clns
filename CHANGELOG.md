@@ -1,9 +1,25 @@
 ## v0.3.0
 
 release date: **2013-xx-xx**
+
+* **feature v0.2.3.1**, `Clns::DeliveryNote` CRUD completitions
+   - feature date: **2013-11-26**
+   - bump version v0.2.3.1
+   - update CHANGELOG
+   - views: `Clns::DeliveryNote` CRUD, finished
+   - views `Clns::Grn` CRUD (_show,create), bugfix
+   - views partials, `/shared/*.haml` Freight|FreightStock issue, cleanup
+   - assets js, `grn|delivery_note.js` compiled versions
+   - assets js, `Clns.desk.delivery_note` finished
+   - assets js, `Clns.desk.grn` cleanup, style, validation fixed
+   - assets css, `_base|_dialog.sass` fix some styling
+   - i18n `clns|delivery_note|freight|grn.yml` missing translations, fixes
+   - models `Clns::DeliveryNote|Grn` #freight_list, show UM
+   - models `Clns::Freight|In|Out|Stock` adapt Wstm -> Clns
+
 * **feature v0.2.3**, `Clns::DeliveryNote` CRUD and initiate stocks
    - feature date: **2013-11-21**
-   - odel `Clns::Stock` initiate, and related changes
+   - model `Clns::Stock` initiate, and related changes
    - model `Clns::DeliveryNote` skeleton
    - i18n `Clns::DeliveryNote` missing translations
    - assets js, `Clns.desk.grn` typo

@@ -2,8 +2,7 @@
   c0,c1,c2 = locals[:id_stats].scan(/\d{2}/)
 %tr
   - if locals[:label]
-    %td
-      - label_for @object, 'criteria'
+    - td_label_for @object, 'criteria'
   %td
     %select.clns.freight.c0
       - t("freight.c0").each do |c|
