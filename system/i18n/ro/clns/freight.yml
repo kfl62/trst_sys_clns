@@ -55,3 +55,6 @@ ro:
         stock_start: Stoc initial
         table_all_with_pu: ['Material', 'PU', 'Iniţial', 'Valoare', 'Intrări', 'Valoare', 'Ieşiri', 'Valoare', 'Stoc', 'Valoare']
         << : *trst_freight
+      'clns/freight_stock':
+        model_name: Material în stoc
+        << : *trst_freight
