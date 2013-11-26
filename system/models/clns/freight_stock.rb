@@ -24,6 +24,15 @@ module Clns
 
     class << self
       # @todo
+      def by_id_stats(ids,lst = false)
+        c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
+        result = where(id_stats: /#{c}/)
+        if lst
+          result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
+        end
+        result
+      end
+      # @todo
       def keys(pu = true)
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
@@ -40,7 +49,7 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:freight_id.in => Clns::PartnerFirm.pos(s).freights.ids)
+        where(:doc_stk_id.in => Clns::Stock.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
       end
       # # @todo
       # def sum_stks(*args)
@@ -57,15 +66,29 @@ module Clns
       #   end
       # end
     end # Class methods
-
+    # @todo
+    def view_filter
+      [id, freight.name]
+    end
+    # @todo
+    def unit
+      Clns::PartnerFirm.unit_by_unit_id(doc_stk.unit_id)
+    end
+    # @todo
+    def name
+      freight.name
+    end
+    # @todo
+    def tva
+      freight.tva
+    end
+    # @todo
+    def doc
+      doc_stk
+    end
     # @todo
     def key
       "#{id_stats}_#{"%05.4f" % pu}"
     end
-    # @todo
-    def unit
-      Clns::PartnerFirm.unit_by_unit_id(doc.unit_id)
-    end
-
   end # FreightIn
 end # Clns

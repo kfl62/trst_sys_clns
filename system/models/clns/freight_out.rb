@@ -15,6 +15,8 @@ module Clns
     field :val,         type: Float,     default: 0.00
     field :pu_invoice,  type: Float,     default: 0.00
     field :val_invoice, type: Float,     default: 0.00
+    field :tva_invoice, type: Float,     default: 0.00
+    field :out_invoice, type: Float,     default: 0.00
 
     belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :outs
     belongs_to  :doc_dln,  class_name: 'Clns::DeliveryNote',inverse_of: :freights
@@ -46,7 +48,7 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:freight_id.in => Clns::PartnerFirm.pos(s).freights.ids)
+        where(:doc_dln_id.in => Clns::DeliveryNote.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
       end
       # # @todo
       # def sum_outs(*args)
@@ -63,10 +65,17 @@ module Clns
       #   end
       # end
     end # Class methods
-
     # @todo
     def unit
       Clns::PartnerFirm.unit_by_unit_id(doc.unit_id)
+    end
+    # @todo
+    def name
+      freight.name
+    end
+    # @todo
+    def tva
+      freight.tva
     end
     # @todo
     def doc
