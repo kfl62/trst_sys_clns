@@ -61,11 +61,13 @@ module Clns
           dn.freights.asc(:id_stats).each_with_object(s) do |f,s|
             key = "#{f.id_stats}_#{"%07.4f" % f.pu_invoice}"
             if s[key].nil?
-              s[key] = [f.freight.name,f.freight.id_stats,f.qu,f.val,f.pu_invoice,f.val_invoice]
+              s[key] = [f.freight.name,f.freight.id_stats,f.um,f.pu,f.qu,f.val,f.pu_invoice,f.val_invoice,f.tva_invoice,f.out_invoice,f.freight.tva]
             else
-              s[key][2] += f.qu
-              s[key][3] += f.val
-              s[key][5] += f.val_invoice
+              s[key][4] += f.qu
+              s[key][5] += f.val
+              s[key][7] += f.val_invoice
+              s[key][8] += f.tva_invoice
+              s[key][9] += f.out_invoice
             end
           end
         end

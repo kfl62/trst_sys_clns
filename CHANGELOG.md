@@ -2,6 +2,17 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.4**, `Clns::Invoice` CRUD
+   - feature date: **2013-11-29**
+   - bump version v0.2.4
+   - update CHANGELOG
+   - views `Clns::Invoice` CRUD
+   - views partial, `_doc_add_freights_stock.haml` add qu to option title
+   - assets js, `desk_invoice.js` compiled versions
+   - assets js, `Clns.desk.invoice` skeleton
+   - i18n `clna,freight,invoice` missing translations, fixes
+   - models `Clns::Invoice|DeliveryNote` adapt Wstm -> Clns
+
 * **feature v0.2.3.1**, `Clns::DeliveryNote` CRUD completitions
    - feature date: **2013-11-26**
    - bump version v0.2.3.1
@@ -9,7 +20,7 @@ release date: **2013-xx-xx**
    - views: `Clns::DeliveryNote` CRUD, finished
    - views `Clns::Grn` CRUD (_show,create), bugfix
    - views partials, `/shared/*.haml` Freight|FreightStock issue, cleanup
-   - assets js, `grn|delivery_note.js` compiled versions
+   - assets js, `desk_grn|delivery_note.js` compiled versions
    - assets js, `Clns.desk.delivery_note` finished
    - assets js, `Clns.desk.grn` cleanup, style, validation fixed
    - assets css, `_base|_dialog.sass` fix some styling

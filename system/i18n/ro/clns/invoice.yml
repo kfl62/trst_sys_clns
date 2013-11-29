@@ -1,0 +1,24 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/invoice':
+        model_name: Factură client
+        table_header: ['Material', 'UM', 'PU<br>Cump.', 'Cantitate', 'Valoare<br>Cump.', 'PU<br>Vânz.', 'Valoare<br>Vânz.', 'TVA', 'Total']
+        table_header_show: ['Material', 'UM', 'Cantitate', 'Preţ', 'Valoare', 'TVA', 'Total']
+        name: 'Nr. intern '
+        id_date: ' din data de '
+        doc_name: 'Document nr.'
+        dlns_name: 'Avize nr:'
+        tabs_freights: 'Materiale facturate'
+        tabs_payments: 'Condiţii plată'
+        payed:     'Achitat? '
+        deadl:     'Termen de plată'
+        pyms_text: 'Achitat cu...'
+        pyms_val:  'Suma de...'
+        day: |
+          Facturi din data de:&nbsp;
+        model_name_grn: Factură furnizor
+        table_header_grn: ['Material', 'UM', 'PU', 'Cant.', 'Valoare']
+        grns_name: 'Avize recepţionate nr:'
+        title_data_payable: 'Facturi - Plăţi'
+        title_data_receivable: 'Facturi - Încasări'

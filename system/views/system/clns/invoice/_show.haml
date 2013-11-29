@@ -1,0 +1,53 @@
+- @object.reload
+- if @object.freights.count > 0
+  %tbody{id: 'tabs-freights',data: {title: mat(@object,'tabs_freights')}}
+    %tr
+      %td
+        %table{:style => "width:100%;font-size:12px"}
+          %tbody.inner
+            %tr
+              - mat(@object,'table_header_show').each do |label|
+                %td.ce= label
+            - @object.reload; @object.freights.each do |o|
+              %tr
+                - td_value_for  o, 'name', {style: 'stats',nested: 'doc_inv'}
+                - td_value_for  o, 'um',   {style: 'um', nested: 'doc_inv'}
+                - td_value_for  o, 'qu',   {style: 'val',nested: 'doc_inv'}
+                - td_value_for  o, 'pu',   {style: 'pu', nested: 'doc_inv',precision: 4}
+                - td_value_for  o, 'val',  {style: 'val',nested: 'doc_inv'}
+                - td_value_for  o, 'tva',  {style: 'val',nested: 'doc_inv'}
+                - td_value_for  o, 'tot',  {style: 'val',nested: 'doc_inv'}
+            %tr
+              %td.ce.st{colspan: '4'}
+                %span Total
+              - td_value_for  @object, 'sum_100',  {style: 'val'}
+              - td_value_for  @object, 'sum_tva',  {style: 'val'}
+              - td_value_for  @object, 'sum_out',  {style: 'val'}
+    %tr
+      %td
+  %tbody{id: 'tabs-payments',data: {title: mat(@object,'tabs_payments')}}
+    %tr
+      %td
+        - label_for @object, 'payed'
+        - value_for @object, 'payed', {style: 'stats'}
+        &nbsp;| &nbsp;
+        - label_for @object, 'deadl'
+        - value_for @object, 'deadl', {style: 'stats'}
+    - if @object.pyms.count > 0
+      - @object.pyms.each do |o|
+        %tr
+          %td
+            - value_for o, 'id_date', {style: 'stats'}
+            &nbsp;| &nbsp;
+            - value_for o, 'text',    {style: 'stats'}
+            &nbsp;| &nbsp;
+            - value_for o, 'val',     {style: 'name'}
+    - else
+      %tr.pdb-05
+        %td
+          %span.info.width-450.ju= t('msg.no_payments')
+- else
+  %tbody
+    %tr.pdb-05
+      %td
+        %span.warning= t('msg.no_freight_selected')

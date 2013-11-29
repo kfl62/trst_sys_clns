@@ -1,0 +1,24 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+  grns = @object.dlns.empty?
+  tdat = grns ? mat(@object,'model_name_grn') : mat(@object,'model_name')
+%span#hidden_data.hidden{data: {dialog: 'show',title_data: tdat,model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_invoice'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td
+        -if grns
+          %span.info.width-450.ju= t('intro.show.desk_invoice.grn',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+        -else
+          %span.info.width-450.ju= t('intro.show.desk_invoice.main',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          - if @object.freights.count == 0
+            %button{type: "button", data: {action: "delete", icon: "circle-minus",type: 'delete'}}= t('button.delete')
+          - else
+            %button{type: "button", data: {action: "print",  icon: "print"}}= t('button.print')
+            %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
+            %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
