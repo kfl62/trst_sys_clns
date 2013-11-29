@@ -112,6 +112,8 @@ module Clns
               dnf.set(:pu_invoice, 0.0)
             end
             dnf.set(:val_invoice,(dnf.qu * dnf.pu_invoice).round(2))
+            dnf.set(:tva_invoice,(dnf.val_invoice * dnf.freight.tva).round(2))
+            dnf.set(:out_invoice,(dnf.val_invoice + dnf.tva_invoice).round(2))
           end
         end
       end
@@ -120,6 +122,10 @@ module Clns
 
   class InvoiceFreight < Trst::Freight
     field :qu,          type: Float,     default: 0.00
+    field :val,         type: Float,     default: 0.00
+    field :tva,         type: Float,     default: 0.00
+    field :tot,         type: Float,     default: 0.00
+
 
     embedded_in :doc_inv, class_name: "Clns::Invoice",  inverse_of: :freights
   end # InvoiceFreight
