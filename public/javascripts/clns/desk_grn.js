@@ -3,6 +3,19 @@
     $.extend(true, Clns, {
       desk: {
         grn: {
+          selectedDeliveryNotes: function() {
+            var $url;
+            this.dln_ary = [];
+            $('input:checked').each(function() {
+              Clns.desk.grn.dln_ary.push(this.id);
+            });
+            $url = Trst.desk.hdf.attr('action');
+            $url += "&p03=" + ($('select.p03').val());
+            if (Clns.desk.grn.dln_ary.length) {
+              $url += "&dln_ary=" + Clns.desk.grn.dln_ary;
+            }
+            Trst.desk.init($url);
+          },
           grnCalculate: function() {
             var i, vf, vt, vtout, vttva, vtval;
             vf = $('tr.grn-freight');
@@ -125,6 +138,35 @@
                 }
               }
             }
+          },
+          inputs: function(inpts) {
+            inpts.each(function() {
+              var $id, $input;
+              $input = $(this);
+              $id = $input.attr('id');
+              if ($input.hasClass('dln_ary')) {
+                $input.on('change', function() {
+                  Clns.desk.grn.selectedDeliveryNotes();
+                });
+              }
+              if ($input.attr('id') === 'date_show') {
+                $input.on('change', function() {
+                  if (Trst.desk.hdo.dialog === 'create') {
+                    $('input[name*="doc_date"]').val($('#date_send').val());
+                    $('input[name*="id_date"]').each(function() {
+                      if ($(this).val() !== '') {
+                        $(this).val($('#date_send').val());
+                      }
+                    });
+                    $('select.doc_type').focus();
+                  }
+                  if (Trst.desk.hdo.dialog === 'repair') {
+                    return Clns.desk.grn.selects($('input.repair'));
+                  }
+                });
+                return;
+              }
+            });
           },
           selects: function(slcts) {
             slcts.each(function() {
@@ -349,7 +391,7 @@
                     $bd = $button.data();
                     $url = '/sys/clns/grn/create?id_intern=true';
                     $url += "&unit_id=" + Trst.desk.hdo.unit_id;
-                    $url += "&dln_ary=" + Wstm.desk.grn.dln_ary;
+                    $url += "&dln_ary=" + Clns.desk.grn.dln_ary;
                     $bd.url = $url;
                     return $button.button('option', 'disabled', false);
                   }
@@ -357,7 +399,9 @@
               } else if (Trst.desk.hdo.dialog === 'create') {
                 if (!Clns.desk.grn.validate.create()) {
                   if ($bd.action === 'save') {
-                    $button.button('option', 'disabled', true);
+                    if (!(this.dln_ary.length > 0)) {
+                      $button.button('option', 'disabled', true);
+                    }
                   }
                 }
                 if ($button.hasClass('icon-refresh')) {
@@ -420,6 +464,7 @@
             }
             Clns.desk.grn.buttons($('button'));
             Clns.desk.grn.selects($('select.clns,input.select2,input.repair'));
+            Clns.desk.grn.inputs($('input'));
             Clns.desk.grn.template = (_ref = $('tr.template')) != null ? _ref.remove() : void 0;
             return $log('Clns.desk.grn.init() OK...');
           }

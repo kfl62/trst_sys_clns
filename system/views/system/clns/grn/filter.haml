@@ -4,6 +4,7 @@
   unit     = firm.units.find(to_unit)
   from_unit= @current_user.unit_id.nil? ? nil : firm.units.find_by(main: true).id
   dln_ary  = params[:dln_ary].nil? ? [] : params[:dln_ary].split(',')
+  bckgrnd = {"dpct" => "#FFBFF0","frsg" => "#DDDDDD","trbd" => "#FFFF99","dpsb" => "#BFFFBF","hcct" => "#B0AFBF"}
 - if params[:id_intern]
   %span#hidden_data.hidden{data: {dialog: 'filter',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn',unit_id: to_unit}}
   %form{action: "/sys/#{@path}/filter?id_intern=true", method: 'get'}
@@ -15,34 +16,28 @@
               %span.info.info.width-450.ju= t('intro.filter.desk_grn.admin',unit: unit.name[1])
             -else
               %span.info.info.width-450.ju= t('intro.filter.desk_grn.user',unit: unit.name[1],slug: unit.slug.downcase)
-        %tr.pdb-05
-          %td
-            %select.wstm.p03
-              - mat(@object,'p03').each do |o|
-                %option{value: o[0], selected: o[0] == params[:p03]}= o[1]
-        - if params[:p03]
-          - dlns = Clns::DeliveryNote.nonin(false).charged(false).by_p03(params[:p03].to_bool).where(:unit_id.ne  => to_unit)
-          - dlns = Clns::DeliveryNote.nonin(false).charged(false).by_p03(params[:p03].to_bool).where(unit_id: from_unit) if from_unit
-          - if dlns.empty?
-            %tr.pdb-05
-              %td
-                %span.info.width-250= t('intro.filter.desk_grn.no_dln')
-          - else
-            %tr.pdb-05
-              %td
-                %span.width-450{style: 'display:inline-block'}
-                  - dlns.each_with_index do |dln,i|
-                    %label{style: "border-right: solid 1px #333333;padding-right: 3px;cursor: pointer;background-color: #{bckgrnd[dln.name.split('_')[1].downcase]};display:inline-block",
-                           title: "#{dln.id_date}\n#{dln.name}\n#{dln.freights_list.join("\n")}"}
-                      %input.dln_ary{id:dln.id,type: 'checkbox',checked: dln_ary.include?(dln.id.to_s)}
-                      = dln.doc_name
-            %tr.pdb-05
-              %td
-                %span.small= t('intro.filter.desk_grn.legend')
-                - firm.units.asc(:slug).each do |u|
-                  %span.small{:style => "background-color: #{bckgrnd[u.name[0].downcase]};cursor:pointer", title: "#{u.name[1]}"}= u.name[0]
-                %br
-                %span.small= t('intro.filter.desk_grn.hover')
+        - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(:unit_id.ne  => to_unit)
+        - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(unit_id: from_unit) if from_unit
+        - if dlns.empty?
+          %tr.pdb-05
+            %td
+              %span.info.width-250= t('intro.filter.desk_grn.no_dln')
+        - else
+          %tr.pdb-05
+            %td
+              %span.width-450{style: 'display:inline-block'}
+                - dlns.each_with_index do |dln,i|
+                  %label{style: "border-right: solid 1px #333333;padding-right: 3px;cursor: pointer;background-color: #{bckgrnd[dln.name.split('_')[1].downcase]};display:inline-block",
+                         title: "#{dln.id_date}\n#{dln.name}\n#{dln.freights_list.join("\n")}"}
+                    %input.dln_ary{id:dln.id,type: 'checkbox',checked: dln_ary.include?(dln.id.to_s)}
+                    = dln.doc_name
+          %tr.pdb-05
+            %td
+              %span.small= t('intro.filter.desk_grn.legend')
+              - firm.units.asc(:slug).each do |u|
+                %span.small{:style => "background-color: #{bckgrnd[u.slug.downcase]};cursor:pointer", title: "#{u.name[1]}"}= u.name[0]
+              %br
+              %span.small= t('intro.filter.desk_grn.hover')
       %tbody
         - unless dln_ary.empty?
           %tr.pdb-05
@@ -59,9 +54,9 @@
                       %td
                         %span.um kg
                       %td
-                        %span.qu= "%.2f" % s[1][2]
+                        %span.pu= "%.4f" % s[1][2]
                       %td
-                        %span.val= "%.2f" % s[1][3]
+                        %span.qu= "%.2f" % s[1][3]
                       %td
                         %span.val= "%.2f" % s[1][4]
                   %tr.result
@@ -74,21 +69,29 @@
             %button.grn{type: 'button', data: {action: 'create', icon: 'circle-plus'}}=  t('button.create') + " NIR!"
             %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
 - else
+  :ruby
+    unit_id = @current_user.unit_id || session[:unit_id]
   %span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_grn'}}
-  %form{action: "/sys/#{@path}", method: 'get'}
-    %table{cellspacing: "0"}
-      %thead
-        %tr.pdb-05
-          %td
-            %span.info.width-550.ju= t('intro.filter.desk_grn.partner_firm',unit: unit.name[1])
-      %tbody
-        %tr.pdb-05
-          %td
-            %input#supplr_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '2',ph: '0',search: 'Clns::PartnerFirm',noinit: 'true'}}
-            %input#supplr_d_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '0',ph: '1',search: 'Clns::PartnerFirm',noinit: 'true'}}
-            %button#supplr_d{type: "button", data: {action: "create", icon: "circle-plus"}}=  t('button.create') + " Delegat!"
-      %tfoot
-        %tr
-          %td.buttonset.ce
-            %button.grn{type: 'button', data: {action: 'create', icon: 'circle-plus'}}=  t('button.create') + " NIR!"
-            %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
+  -if unit_id
+    - unless @current_user.unit_id
+      = partial 'clns/shared/select_unit'
+    %form{action: "/sys/#{@path}", method: 'get'}
+      %table{cellspacing: "0"}
+        %thead
+          %tr.pdb-05
+            %td
+              %span.info.width-550.ju= t('intro.filter.desk_grn.partner_firm',unit: unit.name[1])
+        %tbody
+          %tr.pdb-05
+            %td
+              %input#supplr_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '2',ph: '0',search: 'Clns::PartnerFirm',noinit: 'true'}}
+              %input#supplr_d_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '0',ph: '1',search: 'Clns::PartnerFirm',noinit: 'true'}}
+              %button#supplr_d{type: "button", data: {action: "create", icon: "circle-plus"}}=  t('button.create') + " Delegat!"
+        %tfoot
+          %tr
+            %td.buttonset.ce
+              %button.grn{type: 'button', data: {action: 'create', icon: 'circle-plus'}}=  t('button.create') + " NIR!"
+              %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
+  -else
+    %form{action: "/sys/#{@path}",method: "get"}
+      = partial 'clns/shared/select_unit'

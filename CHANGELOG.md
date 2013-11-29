@@ -2,6 +2,16 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.5**, `Clns::Grn` transfer storage
+   - feature date: **2013-11-29**
+   - bump version v0.2.5
+   - update CHANGELOG
+   - assets: js, `Clns.desk.grn` transfer storage, and recompiled js
+   - views `Clns::Grn` CRUD adapt for transfer storage
+   - views `Clns::Grn` pdf template, tva|out bug
+   - views partial, `_doc_add_freights_stock.haml` unit_id bug
+   - models `Clns::DeliveryNote` adapt `sum_freights_grn` 
+
 * **feature v0.2.4**, `Clns::Invoice` CRUD
    - feature date: **2013-11-29**
    - bump version v0.2.4

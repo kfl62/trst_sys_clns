@@ -2,6 +2,16 @@ define () ->
   $.extend true,Clns,
     desk:
       grn:
+        selectedDeliveryNotes: ()->
+          @dln_ary = []
+          $('input:checked').each ()->
+            Clns.desk.grn.dln_ary.push(@id)
+            return
+          $url = Trst.desk.hdf.attr('action')
+          $url += "&p03=#{$('select.p03').val()}"
+          $url += "&dln_ary=#{Clns.desk.grn.dln_ary}" if Clns.desk.grn.dln_ary.length
+          Trst.desk.init($url)
+          return
         grnCalculate: ()->
           vf = $('tr.grn-freight')
           vt = $('tr.grn-freight-total')
@@ -87,6 +97,27 @@ define () ->
                 $('span.icon-plus-sign').show()
                 return true
             return
+        inputs: (inpts)->
+          inpts.each ()->
+            $input = $(@)
+            $id = $input.attr('id')
+            if $input.hasClass 'dln_ary'
+              $input.on 'change', ()->
+                Clns.desk.grn.selectedDeliveryNotes()
+                return
+            if $input.attr('id') is 'date_show'
+              $input.on 'change', ()->
+                if Trst.desk.hdo.dialog is 'create'
+                  $('input[name*="doc_date"]').val($('#date_send').val())
+                  $('input[name*="id_date"]').each ()->
+                    $(@).val($('#date_send').val()) unless $(@).val() is ''
+                    return
+                  $('select.doc_type').focus()
+                if Trst.desk.hdo.dialog is 'repair'
+                  Clns.desk.grn.selects($('input.repair'))
+              return
+            return
+          return
         selects: (slcts)->
           slcts.each ()->
             $select = $(@)
@@ -251,13 +282,13 @@ define () ->
                   $bd   = $button.data()
                   $url  = '/sys/clns/grn/create?id_intern=true'
                   $url += "&unit_id=#{Trst.desk.hdo.unit_id}"
-                  $url += "&dln_ary=#{Wstm.desk.grn.dln_ary}"
+                  $url += "&dln_ary=#{Clns.desk.grn.dln_ary}"
                   $bd.url = $url
                   $button.button 'option', 'disabled', false
             else if Trst.desk.hdo.dialog is 'create'
               unless Clns.desk.grn.validate.create()
                 if $bd.action is 'save'
-                  $button.button 'option', 'disabled', true
+                  $button.button 'option', 'disabled', true  unless @dln_ary.length > 0
               if $button.hasClass 'icon-refresh'
                 $button.off 'click'
                 $button.on 'click', ()->
@@ -301,6 +332,7 @@ define () ->
             $('#date_show').datepicker 'option', 'minDate', min
           Clns.desk.grn.buttons($('button'))
           Clns.desk.grn.selects($('select.clns,input.select2,input.repair'))
+          Clns.desk.grn.inputs($('input'))
           Clns.desk.grn.template = $('tr.template')?.remove()
           $log 'Clns.desk.grn.init() OK...'
   Clns.desk.grn
