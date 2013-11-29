@@ -22,7 +22,7 @@
       %select.clns.freight.oid
         %option{value: "null"}= t("select.option",data: mat(freights,'model_name'))
         - freights.by_id_stats(id_stats).sort_by{|f| f.freight.name}.each do |o|
-          %option{value: o.view_filter.first, selected: o.id_stats == id_stats,title: "%.4f" % o.pu, data: {id_stats: o.id_stats,qu: o.qu}}= o.view_filter.last
+          %option{value: o.view_filter.first, selected: o.id_stats == id_stats,title: "PU: #{"%.4f" % o.pu} - Cant.#{"%.2f" % o.qu}", data: {id_stats: o.id_stats,qu: o.qu}}= o.view_filter.last
   - if params[:oid]
     - f = freights.find(params[:oid])
     %tr
