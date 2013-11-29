@@ -44,15 +44,17 @@ def table_data(o = nil)
   if o.id_intern
     o.dlns.each do |dn|
       dn.freights.each do |f|
+        tva = (f.val * f.freight.tva).round(2)
+        out = (f.val + tva).round(2)
         k = f.key
         if data[k].nil?
-          data[k] = [f.freight.name,f.um,f.qu,f.pu,f.val.f.out,f.tva,["#{dn.doc_name} #{ "%.2f" % f.qu}"]]
+          data[k] = [f.freight.name,f.um,f.qu,f.pu,f.val,out,tva,["#{dn.doc_name} #{"%.2f" % f.qu}"]]
         else
           data[k][2] += f.qu
           data[k][4] += f.val
-          data[k][5] += f.out
-          data[k][6] += f.tva
-          data[k][7] << ["#{dn.doc_name} #{ "%.2f" % f.qu}"]
+          data[k][5] += out
+          data[k][6] += tva
+          data[k][7] << ["#{dn.doc_name} #{"%.2f" % f.qu}"]
         end
       end
     end
