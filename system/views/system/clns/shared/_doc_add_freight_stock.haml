@@ -1,7 +1,8 @@
 :ruby
   id_stats = params[:id_stats] || locals[:id_stats] || "00000000"
   c0,c1,c2 = id_stats.scan(/\d{2}/)
-  freights = Clns::PartnerFirm.find_by(firm: true).units.find(session[:unit_id]).stock_now.freights.where(:qu.ne => 0)
+  unit_id  = @current_user.unit_id || session[:unit_id]
+  freights = Clns::PartnerFirm.find_by(firm: true).units.find(unit_id).stock_now.freights.where(:qu.ne => 0)
 %table
   %tr
     %td{colspan: 6}
