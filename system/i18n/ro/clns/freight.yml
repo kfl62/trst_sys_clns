@@ -10,7 +10,7 @@ ro:
         "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 16\""], ["03", "Perie PPL 16\""], ["04", "Perie Tynnex 16\""], ["05", "Perie covor 16\""], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"]]
         "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
         "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
-        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"]]
+        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"], ["14", "Cap pulverizare"]]
         "07": [["00", "Toate"]]
         "08": [["00", "Toate"]]
         "09": [["00", "Toate"], ["01", "Protocol"]]
@@ -29,7 +29,7 @@ ro:
         "05":
           "01": [["00", "Toate"], ["01", "Sanitar"], ["02", "Mobilier"], ["03", "Pardoseala"], ["04", "Parfumat"], ["05", "Vesela"], ["06", "Automata"]]
           "02": [["00", "Toate"], ["01", "Sanitar"], ["02", "Alcalin"], ["03", "Altele"]]
-          "03": [["00", "Toate"], ["01", "Sapun lichid"], ["02", "Dispersie polimerica"]]
+          "03": [["00", "Toate"], ["01", "Sapun lichid"], ["02", "Dispersie polimerica"], ["03", "Mocheta"]]
         "06":
           "01": [["00", "Toate"], ["01", "HWCS alb"], ["02", "HWCS color"]]
           "02": [["00", "Toate"], ["01", "HWCM alb"], ["02", "HWCM color"]]

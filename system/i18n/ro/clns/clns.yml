@@ -49,10 +49,9 @@ ro:
         desk_invoice:
           main: |
             Pentru a factura marfă prima dată este nevoie să selectaţi AE,
-            iar pentru aceasta trebuie să specificaţi <b>anul, luna, Tip marfă</b>
-            (cu/fără 3%), respectiv <b>Clientul</b> şi <b>Delegat</b> din partea clientului
-            (cine semnează factura) sau Poşta Română dacă este cazul.
-            Datele ptr.<b>Transportator</b> se preiau din AE!
+            iar pentru aceasta trebuie să specificaţi <b>anul, luna</b>, respectiv <b>Clientul</b>
+            şi <b>Delegat</b> din partea clientului (cine semnează factura) sau Poşta Română dacă
+            este cazul.
           no_dln: |
             Nu aveţi nici un Aviz de expediţie!
           legend: |
@@ -123,11 +122,10 @@ ro:
           pyms_ok: |
             Termenul de plată este obligatoriu (aaaa-ll-zz)!<br>
             Se completează numai dacă există chitanţă sau OP.<br>
-            Se trece suma achitată efectiv (Valoare - Taxă mediu 3%)!
+            Se trece suma achitată efectiv (Valoare + TVA)!
         desk_invoice:
             main: |
-              În cazul în care <b>Preţ Vânzare</b> este 0.0000 trebuie să-l completaţi
-              dacă a fost deja completat la <b>Aviz</b> atunci click pe <b>Salvare</b> dacă
+              Completați <b>Preţ Vânzare</b> și click pe <b>Salvare</b> dacă
               v-aţi convins că totul este completat corect!
             grn: |
               Aveţi grijă la <b>Condiţii plată</b> la completarea sumei să luaţi în considerare
