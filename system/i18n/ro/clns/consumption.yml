@@ -1,0 +1,5 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/consumption':
+        model_name: Bon de Consum
