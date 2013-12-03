@@ -21,6 +21,7 @@ module Clns
     belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :outs
     belongs_to  :doc_dln,  class_name: 'Clns::DeliveryNote',inverse_of: :freights
     belongs_to  :doc_cas,  class_name: 'Clns::Cassation',   inverse_of: :freights
+    belongs_to  :doc_con,  class_name: 'Clns::Consumption', inverse_of: :freights
 
     index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
     index({ id_stats: 1, pu: 1, id_date: 1 })
@@ -79,7 +80,7 @@ module Clns
     end
     # @todo
     def doc
-      doc_dln || doc_cas
+      doc_dln || doc_cas || doc_con
     end
     # @todo
     def key

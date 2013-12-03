@@ -96,6 +96,7 @@ module Clns
     has_many    :dlns,      class_name: 'Clns::DeliveryNote', inverse_of: :unit
     has_many    :grns,      class_name: 'Clns::Grn',          inverse_of: :unit
     has_many    :csss,      class_name: 'Clns::Cassation',    inverse_of: :unit
+    has_many    :cons,      class_name: 'Clns::Consumption',  inverse_of: :unit
 
     # @todo
     def view_filter
