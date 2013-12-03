@@ -374,7 +374,7 @@
           },
           buttons: function(btns) {
             return btns.each(function() {
-              var $bd, $button, $id, $url;
+              var $bd, $button, $id, $url, _ref;
               $button = $(this);
               $bd = $button.data();
               $id = $button.attr('id');
@@ -399,7 +399,7 @@
               } else if (Trst.desk.hdo.dialog === 'create') {
                 if (!Clns.desk.grn.validate.create()) {
                   if ($bd.action === 'save') {
-                    if (!(this.dln_ary.length > 0)) {
+                    if (!(((_ref = Clns.desk.grn.dln_ary) != null ? _ref.length : void 0) > 0)) {
                       $button.button('option', 'disabled', true);
                     }
                   }
