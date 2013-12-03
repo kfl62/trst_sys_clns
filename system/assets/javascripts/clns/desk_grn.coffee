@@ -288,7 +288,7 @@ define () ->
             else if Trst.desk.hdo.dialog is 'create'
               unless Clns.desk.grn.validate.create()
                 if $bd.action is 'save'
-                  $button.button 'option', 'disabled', true  unless @dln_ary.length > 0
+                  $button.button 'option', 'disabled', true  unless Clns.desk.grn.dln_ary.length > 0
               if $button.hasClass 'icon-refresh'
                 $button.off 'click'
                 $button.on 'click', ()->

@@ -2,6 +2,16 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.6**, `Clns::Consumptio` skeleton, js bugfix
+   - feature date: **2013-12-03**
+   - bump version v0.2.6
+   - update CHANGELOG
+   - views `Clns::Consumption` CRUD, skleton
+   - i18n `consumption.yml` skeleton
+   - assets js, `Clns.desk.consumption` skeleton
+   - models `Clns::Consumption` skeleton, relations in other models
+   - assets js, `Clns.desk.grn` Save button bugfix, recompiled
+
 * **feature v0.2.5**, `Clns::Grn` transfer storage
    - feature date: **2013-11-29**
    - bump version v0.2.5
