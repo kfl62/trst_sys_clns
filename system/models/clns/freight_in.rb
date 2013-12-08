@@ -28,6 +28,15 @@ module Clns
 
     class << self
       # @todo
+      def by_id_stats(ids,lst = false)
+        c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
+        result = where(id_stats: /#{c}/)
+        if lst
+          result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
+        end
+        result
+      end
+      # @todo
       def keys(pu = true)
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
