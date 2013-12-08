@@ -1,0 +1,31 @@
+:ruby
+  unit_id = @current_user.unit_id || session[:unit_id]
+%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_consumption'}}
+%form{action: "/sys/#{@path}",method: "post"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr.pdb-05
+        %td
+          %span.warning.width-500.ju= t('intro.create.main', data: mat(@object,'model_name'))
+      %tr.pdb-05
+        %td.ce
+          %span.st Nr.
+          - input_for @object, 'name',      {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
+          %span.st din data de:
+          - input_for @object, 'id_date',   {id: 'date_show',name: 'strip'}
+          - input_for @object, 'id_date',   {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+          - input_for @object, 'unit_id',   {type: 'hidden',value: unit_id}
+          - input_for @object, 'signed_by', {type: 'hidden',value: @current_user.id}
+      %tr.pdb-05
+        %td
+          - label_for @object, 'text'
+          - input_for @object, 'text',      {value: mat(@object,'text_default'),style: 'ui-state-default width-500'}
+      %tr.pdb-05
+        %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
+          = partial "clns/shared/doc_add_freight_stock"
+    = partial "#{@path}/form"
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
