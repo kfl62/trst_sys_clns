@@ -2,7 +2,7 @@ ro:
   clns:
     freight:
       missing: [["00", "---"]]
-      c0: [["00", "Toate"], ["01", "Masini/Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Combustibil"], ["08", "Reparatii/Service"], ["09", "Altele"]]
+      c0: [["00", "Toate"], ["01", "Masini/Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Firma"]]
       c1:
         "00": [["00", "Toate"]]
         "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"]]
@@ -11,9 +11,7 @@ ro:
         "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
         "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
         "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"], ["14", "Cap pulverizare"]]
-        "07": [["00", "Toate"]]
-        "08": [["00", "Toate"]]
-        "09": [["00", "Toate"], ["01", "Protocol"]]
+        "07": [["00", "Toate"], ["01", "Sediu"], ["06", "Parc auto"], ["02", "Energie"], ["03", "Telefonie"], ["04", "Banca"], ["05", "Protocol"]]
       c2:
         "00":
           "00": [["00", "Toate"]]
@@ -42,8 +40,8 @@ ro:
           "11": [["00", "Toate"], ["01", "SM 20L"], ["02", "SM 30L"], ["03", "SM 60L"], ["04", "SM 120L"], ["05", "SM altele"]]
           "12": [["00", "Toate"], ["01", "PHS alb"], ["02", "PHS color"], ["03", "PHB rola 10M"], ["04", "PHB rola 200M"], ["05", "PHB rola 300M"], ["06", "PHI rola KC7200"]]
           "13": [["00", "Toate"], ["01", "Pastila"], ["02","Placa"]]
-        "09":
-          "01": [["00", "Toate"], ["01", "Protocol - Alimente"]]
+        "07":
+          "02": [["00", "Toate"], ["01", "Electrica"], ["02", "Gaz metan"], ["03", "Combustibil"]]
   mongoid:
     attributes:
       'trst/freight': &trst_freight
