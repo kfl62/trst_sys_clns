@@ -153,9 +153,13 @@ ro:
           În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
           <b>%{signed_by}</b> în prezenţa delegatului <b>%{supplr_d}</b>, s-au recepţionat următoarele
           materiale provenind de la <b>%{supplr}</b> :
+        desk_consumption: |
+          În ziua de <b>%{id_date}</b> Dna/Dn-l <b>%{signed_by}</b> din gestiunea <b>%{unit}</b>
+          a scăzut (în baza Bonului de consum) următoarele: <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
         desk_cassation: |
           În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
-          <b>%{signed_by}</b> s-au casat/degradat următoarele: <br>
+          s-au casat/degradat următoarele: <br>
           &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
         desk_sorting: |
           În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
@@ -201,6 +205,24 @@ ro:
         Apăsaţi <b>"Ştergere"</b> şi încercaţi din nou :)
       no_payments: |
         Nu există nici o plată!
+      consumption_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Bon de Consum,
+          modificaţi bonul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"!
+          Puteţi reface Bonul de Consum după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Aviz,
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Aviz,
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
       delivery_note_negative_stock: |
           Cantitatea introdusă este mai mare decât stocul disponibil!
           În cazul în care puteţi modifica cantitatea pe Aviz,

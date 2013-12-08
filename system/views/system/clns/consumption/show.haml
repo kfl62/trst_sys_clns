@@ -1,0 +1,19 @@
+:ruby
+  firm    = Clns::PartnerFirm.find_by(firm: true)
+%span#hidden_data.hidden{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_consumption'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td{colspan: "5"}
+          %span.info.width-450.ju= t('intro.show.desk_consumption',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,expl: @object.text)
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan: "5"}
+          - if @object.freights.count == 0
+            %button{type: "button",data: {action: "delete",icon: "circle-minus",type: 'delete'}}= t('button.delete')
+          - else
+            %button{type: "button",data: {action: "print",icon: "print"}}= t('button.print')
+            %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
+            %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
