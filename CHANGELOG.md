@@ -2,11 +2,21 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.6.1**, `Clns::Consumptio` CRUD
+   - feature date: **2013-12-08**
+   - bump version v0.2.6.1
+   - update CHANGELOG
+   - views `Clns::Consumption` haml files
+   - assets js, `Clns.desk.consumption` coffee script, and compiled js
+   - i18n `clns|Consumption.yml` missing translations
+   - i18n `freights.yml` reorder categories
+   - models `Clns::FreightIn|Out` class method `by_id_stats(id_stats)` bugfix
+
 * **feature v0.2.6**, `Clns::Consumptio` skeleton, js bugfix
    - feature date: **2013-12-03**
    - bump version v0.2.6
    - update CHANGELOG
-   - views `Clns::Consumption` CRUD, skleton
+   - views `Clns::Consumption` CRUD, skeleton
    - i18n `consumption.yml` skeleton
    - assets js, `Clns.desk.consumption` skeleton
    - models `Clns::Consumption` skeleton, relations in other models
