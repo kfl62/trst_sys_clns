@@ -1,0 +1,8 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/stock':
+        model_name: Stoc Iniţial(lunar)/Curent
+        table_header: ['Material', 'UM', 'PU', 'Cant.', 'Valoare']
+        name: 'Nr. intern '
+        id_date: ' din data de '
