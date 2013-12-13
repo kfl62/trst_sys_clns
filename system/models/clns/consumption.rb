@@ -53,5 +53,11 @@ module Clns
       end
       name
     end
+    # @todo
+    def freights_list
+      freights.asc(:id_stats).each_with_object([]) do |f,r|
+        r << "#{f.freight.name}: #{"%.2f" % f.qu} #{f.um} ( #{"%.4f" % f.pu} )"
+      end
+    end
   end # Consumption
 end # Clns
