@@ -148,7 +148,8 @@ module Clns
                       val:        (f.pu * f.qu).round(2),
                       freight_id: f.freight.id,
                       doc_dln_id: (doc_dln_id if doc_dln_id),
-                      doc_cas_id: (doc_cas_id if doc_cas_id)
+                      doc_cas_id: (doc_cas_id if doc_cas_id),
+                      doc_con_id: (doc_con_id if doc_con_id)
                     ).upsert
                   end # if stock_to_handle.first
                   out -= f.qu
@@ -167,7 +168,8 @@ module Clns
                       val:        (f.pu * out).round(2),
                       freight_id: f.freight.id,
                       doc_dln_id: (doc_dln_id if doc_dln_id),
-                      doc_cas_id: (doc_cas_id if doc_cas_id)
+                      doc_cas_id: (doc_cas_id if doc_cas_id),
+                      doc_con_id: (doc_con_id if doc_con_id)
                     ).upsert unless out == 0
                   end # if stock_to_handle.first
                   f.qu -= out; out = 0
