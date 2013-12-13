@@ -2,6 +2,20 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.7**, `Clns::Stock` skeleton, bugfixes
+   - feature date: **2013-12-13**
+   - bump version v0.2.7
+   - update CHANGELOG
+   - views `Clns::Stock` CRUD, skeleton
+   - i18n `stock.yml` skeleton
+   - assets js, `Clns.desk.stock` skeleton
+   - models `Clns::Stock` skeleton, relations in other models
+   - views `Clns::Grn` pdf template, missing payments, bugfix
+   - views `Clns::Consumption` filter, add title to options, bugfix
+   - models: `Clns::Consumption` add #freights_list method, bugfix
+   - models `Clns::FreightOut` doc_con_id, bugfix
+   - i18n `freights.yml` reorder, missing translations
+
 * **feature v0.2.6.1**, `Clns::Consumptio` CRUD
    - feature date: **2013-12-08**
    - bump version v0.2.6.1

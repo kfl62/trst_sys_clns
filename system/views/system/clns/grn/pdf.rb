@@ -31,7 +31,7 @@ def payment(o = nil)
     elsif o.doc_type == 'DN'
       r = ['Nu este cazul.','Se va completa la facturare!']
     elsif o.doc_type == 'INV'
-      r = o.doc_inv.pyms_list
+      r = o.doc_inv.pyms_list rescue ['Eroare tip document!']
     else
       r = ['-']
     end
