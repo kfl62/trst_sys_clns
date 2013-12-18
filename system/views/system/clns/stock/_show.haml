@@ -1,0 +1,24 @@
+- @object.reload
+- if @object.freights.count > 0
+  %tbody
+    %tr
+      %td
+        %table.scroll{cellspacing: "0",style: "font-size:12px"}
+          %tbody.inner
+            %tr.scroll
+              - mat(@object,'table_header').each do |label|
+                %td.ce= label
+            - @object.freights.where(:qu.ne => 0).sort_by{|f| "#{f.freight.name}_#{"%05.4f" % f.pu}"}.each do |o|
+              %tr
+                - td_value_for  o, 'freight',   {order: 'name',style: 'stats',nested: 'doc_stk'}
+                - td_value_for  o, 'um',        {style: 'stats ce',nested: 'doc_stk'}
+                - td_value_for  o, 'pu',        {style: 'stats ri',nested: 'doc_stk',precision: 4}
+                - td_value_for  o, 'qu',        {style: 'stats ri',nested: 'doc_stk'}
+                - td_value_for  o, 'val',       {style: 'stats ri',nested: 'doc_stk'}
+            %tr
+    %tr
+- else
+  %tbody
+    %tr
+      %td
+        %span.warning.width-450.ju= t('msg.no_freight_in_stock')

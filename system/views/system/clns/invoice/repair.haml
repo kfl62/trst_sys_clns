@@ -2,17 +2,11 @@
 %form{action: "/sys/#{@path}", method: "get"}
   %table{cellspacing: "0"}
     %thead
-      - if @current_user.unit_id
-        %tr.pdb-05
-          %td
-            %span.info= t('intro.repair.desk_invoice')
-            %input#date_send{type: 'hidden', value: Date.today.to_s}
-      - else
-        %tr.pdb-05
-          %td
-            %span= mat(@object,'day')
-            %input#date_show.ui-state-default{type: 'text',value: l(Date.today,format: :trst)}
-            %input#date_send{type: 'hidden', value: Date.today.to_s}
+      %tr.pdb-05
+        %td
+          %span= mat(@object,'day')
+          %input#date_show.ui-state-default{type: 'text',value: l(Date.today,format: :trst)}
+          %input#date_send{type: 'hidden', value: Date.today.to_s}
     %tbody
       %tr.pdb-05
         %td

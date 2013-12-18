@@ -265,6 +265,7 @@ define () ->
             min = if Trst.lst.admin is 'true' then new Date(now.getFullYear(),now.getMonth() - 1,1) else new Date(now.getFullYear(),now.getMonth(),1)
             $('#date_show').datepicker 'option', 'maxDate', '+0'
             $('#date_show').datepicker 'option', 'minDate', min
+          $('.focus').focus()
           Clns.desk.delivery_note.buttons($('button'))
           Clns.desk.delivery_note.selects($('select.clns,input.select2,input.repair'))
           Clns.desk.delivery_note.template = $('tr.template')?.remove()

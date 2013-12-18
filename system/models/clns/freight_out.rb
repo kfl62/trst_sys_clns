@@ -103,7 +103,7 @@ module Clns
       stock_to_handle = retro ? [unit.stock_now] : [unit.stock_monthly(id_date.year,id_date.month), unit.stock_now]
       if add_delete
         stock_to_handle.each do |stck|
-          f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+          f = stck.freights.find_or_create_by(id_stats: id_stats, um: um, pu: pu)
           f.qu += qu
           f.freight_id= freight_id
           f.id_date   = stck.id_date
@@ -113,7 +113,7 @@ module Clns
       else
         stock_to_handle.each_with_index do |stck,i|
           if pu > 0 or pu_invoice > 0
-            f = stck.freights.find_or_create_by(id_stats: id_stats, pu: pu)
+            f = stck.freights.find_or_create_by(id_stats: id_stats, um: um, pu: pu)
             f.qu -= qu
             f.freight_id= freight_id
             f.id_date   = stck.id_date
