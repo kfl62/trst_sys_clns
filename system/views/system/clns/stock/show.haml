@@ -1,0 +1,20 @@
+%span#hidden_data.hidden{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr
+        %td
+          - label_for @object, 'name',    {style: 'stats'}
+          - value_for @object, 'name',    {style: 'stats st'}
+          - label_for @object, 'id_date', {style: 'stats'}
+          %span.stats.width-150.ce.st= @object.id_date.to_s
+      %tr.pdb-05
+        %td
+          - value_for @object, 'expl',    {style: 'stats width-250'}
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
+          %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
+          %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')

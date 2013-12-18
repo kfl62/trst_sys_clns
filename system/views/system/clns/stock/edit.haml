@@ -1,0 +1,23 @@
+:ruby
+  unit_id = @current_user.unit_id || session[:unit_id]
+  unit    = Clns::PartnerFirm.unit_by_unit_id(unit_id)
+%span#hidden_data.hidden{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
+%form{action: "/sys/#{@path}", method: "put"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr
+        %td
+          - label_for @object, 'name',    {style: 'stats'}
+          - value_for @object, 'name',    {style: 'stats st'}
+          - label_for @object, 'id_date', {style: 'stats'}
+          - input_for @object, 'id_date', {type: 'hidden',value: @object.id_date.to_s}
+          %span.stats.width-150.ce.st= @object.id_date.to_s
+      %tr.pdb-05
+        %td
+          - value_for @object, 'expl',    {style: 'stats width-250'}
+    = partial "#{@path}/form", locals: {unit: unit}
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}=         t('button.save')
+          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
