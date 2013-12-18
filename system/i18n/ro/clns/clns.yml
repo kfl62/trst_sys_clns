@@ -28,14 +28,12 @@ ro:
           Puteţi modifica preţul unitar la un &raquo;%{data}&laquo; după ce îl alegeţi din listă!
         desk_grn:
           admin: |
-            Pentru a transfera în gestiunea <b>%{unit}</b>, prima dată
-            trebuie să selectaţi tipul de marfă, cu sau fără 3%, după care veţi putea
-            selecta <b>Avizele de expediţie</b>, care vă interesează.
+            Pentru a transfera în gestiunea <b>%{unit}</b>, trebuie
+            selectatate <b>Avizele de expediţie</b>, care vă interesează.
           user: |
-            Pentru a transfera în gestiunea <b>%{unit}</b>, prima dată
-            trebuie să selectaţi tipul de marfă, cu sau fără 3%, după care veţi putea
-            selecta <b>Avizul de expediţie</b>, cu nr. care v-a fost comunicat telefonic.
-            (în principiu care se termină cu <b>%{slug}</b>)
+            Pentru a transfera în gestiunea <b>%{unit}</b>, trebuie
+            selectat <b>Avizul de expediţie</b>, cu nr. care v-a fost comunicat telefonic.
+            (în principiu al cărui nume conține <b>%{slug}</b>)
           partner_firm: |
             Pentru a a crea un &raquo;NIR - Persoane juridice&laquo; este nevoie să selectaţi un "Furnizor"
             opţional un "Delegat" ptr. acest "Furnizor". În cazul în care
@@ -203,6 +201,9 @@ ro:
         Hmmm... Se pare că nu aţi ales niciun material!
         Sau aţi uitat să introduceţi cantitatea!
         Apăsaţi <b>"Ştergere"</b> şi încercaţi din nou :)
+      no_freight_in_stock: |
+        <br>
+        Hmmm... Se pare că nu aveți niciun material îm stoc!
       no_payments: |
         Nu există nici o plată!
       consumption_negative_stock: |
