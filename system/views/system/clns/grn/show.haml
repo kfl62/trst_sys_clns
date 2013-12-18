@@ -15,5 +15,6 @@
             %button{type: "button", data: {action: "delete", icon: "circle-minus",type: 'delete'}}= t('button.delete')
           - else
             %button{type: "button", data: {action: "print",  icon: "print"}}= t('button.print')
-            %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
-            %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+            - if @current_user.admin? || @object.id_date == Date.today
+              %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
+            %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')

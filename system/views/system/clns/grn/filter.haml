@@ -15,7 +15,7 @@
             - if @current_user.admin?
               %span.info.info.width-450.ju= t('intro.filter.desk_grn.admin',unit: unit.name[1])
             -else
-              %span.info.info.width-450.ju= t('intro.filter.desk_grn.user',unit: unit.name[1],slug: unit.slug.downcase)
+              %span.info.info.width-450.ju= t('intro.filter.desk_grn.user',unit: unit.name[1],slug: unit.slug)
         - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(:unit_id.ne  => to_unit)
         - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(unit_id: from_unit) if from_unit
         - if dlns.empty?

@@ -7,17 +7,11 @@
   %form{action: "/sys/#{@path}", method: "get"}
     %table{cellspacing: "0"}
       %thead
-        - if @current_user.unit_id
-          %tr.pdb-05
-            %td
-              %span.info.width-400.ju= t('intro.repair.desk_grn')
-              %input#date_send{type: 'hidden', value: Date.today.to_s}
-        - else
-          %tr.pdb-05
-            %td
-              %span= mat(@object,'day')
-              %input#date_show.ui-state-default{type: 'text',value: l(Date.today,format: :trst)}
-              %input#date_send{type: 'hidden', value: Date.today.to_s}
+        %tr.pdb-05
+          %td
+            %span= mat(@object,'day')
+            %input#date_show.ui-state-default{type: 'text',value: l(Date.today,format: :trst)}
+            %input#date_send{type: 'hidden', value: Date.today.to_s}
       %tbody
         %tr.pdb-05
           %td
@@ -25,7 +19,7 @@
       %tfoot
         %tr
           %td.buttonset.ce
-            %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+            %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
 -else
   %form{action: "/sys/#{@path}", method: "get"}
     = partial 'clns/shared/select_unit'
