@@ -288,7 +288,7 @@ define () ->
             else if Trst.desk.hdo.dialog is 'create'
               unless Clns.desk.grn.validate.create()
                 if $bd.action is 'save'
-                  $button.button 'option', 'disabled', true  unless Clns.desk.grn.dln_ary.length > 0
+                  $button.button 'option', 'disabled', true  unless Clns.desk.grn.dln_ary?.length > 0
               if $button.hasClass 'icon-refresh'
                 $button.off 'click'
                 $button.on 'click', ()->
@@ -330,6 +330,7 @@ define () ->
             min = if Trst.lst.admin is 'true' then new Date(now.getFullYear(),now.getMonth() - 1,1) else min = new Date(now.getFullYear(),now.getMonth(),1)
             $('#date_show').datepicker 'option', 'maxDate', '+0'
             $('#date_show').datepicker 'option', 'minDate', min
+          $('.focus').focus()
           Clns.desk.grn.buttons($('button'))
           Clns.desk.grn.selects($('select.clns,input.select2,input.repair'))
           Clns.desk.grn.inputs($('input'))

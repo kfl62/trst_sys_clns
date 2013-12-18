@@ -372,6 +372,7 @@
               $('#date_show').datepicker('option', 'maxDate', '+0');
               $('#date_show').datepicker('option', 'minDate', min);
             }
+            $('.focus').focus();
             Clns.desk.delivery_note.buttons($('button'));
             Clns.desk.delivery_note.selects($('select.clns,input.select2,input.repair'));
             Clns.desk.delivery_note.template = (_ref = $('tr.template')) != null ? _ref.remove() : void 0;

@@ -462,6 +462,7 @@
               $('#date_show').datepicker('option', 'maxDate', '+0');
               $('#date_show').datepicker('option', 'minDate', min);
             }
+            $('.focus').focus();
             Clns.desk.grn.buttons($('button'));
             Clns.desk.grn.selects($('select.clns,input.select2,input.repair'));
             Clns.desk.grn.inputs($('input'));
