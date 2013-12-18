@@ -2,6 +2,18 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.7.1**, `Clns::Stock` CRUD, bugfixec
+   - feature date: **2013-12-18**
+   - bump version v0.2.7.1
+   - update CHANGELOG
+   - views `Clns::Stock` haml files
+   - assets js, `Clns.desk.stock` coffee script, and compiled js
+   - views `Clns::Grn|DeliveryNote|Invoice` repair, allow users to see whole month, and some typo
+   - assets js, `Clns.desk.grn|delivery_note` repair, focus on date, bugfix
+   - i18n `clns.yml` missing translations
+   - models `Clns::Consumption` freight_list improved
+   - models `Clns::FreightOut` handle_stock, um, bugfix
+
 * **feature v0.2.7**, `Clns::Stock` skeleton, bugfixes
    - feature date: **2013-12-13**
    - bump version v0.2.7
