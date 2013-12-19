@@ -374,6 +374,22 @@ define () ->
               if $bd.action is 'cancel'
                 $button.on 'click', ()->
                   Clns.desk.tmp.clear()
+            else if Trst.desk.hdo.dialog is 'show'
+              if $bd.action is 'print'
+                $button.on 'click', ()->
+                  Trst.msgShow Trst.i18n.msg.report.start
+                  $.fileDownload "/sys/clns/invoice/print?id=#{Trst.desk.hdo.oid}",
+                    successCallback: ()->
+                      Trst.msgHide()
+                    failCallback: ()->
+                      Trst.msgHide()
+                      Trst.desk.downloadError Trst.desk.hdo.model_name
+                  return
+                return
+            else
+              ###
+              Buttons default handler Trst.desk.buttons
+              ###
           return
         init: ()->
           if $('#date_show').length

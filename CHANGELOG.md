@@ -2,6 +2,12 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.8**, `Clns::Consumption|Invoice|DeliveryNote` pdf template or placeholder
+   - feature date: **2013-12-19**
+   - bump version v0.2.8
+   - update CHANGELOG
+   - `Clns::Consumption|Invoice|DeliveryNote` pdf template or placeholder
+
 * **feature v0.2.7.1**, `Clns::Stock` CRUD, bugfixec
    - feature date: **2013-12-18**
    - bump version v0.2.7.1

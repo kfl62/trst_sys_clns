@@ -142,6 +142,18 @@ define () ->
                   if $('tr.consumption-freight').length is 0
                     $('tr.consumption-freight-header, tr.consumption-freight-total').addClass('hidden')
                     $('button[data-action="save"]').button 'option', 'disabled', true
+            else if Trst.desk.hdo.dialog is 'show'
+              if $bd.action is 'print'
+                $button.on 'click', ()->
+                  Trst.msgShow Trst.i18n.msg.report.start
+                  $.fileDownload "/sys/clns/consumption/print?id=#{Trst.desk.hdo.oid}",
+                    successCallback: ()->
+                      Trst.msgHide()
+                    failCallback: ()->
+                      Trst.msgHide()
+                      Trst.desk.downloadError Trst.desk.hdo.model_name
+                  return
+                return
             else
               ###
               Buttons default handler Trst.desk.buttons

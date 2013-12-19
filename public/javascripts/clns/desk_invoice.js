@@ -499,6 +499,26 @@
                     return Clns.desk.tmp.clear();
                   });
                 }
+              } else if (Trst.desk.hdo.dialog === 'show') {
+                if ($bd.action === 'print') {
+                  $button.on('click', function() {
+                    Trst.msgShow(Trst.i18n.msg.report.start);
+                    $.fileDownload("/sys/clns/invoice/print?id=" + Trst.desk.hdo.oid, {
+                      successCallback: function() {
+                        return Trst.msgHide();
+                      },
+                      failCallback: function() {
+                        Trst.msgHide();
+                        return Trst.desk.downloadError(Trst.desk.hdo.model_name);
+                      }
+                    });
+                  });
+                }
+              } else {
+                /*
+                Buttons default handler Trst.desk.buttons
+                */
+
               }
             });
           },
