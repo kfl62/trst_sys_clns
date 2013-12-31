@@ -42,7 +42,7 @@
         - unless dln_ary.empty?
           %tr.pdb-05
             %td
-              %table{cellspacing: "0",style: "width:80%;margin:auto;font-size:12px"}
+              %table{cellspacing: "0",style: "margin:auto;font-size:12px"}
                 %tbody.inner
                   %tr
                     - mat(@object,'table_header')[0..4].each do |label|
@@ -52,17 +52,17 @@
                       %td
                         %span.stats= s[1][0]
                       %td
-                        %span.um kg
+                        %span.um= s[1][0]= s[1][2]
                       %td
-                        %span.pu= "%.4f" % s[1][2]
+                        %span.pu= "%.4f" % s[1][3]
                       %td
-                        %span.qu= "%.2f" % s[1][3]
+                        %span.qu= "%.2f" % s[1][4]
                       %td
-                        %span.val= "%.2f" % s[1][4]
+                        %span.val= "%.2f" % s[1][5]
                   %tr.result
                     %td.ce.st{:colspan => "4"}= "Total"
                     %td
-                      %span.val= "%.2f" % data.values.sum{|r| r[4]}
+                      %span.val= "%.2f" % data.values.sum{|r| r[5]}
       %tfoot
         %tr
           %td.buttonset.ce

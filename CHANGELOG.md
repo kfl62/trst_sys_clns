@@ -2,6 +2,14 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.8.1**, `Clns::Consumption|Invoice|DeliveryNote` Clns::Grn id_intern == true, bugfix
+   - feature date: **2013-12-31**
+   - bump version v0.2.8.1
+   - update CHANGELOG
+   - views `Clns::Grn` CRUD `id_intern == true`, missing UM, bugfix
+   - models `Clns::DeliveryNote.sum_freight_grn` missing `um`, bugfix
+   - i18n `freights.yml` reorder, missing translations
+
 * **feature v0.2.8**, `Clns::Consumption|Invoice|DeliveryNote` pdf template or placeholder
    - feature date: **2013-12-19**
    - bump version v0.2.8
@@ -30,7 +38,7 @@ release date: **2013-xx-xx**
    - models `Clns::Stock` skeleton, relations in other models
    - views `Clns::Grn` pdf template, missing payments, bugfix
    - views `Clns::Consumption` filter, add title to options, bugfix
-   - models: `Clns::Consumption` add #freights_list method, bugfix
+   - models `Clns::Consumption` add #freights_list method, bugfix
    - models `Clns::FreightOut` doc_con_id, bugfix
    - i18n `freights.yml` reorder, missing translations
 
