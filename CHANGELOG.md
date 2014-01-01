@@ -2,6 +2,13 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.8.2**, some work on models
+   - feature date: **2014-01-01**
+   - bump version v0.2.8.2
+   - update CHANGELOG
+   - models improve `increment_name` method, where appropriate
+   - models `Clns::PartnerFirm::Unit` add `stock_create` method
+
 * **feature v0.2.8.1**, `Clns::Consumption|Invoice|DeliveryNote` Clns::Grn id_intern == true, bugfix
    - feature date: **2013-12-31**
    - bump version v0.2.8.1
