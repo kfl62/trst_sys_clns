@@ -115,6 +115,16 @@ module Clns
       end
       stks.find_by(id_date: Date.new(y,m,1))
     end
+    # @todo
+    def stock_create(y,m)
+      stk_new = stks.create(
+        id_date: Date.new(y,m,1),
+        name: "Stock_#{slug}_#{I18n.localize(Date.new(y,m,1), format: '%Y-%m')}",
+        expl: "Stoc initial #{I18n.localize(Date.new(y,m,1), format: '%B, %Y').downcase}"
+      )
+      self.stock_now.freights.where(:qu.ne => 0).each{|f| stk_new.freights << f.clone}
+      stk_new
+    end
   end # FirmUnit
   PartnerFirmUnit = PartnerFirm::Unit
 end # Wstm
