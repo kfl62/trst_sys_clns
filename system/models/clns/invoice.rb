@@ -67,14 +67,8 @@ module Clns
       if invs.count > 0
         name = invs.asc(:name).last.name.next
       else
-        invs = Clns::Invoice.nonin
-        if invs.count > 0
-          #prefix = invs.asc(:name).last.name.split('_').last[0].next
-          prefix = '1'
-          name = "#{firm.name[0][0..2].upcase}_INV-#{prefix}00001"
-        else
-          name = "#{firm.name[0][0..2].upcase}_INV-000001"
-        end
+        prfx = Date.today.year.to_s[-2..-1]
+        name = "#{firm.name[0][0..2].upcase}_INV-#{prfx}00001"
       end
       name
     end

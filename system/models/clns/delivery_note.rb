@@ -104,15 +104,9 @@ module Clns
       if dlns.count > 0
         name = dlns.asc(:name).last.name.next
       else
-        dlns = Clns::DeliveryNote.by_unit_id(unit_id)
         unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
-        if dlns.count > 0
-          #prefix = dlns.asc(:name).last.name.split('_').last[0].next
-          prefix = '1'
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEAA-#{prefix}00001"
-        else
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEAA-000001"
-        end
+        prfx = Date.today.year.to_s[-2..-1]
+        name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_AEAA-#{prfx}00001"
       end
       name
     end

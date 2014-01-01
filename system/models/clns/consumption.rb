@@ -37,19 +37,13 @@ module Clns
     end
     # @todo
     def increment_name(unit_id)
-      cass = Clns::Consumption.by_unit_id(unit_id).yearly(Date.today.year)
-      if cass.count > 0
-        name = cass.asc(:name).last.name.next
+      css = Clns::Consumption.by_unit_id(unit_id).yearly(Date.today.year)
+      if css.count > 0
+        name = css.asc(:name).last.name.next
       else
-        cass = Clns::Consumption.by_unit_id(unit_id)
         unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
-        if cass.count > 0
-          #prefix = cass.asc(:name).last.name.split('_').last[0].next
-          prefix = '2'
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_BC-#{prefix}00001"
-        else
-          name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_BC-000001"
-        end
+        prfx = Date.today.year.to_s[-2..-1]
+        name = "#{unit.firm.name[0][0..2].upcase}_#{unit.slug}_BC-#{prfx}00001"
       end
       name
     end
