@@ -5,12 +5,12 @@ ro:
       c0: [["00", "Toate"], ["01", "Masini/Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Firma"]]
       c1:
         "00": [["00", "Toate"]]
-        "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"]]
+        "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"], ["06", "Altele"]]
         "02": [["00", "Toate"], ["01", "Carucior"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["07", "Suport pad dreptunghiular"], ["08", "Suport lama"], ["06", "Perie frecat cu miner"], ["09", "Scara Aluminiu"], ["10", "Tija telescop"]]
         "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 16\""], ["03", "Perie PPL 16\""], ["04", "Perie Tynnex 16\""], ["05", "Perie covor 16\""], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"]]
         "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
         "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
-        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta microfibra"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"], ["14", "Cap pulverizare"]]
+        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"], ["14", "Cap pulverizare"]]
         "07": [["00", "Toate"], ["01", "Sediu"], ["06", "Parc auto"], ["02", "Energie"], ["03", "Telefonie"], ["04", "Banca"], ["05", "Protocol"]]
       c2:
         "00":
@@ -32,7 +32,7 @@ ro:
         "06":
           "01": [["00", "Toate"], ["01", "HWCS alb"], ["02", "HWCS color"]]
           "02": [["00", "Toate"], ["01", "HWCM alb"], ["02", "HWCM color"]]
-          "03": [["00", "Toate"], ["01", "LMF rosu"], ["02", "LMF albastru/verde"], ["03", "LMF galben"]]
+          "03": [["00", "Toate"], ["01", "Microfibra"], ["02", "Umeda"]]
           "04": [["00", "Toate"], ["01", "BSB alb"], ["02", "BSB verde"]]
           "06": [["00", "Toate"], ["01", "MP40 bumbac cu urechi"], ["02", "MP40 bumbac cu buzunare"], ["03", "MP40 micro cu urechi"], ["04", "MP40 micro cu buzunare"]]
           "07": [["00", "Toate"], ["01", "MR profesional"], ["02", "MR Metro"]]
