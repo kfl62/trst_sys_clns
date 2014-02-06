@@ -123,6 +123,7 @@ module Clns
         expl: "Stoc initial #{I18n.localize(Date.new(y,m,1), format: '%B, %Y').downcase}"
       )
       self.stock_now.freights.where(:qu.ne => 0).each{|f| stk_new.freights << f.clone}
+      stk_new.freights.each{|f| f.set(:id_date,stk_new.id_date)}
       stk_new
     end
   end # FirmUnit
