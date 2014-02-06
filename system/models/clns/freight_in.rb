@@ -29,17 +29,20 @@ module Clns
     class << self
       # @todo
       def by_id_stats(ids,lst = false)
-        c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
-        result = where(id_stats: /#{c}/)
+        c = ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
+        result = where(id_stats: /#{c}/).asc(:name)
         if lst
+          c = ids.gsub(/\d{2}$/,"\\d{2}")
+          result = where(id_stats: /#{c}/).asc(:id_stats)
           result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
         end
         result
       end
       # @todo
-      def keys(pu = true)
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
+      def keys(p = 2)
+        p  = 0 unless p # keys(false) compatibility
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%.#{p}f" % f.pu}"}.uniq.sort!
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort! if p.zero?
         ks
       end
       # @todo
@@ -85,7 +88,7 @@ module Clns
     end
     # @todo
     def key
-      "#{id_stats}_#{"%05.4f" % pu}"
+      "#{id_stats}_#{"%.4f" % pu}"
     end
 
     protected

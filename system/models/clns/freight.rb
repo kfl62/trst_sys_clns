@@ -8,15 +8,26 @@ module Clns
     has_many    :outs,     class_name: "Clns::FreightOut",      inverse_of: :freight
     has_many    :stks,     class_name: "Clns::FreightStock",    inverse_of: :freight
 
+    after_update :handle_id_stats
+
     class << self
       # @todo
       def by_id_stats(ids,lst = false)
-        c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
+        c = ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
         result = where(id_stats: /#{c}/).asc(:name)
         if lst
+          c = ids.gsub(/\d{2}$/,"\\d{2}")
+          result = where(id_stats: /#{c}/).asc(:id_stats)
           result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
         end
         result
+      end
+      # @todo
+      def keys(p = 2)
+        p  = 0 unless p # keys(false) compatibility
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%.#{p}f" % f.pu}"}.uniq.sort!
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort! if p.zero?
+        ks
       end
       # # @todo
       # def stats_pos(*args)
@@ -113,13 +124,13 @@ module Clns
     # def stock_by_key(key)
     #   stks_now.by_key(key).sum(:qu) || 0
     # end
-    # @todo
-    def unit
-      Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue nil
-    end
+    # # @todo
+    # def unit
+    #   Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue nil
+    # end
     # @todo
     def key(p)
-      "#{id_stats}_#{"%05.4f" % p}"
+      "#{id_stats}_#{"%.4f" % p}"
     end
     # @todo
     def criteria_name
@@ -129,6 +140,16 @@ module Clns
       I18n.t("clns.freight.c1.#{c0}").each_with_object(result){|a,r| r << a[1] if a[0] == c1} unless c1 == '00'
       I18n.t("clns.freight.c2.#{c0}.#{c1}").each_with_object(result){|a,r| r << a[1] if a[0] == c2} unless c2 == '00'
       result.join(' - ')
+    end
+
+    protected
+    # @todo
+    def handle_id_stats
+      if id_stats_changed?
+        [ins,outs,stks].each do |m|
+          m.where(id_stats: id_stats_was).update_all(id_stats: id_stats)
+        end
+      end
     end
   end # Freight
 end # Clns
