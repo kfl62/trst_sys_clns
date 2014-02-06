@@ -27,10 +27,8 @@ module Clns
     end # Class methods
 
     # @todo
-    def keys(pu = true)
-      ks = freights.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-      ks = freights.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
-      ks
+    def keys(p = 2)
+      freights.keys(p)
     end
     # @todo
     def unit

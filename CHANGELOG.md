@@ -2,6 +2,17 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.9.1**, bugfix, prepare query `Clns::Freights*`
+   - feature date: **2014-02-06**
+   - bump version v0.2.9.1
+   - update CHANGELOG
+   - views `Clns::Stock` bugfix
+   - views `Clns::Freight` bugfix, query skeleton
+   - i18n `freights.yml` reorder categories
+   - models `Clns::Stock#keys` use inherited
+   - models `Clns::Freight|In|Out|Stock` bugfix, typo etc.
+   - models `Clns::PartnerFirm::Unit#stock_create`, related freights `id_date`
+
 * **feature v0.2.8.2**, some work on models
    - feature date: **2014-01-01**
    - bump version v0.2.8.2

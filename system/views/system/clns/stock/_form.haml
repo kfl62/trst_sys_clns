@@ -22,7 +22,7 @@
               %td
                 %span.stats.ce= o.freight.um
                 -input_for    o, 'um',         {nested: 'doc_stk',index: i,type: 'hidden',value: o.freight.um}
-              - td_input_for  o, 'pu',         {nested: 'doc_stk',index: i,style: 'pu', value: "%.2f" % o.pu}
+              - td_input_for  o, 'pu',         {nested: 'doc_stk',index: i,style: 'quw', value: "%.4f" % o.pu}
               - td_input_for  o, 'qu',         {nested: 'doc_stk',index: i,style: 'quw',value: "%.2f" % o.qu}
               %td
                 %span.stats.ri= "%.2f" % o.val

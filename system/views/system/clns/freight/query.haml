@@ -1,0 +1,76 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:y].nil? ? today.year  : params[:y].to_i
+  m   = params[:m].nil? ? today.month : params[:m].to_i
+  d   = params[:d].nil? ? 0 : params[:d].to_i
+  uid = @current_user.unit_id ? @current_user.unit_id : params[:uid] == 'null' ? nil : params[:uid]
+  fid = params[:fid] ? params[:fid] == 'null' ? nil : params[:fid] : nil
+  firm= Clns::PartnerFirm.find_by(firm: :true); unit= firm.units.find(uid) if uid; freight = Wstm::Freight.find(fid) if fid
+  data= uid ? unit.name[1] : firm.name[2]
+  id_stats = params[:id_stats] || locals[:id_stats] || "00000000"
+  c0,c1,c2 = id_stats.scan(/\d{2}/)
+  freights = Clns::Freight
+%span#hidden_data.hidden{data: {dialog: "query",title_data: data,model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+- if uid && fid.nil?
+  %div.small
+    %p.noFreight
+      %select#y
+        - [2013,2014].each do |year|
+          %option{value: year, selected: y == year}= year
+      %select#m
+        - t('month')[1..12].each_with_index do |month,i|
+          %option{value: i + 1, selected: m == i + 1}= month
+      %select#d{style: 'font-family:Courier'}
+        - (0..Time.days_in_month(m,y)).each do |day|
+          %option{value: day, selected: d == day}= l(Date.new(y,m,day), format: "%a, %Y-%m-%d") rescue 'Intrări zilnice'
+      - unless @current_user.unit_id
+        %select#u
+          %option{value: 'null'} Toate unităţile
+          - firm.units.asc(:slug).each do |pos|
+            %option{value: pos.id, selected: uid.to_s == pos.id.to_s}= pos.name[1]
+- elsif freight
+  %div.small
+    %span.info= t('intro.query.desk_freight.exit_one')
+    %p.hasFreight
+      %select#y
+        - [2013,2014].each do |year|
+          %option{value: year, selected: y == year}= year
+      %select#m
+        - t('month')[1..12].each_with_index do |month,i|
+          %option{value: i + 1, selected: m == i + 1}= month
+      %select#f{data: {uid: freight.unit.id}}
+        %option{value: 'null'}= t('select.freight_all')
+        - freight.unit.freights.asc(:id_stats).each do |f|
+          %option{value: f.id, selected: freight.id.to_s == f.id.to_s}= f.name
+- else
+  %div.small
+    %span.info.width-500.ju= t('intro.query.desk_freight.all')
+    %p.noFreight
+      %select#y
+        - [2013,2014].each do |year|
+          %option{value: year, selected: y == year}= year
+      %select#m
+        - t('month')[1..12].each_with_index do |month,i|
+          %option{value: i + 1, selected: m == i + 1}= month
+      %select.clns.freight.c0
+        - t("freight.c0").each do |c|
+          %option{value: c.first, selected: c.first == c0}= c.last
+      %select.clns.freight.c1
+        - t("freight.c1.#{c0}",default: [:'clns.freight.missing']).each do |c|
+          %option{value: c.first, selected: c.first == c1}= c.last
+      %select.clns.freight.c2
+        - t("freight.c2.#{c0}.#{c1}",default: [:'clns.freight.missing']).each do |c|
+          %option{value: c.first, selected: c.first == c2}= c.last
+      %select.clns.freight.oid
+        %option{value: "null"}= t("select.option",data: mat(freights,'model_name'))
+        - freights.by_id_stats(id_stats).each do |o|
+          %option{value: o.view_filter.first, selected: o.id_stats == id_stats, data: {id_stats: o.id_stats,tva: (o.tva)}}= o.view_filter.last
+  %table{:cellspacing => "0"}
+    %tbody.inner
+      %tr
+        - mat(@object,'table_all').each do |cn|; cols += 1
+          %td
+            %span.stats.ce= cn
+        - firm.units.asc(:slug).each do |cn|; cols +=1
+          %td
+            %span.stats.ce.link.uid{id: cn.id}= cn.slug

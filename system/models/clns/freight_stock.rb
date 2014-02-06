@@ -22,20 +22,25 @@ module Clns
     index({ freight_id: 1, doc_stk_id: 1, qu: 1})
     scope :stock_now, where(id_date: Date.new(2000,1,31))
 
+    after_update :handle_value
+
     class << self
       # @todo
       def by_id_stats(ids,lst = false)
-        c = lst ? ids.gsub(/\d{2}$/,"\\d{2}") : ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
-        result = where(id_stats: /#{c}/)
+        c = ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
+        result = where(id_stats: /#{c}/).asc(:name)
         if lst
+          c = ids.gsub(/\d{2}$/,"\\d{2}")
+          result = where(id_stats: /#{c}/).asc(:id_stats)
           result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
         end
         result
       end
       # @todo
-      def keys(pu = true)
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%05.4f" % f.pu}"}.uniq.sort! if pu
+      def keys(p = 2)
+        p  = 0 unless p # keys(false) compatibility
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%.#{p}f" % f.pu}"}.uniq.sort!
+        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort! if p.zero?
         ks
       end
       # @todo
@@ -88,7 +93,13 @@ module Clns
     end
     # @todo
     def key
-      "#{id_stats}_#{"%05.4f" % pu}"
+      "#{id_stats}_#{"%.4f" % pu}"
     end
-  end # FreightIn
+
+    protected
+    # @todo
+    def handle_value
+      set :val, (pu * qu).round(2)
+    end
+  end # FreightStock
 end # Clns
