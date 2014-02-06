@@ -5,7 +5,10 @@
       - tr_input_for  @object,      'id_stats', {value: id_stats}
     - else
       - tr_show_for @object,        'criteria_name'
-      - tr_show_for @object,        'id_stats'
+      - if @current_user.root?
+        - tr_input_for @object,        'id_stats'
+      - else
+        - tr_show_for @object,        'id_stats'
     - tr_input_for  @object,        'name', {style: 'focus'}
     - tr_input_for  @object,        'um'
     - tr_input_for  @object,        'pu'

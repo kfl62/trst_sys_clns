@@ -13,7 +13,7 @@
           %select#oid
             %option{value: "null"}= t("select.option",data: mat(@object,'model_name'))
             - @object.default_sort.by_id_stats(id_stats).each do |o|
-              %option{value: o.view_filter.first}= o.view_filter.last
+              %option{value: o.view_filter.first,title: o.id_stats}= o.view_filter.last
     %tfoot
       %tr
         %td.buttonset.ce
