@@ -15,6 +15,7 @@
     %tfoot
       %tr
         %td.buttonset.ce
-          %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
-          %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
+          - if @current_user.root?
+            %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
+            %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
           %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
