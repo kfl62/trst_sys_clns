@@ -17,7 +17,7 @@
         %tr.pdb-05
           %td
             %select.clns.y
-              - [2011,2012,2013].each do |year|
+              - (2014..Date.today.year).each do |year|
                 %option{value: year, selected: y == year}= year
             %select.clns.m
               - t('month')[1..12].each_with_index do |month,i|
@@ -92,7 +92,7 @@
         %tr.pdb-05
           %td
             %select.clns.y
-              - [2011,2012,2013].each do |year|
+              - (2014..Date.today.year).each do |year|
                 %option{value: year, selected: y == year}= year
             %select.clns.m
               - t('month')[1..12].each_with_index do |month,i|
