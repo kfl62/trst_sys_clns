@@ -17,6 +17,7 @@ module Clns
     belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :stks
     belongs_to  :doc_stk,  class_name: 'Clns::Stock',       inverse_of: :freights
 
+    index({ id_stats: 1, freight_id: 1, id_date: 1 })
     index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
     index({ id_stats: 1, pu: 1, id_date: 1 })
     index({ freight_id: 1, doc_stk_id: 1, qu: 1})

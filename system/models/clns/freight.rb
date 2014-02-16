@@ -29,6 +29,21 @@ module Clns
         ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort! if p.zero?
         ks
       end
+      # @todo
+      def stks
+        ids = all.pluck(:id)
+        Clns::FreightStock.where(:freight_id.in => ids)
+      end
+      # @todo
+      def ins
+        ids = all.pluck(:id)
+        Clns::FreightIn.where(:freight_id.in => ids)
+      end
+      # @todo
+      def outs
+        ids = all.pluck(:id)
+        Clns::FreightOut.where(:freight_id.in => ids)
+      end
       # # @todo
       # def stats_pos(*args)
       #   opts = args.last.is_a?(Hash) ? {}.merge!(args.pop) : {}
