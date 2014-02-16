@@ -23,10 +23,12 @@ module Clns
     belongs_to  :doc_cas,  class_name: 'Clns::Cassation',   inverse_of: :freights
     belongs_to  :doc_con,  class_name: 'Clns::Consumption', inverse_of: :freights
 
+    index({ id_stats: 1, freight_id: 1, id_date: 1 })
     index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
     index({ id_stats: 1, pu: 1, id_date: 1 })
     index({ doc_dln_id: 1})
     index({ doc_cas_id: 1})
+    index({ doc_con_id: 1})
 
     after_save    :'handle_stock(false)'
     after_destroy :'handle_stock(true)'
@@ -61,7 +63,10 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:doc_dln_id.in => Clns::DeliveryNote.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
+        uid = PartnerFirm.pos(s).id
+        all.or(:doc_dln_id.in => Clns::DeliveryNote.where(unit_id: uid).pluck(:id))
+        .or(:doc_cas_id.in => Clns::Consumption.where(unit_id: uid).pluck(:id))
+        .or(:doc_con_id.in => Clns::Consumption.where(unit_id: uid).pluck(:id))
       end
       # # @todo
       # def sum_outs(*args)
