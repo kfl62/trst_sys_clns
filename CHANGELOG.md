@@ -2,6 +2,15 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.9.2**, bugfix, prepare query `Clns::Freights*`
+   - feature date: **2014-02-16**
+   - bump version v0.2.9.2
+   - update CHANGELOG
+   - views `Clns::Freight` query and related partials...
+   - views `Clns::Invoice` filter, bugfix, (select year)
+   - i18n `freight.yml` reorder, missing translations
+   - models `Clns::Freight|In|Out|Stock` query freight related ...
+
 * **feature v0.2.9.1**, bugfix, prepare query `Clns::Freights*`
    - feature date: **2014-02-06**
    - bump version v0.2.9.1
