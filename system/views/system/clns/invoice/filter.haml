@@ -27,11 +27,8 @@
             %input#supplr_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '2',ph: '3',search: 'Clns::PartnerFirm'}}
             %input#supplr_d_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '0',ph: '1',search: 'Clns::PartnerFirm'}}
             %button#supplr_d{type: "button", data: {action: "create", icon: "circle-plus"}}=  t('button.create') + " Delegat!"
-        - if params[:p03] && params[:supplr_id]
-          - if params[:p03] == 'mixt'
-            - grns = Clns::Grn.monthly(y,m).charged(false).where(supplr_id: params[:supplr_id],doc_type: 'DN').asc(:doc_name)
-          - else
-            - grns = Clns::Grn.monthly(y,m).charged(false).by_p03(params[:p03].to_bool).where(supplr_id: params[:supplr_id],doc_type: 'DN').asc(:doc_name)
+        - if params[:supplr_id]
+          - grns = Clns::Grn.monthly(y,m).charged(false).where(supplr_id: params[:supplr_id],doc_type: 'DN').asc(:doc_name)
           - if grns.empty?
             %tr.grns
               %td
@@ -62,20 +59,20 @@
                         %td
                           %span.stats= s[1][0]
                         %td
-                          %span.um kg
+                          %span.um= s[1][2]
                         %td
-                          %span.pu= "%.2f" % s[1][2]
+                          %span.pu= "%.2f" % s[1][3]
                         %td
-                          %span.qu= "%.2f" % s[1][3]
+                          %span.qu= "%.2f" % s[1][4]
                         %td
-                          %span.val= "%.2f" % s[1][4]
+                          %span.val= "%.2f" % s[1][5]
                     %tr.result
                       %td.ce.st{:colspan => "3"}
                         %span Total
                       %td
-                        %span.val= "%.2f" % data.values.sum{|r| r[3]}
-                      %td
                         %span.val= "%.2f" % data.values.sum{|r| r[4]}
+                      %td
+                        %span.val= "%.2f" % data.values.sum{|r| r[5]}
       %tfoot
         %tr
           %td.buttonset.ce
