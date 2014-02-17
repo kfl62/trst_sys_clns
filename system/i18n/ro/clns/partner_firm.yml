@@ -51,4 +51,6 @@ ro:
           Viziona/Edita/Şterge folosiţi butoanele din dreapta!
         tab_units_create: |
           Ptr. a crea o &raquo;Unitate&laquo; apăsaţi butonul din dreapta!
+        table_header_grn: ['Material', 'UM', 'PU', 'Cant.', 'Valoare', 'TVA', 'Total']
+        table_header_inv: ['Material', 'UM', 'PU<br>Cump.', 'Cantitate', 'Valoare<br>Cump.', 'PU<br>Vânz.', 'Valoare<br>Vânz.', 'TVA', 'Total']
         <<: *trst_firm
