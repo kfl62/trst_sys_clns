@@ -1,0 +1,79 @@
+:ruby
+  fid = params[:supplier]
+  firm= Clns::PartnerFirm.find(fid)
+  grns= firm.try(:grns_supplr)
+  grns= (m == 0 ? grns.yearly(y) : grns.monthly(y,m)) if grns
+  doc_ary = params[:doc_ary].try(:split, ',')
+%span#hidden_data.hidden{data: {dialog: "query",title_data: 'Furnizori',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%p.small
+  %input.param{type: 'hidden',name: 'query_supplier', value: 'true'}
+  %input.param.doc_ary{type: 'hidden',name: 'doc_ary', value: params[:doc_ary]}
+  %select.param{name: 'y'}
+    - (2014..Date.today.year).each do |year|
+      %option{value: year, selected: y == year}= year
+  %select.param{name: 'm'}
+    %option{value: 0, selected: m == 0}= 'Tot anul'
+    - t('month')[1..12].each_with_index do |month,i|
+      %option{value: i + 1, selected: m == i + 1}= month
+  %select.param.firm{name: 'supplier'}
+    %option{value: 0}= 'Alegeți furnizorul!'
+    - if m == 0
+      - Clns::PartnerFirm.asc(:name).find(Clns::Grn.yearly(y).nonin.pluck(:supplr_id).uniq).each do |f|
+        %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
+    - else
+      - Clns::PartnerFirm.asc(:name).find(Clns::Grn.monthly(y,m).nonin.pluck(:supplr_id).uniq).each do |f|
+        %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
+- unless grns.try(:count) == 0 || grns.try(:count).nil?
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td
+          %span= firm.name[2] + ' ( ' + grns.count.to_s + ' )'
+          %button{type: 'button',data: {action: "toggle_checkbox", icon: 'circle-check'}}= 'Toate'
+      %tr.pdb-05
+        %td
+          %span.doc-ary-name
+            - l = grns.pluck(:doc_name).max_by(&:length).length; grns.each_with_index do |grn,i|
+              %label.doc-ary-name{style: "background-color:#{grn.charged? ? '#e6e6e6' : '#ff9999'}", title: "#{grn.id_date}\n#{grn.name}\n#{grn.freights_list.join("\n")}"}
+                %input.doc_ary{id:grn.id,type: 'checkbox',checked: doc_ary.include?(grn.id.to_s)}
+                = grn.doc_name.rjust(l,"\u00a0")
+    %tbody
+      - unless doc_ary.empty?
+        %tr
+          %td
+            %table{:style => "width:initial;margin:auto;font-size:12px"}
+              %tbody.inner
+                %tr
+                  - mat(@object,'table_header_grn').each do |label|
+                    %td.ce= label
+                - data = grns.where(:id.in => doc_ary).sum_freights_grn; data.sort.each do |s|
+                  %tr
+                    %td
+                      %span.stats= s[1][0]
+                    %td
+                      %span.um= s[1][2]
+                    %td
+                      %span.pu= "%.4f" % s[1][3]
+                    %td
+                      %span.qu= "%.2f" % s[1][4]
+                    %td
+                      %span.val= "%.2f" % s[1][5]
+                    %td
+                      %span.tva= "%.2f" % s[1][6]
+                    %td
+                      %span.out= "%.2f" % s[1][7]
+                %tr.result
+                  %td.ce.st{:colspan => "3"}
+                    %span Total
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[4]}
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[5]}
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[6]}
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[7]}
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')

@@ -75,10 +75,12 @@ module Clns
         all.each_with_object({}) do |grn,s|
           grn.freights.asc(:id_stats).each_with_object(s) do |f,s|
             if s[f.key].nil?
-              s[f.key] = [f.freight.name,f.freight.id_stats,f.pu,f.qu,(f.pu * f.qu).round(2)]
+              s[f.key] = [f.freight.name,f.freight.id_stats,f.um,f.pu,f.qu,f.val,f.tva,f.out]
             else
-              s[f.key][3] += f.qu
-              s[f.key][4] += (f.pu * f.qu).round(2)
+              s[f.key][4] += f.qu
+              s[f.key][5] += f.val
+              s[f.key][6] += f.tva
+              s[f.key][7] += f.out
             end
           end
         end

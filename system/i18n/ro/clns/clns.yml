@@ -178,6 +178,14 @@ ro:
         desk_stock:
           forbidden: |
             Acest &raquo;Stoc iniţial lunar&laquo; nu se poate şterge numai de către inginerul de sistem!
+      query:
+        desk_freight:
+          query_firm: |
+            Stocuri materiale firmă
+          query_unit: |
+            Stocuri materiale gestiune
+          query_freight: |
+            Fișa de magazie material
     select:
       freight_all: Toate materialele
       unit_all: Toate unităţile

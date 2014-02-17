@@ -10,6 +10,7 @@
 %span#hidden_data.hidden{data: {dialog: "query",title_data: uid ? unit.name[1] : firm.name[2],model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
 - if uid && fid.nil?
   %div.small
+    %span.info= t('intro.query.desk_freight.query_unit')
     %span.select-date
       = partial "#{@path}/select_date"#, locals: {daily: true}
     %span.select-freight-c
@@ -24,7 +25,7 @@
     = partial "#{@path}/data_unit"
 - elsif freight
   %div.small
-    %span.info= t('intro.query.desk_freight.exit_one')
+    %span.info.width-500.ju= t('intro.query.desk_freight.query_freight')
     %span.select-date
       = partial "#{@path}/select_date"
     %span.select-freight-c
@@ -39,7 +40,7 @@
     = partial "#{@path}/data_freight"
 - else
   %div.small
-    %span.info.width-500.ju= t('intro.query.desk_freight.all')
+    %span.info.width-500.ju= t('intro.query.desk_freight.query_firm')
     %span.select-date
       = partial "#{@path}/select_date"
     %span.select-freight-c

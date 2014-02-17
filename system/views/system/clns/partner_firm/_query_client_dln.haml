@@ -1,0 +1,84 @@
+:ruby
+  fid = params[:client]
+  firm= Clns::PartnerFirm.find(fid)
+  dlns= firm.try(:dlns_client)
+  dlns= (m == 0 ? dlns.yearly(y) : dlns.monthly(y,m)) if dlns
+  doc_ary = params[:doc_ary].try(:split, ',')
+%span#hidden_data.hidden{data: {dialog: "query",title_data: 'Clienți',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%p.small
+  %input.param{type: 'hidden',name: 'query_client', value: 'true'}
+  %input.param.doc_ary{type: 'hidden',name: 'doc_ary', value: params[:doc_ary]}
+  %select.param{name: 'y'}
+    - (2014..Date.today.year).each do |year|
+      %option{value: year, selected: y == year}= year
+  %select.param{name: 'm'}
+    %option{value: 0, selected: m == 0}= 'Tot anul'
+    - t('month')[1..12].each_with_index do |month,i|
+      %option{value: i + 1, selected: m == i + 1}= month
+  %select.param.firm{name: 'client'}
+    %option{value: 0, selected: m == 0}= 'Alegeți clientul!'
+    - if m == 0
+      - Clns::PartnerFirm.asc(:name).find(Clns::DeliveryNote.yearly(y).nonin.pluck(:client_id).uniq).each do |f|
+        %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
+    - else
+      - Clns::PartnerFirm.asc(:name).find(Clns::DeliveryNote.monthly(y,m).nonin.pluck(:client_id).uniq).each do |f|
+        %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
+- unless dlns.try(:count) == 0 || dlns.try(:count).nil?
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td
+          %span= firm.name[2] + ' ( ' + dlns.count.to_s + ' )'
+          %button{type: 'button',data: {action: "toggle_checkbox", icon: 'circle-check'}}= 'Toate'
+      %tr.pdb-05
+        %td
+          %span.doc-ary-name
+            - l = dlns.pluck(:doc_name).max_by(&:length).length; dlns.each_with_index do |dln,i|
+              %label.doc-ary-name{style: "background-color:#{dln.charged? ? '#e6e6e6' : '#ff9999'}",title: "#{dln.id_date}\n#{dln.name}\n#{dln.freights_list.join("\n")}"}
+                %input.doc_ary{id:dln.id,type: 'checkbox',checked: doc_ary.include?(dln.id.to_s)}
+                = dln.doc_name.rjust(l,"\u00a0")
+    %tbody
+      - unless doc_ary.empty?
+        %tr
+          %td
+            %table{:style => "width:initial;margin:auto;font-size:12px"}
+              %tbody.inner
+                %tr
+                  - mat(@object,'table_header_inv').each do |label|
+                    %td.ce= label
+                - data = dlns.where(:id.in => doc_ary).sum_freights_inv; data.sort.each do |s|
+                  %tr
+                    %td
+                      %span.stats= s[1][0]
+                    %td
+                      %span.stats.ce= s[1][2]
+                    %td
+                      %span.stats.ri= "%.4f" % s[1][3]
+                    %td
+                      %span.stats.ri= "%.2f" % s[1][4]
+                    %td
+                      %span.stats.ri= "%.2f" % s[1][5]
+                    %td
+                      %span.stats.ri= "%.4f" % s[1][6]
+                    %td
+                      %span.stats.ri= "%.2f" % s[1][7]
+                    %td
+                      %span.stats.ri= "%.2f" % s[1][8]
+                    %td
+                      %span.stats.ri= "%.2f" % s[1][9]
+                %tr.result
+                  %td.ce.st{:colspan => "4"}= "Total"
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[5]}
+                  %td
+                    %span
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[7]}
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[8]}
+                  %td
+                    %span.val= "%.2f" % data.values.sum{|r| r[9]}
+    %tfoot
+      %tr
+        %td.buttonset.ce
+          %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
