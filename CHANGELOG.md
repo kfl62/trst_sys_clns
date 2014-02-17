@@ -2,6 +2,16 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.10**, bugfix, `Clns::PartnerFirm` query client, supplier
+   - feature date: **2014-02-17**
+   - bump version v0.2.10
+   - update CHANGELOG
+   - views `Clns::PartnerFirm` query functionality
+   - assets `Clns.desk.partner_firm` query functionality
+   - i18n `partner_firm.yml` add table headers for queries
+   - views, i18n `Clns::Freight` missing translations, bugfix
+   - `Clns::Invoice` um bug, adapt views and model for query freights 
+
 * **feature v0.2.9.2**, bugfix, prepare query `Clns::Freights*`
    - feature date: **2014-02-16**
    - bump version v0.2.9.2
