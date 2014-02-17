@@ -1,0 +1,11 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:y].nil? ? today.year : params[:y].to_i
+  m   = params[:m].nil? ? today.month : params[:m].to_i
+- if params[:client]
+  = partial "#{@path}/query_client_dln", locals: {y: y, m: m}
+- elsif params[:supplier]
+  = partial "#{@path}/query_supplier_grn", locals: {y: y, m: m}
+- else
+  -# = partial "#{@path}/query_unit_exp", locals: {y: y}
+  %h1 Placeholder :)
