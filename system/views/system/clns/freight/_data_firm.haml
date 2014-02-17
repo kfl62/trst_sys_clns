@@ -32,11 +32,11 @@
           %span.stats.ri= "%.2f" % o
         %td
           - fsn = (s + i - o); tfsn += fsn
-          %span.stats.ri= "%.2f" % fsn
+          %span.stats.ri.st= "%.2f" % fsn
         - firm.units.asc(:slug).each_with_index do |u,i|
           - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
           %td
-            %span.val= "%.2f" % psn
+            %span.stats.ri= "%.2f" % psn
     - t = [ts,ti,to,tfsn,tpsn].flatten
     %tr
       %td
@@ -63,7 +63,7 @@
             %span.stats.ri= "%.2f" % o
           %td
             - fsn = (s + i - o); tfsn += fsn
-            %span.stats.ri= "%.2f" % fsn
+            %span.stats.ri.st= "%.2f" % fsn
           - firm.units.asc(:slug).each_with_index do |u,i|
             - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
             %td
@@ -95,7 +95,7 @@
                 %span.stats.ri= "%.2f" % o
               %td
                 - fsn = (s + i - o); tfsn += fsn
-                %span.stats.ri= "%.2f" % fsn
+                %span.stats.ri.st= "%.2f" % fsn
               - firm.units.asc(:slug).each_with_index do |u,i|
                 - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
                 %td
@@ -116,7 +116,7 @@
                 %span.stats.ri= "%.2f" % o
               %td
                 - fsn = (s + i - o); tfsn += fsn
-                %span.stats.ri= "%.2f" % fsn
+                %span.stats.ri.st= "%.2f" % fsn
               - firm.units.asc(:slug).each_with_index do |u,i|
                 - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
                 %td
@@ -145,7 +145,7 @@
               %span.stats.ri= "%.2f" % o
             %td
               - fsn = (s + i - o); tfsn += fsn
-              %span.stats.ri= "%.2f" % fsn
+              %span.stats.ri.st= "%.2f" % fsn
             - firm.units.asc(:slug).each_with_index do |u,i|
               - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
               %td
