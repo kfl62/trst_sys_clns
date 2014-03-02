@@ -29,7 +29,7 @@
         %span.add-freight.name{data: {freight_id: f.id.to_s,name: f.name,id_stats: f.id_stats,tva: f.tva}}= f.name
       %td
         %input.add-freight.um{value: f.um}
-        %input.add-freight.pu{value: f.pu}
+        %input.add-freight.pu{value: "%.4f" % f.pu}
         %input.add-freight.qu.focus{value: '0.00'}
       %td
         %span.add-freight.out 0.00
