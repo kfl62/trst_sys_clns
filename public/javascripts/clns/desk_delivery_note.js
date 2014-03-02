@@ -48,13 +48,15 @@
             v.find('span.out.qu').text(r.qu.toFixed(2));
             v.find('input.val').val(r.sval);
             v.find('span.val').text(r.sval.toFixed(2));
+            v.find('input.pu_invoice').val(r.pu_invoice);
+            v.find('input.val_invoice').val(r.val_invoice);
             $('tr.dln-freight-header, tr.dln-freight-total').removeClass('hidden');
             $('tr.dln-freight-total').before(v);
             Clns.desk.delivery_note.buttons($('span.button'));
             Clns.desk.delivery_note.dlnCalculate();
           },
           freightCalculate: function() {
-            var $qus, $val, fid, idd, ids, name, pu, qu, qus, um, v;
+            var $pu_invoice, $qus, $val, $val_invoice, fid, idd, ids, name, pu, qu, qus, um, v;
             v = $('.add-freight');
             name = v.filter('.name').data('name');
             ids = v.filter('.name').data('id_stats');
@@ -69,6 +71,8 @@
               $qus = (qus - qu).round(2);
               v.filter('.val').text($val.toFixed(2));
               v.filter('span.qu').text((qus - qu).toFixed(2));
+              $pu_invoice = v.filter('.pu_inv').prop('checked') ? 1.0 : 0.0;
+              $val_invoice = v.filter('.pu_inv').prop('checked') ? 1.0 : 0.0;
               return {
                 result: {
                   freight_id: fid,
@@ -78,11 +82,13 @@
                   pu: pu,
                   qu: qu,
                   qus: $qus,
-                  sval: $val
+                  sval: $val,
+                  pu_invoice: $pu_invoice,
+                  val_invoice: $val_invoice
                 }
               };
             } else {
-              alert(Trst.i18n.msg.delivery_note_negative_stock.replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2)));
+              alert(Trst.i18n.msg.delivery_note_negative_stock).replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2));
               return $('.focus').focus().select();
             }
           },
@@ -122,7 +128,7 @@
               if ($select.hasClass('clns freight')) {
                 $id_stats = $('select.clns.freight.oid option:selected').data('id_stats') || '00000000';
                 $select.on('change', function() {
-                  var $oid, $url, c0, c1, c2;
+                  var $oid, $pu_inv, $url, c0, c1, c2;
                   if (Clns.desk.delivery_note.validate.create()) {
                     if ($select.hasClass('c0')) {
                       c0 = $select.val();
@@ -150,10 +156,12 @@
                     } else {
                       $id_stats = c0 + c1 + c2 + "00";
                     }
+                    $pu_inv = $('input.add-freight.pu_inv').length ? $('input.add-freight.pu_inv').prop('checked') : false;
                     $url = "/sys/partial/clns/shared/_doc_add_freight_stock?id_stats=" + $id_stats;
                     if ($oid) {
                       $url += "&oid=" + $oid;
                     }
+                    $url += "&pu_inv=" + $pu_inv;
                     return $('td.add-freight-container').load($url, function() {
                       Clns.desk.delivery_note.selects($('select.clns.freight'));
                       if ($id_stats.slice(-2) !== '00') {
@@ -372,10 +380,10 @@
                   return;
                 }
               } else {
+
                 /*
                 Buttons default handler Trst.desk.buttons
-                */
-
+                 */
               }
             });
           },

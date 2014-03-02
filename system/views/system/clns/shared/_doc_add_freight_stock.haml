@@ -1,6 +1,7 @@
 :ruby
   id_stats = params[:id_stats] || locals[:id_stats] || "00000000"
   c0,c1,c2 = id_stats.scan(/\d{2}/)
+  pu_inv   = params[:pu_inv].to_bool if params[:pu_inv]
   unit_id  = @current_user.unit_id || session[:unit_id]
   freights = Clns::PartnerFirm.find_by(firm: true).units.find(unit_id).stock_now.freights.where(:qu.ne => 0)
 %table
@@ -23,7 +24,7 @@
       %select.clns.freight.oid
         %option{value: "null"}= t("select.option",data: mat(freights,'model_name'))
         - freights.by_id_stats(id_stats).sort_by{|f| f.freight.name}.each do |o|
-          %option{value: o.view_filter.first, selected: o.id_stats == id_stats,title: "PU: #{"%.4f" % o.pu} - Cant.#{"%.2f" % o.qu}", data: {id_stats: o.id_stats,qu: o.qu}}= o.view_filter.last
+          %option{value: o.view_filter.first, selected: o.id_stats == id_stats,title: "PU: #{"%.4f" % o.pu} - Cant.#{"%.2f" % o.qu}", data: {freight_id: o.freight.id,id_stats: o.id_stats,pu: o.pu,qu: o.qu}}= o.view_filter.last
   - if params[:oid]
     - f = freights.find(params[:oid])
     %tr
@@ -37,6 +38,8 @@
         %span.add-freight.um.pdr-05= f.um
       %td
         %input.add-freight.qu.focus{value: '0.00'}
+        - unless pu_inv.nil?
+          %input.add-freight.pu_inv{type: 'checkbox',checked: pu_inv}
       %td.width-50
         %span.add-freight.val.pdr-05 0.00
   - else

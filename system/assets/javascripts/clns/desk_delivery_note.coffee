@@ -35,6 +35,8 @@ define () ->
           v.find('span.out.qu').text r.qu.toFixed(2)
           v.find('input.val').val(r.sval)
           v.find('span.val').text r.sval.toFixed(2)
+          v.find('input.pu_invoice').val(r.pu_invoice)
+          v.find('input.val_invoice').val(r.val_invoice)
           $('tr.dln-freight-header, tr.dln-freight-total').removeClass('hidden')
           $('tr.dln-freight-total').before(v)
           Clns.desk.delivery_note.buttons($('span.button'))
@@ -55,8 +57,10 @@ define () ->
             $qus = (qus - qu).round(2)
             v.filter('.val').text $val.toFixed(2)
             v.filter('span.qu').text((qus - qu).toFixed(2))
+            $pu_invoice  = if v.filter('.pu_inv').prop('checked') then 1.0 else 0.0
+            $val_invoice = if v.filter('.pu_inv').prop('checked') then 1.0 else 0.0
             result:
-              freight_id: fid; name: name; id_stats: ids; um: um; pu: pu; qu: qu; qus: $qus; sval: $val
+              freight_id: fid; name: name; id_stats: ids; um: um; pu: pu; qu: qu; qus: $qus; sval: $val; pu_invoice: $pu_invoice; val_invoice: $val_invoice
           else
             alert Trst.i18n.msg.delivery_note_negative_stock
               .replace(/%\{um\}/g,um)
@@ -111,8 +115,10 @@ define () ->
                       $oid = $('select.clns.freight.oid option:selected').val()
                   else
                     $id_stats = c0 + c1 + c2 + "00"
+                  $pu_inv = if $('input.add-freight.pu_inv').length then $('input.add-freight.pu_inv').prop('checked') else false
                   $url = "/sys/partial/clns/shared/_doc_add_freight_stock?id_stats=#{$id_stats}"
                   $url += "&oid=#{$oid}" if $oid
+                  $url += "&pu_inv=#{$pu_inv}"
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.delivery_note.selects($('select.clns.freight'))
                     if $id_stats.slice(-2) isnt '00'
