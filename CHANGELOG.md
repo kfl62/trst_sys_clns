@@ -2,6 +2,15 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.11**, bugfix, pdf templates cleanup, rewrite
+   - feature date: **2014-03-02**
+   - bump version v0.2.11
+   - update CHANGELOG
+   - assets `Clns.desk.freight`, generate id_stats on create, bugfix
+   - views, assets: `Clns::DeliveryNote`, freight more then once on invoice, bugfix
+   - models `Clns::Invoice` freight_list, um bugfix
+   - pdf templates cleanup, rewrite
+
 * **feature v0.2.10**, bugfix, `Clns::PartnerFirm` query client, supplier
    - feature date: **2014-02-17**
    - bump version v0.2.10
