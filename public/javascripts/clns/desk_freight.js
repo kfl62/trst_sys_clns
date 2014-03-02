@@ -145,9 +145,11 @@
                   Trst.desk.init($url);
                 });
               }
-              if (Trst.desk.hdo.dialog === 'filter') {
-                $('button[data-action="create"]').data().url = (_ref = Trst.lst.url) != null ? _ref.replace('filter', 'create') : void 0;
-                Trst.lst.removeItem('url');
+              if ($bd.action === 'create') {
+                if (Trst.desk.hdo.dialog === 'filter') {
+                  $button.data().url = (_ref = Trst.lst.url) != null ? _ref.replace('filter', 'create') : void 0;
+                  Trst.lst.removeItem('url');
+                }
               }
             });
           },

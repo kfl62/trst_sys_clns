@@ -120,9 +120,10 @@ define () ->
               $button.on 'click', ()->
                 Trst.desk.init($url)
                 return
-            if Trst.desk.hdo.dialog is 'filter'
-              $('button[data-action="create"]').data().url = Trst.lst.url?.replace 'filter', 'create'
-              Trst.lst.removeItem 'url'
+            if $bd.action is 'create'
+              if Trst.desk.hdo.dialog is 'filter'
+                $button.data().url = Trst.lst.url?.replace 'filter', 'create'
+                Trst.lst.removeItem 'url'
             return
           return
         init: ()->
