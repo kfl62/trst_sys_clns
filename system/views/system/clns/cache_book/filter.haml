@@ -1,0 +1,43 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:p_y].nil? ? today.year : params[:p_y].to_i
+  m   = params[:p_m].nil? ? today.month : params[:p_m].to_i
+  d   = params[:p_d].nil? ? today.day   : params[:p_d].to_i
+%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_cache_book'}}
+%p.small
+  %select.param{name: 'p_y'}
+    - (2012..Date.today.year).each do |year|
+      %option{value: year, selected: y == year}= year
+  %select.param{name: 'p_m'}
+    - t('month')[1..12].each_with_index do |month,i|
+      %option{value: i + 1, selected: m == i + 1}= month
+%table{:cellspacing => "0"}
+  %tbody
+    %tr
+      %td
+        %table.scroll
+          %tbody.inner
+            %tr.scroll
+              - mat(@object,'tbl_filter_hdr').each do |label|
+                %td.ce= label
+            - range = m == today.month ? (1..d) : (1..Time.days_in_month(m,y)); range.each do |day|
+              - cb = Clns::CacheBook.daily(y,m,day); cbc = cb.count > 0
+              %tr
+                %td
+                  %span.link{data: {oid: cbc ? cb.first.id : 'nil', action: cbc && (cb.first.lines.count > 0 ? 'show' : 'edit'), id_date: Date.new(y,m,day).to_s}}= cbc ? cb.first.id_date.to_s : "* #{Date.new(y,m,day).to_s}"
+                %td
+                  %span.val= cbc ? "%.2f" % cb.first.ib : "-"
+                %td
+                  %span.val= cbc ? "%.2f" % cb.first.lines.sum(:in)  : "-"
+                %td
+                  %span.val= cbc ? "%.2f" % cb.first.lines.sum(:out) : "-"
+                %td
+                  %span.val= cbc ? "%.2f" % cb.first.fb : "-"
+                %td
+                  %span.val= cbc ? cb.first.lines.count : "-"
+            %tr
+  %tfoot
+    %tr
+      %td.buttonset.ce
+        %button{:type => "button",data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+
