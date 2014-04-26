@@ -1,0 +1,7 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/cache_book':
+        model_name: Registru de casă
+        tbl_filter_hdr: ["Pagina", "Sold", "Incasări", "Plăți", "Sold", "Linii"]
+        tbl_lines_hdr: ["Nr.", "Document", "Explicații", "Incasare", "Plată", " "]
