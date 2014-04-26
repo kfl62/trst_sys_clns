@@ -14,20 +14,21 @@
             }
           },
           clear: function() {
-            var what,
-              _this = this;
+            var what;
             what = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-            return $.each(this, function(k) {
-              if (what.length) {
-                if (__indexOf.call(__slice.call(what), k) >= 0) {
-                  return delete _this[k];
+            return $.each(this, (function(_this) {
+              return function(k) {
+                if (what.length) {
+                  if (__indexOf.call(__slice.call(what), k) >= 0) {
+                    return delete _this[k];
+                  }
+                } else {
+                  if (k !== 'set' && k !== 'clear') {
+                    return delete _this[k];
+                  }
                 }
-              } else {
-                if (k !== 'set' && k !== 'clear') {
-                  return delete _this[k];
-                }
-              }
-            });
+              };
+            })(this));
           }
         },
         scrollHeader: function(tbl, h) {
@@ -36,24 +37,31 @@
             h = 450;
           }
           $table = $(tbl);
-          tblHdr = $("<table style='width:auto;font-size:12px'><tbody class='inner'><tr></tr><tr></tr></tbody></table>");
-          tblCntnr = $("<div id='scroll-container' style='height:" + h + "px;overflow-x:hidden;overflow-y:scroll'></div>");
-          tblClmnW = [];
-          $table.find('tr.scroll td').each(function(i) {
-            tblClmnW[i] = $(this).width();
-          });
-          tblscrll = $table.find('tr.scroll').html();
-          $table.find('tr.scroll').html('');
-          $table.css('width', 'auto');
-          tblHdr.find('tr:first').html(tblscrll);
-          tblHdr.find('tr:first td').each(function(i) {
-            $(this).css('width', tblClmnW[i]);
-          });
-          $table.find('tr.scroll').next().find('td').each(function(i) {
-            $(this).css('width', tblClmnW[i]);
-          });
-          $table.before(tblHdr);
-          $table.wrap(tblCntnr);
+          if (h !== 0) {
+            tblHdr = $("<table style='width:auto'><tbody class='inner'><tr></tr><tr></tr></tbody></table>");
+            tblCntnr = $("<div id='scroll-container' style='height:" + h + "px;overflow-x:hidden;overflow-y:scroll'></div>");
+            tblClmnW = [];
+            $table.find('tr.scroll td').each(function(i) {
+              tblClmnW[i] = $(this).width();
+            });
+            tblscrll = $table.find('tr.scroll').html();
+            $table.find('tr.scroll').html('');
+            $table.css('width', 'auto');
+            tblHdr.find('tr:first').html(tblscrll);
+            tblHdr.find('tr:first td').each(function(i) {
+              $(this).css('width', tblClmnW[i]);
+            });
+            $table.find('tr.scroll').next().find('td').each(function(i) {
+              $(this).css('width', tblClmnW[i]);
+            });
+            $table.before(tblHdr);
+            $table.wrap(tblCntnr);
+          } else {
+            tblscrll = $('div#scroll-container').prev().find('tr:first').html();
+            $('div#scroll-container').prev().remove();
+            $table.find('tr.scroll').html(tblscrll);
+            $table.unwrap();
+          }
         },
         idPnHandle: function() {
           var $input;
