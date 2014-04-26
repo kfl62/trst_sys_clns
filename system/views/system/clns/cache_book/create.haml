@@ -1,0 +1,50 @@
+:ruby
+  y,m,d = params[:id_date].split('-').map(&:to_i)
+  date  = Date.new(y,m,d)
+  firm  = Clns::PartnerFirm.find_by(firm:true)
+  prev  = Clns::CacheBook.where(:id_date.lt => date).desc(:id_date).limit(1).first
+%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_cache_book'}}
+%form{action: "/sys/#{@path}",method: "post"}
+  %table{:cellspacing => "0"}
+    %thead
+      %tr.pdb-05
+        %td
+          %span.label Nr:
+          %span.name.st= "#{firm.name[0][0..2].upcase}_RC-#{date.to_s.gsub("-","")}"
+          %span.label din:
+          %span.date.st= date.to_s
+          %br
+          %span.label Sold inițial:
+          %span.ib.st.red= "%.2f" % (prev.fb rescue 0.0)
+          %span.label Sold final:
+          %span.fb.st.red= "%.2f" % (prev.fb rescue 0.0)
+          %span.label Nr. rânduri:
+          %span.lines.st.red 0
+          - input_for @object, 'name',    {type: 'hidden',value: "#{firm.name[0][0..2].upcase}_RC-#{date.to_s.gsub("-","")}"}
+          - input_for @object, 'id_date', {type: 'hidden',value: date.to_s}
+          - input_for @object, 'ib',      {style: 'ib',type: 'hidden',value: (prev.fb rescue 0.0)}
+          - input_for @object, 'fb',      {style: 'fb',type: 'hidden',value: (prev.fb rescue 0.0)}
+      %tr.pdb-05
+        %td.add-line-container{style: 'padding: 5px;border: solid 1px'}
+          %table
+            %tr
+              %td
+                %span Adăugare rând la Registru de casă
+                %span.button.flri.pdr-05.red.pointer.icon-plus-sign.icon-large{title: t('button.new_row')}
+                %span.button.flri.pdr-05.red.pointer.icon-refresh.icon-large
+            %tr
+              %td
+                %span.add-line.ord.st 1.
+                %input.add-line.doc{size: 10,placeholder: 'Doc. nr.'}
+                %input.add-line.exp{size: 60,placeholder: 'Explicații'}
+                %input.add-line.ins{size: 10,placeholder: 'Înc. 0.00 lei'}
+                %input.add-line.out{size: 10,placeholder: 'Plată 0.00 lei'}
+    %tbody
+      %tr
+        %td
+          = partial "#{@path}/form", locals: {create: true}
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan: "6"}
+          %button.cb{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
