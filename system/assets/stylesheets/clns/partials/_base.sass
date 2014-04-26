@@ -94,32 +94,11 @@ input[type=checkbox], input[type=radio]
 input[type=radio]
   bottom: 2px
 input, span, td
-  &.width-25
-    width: 25px
-  &.width-50
-    width: 50px
-  &.width-75
-    width: 75px
-  &.width-100
-    width: 100px
-  &.width-150
-    width: 150px
-  &.width-200
-    width: 200px
-  &.width-250
-    width: 250px
-  &.width-300
-    width: 300px
-  &.width-350
-    width: 350px
-  &.width-400
-    width: 400px
-  &.width-450
-    width: 450px
-  &.width-500
-    width: 500px
-  &.width-550
-    width: 550px
+  @each $width in 10,20,25,30,40,50,60,70,75,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350,400,450,500,550
+    &.width-#{$width}
+      width: 1px * $width
+      display: inline-block
+      padding: 0px 2px
 span[class*="truncate-"]
   display: inline-block
   overflow: hidden
