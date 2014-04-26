@@ -2,6 +2,18 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
+   - feature date: **2014-04-26**
+   - bump version v0.2.12
+   - update CHANGELOG
+   - assets js, `Clns.desk.cache_book` skeleton
+   - assets js, `Clns.desk.scrollHeader` reset functionality
+   - assets css, base completions
+   - views `pdf.rb` Prawn skeleton, templte
+   - views `Clns::CacheBook` CRUD skeleton, for testing
+   - i18n `cache_book.yml` initial translation
+   - model `Clns::CacheBook` and embedded model, skeleton
+
 * **feature v0.2.11**, bugfix, pdf templates cleanup, rewrite
    - feature date: **2014-03-02**
    - bump version v0.2.11
@@ -127,7 +139,7 @@ release date: **2013-xx-xx**
    - assets js, `desk_invoice.js` compiled versions
    - assets js, `Clns.desk.invoice` skeleton
    - i18n `clna,freight,invoice` missing translations, fixes
-   - models `Clns::Invoice|DeliveryNote` adapt Wstm -> Clns
+   - models `Clns::Invoice|DeliveryNote` adapt Clns -> Clns
 
 * **feature v0.2.3.1**, `Clns::DeliveryNote` CRUD completitions
    - feature date: **2013-11-26**
@@ -142,7 +154,7 @@ release date: **2013-xx-xx**
    - assets css, `_base|_dialog.sass` fix some styling
    - i18n `clns|delivery_note|freight|grn.yml` missing translations, fixes
    - models `Clns::DeliveryNote|Grn` #freight_list, show UM
-   - models `Clns::Freight|In|Out|Stock` adapt Wstm -> Clns
+   - models `Clns::Freight|In|Out|Stock` adapt Clns -> Clns
 
 * **feature v0.2.3**, `Clns::DeliveryNote` CRUD and initiate stocks
    - feature date: **2013-11-21**
