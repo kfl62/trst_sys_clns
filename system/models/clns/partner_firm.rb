@@ -90,7 +90,6 @@ module Clns
 
     embedded_in :firm,      class_name: 'Clns::PartnerFirm',  inverse_of: :units
     has_many    :users,     class_name: 'Clns::User',         inverse_of: :unit
-    has_many    :freights,  class_name: 'Clns::Freight',      inverse_of: :unit
     has_many    :dps,       class_name: 'Clns::Cache',        inverse_of: :unit
     has_many    :stks,      class_name: 'Clns::Stock',        inverse_of: :unit
     has_many    :dlns,      class_name: 'Clns::DeliveryNote', inverse_of: :unit

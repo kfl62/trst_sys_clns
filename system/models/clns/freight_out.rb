@@ -22,6 +22,7 @@ module Clns
     belongs_to  :doc_dln,  class_name: 'Clns::DeliveryNote',inverse_of: :freights
     belongs_to  :doc_cas,  class_name: 'Clns::Cassation',   inverse_of: :freights
     belongs_to  :doc_con,  class_name: 'Clns::Consumption', inverse_of: :freights
+    belongs_to  :doc_sor,  class_name: 'Clns::Sorting',     inverse_of: :from_freights
 
     index({ id_stats: 1, freight_id: 1, id_date: 1 })
     index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
@@ -65,23 +66,10 @@ module Clns
       def pos(s)
         uid = PartnerFirm.pos(s).id
         all.or(:doc_dln_id.in => Clns::DeliveryNote.where(unit_id: uid).pluck(:id))
-        .or(:doc_cas_id.in => Clns::Consumption.where(unit_id: uid).pluck(:id))
+        .or(:doc_cas_id.in => Clns::Cassation.where(unit_id: uid).pluck(:id))
         .or(:doc_con_id.in => Clns::Consumption.where(unit_id: uid).pluck(:id))
+        .or(:doc_sor_id.in => Clns::Sorting.where(unit_id: uid).pluck(:id))
       end
-      # # @todo
-      # def sum_outs(*args)
-      #   opts = args.last.is_a?(Hash) ? {what: :qu}.merge!(args.pop) : {what: :qu}
-      #   y,m,d = *args; today = Date.today
-      #   y,m,d = today.year, today.month, today.day unless ( y || m || d)
-      #   v = opts[:what]
-      #   if d
-      #     (daily(y,m,d).sum(v) || 0.0).round(2)
-      #   elsif m
-      #     (monthly(y,m).sum(v) || 0.0).round(2)
-      #   else
-      #     (yearly(y).sum(v)    || 0.0).round(2)
-      #   end
-      # end
     end # Class methods
     # @todo
     def unit
@@ -97,7 +85,7 @@ module Clns
     end
     # @todo
     def doc
-      doc_dln || doc_cas || doc_con
+      doc_dln || doc_cas || doc_con || doc_sor
     end
     # @todo
     def key

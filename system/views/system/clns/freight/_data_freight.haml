@@ -23,9 +23,11 @@
   - if d > 0
     - stk_day = freight.stks.monthly(y,m).pos(unit.slug).sum(:qu) + freight.ins.period(y,m,1,d - 1).pos(unit.slug).sum(:qu) - freight.outs.period(y,m,1,d - 1).pos(unit.slug).sum(:qu); stock = stk_day
     - ins_int = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin(false).sum(:qu)
+    - ins_sor = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_sor_id.ne => nil).sum(:qu)
     - ins_grn = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin.sum(:qu)
     - out_cas = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_cas_id.ne => nil).sum(:qu)
     - out_con = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_con_id.ne => nil).sum(:qu)
+    - out_sor = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_sor_id.ne => nil).sum(:qu)
     - out_int = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin(false).sum(:qu)
     - out_dln = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin.sum(:qu)
     %tr
@@ -38,6 +40,13 @@
       %tr{style: 'color:blue'}
         %td= 'Transfer gestiune'
         %td.stats.ri= "%0.2f" % ins_int
+        %td &nbsp;
+        %td.stats.ri= "%0.2f" % stock
+    - if ins_sor > 0
+      - stock += ins_sor
+      %tr{style: 'color:blue'}
+        %td= 'Intrari preparare'
+        %td.stats.ri= "%0.2f" % ins_sor
         %td &nbsp;
         %td.stats.ri= "%0.2f" % stock
     - if ins_grn > 0
@@ -66,6 +75,13 @@
         %td= 'Ieșiri Bon de Consum'
         %td &nbsp;
         %td.stats.ri= "%0.2f" % out_con
+        %td.stats.ri= "%0.2f" % stock
+    - if out_sor > 0
+      - stock -= out_sor
+      %tr{style: 'color:blue'}
+        %td= 'Ieșiri preparare'
+        %td &nbsp;
+        %td.stats.ri= "%0.2f" % out_sor
         %td.stats.ri= "%0.2f" % stock
     - if out_int > 0
       - stock -= out_int

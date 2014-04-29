@@ -18,6 +18,7 @@ module Clns
 
     belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :ins
     belongs_to  :doc_grn,  class_name: 'Clns::Grn',         inverse_of: :freights
+    belongs_to  :doc_sor,  class_name: 'Clns::Sorting',     inverse_of: :resl_freights
 
     index({ id_stats: 1, freight_id: 1, id_date: 1 })
     index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
@@ -57,22 +58,10 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:doc_grn_id.in => Clns::Grn.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
+        uid = PartnerFirm.pos(s).id
+        all.or(:doc_grn_id.in => Clns::Grn.where(unit_id: uid).pluck(:id))
+        .or(:doc_sor_id.in => Clns::Sorting.where(unit_id: uid).pluck(:id))
       end
-      # # @todo
-      # def sum_ins(*args)
-      #   opts = args.last.is_a?(Hash) ? {what: :qu}.merge!(args.pop) : {what: :qu}
-      #   y,m,d = *args; today = Date.today
-      #   y,m,d = today.year, today.month, today.day unless ( y || m || d)
-      #   v = opts[:what]
-      #   if d
-      #     (daily(y,m,d).sum(v) || 0.0).round(2)
-      #   elsif m
-      #     (monthly(y,m).sum(v) || 0.0).round(2)
-      #   else
-      #     (yearly(y).sum(v)    || 0.0).round(2)
-      #   end
-      # end
     end # Class methods
 
     # @todo
@@ -85,7 +74,7 @@ module Clns
     end
     # @todo
     def doc
-      doc_grn
+      doc_grn || doc_sor
     end
     # @todo
     def key

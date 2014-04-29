@@ -1,0 +1,9 @@
+ro:
+  mongoid:
+    attributes:
+      'clns/sorting':
+        model_name: PV Preparare
+        table_header_show: ['Material', 'UM', 'PU', 'Sortat(kg)', 'Valoare', 'Destinație']
+        table_header_form: ['Material', 'UM', 'Cant. preparată', ' ']
+        text: 'Explicaţii'
+        text_default: 'PV preparare nr.'
