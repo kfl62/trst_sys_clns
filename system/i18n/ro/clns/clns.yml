@@ -161,7 +161,7 @@ ro:
           &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
         desk_sorting: |
           În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
-          <b>%{signed_by}</b> s-au sortat următoarele: <br>
+          <b>%{signed_by}</b> s-au preparat următoarele: <br>
           &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
         desk_invoice:
           main: |
