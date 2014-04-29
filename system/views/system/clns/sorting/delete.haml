@@ -1,0 +1,15 @@
+%span#hidden_data.hidden{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_sorting'}}
+%form{action: "/sys/#{@path}",method: "delete"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %td{colspan: "6"}
+          %span.warning.width-350.ju= t('intro.delete.main',data: mat(@object,'model_name'))
+          %span.info.width-350.ju= t('intro.show.desk_sorting',id_date: l(@object.id_date,format: :trst),unit: @object.unit.name[1],signed_by: @object.signed_by.name,expl: @object.text)
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan: "6"}
+          %button{type: "button",data: {action: "delete",icon: "circle-minus"}}= t('button.delete')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+
