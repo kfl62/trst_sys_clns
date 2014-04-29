@@ -3,11 +3,11 @@
 release date: **2013-xx-xx**
 
 * **feature v0.2.13**, `Clns::Sorting` skeletin, CRUD
-   - feature date: **2014-04-26**
-   - bump version v0.2.12
+   - feature date: **2014-04-29**
+   - bump version v0.2.13
    - update CHANGELOG
    - assets js, `Clns.desk.sorting` skeleton
-   - assets css, base completions
+   - views `Clns::Freght` query `_data_freight` partial add sorting
    - views `pdf.rb` Prawn skeleton, templte
    - views `Clns::Sorting` CRUD skeleton, for testing
    - i18n `clns.yml` add/modify sorting
