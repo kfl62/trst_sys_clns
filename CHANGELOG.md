@@ -2,6 +2,31 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.13**, `Clns::Sorting` skeletin, CRUD
+   - feature date: **2014-04-26**
+   - bump version v0.2.12
+   - update CHANGELOG
+   - assets js, `Clns.desk.sorting` skeleton
+   - assets css, base completions
+   - views `pdf.rb` Prawn skeleton, templte
+   - views `Clns::Sorting` CRUD skeleton, for testing
+   - i18n `clns.yml` add/modify sorting
+   - i18n `sorting.yml` initial translation
+   - models `Clns::PartnerFirm|FreightIn|FreightOut` cleanup, add sorting
+   - models `Clns::Sorting` skeleton
+
+* **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
+   - feature date: **2014-04-26**
+   - bump version v0.2.12
+   - update CHANGELOG
+   - assets js, `Clns.desk.cache_book` skeleton
+   - assets js, `Clns.desk.scrollHeader` reset functionality
+   - assets css, base completions
+   - views `pdf.rb` Prawn skeleton, templte
+   - views `Clns::CacheBook` CRUD skeleton, for testing
+   - i18n `cache_book.yml` initial translation
+   - model `Clns::CacheBook` and embedded model, skeleton
+
 * **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
    - feature date: **2014-04-26**
    - bump version v0.2.12
