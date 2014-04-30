@@ -2,6 +2,14 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.14**, bugfix
+   - feature date: **2014-04-30**
+   - bump version v0.2.14
+   - update CHANGELOG
+   - rename `/lib/version.rb` :(
+   - i18n `freight.yml` add new sort
+   - i18n `sorting.yml` bugfix, typo
+
 * **feature v0.2.13**, `Clns::Sorting` skeletin, CRUD
    - feature date: **2014-04-29**
    - bump version v0.2.13
@@ -56,7 +64,7 @@ release date: **2013-xx-xx**
    - assets `Clns.desk.partner_firm` query functionality
    - i18n `partner_firm.yml` add table headers for queries
    - views, i18n `Clns::Freight` missing translations, bugfix
-   - `Clns::Invoice` um bug, adapt views and model for query freights 
+   - `Clns::Invoice` um bug, adapt views and model for query freights
 
 * **feature v0.2.9.2**, bugfix, prepare query `Clns::Freights*`
    - feature date: **2014-02-16**
@@ -153,7 +161,7 @@ release date: **2013-xx-xx**
    - views `Clns::Grn` CRUD adapt for transfer storage
    - views `Clns::Grn` pdf template, tva|out bug
    - views partial, `_doc_add_freights_stock.haml` unit_id bug
-   - models `Clns::DeliveryNote` adapt `sum_freights_grn` 
+   - models `Clns::DeliveryNote` adapt `sum_freights_grn`
 
 * **feature v0.2.4**, `Clns::Invoice` CRUD
    - feature date: **2013-11-29**
