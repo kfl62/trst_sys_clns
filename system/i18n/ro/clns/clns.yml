@@ -62,33 +62,7 @@ ro:
           no_grn: |
             Nu aveţi nici o recepţie!
         desk_report:
-          cdd: Document cumulativ APP
-          grn: Notă de recepţie APP
-          plst: Listă preț
-          stock_stats: Situaţie lunară (Statistică)
-          stock_accounting: Situaţie lunară (Contabilă)
-          unit: |
-            După ce alegeţi data, sau o lăsaţi pe cea de azi
-            puteţi genera un &raquo;%{data}&laquo; pentru<br>
-            <b>%{unit}</b>
-          unit_plst: |
-            Dacă ați modificat prețul la materiale,
-            puteţi genera o nouă &raquo;%{data}&laquo; pentru<br>
-            <b>%{unit}</b>
-          firm: |
-            Se poate tipări &raquo;%{data}&laquo; pe mai multe zile,
-            cu începere din data pe care o selectaţi. Trebuie să alegeţi cel
-            puţin una, sau mai multe Puncte de Colectare.
-          firm_plst: |
-            Pentru a tipări &raquo;%{data}&laquo; trebuie să alegeţi cel puţin una,
-            sau mai multe Puncte de Colectare.
-          stats: |
-            Pentru luna curentă datele sunt în funcţie de documentele operate,
-            deoarece se lucrează cu stocul curent. Trebuie să alegeţi cel puţin una,
-            sau mai multe Puncte de Colectare.
-          accounting: |
-            Pentru luna curentă datele sunt în funcţie de documentele operate,
-            deoarece se lucrează cu stocul curent.
+          cb_monthly: Registru de casă
         desk_stock: |
             În cazul &raquo;Stocurilor iniţiale lunare&laquo; trebuie să ştiţi următoarele:<br>
             1.) Crearea unui nou &raquo;Stoc iniţial lunar&laquo; presupune copierea <b>Stocului curent</b> întro
