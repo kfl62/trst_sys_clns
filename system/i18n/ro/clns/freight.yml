@@ -6,7 +6,7 @@ ro:
       c1:
         "00": [["00", "Toate"]]
         "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"], ["06", "Altele"]]
-        "02": [["00", "Toate"], ["01", "Carucior"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["07", "Suport pad dreptunghiular"], ["08", "Suport lama"], ["06", "Perie frecat cu miner"], ["09", "Scara Aluminiu"], ["10", "Tija telescop"]]
+        "02": [["00", "Toate"], ["01", "Carucior"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["07", "Suport pad dreptunghiular"], ["08", "Suport lama"], ["06", "Perie frecat cu miner"], ["09", "Scara Aluminiu"], ["10", "Tija telescop"], ["11", "Matura"]]
         "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 16\""], ["03", "Perie PPL 16\""], ["04", "Perie Tynnex 16\""], ["05", "Perie covor 16\""], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"],["09", "Diverse"]]
         "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
         "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
@@ -18,6 +18,7 @@ ro:
         "02":
           "01": [["00", "Toate"], ["01", "Mono"], ["02", "Dublu"], ["03", "Complex"]]
           "05": [["00", "Toate"], ["01", "Suport mop cu urechi"], ["02", "Suport mop cu buzunar"], ["03", "Suport mop special"]]
+          "11": [["00", "Toate"], ["01", "Plastic"], ["02", "Altele"]]
         "03":
           "01": [["00", "Toate"], ["01", "Furtun 38mm"], ["02", "Furtun 42mm"]]
           "06": [["00", "Toate"], ["01", "Coada lemn 110"], ["02", "Coada lemn 150"], ["03", "Coada metal Alu"], ["04", "Coada metal Altele"]]
