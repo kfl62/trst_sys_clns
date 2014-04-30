@@ -30,7 +30,7 @@ pdf = Prawn::Document.new(
   skip_page_creation: true,
   margin: [10.mm],
   info: {
-    Title: "Registru de casă",
+    Title: "Registru de casa",
     Author: "kfl62",
     Subject: "Formular \"Registru de casă\"",
     Keywords: "#{firm.name[1]} Registru de casă ",
