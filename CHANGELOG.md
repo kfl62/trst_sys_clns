@@ -2,6 +2,16 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.15**, `Clns::CacheBook` monthly report
+   - feature date: **2014-04-30**
+   - bump version v0.2.15
+   - update CHANGELOG
+   - assets js, `Clns.desk.report` skeleton
+   - views `report/cb_monthly.rb` skeleton
+   - views `report.haml` for handling tasks which generates reports
+   - views `Clns::Cache::Book` pdf template, typo
+   - i18n `clns.yml` add translation
+
 * **feature v0.2.14**, bugfix
    - feature date: **2014-04-30**
    - bump version v0.2.14
