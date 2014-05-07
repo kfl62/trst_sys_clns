@@ -2,6 +2,12 @@
 
 release date: **2013-xx-xx**
 
+* **feature v0.2.18**, `Clns::Invoice` pdf template, #4
+   - feature date: **2014-05-07**
+   - bump version v0.2.18
+   - update CHANGELOG
+   - views `Clns::Invoice` pdf template, issue #4
+
 * **feature v0.2.17**, `Clns::DeliveryNote` pdf template, #2
    - feature date: **2014-05-05**
    - bump version v0.2.17
