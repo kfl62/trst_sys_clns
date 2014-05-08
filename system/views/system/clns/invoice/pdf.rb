@@ -55,7 +55,7 @@ def table_recap_data
   data[2] = ["Ștampilă","Mijloctransport",": #{recap_data['doc_plat']}"]
   data[3] = ["","Data expedierii",": #{recap_data['id_date']}",{content: "Semnătura de primire",rowspan: 4},{content: "TOTAL DE PLATĂ",rowspan: 2,colspan: 2}]
   data[4] = ["","Întocmit de",": #{@object.signed_by.name rescue ''}"]
-  data[5] = ["","CNP",":",{content: "<b>#{"%.2f" % @object.sum_out} RON</b>",rowspan: 2,colspan: 2}]
+  data[5] = ["","CNP",": #{@object.signed_by.id_pn.gsub(/\d{4}$/,'****') rescue ''}",{content: "<b>#{"%.2f" % @object.sum_out} RON</b>",rowspan: 2,colspan: 2}]
   data[6] = ["","Semnătura",":"]
   data
 end

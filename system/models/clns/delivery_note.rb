@@ -11,6 +11,7 @@ module Clns
     field :id_intern,   type: Boolean,  default: false
     field :doc_name,    type: String
     field :doc_plat,    type: String
+    field :doc_text,    type: String
     field :charged,     type: Boolean,  default: false
 
     alias :file_name :name

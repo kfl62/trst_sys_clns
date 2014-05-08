@@ -215,6 +215,8 @@ ro:
       delivery_note_not_complete: |
           Nu aţi completat sau aţi completat greşit
           unul din câmpurile "Aviz nr.", "maşina nr."!
+          "Aviz nr." poate fi lăsat gol caz în care
+          va completat cu valoarea implicită.
       grn_not_complete: |
           Nu aţi selectat "Tip document", sau nu aţi completat
           unul din câmpurile "Document nr.", "Maşina nr."!
