@@ -5,9 +5,12 @@ ro:
         model_name: Anexa Aviz Expediţie
         table_header_show: ['Material', 'UM', 'PU', 'Se livrează', 'Valoare']
         table_header_form: ['Material', 'UM', 'PU', 'Stoc rămas', 'Livrat', 'Valoare', ' ']
-        name: Anexa Anexa nr.
+        name: Anexa Aviz nr.
         id_date: din data de
         doc_name: Aviz nr.
+        doc_name_ph: (dacă este cazul)
         doc_plat: maşina nr.
+        doc_text: Explicații
+        doc_text_ph: Explicații (dacă este cazul)
         day: |
           Avize din data de:&nbsp;
