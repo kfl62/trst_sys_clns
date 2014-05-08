@@ -116,6 +116,9 @@
                 }
                 $('span.icon-plus-sign').show();
                 return true;
+              } else if ($('input[name*="doc_name"]').val() === '' && $('input[name*="doc_plat"]').val() !== '') {
+                $('input[name*="doc_name"]').val("" + ($('input.id_intern').val().split('_')[1]) + "-" + ($('input.id_intern').val().split('-')[1]));
+                return Clns.desk.delivery_note.validate.create();
               }
             }
           },

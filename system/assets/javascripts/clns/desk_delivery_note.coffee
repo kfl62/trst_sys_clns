@@ -86,6 +86,9 @@ define () ->
                 $('button[data-action="save"]').button 'option', 'disabled', false
               $('span.icon-plus-sign').show()
               return true
+            else if $('input[name*="doc_name"]').val() is '' and $('input[name*="doc_plat"]').val() isnt ''
+              $('input[name*="doc_name"]').val("#{$('input.id_intern').val().split('_')[1]}-#{$('input.id_intern').val().split('-')[1]}")
+              Clns.desk.delivery_note.validate.create()
         selects: (slcts)->
           slcts.each ()->
             $select = $(@)
