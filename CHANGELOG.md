@@ -2,23 +2,40 @@
 
 release date: **2013-xx-xx**
 
-* **feature v0.2.18**, `Clns::Invoice` pdf template, #4
+
+* **feature v0.2.19**, issues [issue #3][#3], [issue #5][#5], [issue #6][#6], [issue #8][#8]
+   - feature date: **2014-05-08**
+   - bump version v0.2.19
+   - update CHANGELOG
+   - i18n `clns.yml` typo and competition
+   - views `Clns::Invoice` pdf template fix [issue #8][#8]
+   - views `Clns::DeliveryNote` pdf template improve and [issue #5][#5]
+   - views `Clns::DeliveryNote` CRUD updates regarding [issue #3][#3]
+   - assets js, `Clns.desk.delivery_note`, update `doc_name`, [issue #6][#6]
+   - i18n `delivery_note.yml` add translation, related to [issue #3][#3]
+   - models `Clns::DeliveryNote` add field `doc_text`, [issue #3][#3]
+
+
+* **feature v0.2.18**, `Clns::Invoice` pdf template, [issue #4][#4]
    - feature date: **2014-05-07**
    - bump version v0.2.18
    - update CHANGELOG
-   - views `Clns::Invoice` pdf template, issue #4
+   - views `Clns::Invoice` pdf template, [issue #4][#4]
 
-* **feature v0.2.17**, `Clns::DeliveryNote` pdf template, #2
+
+* **feature v0.2.17**, `Clns::DeliveryNote` pdf template, [issue #2][#2]
    - feature date: **2014-05-05**
    - bump version v0.2.17
    - update CHANGELOG
-   - views `Clns::DeliveryNote` pdf template, closes #2
+   - views `Clns::DeliveryNote` pdf template, closes [issue #2][#2]
 
-* **feature v0.2.16**, `Clns::Invoice` pdf template, #1
+
+* **feature v0.2.16**, `Clns::Invoice` pdf template, [issue #1][#1]
    - feature date: **2014-05-04**
    - bump version v0.2.16
    - update CHANGELOG
-   - views `Clns::Invoice` pdf template, closes #1
+   - views `Clns::Invoice` pdf template, closes [issue #1][#1]
+
 
 * **feature v0.2.15**, `Clns::CacheBook` monthly report
    - feature date: **2014-04-30**
@@ -30,6 +47,7 @@ release date: **2013-xx-xx**
    - views `Clns::Cache::Book` pdf template, typo
    - i18n `clns.yml` add translation
 
+
 * **feature v0.2.14**, bugfix
    - feature date: **2014-04-30**
    - bump version v0.2.14
@@ -37,6 +55,7 @@ release date: **2013-xx-xx**
    - rename `/lib/version.rb` :(
    - i18n `freight.yml` add new sort
    - i18n `sorting.yml` bugfix, typo
+
 
 * **feature v0.2.13**, `Clns::Sorting` skeletin, CRUD
    - feature date: **2014-04-29**
@@ -51,17 +70,6 @@ release date: **2013-xx-xx**
    - models `Clns::PartnerFirm|FreightIn|FreightOut` cleanup, add sorting
    - models `Clns::Sorting` skeleton
 
-* **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
-   - feature date: **2014-04-26**
-   - bump version v0.2.12
-   - update CHANGELOG
-   - assets js, `Clns.desk.cache_book` skeleton
-   - assets js, `Clns.desk.scrollHeader` reset functionality
-   - assets css, base completions
-   - views `pdf.rb` Prawn skeleton, templte
-   - views `Clns::CacheBook` CRUD skeleton, for testing
-   - i18n `cache_book.yml` initial translation
-   - model `Clns::CacheBook` and embedded model, skeleton
 
 * **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
    - feature date: **2014-04-26**
@@ -74,6 +82,20 @@ release date: **2013-xx-xx**
    - views `Clns::CacheBook` CRUD skeleton, for testing
    - i18n `cache_book.yml` initial translation
    - model `Clns::CacheBook` and embedded model, skeleton
+
+
+* **feature v0.2.12**, `Clns::CacheBook` skeletin, CRUD
+   - feature date: **2014-04-26**
+   - bump version v0.2.12
+   - update CHANGELOG
+   - assets js, `Clns.desk.cache_book` skeleton
+   - assets js, `Clns.desk.scrollHeader` reset functionality
+   - assets css, base completions
+   - views `pdf.rb` Prawn skeleton, templte
+   - views `Clns::CacheBook` CRUD skeleton, for testing
+   - i18n `cache_book.yml` initial translation
+   - model `Clns::CacheBook` and embedded model, skeleton
+
 
 * **feature v0.2.11**, bugfix, pdf templates cleanup, rewrite
    - feature date: **2014-03-02**
@@ -83,6 +105,7 @@ release date: **2013-xx-xx**
    - views, assets: `Clns::DeliveryNote`, freight more then once on invoice, bugfix
    - models `Clns::Invoice` freight_list, um bugfix
    - pdf templates cleanup, rewrite
+
 
 * **feature v0.2.10**, bugfix, `Clns::PartnerFirm` query client, supplier
    - feature date: **2014-02-17**
@@ -94,6 +117,7 @@ release date: **2013-xx-xx**
    - views, i18n `Clns::Freight` missing translations, bugfix
    - `Clns::Invoice` um bug, adapt views and model for query freights
 
+
 * **feature v0.2.9.2**, bugfix, prepare query `Clns::Freights*`
    - feature date: **2014-02-16**
    - bump version v0.2.9.2
@@ -102,6 +126,7 @@ release date: **2013-xx-xx**
    - views `Clns::Invoice` filter, bugfix, (select year)
    - i18n `freight.yml` reorder, missing translations
    - models `Clns::Freight|In|Out|Stock` query freight related ...
+
 
 * **feature v0.2.9.1**, bugfix, prepare query `Clns::Freights*`
    - feature date: **2014-02-06**
@@ -114,12 +139,14 @@ release date: **2013-xx-xx**
    - models `Clns::Freight|In|Out|Stock` bugfix, typo etc.
    - models `Clns::PartnerFirm::Unit#stock_create`, related freights `id_date`
 
+
 * **feature v0.2.8.2**, some work on models
    - feature date: **2014-01-01**
    - bump version v0.2.8.2
    - update CHANGELOG
    - models improve `increment_name` method, where appropriate
    - models `Clns::PartnerFirm::Unit` add `stock_create` method
+
 
 * **feature v0.2.8.1**, `Clns::Consumption|Invoice|DeliveryNote` Clns::Grn id_intern == true, bugfix
    - feature date: **2013-12-31**
@@ -129,11 +156,13 @@ release date: **2013-xx-xx**
    - models `Clns::DeliveryNote.sum_freight_grn` missing `um`, bugfix
    - i18n `freights.yml` reorder, missing translations
 
+
 * **feature v0.2.8**, `Clns::Consumption|Invoice|DeliveryNote` pdf template or placeholder
    - feature date: **2013-12-19**
    - bump version v0.2.8
    - update CHANGELOG
    - `Clns::Consumption|Invoice|DeliveryNote` pdf template or placeholder
+
 
 * **feature v0.2.7.1**, `Clns::Stock` CRUD, bugfixec
    - feature date: **2013-12-18**
@@ -146,6 +175,7 @@ release date: **2013-xx-xx**
    - i18n `clns.yml` missing translations
    - models `Clns::Consumption` freight_list improved
    - models `Clns::FreightOut` handle_stock, um, bugfix
+
 
 * **feature v0.2.7**, `Clns::Stock` skeleton, bugfixes
    - feature date: **2013-12-13**
@@ -161,6 +191,7 @@ release date: **2013-xx-xx**
    - models `Clns::FreightOut` doc_con_id, bugfix
    - i18n `freights.yml` reorder, missing translations
 
+
 * **feature v0.2.6.1**, `Clns::Consumptio` CRUD
    - feature date: **2013-12-08**
    - bump version v0.2.6.1
@@ -170,6 +201,7 @@ release date: **2013-xx-xx**
    - i18n `clns|Consumption.yml` missing translations
    - i18n `freights.yml` reorder categories
    - models `Clns::FreightIn|Out` class method `by_id_stats(id_stats)` bugfix
+
 
 * **feature v0.2.6**, `Clns::Consumptio` skeleton, js bugfix
    - feature date: **2013-12-03**
@@ -181,6 +213,7 @@ release date: **2013-xx-xx**
    - models `Clns::Consumption` skeleton, relations in other models
    - assets js, `Clns.desk.grn` Save button bugfix, recompiled
 
+
 * **feature v0.2.5**, `Clns::Grn` transfer storage
    - feature date: **2013-11-29**
    - bump version v0.2.5
@@ -190,6 +223,7 @@ release date: **2013-xx-xx**
    - views `Clns::Grn` pdf template, tva|out bug
    - views partial, `_doc_add_freights_stock.haml` unit_id bug
    - models `Clns::DeliveryNote` adapt `sum_freights_grn`
+
 
 * **feature v0.2.4**, `Clns::Invoice` CRUD
    - feature date: **2013-11-29**
@@ -201,6 +235,7 @@ release date: **2013-xx-xx**
    - assets js, `Clns.desk.invoice` skeleton
    - i18n `clna,freight,invoice` missing translations, fixes
    - models `Clns::Invoice|DeliveryNote` adapt Clns -> Clns
+
 
 * **feature v0.2.3.1**, `Clns::DeliveryNote` CRUD completitions
    - feature date: **2013-11-26**
@@ -217,6 +252,7 @@ release date: **2013-xx-xx**
    - models `Clns::DeliveryNote|Grn` #freight_list, show UM
    - models `Clns::Freight|In|Out|Stock` adapt Clns -> Clns
 
+
 * **feature v0.2.3**, `Clns::DeliveryNote` CRUD and initiate stocks
    - feature date: **2013-11-21**
    - model `Clns::Stock` initiate, and related changes
@@ -226,6 +262,7 @@ release date: **2013-xx-xx**
    - assets js, `Clns.desk.delivery_note` skeleton
    - views `Clns::DeliveryNote` CRUD skeleton
    - hotfix `Clns::Grn` pdf, background path
+
 
 * **feature v0.2.2.1**, `Clns::Grn` CRUD completitions
    - feature date: **2013-11-21**
@@ -240,6 +277,7 @@ release date: **2013-xx-xx**
    - model `Clns::Invoice` payments text changed
    - model `Clns::Grn` prepare prefix for 2014
 
+
 * **feature v0.2.2**, `Clns::Grn` CRUD
    - feature date: **2013-11-20**
    - bump version v0.2.2
@@ -252,6 +290,7 @@ release date: **2013-xx-xx**
    - model `Clns::User` hotfix, login issue
    - models `Clns::Freight|FreightIn|Grn|Invoice` new methods etc.
    - i18n `freight.yml`, `clns.yml` completitions; add `grn.yml`
+
 
 * **feature v0.2.1**, `Clns::Freight` CRUD
   - feature date: **2013-10-31**
@@ -282,3 +321,25 @@ release date: **2013-07-18**
 * Added **CHANGELOG**
 
 * Add version `lib/clns/version.rb`
+
+[#1]: https://github.com/kfl62/trst_sys_clns/issues/1
+[#2]: https://github.com/kfl62/trst_sys_clns/issues/2
+[#3]: https://github.com/kfl62/trst_sys_clns/issues/3
+[#4]: https://github.com/kfl62/trst_sys_clns/issues/4
+[#5]: https://github.com/kfl62/trst_sys_clns/issues/5
+[#6]: https://github.com/kfl62/trst_sys_clns/issues/6
+[#7]: https://github.com/kfl62/trst_sys_clns/issues/7
+[#8]: https://github.com/kfl62/trst_sys_clns/issues/8
+[#9]: https://github.com/kfl62/trst_sys_clns/issues/9
+[#10]: https://github.com/kfl62/trst_sys_clns/issues/10
+[#11]: https://github.com/kfl62/trst_sys_clns/issues/11
+[#12]: https://github.com/kfl62/trst_sys_clns/issues/12
+[#13]: https://github.com/kfl62/trst_sys_clns/issues/13
+[#14]: https://github.com/kfl62/trst_sys_clns/issues/14
+[#15]: https://github.com/kfl62/trst_sys_clns/issues/15
+[#16]: https://github.com/kfl62/trst_sys_clns/issues/16
+[#17]: https://github.com/kfl62/trst_sys_clns/issues/17
+[#18]: https://github.com/kfl62/trst_sys_clns/issues/18
+[#19]: https://github.com/kfl62/trst_sys_clns/issues/19
+[#20]: https://github.com/kfl62/trst_sys_clns/issues/20
+
