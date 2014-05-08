@@ -20,12 +20,15 @@
           - input_for @object, 'signed_by',    {type: 'hidden',value: @current_user.id}
           - if client_d
             - input_for @object, 'client_d_id',{type: 'hidden',value: client_d.id}
-      %tr.pdb-05
+      %tr
         %td.ce
           - label_for @object, 'doc_name'
-          - input_for @object, 'doc_name',     {placeholder: "Aviz nr."}
+          - input_for @object, 'doc_name',     {placeholder: mat(@object,'doc_name_ph')}
           - label_for @object, 'doc_plat'
           - input_for @object, 'doc_plat'
+      %tr.pdb-05
+        %td
+          - input_for @object, 'doc_text',     {style: 'ui-state-default width-500',placeholder: mat(@object,'doc_text_ph')}
       %tr.pdb-05
         %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
           = partial "clns/shared/doc_add_freight_stock"

@@ -1,10 +1,14 @@
 - @object.reload
 - if @object.freights.count > 0
   %tbody.inner
+    - unless @object.doc_text.blank?
+      %tr
+        %td{colspan: '5'}
+          %span= @object.doc_text
     %tr
       - mat(@object,'table_header_show').each do |label|
         %td.ce= label
-    - @object.reload; @object.freights.each do |o|
+    - @object.freights.asc(:id_stats).each do |o|
       %tr
         - td_value_for  o, 'freight',   {order: 'name',style: 'name',nested: 'doc_dln'}
         - td_value_for  o, 'um',        {style: 'um',nested: 'doc_dln'}
