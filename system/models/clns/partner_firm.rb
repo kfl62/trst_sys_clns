@@ -9,11 +9,12 @@ module Clns
     embeds_many :addresses,   class_name: "Clns::PartnerFirm::Address", cascade_callbacks: true
     embeds_many :people,      class_name: "Clns::PartnerFirm::Person",  cascade_callbacks: true
     embeds_many :units,       class_name: "Clns::PartnerFirm::Unit",    cascade_callbacks: true
+    embeds_many :banks,       class_name: "Clns::PartnerFirm::Bank",    cascade_callbacks: true
     has_many    :dlns_client, class_name: "Clns::DeliveryNote",         inverse_of: :client
     has_many    :grns_supplr, class_name: "Clns::Grn",                  inverse_of: :supplr
     has_many    :invs_client, class_name: "Clns::Invoice",              inverse_of: :client
 
-    accepts_nested_attributes_for :addresses, :people, :units
+    accepts_nested_attributes_for :addresses, :people, :units, :banks
 
     class << self
       # @todo
@@ -127,4 +128,21 @@ module Clns
     end
   end # FirmUnit
   PartnerFirmUnit = PartnerFirm::Unit
+
+  class PartnerFirm::Bank
+    include Mongoid::Document
+    include Mongoid::Timestamps
+    include Trst::ViewHelpers
+
+    field :name,      type: String
+    field :swift,     type: String
+
+    embedded_in :firm,      class_name: 'Clns::PartnerFirm',  inverse_of: :banks
+
+    # @todo
+    # def view_filter
+    #   [id, name[1]]
+    # end
+  end # FirmBank
+  PartnerFirmBank = PartnerFirm::Bank
 end # Wstm
