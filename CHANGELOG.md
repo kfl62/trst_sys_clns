@@ -3,9 +3,19 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.21**,
+   - feature date: **2014-05-09**
+   - bump version v0.2.21
+   - update CHANGELOG
+   - views `Clns::PartnerFirm::Bank` CRUD, [issue #9][#9]
+   - views `Clns::PartnerFirm` partial `_show.haml` add tab for banks
+   - i18n `partner_firm.yml` translationa related to [issue #9][#9]
+   - models `Clns::PartnerFirm` embed `Clns::PartnerFirm::Bank`, [issue #9][#9]
+
+
 * **feature v0.2.20**,`Clns::Grn`, issues [issue #7][#7], [issue #10][#10]
-   - feature date: **2014-05-08**
-   - bump version v0.2.19
+   - feature date: **2014-05-09**
+   - bump version v0.2.20
    - update CHANGELOG
    - views `Clns::DeliveryNote` show `doc_text` before freight table
    - views `Clns::Grn` pdf template improve and [issue #10][#10]
