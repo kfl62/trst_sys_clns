@@ -49,7 +49,7 @@ def table_data(o = nil)
         out = (f.val + tva).round(2)
         k = f.key
         if data[k].nil?
-          data[k] = [f.freight.name,f.um,f.qu,f.pu,f.val,out,tva,["#{dn.doc_name} #{"%.2f" % f.qu}"]]
+          data[k] = [f.freight.name,f.um,f.qu,f.pu,f.val,out,tva,["#{dn.doc_name} - #{"%.2f" % f.qu}"]]
         else
           data[k][2] += f.qu
           data[k][4] += f.val
@@ -117,18 +117,25 @@ if @object.id_intern
                at: [16.mm, pdf.bounds.top - 30.mm], width: 91.mm, size: 8
 else
   pdf.text_box mat(@object,"doc_type_#{@object.doc_type}"),
-               at: [13.mm, pdf.bounds.top - 30.mm], width: 63.mm, align: :center, size: 10
+               at: [13.mm, pdf.bounds.top - 30.mm], width: 63.mm, align: :center, size: 9, height: 10, overflow: :shrink_to_fit
   pdf.text_box @object.doc_name,
-               at: [75.mm, pdf.bounds.top - 30.mm], width: 28.mm, align: :center, size: 10
+               at: [75.mm, pdf.bounds.top - 30.mm], width: 28.mm, align: :center, size: 9, height: 10, overflow: :shrink_to_fit
   pdf.text_box @object.doc_date.to_s,
-               at: [100.mm, pdf.bounds.top - 30.mm], width: 37.mm, align: :center, size: 10
+               at: [100.mm, pdf.bounds.top - 30.mm], width: 37.mm, align: :center, size: 9, height: 10, overflow: :shrink_to_fit
 end
 pdf.text_box supplier.name[2],
-             at: [140.mm, pdf.bounds.top - 30.mm], width: 44.mm, align: :center, size: 9
+             at: [140.mm, pdf.bounds.top - 30.mm], width: 44.mm, align: :center, size: 9, height: 10, overflow: :shrink_to_fit
 pdf.text_box "#{supplier.identities["fiscal"] rescue '-'}",
              at: [183.mm, pdf.bounds.top - 30.mm], width: 38.mm, align: :center, size: 9
 pdf.text_box payment(@object),
              at: [222.mm, pdf.bounds.top - 29.mm], width: 63.mm, align: :left, size: 8
+unless @object.doc_text.blank?
+  pdf.fill_color "ffffff"
+  pdf.fill_rectangle [150, pdf.bounds.top - 35.5.mm], 190.mm, 6.5.mm
+  pdf.fill_color "000000"
+  pdf.text_box "Explicații: #{@object.doc_text}",
+              at: [20.mm, pdf.bounds.top - 35.5.mm], width: 255.mm, height: 6.5.mm, align: :left, valign: :center, size: 9, overflow: :shrink_to_fit
+end
 pdf.text_box "#{delegate.name rescue 'Fără delegat'}",
              at: [43.mm, pdf.bounds.top - 48.mm], width: 92.mm, align: :center, size: 10
 pdf.text_box "#{@object.doc_plat.upcase rescue '-'}",
@@ -138,17 +145,17 @@ pdf.text_box signed_by,
 pdf.text_box signed_by,
              at: [240.mm, 12.mm], size: 10, width: 40.mm, align: :center
 pdf.bounding_box([15.mm, pdf.bounds.top - 70.mm], :width  => pdf.bounds.width) do
-  pdf.table(data, cell_style: {borders: []}, column_widths: [12.mm,60.mm,12.mm,25.mm,25.mm,25.mm,120.mm]) do
+  pdf.table(data, cell_style: {borders: []}, column_widths: [12.mm,60.mm,12.mm,25.mm,25.mm,25.mm,25.mm,25.mm,55.mm]) do
     pdf.font_size = 9
     column(0).style(align: :right, padding: [5,10,5,0])
     column(2).style(align: :center)
-    column(3..5).style(align: :right)
+    column(3..7).style(align: :right)
     row(data.length - 1).columns(1).style(align: :center) unless data_ext
     (0..data.length - 1).each do |i|
       if data[i].last.length > 160
-        row(i).columns(6).style(size: 7,height: 14.mm, padding: [2,0,0,5])
+        row(i).columns(8).style(size: 7,height: 14.mm, padding: [2,0,0,5])
       else data[i].last.split('; ').length > 10
-        row(i).columns(6).style(size: 7,height: 7.mm, padding: [2,0,0,5])
+        row(i).columns(8).style(size: 7,height: 7.mm, padding: [2,0,0,5])
       end
     end
   end
@@ -156,17 +163,17 @@ end
 if data_ext
   pdf.start_new_page(template: "public/images/clns/pdf/grn.pdf",template_page: 2)
   pdf.bounding_box([15.mm, pdf.bounds.top - 30.mm], :width  => pdf.bounds.width) do
-    pdf.table(data_ext, cell_style: {borders: []}, column_widths: [12.mm,60.mm,12.mm,25.mm,25.mm,25.mm]) do
+    pdf.table(data_ext, cell_style: {borders: []}, column_widths: [12.mm,60.mm,12.mm,25.mm,25.mm,25.mm,25.mm,25.mm,55.mm]) do
       pdf.font_size = 9
       column(0).style(align: :right, padding: [5,10,5,0])
       column(2).style(align: :center)
-      column(3..5).style(align: :right)
+      column(3..7).style(align: :right)
       row(data_ext.length-1).columns(1).style(align: :center)
       (0..data.length - 1).each do |i|
         if data[i].last.length > 160
-          row(i).columns(6).style(size: 7,height: 14.mm, padding: [2,0,0,5])
+          row(i).columns(8).style(size: 7,height: 14.mm, padding: [2,0,0,5])
         else data[i].last.split('; ').length > 10
-          row(i).columns(6).style(size: 7,height: 7.mm, padding: [2,0,0,5])
+          row(i).columns(8).style(size: 7,height: 7.mm, padding: [2,0,0,5])
         end
       end
     end
