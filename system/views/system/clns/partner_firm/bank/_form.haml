@@ -1,0 +1,7 @@
+%tbody
+  %tr
+    - td_label_for @related_object, 'name', {order: 1}
+    - td_value_for @related_object, 'name', {order: 1}
+    - td_error_for @related_object, 'name', {order: 1}
+  - tr_input_for  @object,'name',           {placeholder: mat(@object,'name_ph')}
+  - tr_input_for  @object,'swift',          {placeholder: mat(@object,'swift_ph')}
