@@ -64,12 +64,15 @@
               - input_for @object,'supplr_d_id',{type: 'hidden',value: supplr_d.id}
             - input_for @object, 'unit_id',     {type: 'hidden',value: unit_id}
             - input_for @object, 'signed_by_id',{type: 'hidden',value: @current_user.id}
-        %tr.pdb-05
+        %tr
           %td
             - select_for @object,'doc_type',    {type: 'enum',style: 'clns doc_type focus',select_options: %w{null DN INV CRC MIN}}
             - input_for  @object,'doc_name',    {style: 'ui-state-default ce',placeholder: mat(@object,'doc_name')}
             - input_for  @object,'doc_plat',    {style: 'ui-state-default ce',placeholder: mat(@object,'doc_plat')}
             - input_for  @object,'doc_date',    {type: 'hidden',value: 'strip'}
+        %tr.pdb-5
+          %td
+            - input_for  @object,'doc_text',    {style: 'ui-state-default width-450',placeholder: mat(@object,'doc_text_ph')}
         %tr.pdb-05
           %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
             = partial "clns/shared/doc_add_freight"
