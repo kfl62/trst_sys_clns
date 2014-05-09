@@ -13,6 +13,7 @@ module Clns
     field :doc_name,    type: String
     field :doc_date,    type: Date
     field :doc_plat,    type: String
+    field :doc_text,    type: String
     field :sum_100,     type: Float,    default: 0.00
     field :sum_tva,     type: Float,    default: 0.00
     field :sum_out,     type: Float,    default: 0.00

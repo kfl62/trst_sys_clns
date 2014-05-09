@@ -3,6 +3,17 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.20**,`Clns::Grn`, issues [issue #7][#7], [issue #10][#10]
+   - feature date: **2014-05-08**
+   - bump version v0.2.19
+   - update CHANGELOG
+   - views `Clns::DeliveryNote` show `doc_text` before freight table
+   - views `Clns::Grn` pdf template improve and [issue #10][#10]
+   - views `Clns::Grn` CRUD updates regarding [issue #7][#7]
+   - i18n `grn.yml` add translation, related to [issue #7][#7]
+   - models `Clns::Grn` add field `doc_text`, [issue #7][#7]
+
+
 * **feature v0.2.19**, issues [issue #3][#3], [issue #5][#5], [issue #6][#6], [issue #8][#8]
    - feature date: **2014-05-08**
    - bump version v0.2.19

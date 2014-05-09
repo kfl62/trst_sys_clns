@@ -17,6 +17,8 @@ ro:
         doc_type_MIN:  'Proces verbal'
         doc_name:  'Document nr.'
         doc_plat:  'Maşina nr.'
+        doc_text: 'Explicații'
+        doc_text_ph: 'Explicații (dacă este cazul)'
         deadl:     'Termen de plată'
         pyms_text: 'Achitat cu...'
         pyms_val:  'Suma de...'
