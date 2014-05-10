@@ -9,6 +9,10 @@ end
 def address_f
   firm.addresses.first
 end
+def bank_f
+  b = firm.banks.asc(:name).first
+  b.nil? ? ["","____ "*6] : [b.name.split('#').reverse.first,b.swift]
+end
 def unit
   firm.units.find(@object.unit_id)
 end
@@ -17,6 +21,10 @@ def client
 end
 def address_c
   client.addresses.first
+end
+def bank_c
+  b = client.banks.asc(:name).first
+  b.nil? ? ["","____ "*6] : [b.name.split('#').reverse.first,b.swift]
 end
 def doc_text
   @object.doc_text.blank? == true ? nil : @object.doc_text
@@ -65,8 +73,8 @@ def box_content(pdf,left,top)
     pdf.text "Nr. înreg. R.C. : #{firm.identities['chambcom']}"
     pdf.text "Cod Fiscal (C.U.I.) : #{firm.identities['fiscal']}"
     pdf.text "Str.#{address_f.street}, nr.#{address_f.nr rescue '-'}, bl.#{address_f.bl rescue '-'}, sc.#{address_f.sc rescue '-'}, et.#{address_f.et rescue '-'}, ap.#{address_f.ap rescue '-'}, #{address_f.city rescue '-'}, județul #{address_f.state rescue '-'}"
-    pdf.text "Cont: #{'____ '*5}"
-    pdf.text "Banca:"
+    pdf.text "Cont: #{bank_f[1]}"
+    pdf.text "Banca: #{bank_f[0]}"
   end
   pdf.bounding_box([140.mm, top - 10.mm], width: 60.mm) do
     pdf.font_size = 8
@@ -74,8 +82,8 @@ def box_content(pdf,left,top)
     pdf.text "Nr. înreg. R.C. : #{client.identities['chambcom']}"
     pdf.text "Cod Fiscal (C.U.I.) : #{client.identities['fiscal']}"
     pdf.text "Str.#{address_c.street}, nr.#{address_c.nr rescue '-'}, bl.#{address_c.bl rescue '-'}, sc.#{address_c.sc rescue '-'}, et.#{address_c.et rescue '-'}, ap.#{address_c.ap rescue '-'}, #{address_c.city rescue '-'}, județul #{address_c.state rescue '-'}"
-    pdf.text "Cont: #{'____ '*5}"
-    pdf.text "Banca:"
+    pdf.text "Cont: #{bank_c[1]}"
+    pdf.text "Banca: #{bank_c[0]}"
   end
   pdf.bounding_box([80.mm, top - 20.mm], width: 50.mm) do
     pdf.text "Aviz de expediție", align: :center, size: 12, style: :bold

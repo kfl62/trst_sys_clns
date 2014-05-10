@@ -13,5 +13,7 @@
             %button{type: "button",data: {action: "delete",icon: "circle-minus",type: 'delete'}}= t('button.delete')
           - else
             %button{type: "button",data: {action: "print",icon: "print"}}= t('button.print')
+            - if @current_user.admin?
+              %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
             %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
             %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

@@ -3,7 +3,19 @@
 release date: **2013-xx-xx**
 
 
-* **feature v0.2.21**,
+* **feature v0.2.22**, `Clns::DeliveryNote|Grn|Consumption|Sorting`, [issue #11][#11]
+   - feature date: **2014-05-10**
+   - bump version v0.2.22
+   - update CHANGELOG
+   - views `Clns::Invoice` pdf template, bank info [issue #9][#9]
+   - views `Clns::DeliveryNote` pdf template, bank info [issue #9][#9]
+   - views `Clns::Grn` CRUD rearrange, edit `doc_name|doc_text` fields, [issue #11][#11]
+   - views `Clns::DeliveryNote` CRUD rearrange, edit `doc_name|doc_text` fields, [issue #11][#11]
+   - views `Clns::Sorting` CRUD edit `name|text` fields, [issue #11][#11]
+   - views `Clns::Consumption` CRUD edit `name|text` fields, [issue #11][#11]
+
+
+* **feature v0.2.21**, `Clns::PartnerFirm::Bank`,  [issue #9][#9],  [issue #14][#14]
    - feature date: **2014-05-09**
    - bump version v0.2.21
    - update CHANGELOG

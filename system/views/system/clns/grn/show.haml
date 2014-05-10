@@ -7,6 +7,10 @@
       %tr.pdb-05
         %td{colspan: @object.id_intern == true ? '5' : '6'}
           %span.info.width-450.ju= t('intro.show.desk_grn',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,supplr_d: (@object.supplr_d.name rescue 'Anonymous'),supplr: @object.supplr.name[2])
+      - unless @object.doc_text.blank?
+        %tr.pdb-05
+          %td{colspan: @object.id_intern == true ? '5' : '6'}
+            %span.warning.width-450= @object.doc_text
     = partial "#{@path}/show"
     %tfoot
       %tr
@@ -15,6 +19,8 @@
             %button{type: "button", data: {action: "delete", icon: "circle-minus",type: 'delete'}}= t('button.delete')
           - else
             %button{type: "button", data: {action: "print",  icon: "print"}}= t('button.print')
+            - if @current_user.admin?
+              %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
             - if @current_user.admin? || @object.id_date == Date.today
               %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
             %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
