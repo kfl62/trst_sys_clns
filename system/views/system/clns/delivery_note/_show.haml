@@ -1,9 +1,5 @@
 - @object.reload
 - if @object.freights.count > 0
-  - unless @object.doc_text.blank?
-    %tr
-      %td{colspan: '5'}
-        %span.warning.width-450= @object.doc_text
   %tbody.inner
     %tr
       - mat(@object,'table_header_show').each do |label|
