@@ -3,6 +3,19 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.23**, bugfix [issue #16][#16], [issue #17][#17], [issue #20][#20]
+   - feature date: **2014-05-14**
+   - bump version v0.2.23
+   - update CHANGELOG
+   - assets js, `Clns.desk.grn` fix [issue #18][#18]
+   - assets css, `_dialog.sass` style for `input.val`
+   - views: shared partial `_doc_add_freight.haml`, change `val` from span to input, [issue #18][#18]
+   - assets js, `Clns.desk.grn` modified, [issue #17][#17]
+   - views `Clns::Grn` CRUD `create` modified, fix [issue #17][#17]
+   - models all relevant, fix [issue #16][#16]
+   - i18n `freights.yml` 05010700 - Geam, fix [issue #20][#20]
+
+
 * **feature v0.2.22**, `Clns::DeliveryNote|Grn|Consumption|Sorting`, [issue #11][#11]
    - feature date: **2014-05-10**
    - bump version v0.2.22
@@ -375,4 +388,23 @@ release date: **2013-07-18**
 [#18]: https://github.com/kfl62/trst_sys_clns/issues/18
 [#19]: https://github.com/kfl62/trst_sys_clns/issues/19
 [#20]: https://github.com/kfl62/trst_sys_clns/issues/20
-
+[#21]: https://github.com/kfl62/trst_sys_clns/issues/21
+[#22]: https://github.com/kfl62/trst_sys_clns/issues/22
+[#23]: https://github.com/kfl62/trst_sys_clns/issues/23
+[#24]: https://github.com/kfl62/trst_sys_clns/issues/24
+[#25]: https://github.com/kfl62/trst_sys_clns/issues/25
+[#26]: https://github.com/kfl62/trst_sys_clns/issues/26
+[#27]: https://github.com/kfl62/trst_sys_clns/issues/27
+[#28]: https://github.com/kfl62/trst_sys_clns/issues/28
+[#29]: https://github.com/kfl62/trst_sys_clns/issues/29
+[#30]: https://github.com/kfl62/trst_sys_clns/issues/30
+[#31]: https://github.com/kfl62/trst_sys_clns/issues/31
+[#32]: https://github.com/kfl62/trst_sys_clns/issues/32
+[#33]: https://github.com/kfl62/trst_sys_clns/issues/33
+[#34]: https://github.com/kfl62/trst_sys_clns/issues/34
+[#35]: https://github.com/kfl62/trst_sys_clns/issues/35
+[#36]: https://github.com/kfl62/trst_sys_clns/issues/36
+[#37]: https://github.com/kfl62/trst_sys_clns/issues/37
+[#38]: https://github.com/kfl62/trst_sys_clns/issues/38
+[#39]: https://github.com/kfl62/trst_sys_clns/issues/39
+[#40]: https://github.com/kfl62/trst_sys_clns/issues/40
