@@ -14,9 +14,9 @@ module Clns
 
     alias :file_name :name
 
-    has_many   :freights,   class_name: "Clns::FreightOut",      inverse_of: :doc_cas, dependent: :destroy
-    belongs_to :unit,       class_name: "Clns::PartnerFirmUnit", inverse_of: :csss
-    belongs_to :signed_by,  class_name: "Clns::User",            inverse_of: :csss
+    has_many   :freights,   class_name: "Clns::FreightOut",       inverse_of: :doc_cas, dependent: :destroy
+    belongs_to :unit,       class_name: "Clns::PartnerFirm::Unit",inverse_of: :csss
+    belongs_to :signed_by,  class_name: "Clns::User",             inverse_of: :csss
 
     index({ unit_id: 1, id_date: 1 })
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}

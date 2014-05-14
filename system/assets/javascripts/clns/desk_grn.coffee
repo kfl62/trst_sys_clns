@@ -67,14 +67,21 @@ define () ->
           tva  = parseFloat v.filter('.name').data('tva')
           pu   = parseFloat v.filter('.pu').decFixed(4).val()
           qu   = parseFloat v.filter('.qu').decFixed(2).val()
-          $val = (pu * qu).round(2)
+          val  = parseFloat v.filter('.val').decFixed(2).val()
+          if val is 0
+            $val = (pu * qu).round(2)
+            $pu  = pu
+          else
+            $val = val
+            $pu  = (val / qu).round(4)
           $tva = ($val * tva).round(2)
           $out = ($val + $tva).round(2)
-          v.filter('.val').text $val.toFixed(2)
+          v.filter('.pu').val $pu.toFixed(4)
+          v.filter('.val').val $val.toFixed(2)
           v.filter('.tva').text $tva.toFixed(2)
           v.filter('.out').text $out.toFixed(2)
           result:
-            freight_id: fid; name: name; id_stats: ids; um: um; tva: tva; pu: pu; qu: qu
+            freight_id: fid; name: name; id_stats: ids; um: um; tva: tva; pu: $pu; qu: qu
             sval: $val; stva: $tva; sout: $out
         validate:
           filter: ()->
@@ -126,6 +133,7 @@ define () ->
             if $select.hasClass 'clns doc_type'
               $('tr.inv').hide()
               $select.on 'change', ()->
+                if $select.val() is 'DN' then $('input[name*="charged"]').val('false') else $('input[name*="charged"]').val('true')
                 $('input[name*="doc_date"]').val($('#date_send').val())
                 if $select.val() is 'INV'
                   $('tr.dn').hide()

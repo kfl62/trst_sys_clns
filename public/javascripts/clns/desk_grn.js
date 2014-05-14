@@ -79,7 +79,7 @@
             return Clns.desk.grn.grnCalculate();
           },
           freightCalculate: function() {
-            var $out, $tva, $val, fid, idd, ids, name, pu, qu, tva, um, v;
+            var $out, $pu, $tva, $val, fid, idd, ids, name, pu, qu, tva, um, v, val;
             v = $('.add-freight');
             name = v.filter('.name').data('name');
             ids = v.filter('.name').data('id_stats');
@@ -89,10 +89,18 @@
             tva = parseFloat(v.filter('.name').data('tva'));
             pu = parseFloat(v.filter('.pu').decFixed(4).val());
             qu = parseFloat(v.filter('.qu').decFixed(2).val());
-            $val = (pu * qu).round(2);
+            val = parseFloat(v.filter('.val').decFixed(2).val());
+            if (val === 0) {
+              $val = (pu * qu).round(2);
+              $pu = pu;
+            } else {
+              $val = val;
+              $pu = (val / qu).round(4);
+            }
             $tva = ($val * tva).round(2);
             $out = ($val + $tva).round(2);
-            v.filter('.val').text($val.toFixed(2));
+            v.filter('.pu').val($pu.toFixed(4));
+            v.filter('.val').val($val.toFixed(2));
             v.filter('.tva').text($tva.toFixed(2));
             v.filter('.out').text($out.toFixed(2));
             return {
@@ -102,7 +110,7 @@
                 id_stats: ids,
                 um: um,
                 tva: tva,
-                pu: pu,
+                pu: $pu,
                 qu: qu,
                 sval: $val,
                 stva: $tva,
@@ -177,6 +185,11 @@
               if ($select.hasClass('clns doc_type')) {
                 $('tr.inv').hide();
                 $select.on('change', function() {
+                  if ($select.val() === 'DN') {
+                    $('input[name*="charged"]').val('false');
+                  } else {
+                    $('input[name*="charged"]').val('true');
+                  }
                   $('input[name*="doc_date"]').val($('#date_send').val());
                   if ($select.val() === 'INV') {
                     $('tr.dn').hide();
@@ -447,10 +460,10 @@
                   });
                 }
               } else {
+
                 /*
                 Buttons default handler Trst.desk.buttons
-                */
-
+                 */
               }
             });
           },

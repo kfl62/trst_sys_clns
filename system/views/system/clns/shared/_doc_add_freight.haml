@@ -34,7 +34,7 @@
       %td
         %span.add-freight.out 0.00
         %span.add-freight.tva 0.00
-        %span.add-freight.val 0.00
+        %input.add-freight.val{value: '0.00'}
   - else
     %tr
       %td
@@ -46,4 +46,4 @@
       %td
         %span.out 0.00
         %span.tva 0.00
-        %span.val 0.00
+        %input.val{disabled: true,value: '0.00'}

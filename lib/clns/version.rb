@@ -1,4 +1,4 @@
 # encoding: utf-8
 module Clns
-  VERSION = "0.2.22"
+  VERSION = "0.2.23"
 end

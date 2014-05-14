@@ -13,19 +13,20 @@
         %tr
           %td
             - label_for @object, 'name'
-            - input_for @object, 'name',      {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
+            - input_for @object, 'name',        {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
             - label_for @object, 'id_date'
-            - input_for @object, 'id_date',   {id: 'date_show',name: 'strip'}
-            - input_for @object, 'id_date',   {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
-            - input_for @object, 'id_intern', {type: 'hidden',value: 'true'}
-            - input_for @object, 'doc_type',  {type: 'hidden',value: 'DN'}
-            - input_for @object, 'doc_name',  {type: 'hidden',value: @object.dlns.map(&:doc_name).join(', ')}
-            - input_for @object, 'doc_date',  {type: 'hidden',value: @object.dlns.last.id_date}
-            - input_for @object, 'supplr_id', {type: 'hidden',value: firm.id}
-            - input_for @object, 'unit_id',   {type: 'hidden',value: unit_id}
-            - input_for @object, 'signed_by_id', {type: 'hidden',value: @current_user.id}
+            - input_for @object, 'id_date',     {id: 'date_show',name: 'strip'}
+            - input_for @object, 'id_date',     {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+            - input_for @object, 'id_intern',   {type: 'hidden',value: 'true'}
+            - input_for @object, 'doc_type',    {type: 'hidden',value: 'DN'}
+            - input_for @object, 'doc_name',    {type: 'hidden',value: @object.dlns.map(&:doc_name).join(', ')}
+            - input_for @object, 'doc_date',    {type: 'hidden',value: @object.dlns.last.id_date}
+            - input_for @object, 'supplr_id',   {type: 'hidden',value: firm.id}
+            - input_for @object, 'unit_id',     {type: 'hidden',value: unit_id}
+            - input_for @object, 'signed_by_id',{type: 'hidden',value: @current_user.id}
+            - input_for @object, 'charged',     {type: 'hidden',value: 'true'}
             - dln_ary.each do |dn|
-              -input_for @object,'dln_ids',   {type: 'hidden',name: "[#{@path}][dln_ids][]",value: dn}
+              -input_for @object,'dln_ids',     {type: 'hidden',name: "[#{@path}][dln_ids][]",value: dn}
         %tr.pdb-05
           %td
             %span= t('intro.create.desk_grn.id_intern',unit: unit.name[1])
@@ -64,6 +65,7 @@
               - input_for @object,'supplr_d_id',{type: 'hidden',value: supplr_d.id}
             - input_for @object, 'unit_id',     {type: 'hidden',value: unit_id}
             - input_for @object, 'signed_by_id',{type: 'hidden',value: @current_user.id}
+            - input_for @object, 'charged',     {type: 'hidden',value: 'true'}
         %tr
           %td
             - select_for @object,'doc_type',    {type: 'enum',style: 'clns doc_type focus',select_options: %w{null DN INV CRC MIN}}

@@ -27,7 +27,7 @@ ro:
           "01": [["00", "Toate"], ["01", "Motor A40"], ["02", "Motor Soteco"]]
           "02": [["00", "Toate"], ["01", "Dispersor sapun Pompa"], ["02", "Dispersor sapun Placa spate"]]
         "05":
-          "01": [["00", "Toate"], ["01", "Sanitar"], ["02", "Mobilier"], ["03", "Pardoseala"], ["04", "Parfumat"], ["05", "Vesela"], ["06", "Automata"]]
+          "01": [["00", "Toate"], ["01", "Sanitar"], ["02", "Mobilier"], ["03", "Pardoseala"], ["07", "Geam"], ["04", "Parfumat"], ["05", "Vesela"], ["06", "Automata"]]
           "02": [["00", "Toate"], ["01", "Sanitar"], ["02", "Alcalin"], ["03", "Altele"]]
           "03": [["00", "Toate"], ["01", "Sapun lichid"], ["02", "Dispersie polimerica"], ["03", "Mocheta"], ["04", "Diverse"]]
         "06":
