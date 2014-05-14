@@ -10,8 +10,8 @@ module Clns
     field :id_date,     type: Date
     field :expl,        type: String,   default: 'Stock initial'
 
-    has_many   :freights,   class_name: "Clns::FreightStock",   :inverse_of => :doc_stk, dependent: :destroy
-    belongs_to :unit,       class_name: "Clns::PartnerFirmUnit",:inverse_of => :stks
+    has_many   :freights,   class_name: "Clns::FreightStock",     :inverse_of => :doc_stk, dependent: :destroy
+    belongs_to :unit,       class_name: "Clns::PartnerFirm::Unit",:inverse_of => :stks
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 

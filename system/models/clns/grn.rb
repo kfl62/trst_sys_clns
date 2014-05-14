@@ -21,13 +21,13 @@ module Clns
 
     alias :file_name :name
 
-    has_many   :freights,     class_name: "Clns::FreightIn",        inverse_of: :doc_grn, dependent: :destroy
-    has_many   :dlns,         class_name: "Clns::DeliveryNote",     inverse_of: :doc_grn
-    belongs_to :supplr,       class_name: "Clns::PartnerFirm",      inverse_of: :grns_supplr
-    belongs_to :supplr_d,     class_name: "Clns::PartnerFirmPerson",inverse_of: :grns_supplr
-    belongs_to :doc_inv,      class_name: "Clns::Invoice",          inverse_of: :grns
-    belongs_to :unit,         class_name: "Clns::PartnerFirmUnit",  inverse_of: :grns
-    belongs_to :signed_by,    class_name: "Clns::User",             inverse_of: :grns
+    has_many   :freights,     class_name: "Clns::FreightIn",          inverse_of: :doc_grn, dependent: :destroy
+    has_many   :dlns,         class_name: "Clns::DeliveryNote",       inverse_of: :doc_grn
+    belongs_to :supplr,       class_name: "Clns::PartnerFirm",        inverse_of: :grns_supplr
+    belongs_to :supplr_d,     class_name: "Clns::PartnerFirm::Person",inverse_of: :grns_supplr
+    belongs_to :doc_inv,      class_name: "Clns::Invoice",            inverse_of: :grns
+    belongs_to :unit,         class_name: "Clns::PartnerFirm::Unit",  inverse_of: :grns
+    belongs_to :signed_by,    class_name: "Clns::User",               inverse_of: :grns
 
     index({ unit_id: 1, id_date: 1 })
 
