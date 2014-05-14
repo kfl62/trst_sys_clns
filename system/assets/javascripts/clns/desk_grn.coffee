@@ -126,6 +126,7 @@ define () ->
             if $select.hasClass 'clns doc_type'
               $('tr.inv').hide()
               $select.on 'change', ()->
+                if $select.val() is 'DN' then $('input[name*="charged"]').val('false') else $('input[name*="charged"]').val('true')
                 $('input[name*="doc_date"]').val($('#date_send').val())
                 if $select.val() is 'INV'
                   $('tr.dn').hide()
