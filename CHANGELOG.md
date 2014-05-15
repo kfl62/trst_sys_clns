@@ -3,8 +3,15 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.25**, bugfix [issue #21][#21]
+   - feature date: **2014-05-15**
+   - bump version v0.2.25
+   - update CHANGELOG
+   - views `report.haml` unit_id bug, fix [issue #21][#21]
+
+
 * **feature v0.2.24**, `Clns::Stock` print [issue #19][#19]
-   - feature date: **2014-05-xx**
+   - feature date: **2014-05-15**
    - bump version v0.2.24
    - update CHANGELOG
    - i18n `clns.yaml` related to [issue #19][#19] translations
