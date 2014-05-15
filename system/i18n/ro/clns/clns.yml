@@ -63,6 +63,9 @@ ro:
             Nu aveţi nici o recepţie!
         desk_report:
           cb_monthly: Registru de casă
+          stock_monthly: Stoc iniţial lunar / curent
+          stock_monthly_expl: |
+            Pentr stoc iniţial lunar alegeți <b>AAAA-LL</b>, pentru stocul curent treceți <b>2000-01</b>
         desk_stock: |
             În cazul &raquo;Stocurilor iniţiale lunare&laquo; trebuie să ştiţi următoarele:<br>
             1.) Crearea unui nou &raquo;Stoc iniţial lunar&laquo; presupune copierea <b>Stocului curent</b> întro

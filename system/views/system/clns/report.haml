@@ -25,3 +25,44 @@
           %td.buttonset.ce{colspan: "2"}
             %button{type: "button",data: {action: "print", icon: "print"}}= t('button.print')
             %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+- if ext == 'stock_monthly'
+  %form{action: "/sys/clns/report/print?rb=#{ext}"}
+    %table{cellspacing: "0"}
+      %thead
+        %tr.pdb-05
+          %td{colspan: "2"}
+            %span.info.width-300.ju= t("intro.filter.desk_report.#{ext}_expl")
+      %tbody
+        %tr.pdb-05
+          %td
+            %span Alegeţi luna:
+          %td
+            %input#date_send.ui-state-default.ce{name: 'date',value: l(Date.today,format: '%Y-%m')}
+            %input#file_name{type: 'hidden',name: 'fn',value: "#{firm.name[0][0..2].upcase}_Inventar-"}
+        %tr.pdb-05
+          %td
+            %label
+              Complet ( Toate categoriile )
+              %input{type: 'radio', name: 'type_0',value: 'all'}
+          %td
+            %label
+              Parțial ( Accesorii etc. )
+              %input{type: 'radio', name: 'type_0',value: 'sel',checked: true}
+        %tr.pdb-05
+          %td
+            %label
+              Cumulat ( id )
+              %input{type: 'radio', name: 'type_1',value: 'id',checked: true}
+          %td
+            %label
+              Detailat ( id_pu )
+              %input{type: 'radio', name: 'type_1',value: 'id_pu'}
+        - unless uid
+          %tr.pdb-05
+            %td{colspan: '2'}
+              %input#unit_ids.ui-state-default{type: 'hidden',name: 'unit_ids',style: 'width:350px',data: {data: s2dt}}
+      %tfoot
+        %tr
+          %td.buttonset.ce{colspan: "2"}
+            %button{type: "button",data: {action: "print", icon: "print"}}= t('button.print')
+            %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

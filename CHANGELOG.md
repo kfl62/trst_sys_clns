@@ -3,7 +3,16 @@
 release date: **2013-xx-xx**
 
 
-* **feature v0.2.23**, bugfix [issue #16][#16], [issue #17][#17], [issue #20][#20]
+* **feature v0.2.24**, `Clns::Stock` print [issue #19][#19]
+   - feature date: **2014-05-xx**
+   - bump version v0.2.24
+   - update CHANGELOG
+   - i18n `clns.yaml` related to [issue #19][#19] translations
+   - views `report.haml` handle `stock_monthly.rb`
+   - views report, `stock_monthly.rb` prawn, pdf template
+
+
+* **feature v0.2.23**, bugfix [issue #16][#16], [issue #17][#17], [issue #18][#18], [issue #17][#17], [issue #20][#20]
    - feature date: **2014-05-14**
    - bump version v0.2.23
    - update CHANGELOG
