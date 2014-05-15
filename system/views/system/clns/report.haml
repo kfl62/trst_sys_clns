@@ -2,7 +2,7 @@
   ext  = params[:report]
   uid  = @current_user.unit_id
   unit = Clns::PartnerFirm.unit_by_unit_id(uid) if uid
-  firm = Clns::PartnerFirm.find_by(firm: true) unless uid
+  firm = Clns::PartnerFirm.find_by(firm: true)
   s2dt = firm.units.asc(:slug).map{|u| {id: u.id,text: u.slug}}.to_json if firm
   data = t("intro.filter.desk_report.#{ext}")
 %span#hidden_data.hidden{data: {dialog: 'report',title_data: data,model_name: mat(@object,'model_name'),oid: nil,js_ext: 'desk_report'}}
@@ -61,6 +61,10 @@
           %tr.pdb-05
             %td{colspan: '2'}
               %input#unit_ids.ui-state-default{type: 'hidden',name: 'unit_ids',style: 'width:350px',data: {data: s2dt}}
+        -else
+          %tr.pdb-05
+            %td{colspan: '2'}
+              %input{type: 'hidden',name: 'unit_ids',value: uid}
       %tfoot
         %tr
           %td.buttonset.ce{colspan: "2"}
