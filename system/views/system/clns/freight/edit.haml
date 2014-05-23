@@ -1,0 +1,15 @@
+:ruby
+  csn = params[:csn].nil? ? nil : params[:csn]
+%span#hidden_data.hidden{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_freight'}}
+%form{action: "/sys/#{@path}",method: "put"}
+  %table{cellspacing: "0"}
+    %thead
+      %tr.pdb-05
+        %th{colspan: "3"}
+    = partial "#{@path}/form", locals: {csn: csn}
+    %tfoot
+      %tr
+        %td.buttonset.ce{colspan: "3"}
+          %button{type: "button",data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
+          %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
+          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

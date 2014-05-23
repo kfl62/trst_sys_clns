@@ -1,20 +1,60 @@
-%tbody
-  - if @current_user.admin?
-    - if locals[:create]
-      = partial 'clns/shared/doc_select_freight', locals: {label: true,error: true,id_stats: id_stats}
-      - tr_input_for  @object,      'id_stats', {value: id_stats}
-    - else
-      - tr_show_for @object,        'criteria_name'
-      - if @current_user.root?
-        - tr_input_for @object,        'id_stats'
+- unless (csn rescue nil)
+  %tbody
+    - if @current_user.admin?
+      - if locals[:create]
+        = partial 'clns/shared/doc_select_freight', locals: {label: true,error: true,id_stats: id_stats}
+        - tr_input_for  @object,      'id_stats', {value: id_stats}
       - else
-        - tr_show_for @object,        'id_stats'
-    - tr_input_for  @object,        'name', {style: 'focus'}
-    - tr_input_for  @object,        'um'
-    - tr_input_for  @object,        'pu'
-    - tr_input_for  @object,        'tva'
-  - else
-    - tr_show_for   @object,        'id_stats'
-    - tr_show_for   @object,        'name'
-    - tr_show_for   @object,        'um', {style: 'focus'}
-    - tr_input_for  @object,        'pu'
+        - tr_show_for @object,        'criteria_name'
+        - if @current_user.root?
+          - tr_input_for @object,        'id_stats'
+        - else
+          - tr_show_for @object,        'id_stats'
+      - tr_input_for  @object,        'name', {style: 'focus'}
+      - tr_input_for  @object,        'um'
+      - tr_input_for  @object,        'pu'
+      - tr_input_for  @object,        'tva'
+    - else
+      - tr_show_for   @object,        'id_stats'
+      - tr_show_for   @object,        'name'
+      - tr_show_for   @object,        'um', {style: 'focus'}
+      - tr_input_for  @object,        'pu'
+- else
+  %tbody
+    - if csn == 'new'
+      -if @object.csn
+        %tr
+          %td
+            %select.csn
+              %option{value: 'dflt'}= 'Alegeți patenerul!'
+              - Clns::PartnerFirm.where(client: true).asc(:name).each do |c|
+                %option{value: c.id.to_s}= c.name[0]
+          %td
+            %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][_new_]",value: @object.csn['dflt']}
+            - @object.csn.each do |o|
+              - input_for @object, 'csn', {order: o[0], type: 'hidden'}
+      - else
+        %tr
+          %td
+            %span= 'Denumire generică : '
+          %td
+            %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][dflt]",value: @object.name}
+    - elsif csn == 'delete'
+      - @object.csn.each do |o|
+        %tr.ui-state-default
+          %td
+            %span= o.first == 'dflt' ? 'Denumire generică' : "#{Clns::PartnerFirm.find(o.first).name[0]}"
+          %td
+            %span.value= o.last
+            - input_for @object, 'csn', {order: o[0], type: 'hidden'}
+          %td
+            - unless o.first == 'dflt'
+              %span.button.flri.red.pointer.icon-minus-sign.pdlr-05
+    - else
+      %tr
+        %td
+          %span= csn == 'dflt' ? 'Denumire generică : ' : "#{Clns::PartnerFirm.find(csn).name[0]} : "
+        %td
+          %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][#{csn}]",value: @object.csn[csn]}
+          - @object.csn.each do |o|
+            - input_for @object, 'csn', {order: o[0], type: 'hidden'} unless csn == o[0]
