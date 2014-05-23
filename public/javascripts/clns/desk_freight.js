@@ -91,6 +91,14 @@
                   Trst.desk.init($url);
                 });
               }
+              if ($select.hasClass('csn')) {
+                $select.on('change', function() {
+                  var input, name;
+                  input = $('input[name="\[clns\/freight\]\[csn\]\[_new_\]"]');
+                  name = input.prop('name').replace('_new_', $select.val());
+                  input.prop('name', name);
+                });
+              }
             });
           },
           buttons: function(btns) {
@@ -151,13 +159,19 @@
                   Trst.lst.removeItem('url');
                 }
               }
+              if ($button.hasClass('icon-minus-sign')) {
+                $button.off('click');
+                $button.on('click', function() {
+                  $button.parentsUntil('tbody').last().remove();
+                });
+              }
             });
           },
           init: function() {
             if (Trst.desk.hdo.dialog === 'create') {
               Clns.desk.freight.createFreightName();
             }
-            Clns.desk.freight.buttons($('button, span.link'));
+            Clns.desk.freight.buttons($('button, span.link, span.button'));
             Clns.desk.freight.selects($('select'));
             return $log('Clns.desk.freight.init() OK...');
           }
