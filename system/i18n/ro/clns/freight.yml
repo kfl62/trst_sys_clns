@@ -54,6 +54,16 @@ ro:
         table_one: ['Data', 'Intrări', 'Ieşiri', 'Stoc']
         stock_start: Stoc initial
         table_all_with_pu: ['Material', 'PU', 'Iniţial', 'Valoare', 'Intrări', 'Valoare', 'Ieşiri', 'Valoare', 'Stoc', 'Valoare']
+        tab_main_title: Date generale
+        tab_csn_title: Denumiri specifice
+        tab_csn_empty: |
+          Nu există denumiri specifice, Se va tipării denumirea materialului.
+        tab_csn_one: |
+          Există doar denumirea generică, care se va tipării ptr. fiecare client.
+        tab_csn_many: |
+          Denumirea generică se va tipării la toți cei care nu au o altă denumire definită.
+        tab_csn_create: |
+          Adăugați o denumire spicifică clientului.
         << : *trst_freight
       'clns/freight_stock':
         model_name: Material în stoc
