@@ -3,6 +3,15 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.26**,bugfix [issue #22][#22], feature [issue #12][#12]
+   - feature date: **2014-05-23**
+   - bump version v0.2.26
+   - update CHANGELOG
+   - i18n `freight.yml` new translations related to [issue #12][#12]
+   - models `Clns::Freight`, add field, handle sorting ... [issue #12][#12]
+   - views report `stock_monthly` fix [issue #22][#22]
+
+
 * **feature v0.2.25**, bugfix [issue #21][#21]
    - feature date: **2014-05-15**
    - bump version v0.2.25

@@ -1,4 +1,5 @@
-%tbody
+- @object.reload
+%tbody#tabs-main{data: {title: mat(@object, :tab_main_title)}}
   - tr_show_for @object,        'id'
   - tr_show_for @object,        'criteria_name'
   - tr_show_for @object,        'id_stats'
@@ -7,3 +8,36 @@
   - tr_show_for @object,        'pu',             {precision: 4}
   - tr_show_for @object,        'created_at'
   - tr_show_for @object,        'updated_at'
+- if @object.csn
+  %tbody#tabs-csn{data: {title: mat(@object, :tab_csn_title)}}
+    %tr.pdb-05
+      %td{colspan: '3'}
+        - if @object.csn.count == 1
+          %span.info= mat(@object,'tab_csn_one')
+        - else
+          %span.info= mat(@object,'tab_csn_many')
+    - @object.csn.each do |o|
+      %tr
+        %td
+          %span.value.ui-state-default= o.first == 'dflt' ? 'Denumire generică : ' : "#{Clns::PartnerFirm.find(o.first).name[0]} : "
+        %td
+          %span.value.ui-state-error= o.last
+        %td.buttonset
+          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}?csn=#{o.first}",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "document"}}= t('button.edit')
+          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}?csn=delete",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',icon: "circle-minus"}}= t('button.delete')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_csn_create')
+      %td.buttonset{colspan: '2'}
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+
+- else
+  %tbody#tabs-csn{data: {title: mat(@object, :tab_csn_title)}}
+    %tr.pdb-05
+      %td{colspan: '3'}
+        %span.error= mat(@object,'tab_csn_empty')
+    %tr
+      %td
+        %span.value.ui-state-default= mat(@object,'tab_csn_create')
+      %td.buttonset{colspan: '2'}
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "circle-plus"}}= t('button.create')

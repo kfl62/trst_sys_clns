@@ -43,7 +43,8 @@ def table_data(uid)
           h[key][4] += f.val
         end
       end
-    end.sort.to_h.values
+    end #.sort.to_h.values
+    ary = Hash[ary.sort].values # ary.sort.to_h only ruby v2.1
     ary.each_with_index do |a,i|
       a[3] = a[4] / a[2] if params['type_1'] == 'id'
       data << ["#{i + 1}.",a[0],a[1],"%.2f" % a[2],"%.4f" % a[3],"%.2f" % a[4]]
