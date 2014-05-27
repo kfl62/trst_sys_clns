@@ -240,7 +240,7 @@
                         if ($dlg.select2('data')) {
                           if ($dlg.select2('data').id === 'new') {
                             $dlgadd = $dlg.next();
-                            $dlgadd.data('url', '/sys/wstm/partner_firm_person');
+                            $dlgadd.data('url', '/sys/clns/partner_firm/person');
                             $dlgadd.data('r_id', $select.select2('val'));
                             $dlgadd.data('r_mdl', 'firm');
                             $dlgadd.show();
