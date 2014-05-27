@@ -32,7 +32,7 @@ end
 def table_goods_data
   data    = []
   data[0] = ["Nr.", "Denumire", "UM", "Cantitate", "Preț unitar", "Valoare", "TVA"]
-  Clns::DeliveryNote.where(id: @object.id).sum_freights_inv.values.each_with_index do |f,i|
+  Clns::DeliveryNote.where(id: @object.id).sum_freights_inv(true).values.each_with_index do |f,i|
     data << ["#{i + 1}.", f[0], f[2], "%.2f" % f[4], "", "", ""]
   end
   for i in data.length..19 do
