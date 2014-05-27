@@ -57,12 +57,14 @@ module Clns
         end
       end
       # @todo
-      def sum_freights_inv
+      def sum_freights_inv(for_partner = false)
         all.each_with_object({}) do |dn,s|
           dn.freights.asc(:id_stats).each_with_object(s) do |f,s|
-            key = "#{f.id_stats}_#{"%07.4f" % f.pu_invoice}"
+            key  = "#{f.id_stats}_#{"%07.4f" % f.pu_invoice}"
+            name = f.freight.name
+            name = (f.freight.csn.nil? ? f.freight.name : f.freight.csn[dn.client_id.to_s] || f.freight.csn['dflt']) if for_partner
             if s[key].nil?
-              s[key] = [f.freight.name,f.freight.id_stats,f.um,f.pu,f.qu,f.val,f.pu_invoice,f.val_invoice,f.tva_invoice,f.out_invoice,f.freight.tva]
+              s[key] = [name,f.freight.id_stats,f.um,f.pu,f.qu,f.val,f.pu_invoice,f.val_invoice,f.tva_invoice,f.out_invoice,f.freight.tva]
             else
               s[key][4] += f.qu
               s[key][5] += f.val
