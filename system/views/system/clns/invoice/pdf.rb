@@ -41,7 +41,9 @@ end
 def table_goods_data
   data = [["Nr.", "Denumire produs/serviciu", "UM", "Cantitate", "Preț unitar", "Valoare", "TVA"]]
   @object.freights.each_with_index do |f,i|
-    data << ["#{i + 1}.", f.name, f.um, "%.2f" % f.qu, "%.4f" % f.pu, "%.2f" % f.val, "%.2f" % f.tva]
+    ff   = Clns::Freight.find_by(id_stats: f.id_stats)
+    name = ff.csn.nil? ? f.name : ff.csn[@object.client_id.to_s] || ff.csn['dflt']
+    data << ["#{i + 1}.", name, f.um, "%.2f" % f.qu, "%.4f" % f.pu, "%.2f" % f.val, "%.2f" % f.tva]
   end
   for i in data.length..17 do
     data[i] = [Prawn::Text::NBSP, "","","","","",""]

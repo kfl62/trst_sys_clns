@@ -3,10 +3,22 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.27**, bugfix [issue #24][#24], feature [issue #23][#23]
+   - feature date: **2014-05-27**
+   - bump version v0.2.27
+   - update CHANGELOG
+   - views `Clns::Invoice` pdf template [issue #23][#23]
+   - views `Clns::DeliveryNote` pdf template [issue #23][#23]
+   - models `Clns::DeliveryNote::sum_freights_inv` add `for_partner` parameter, default false
+   - assets js, `Clns.desk.delivery_note` fix [issue #24][#24]
+
+
 * **feature v0.2.26**,bugfix [issue #22][#22], feature [issue #12][#12]
    - feature date: **2014-05-23**
    - bump version v0.2.26
    - update CHANGELOG
+   - views `Clns::Freight` CRUD, updates related to [issue #12][#12]
+   - assets js, `Clns.desk.freight` add functionality for [issue #12][#12]
    - i18n `freight.yml` new translations related to [issue #12][#12]
    - models `Clns::Freight`, add field, handle sorting ... [issue #12][#12]
    - views report `stock_monthly` fix [issue #22][#22]
