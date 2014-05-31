@@ -10,13 +10,14 @@ module Clns
     belongs_to  :unit,     class_name: 'Clns::PartnerFirm::Unit', inverse_of: :dps
 
     index({ unit_id: 1, id_date: 1 })
+
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     class << self
       # @todo
       def pos(s)
-        s = s.upcase
-        where(unit_id: Clns::PartnerFirm.pos(s).id)
+        uid = Clns::PartnerFirm.pos(s).id
+        by_unit_id(uid)
       end
       # @todo
       def nonin(nin = true)

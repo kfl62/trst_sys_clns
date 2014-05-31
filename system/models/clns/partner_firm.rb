@@ -97,6 +97,9 @@ module Clns
     has_many    :grns,      class_name: 'Clns::Grn',          inverse_of: :unit
     has_many    :csss,      class_name: 'Clns::Cassation',    inverse_of: :unit
     has_many    :cons,      class_name: 'Clns::Consumption',  inverse_of: :unit
+    has_many    :ins,       class_name: 'Clns::FreightIn',    inverse_of: :unit
+    has_many    :outs,      class_name: 'Clns::FreightOut',   inverse_of: :unit
+    has_many    :fsts,      class_name: 'Clns::FreightStock', inverse_of: :unit
 
     # @todo
     def view_filter

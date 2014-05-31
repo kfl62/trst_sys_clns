@@ -14,14 +14,14 @@ module Clns
     field :qu,          type: Float,     default: 0.00
     field :val,         type: Float,     default: 0.00
 
-    belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :stks
-    belongs_to  :doc_stk,  class_name: 'Clns::Stock',       inverse_of: :freights
+    belongs_to  :freight,  class_name: 'Clns::Freight',           inverse_of: :stks, index: true
+    belongs_to  :unit,     class_name: 'Clns::PartnerFirm::Unit', inverse_of: :fsts, index: true
+    belongs_to  :doc_stk,  class_name: 'Clns::Stock',             inverse_of: :freights, index: true
 
-    index({ id_stats: 1, freight_id: 1, id_date: 1 })
-    index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
-    index({ id_stats: 1, pu: 1, id_date: 1 })
-    index({ freight_id: 1, doc_stk_id: 1, qu: 1})
+    index({ freight_id: 1, id_date: 1, unit_id: 1 })
+
     scope :stock_now, where(id_date: Date.new(2000,1,31))
+    scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     after_update :handle_value
 
@@ -55,30 +55,18 @@ module Clns
       end
       # @todo
       def pos(s)
-        where(:doc_stk_id.in => Clns::Stock.where(unit_id: PartnerFirm.pos(s).id).pluck(:id))
+        uid = Clns::PartnerFirm.pos(s).id
+        by_unit_id(uid)
       end
-      # # @todo
-      # def sum_stks(*args)
-      #   opts = args.last.is_a?(Hash) ? {what: :qu}.merge!(args.pop) : {what: :qu}
-      #   y,m,d = *args; today = Date.today
-      #   y,m,d = today.year, today.month, today.day unless ( y || m || d)
-      #   v = opts[:what]
-      #   if d
-      #     (monthly(y,m).sum(v) || 0.0).round(2)
-      #   elsif m
-      #     (monthly(y,m).sum(v) || 0.0).round(2)
-      #   else
-      #     (monthly(y,1).sum(v) || 0.0).round(2)
-      #   end
-      # end
     end # Class methods
+
     # @todo
     def view_filter
       [id, freight.name]
     end
     # @todo
     def unit
-      Clns::PartnerFirm.unit_by_unit_id(doc_stk.unit_id)
+      Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue nil
     end
     # @todo
     def name

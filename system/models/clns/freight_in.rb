@@ -16,14 +16,14 @@ module Clns
     field :tva,         type: Float,     default: 0.00
     field :out,         type: Float,     default: 0.00
 
-    belongs_to  :freight,  class_name: 'Clns::Freight',     inverse_of: :ins
-    belongs_to  :doc_grn,  class_name: 'Clns::Grn',         inverse_of: :freights
-    belongs_to  :doc_sor,  class_name: 'Clns::Sorting',     inverse_of: :resl_freights
+    belongs_to  :freight,  class_name: 'Clns::Freight',           inverse_of: :ins, index: true
+    belongs_to  :unit,     class_name: 'Clns::PartnerFirm::Unit', inverse_of: :ins, index: true
+    belongs_to  :doc_grn,  class_name: 'Clns::Grn',               inverse_of: :freights, index: true
+    belongs_to  :doc_sor,  class_name: 'Clns::Sorting',           inverse_of: :resl_freights, index: true
 
-    index({ id_stats: 1, freight_id: 1, id_date: 1 })
-    index({ freight_id: 1, id_stats: 1, pu: 1, id_date: 1 })
-    index({ id_stats: 1, pu: 1, id_date: 1 })
-    index({ doc_grn_id: 1})
+    index({ freight_id: 1, id_date: 1, unit_id: 1 })
+
+    scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     after_save    :'handle_stock(true)'
     after_destroy :'handle_stock(false)'
@@ -58,15 +58,14 @@ module Clns
       end
       # @todo
       def pos(s)
-        uid = PartnerFirm.pos(s).id
-        all.or(:doc_grn_id.in => Clns::Grn.where(unit_id: uid).pluck(:id))
-        .or(:doc_sor_id.in => Clns::Sorting.where(unit_id: uid).pluck(:id))
+        uid = Clns::PartnerFirm.pos(s).id
+        by_unit_id(uid)
       end
     end # Class methods
 
     # @todo
     def unit
-      Clns::PartnerFirm.unit_by_unit_id(doc.unit_id)
+      Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue nil
     end
     # @todo
     def name
