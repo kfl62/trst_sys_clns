@@ -19,21 +19,23 @@ module Clns
     belongs_to :signed_by,  class_name: "Clns::User",             inverse_of: :csss
 
     index({ unit_id: 1, id_date: 1 })
+
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     accepts_nested_attributes_for :freights,
       reject_if: ->(attrs){ attrs[:qu].to_f == 0 }
 
-    # class << self
-    #   # @todo
-    #   def pos(s)
-    #     where(unit_id: Clns::PartnerFirm.pos(s).id)
-    #   end
-    #   # @todo
-    #   def nonin(nin = true)
-    #     where(id_intern: !nin)
-    #   end
-    # end # Class methods
+    class << self
+      # @todo
+      def pos(s)
+        uid = Clns::PartnerFirm.pos(s).id
+        by_unit_id(uid)
+      end
+      # @todo
+      def nonin(nin = true)
+        where(id_intern: !nin)
+      end
+    end # Class methods
 
     # @todo
     def unit

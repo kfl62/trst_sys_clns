@@ -9,6 +9,8 @@ module Clns
     has_many    :outs,     class_name: "Clns::FreightOut",      inverse_of: :freight
     has_many    :stks,     class_name: "Clns::FreightStock",    inverse_of: :freight
 
+    index({ id_stats: 1 })
+
     after_create :handle_csn
     after_update :handle_id_stats
     after_update :order_csn
@@ -33,11 +35,6 @@ module Clns
         ks
       end
       # @todo
-      def stks
-        ids = all.pluck(:id)
-        Clns::FreightStock.where(:freight_id.in => ids)
-      end
-      # @todo
       def ins
         ids = all.pluck(:id)
         Clns::FreightIn.where(:freight_id.in => ids)
@@ -46,6 +43,11 @@ module Clns
       def outs
         ids = all.pluck(:id)
         Clns::FreightOut.where(:freight_id.in => ids)
+      end
+      # @todo
+      def stks
+        ids = all.pluck(:id)
+        Clns::FreightStock.where(:freight_id.in => ids)
       end
     end # Class methods
 

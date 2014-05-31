@@ -3,6 +3,12 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.28**, feature [issue #26][#26]
+   - feature date: **2014-05-31**
+   - bump version v0.2.28
+   - update CHANGELOG
+   - models: fix [issue #26][#26], cleanup, optimize
+
 * **feature v0.2.27**, bugfix [issue #24][#24], feature [issue #23][#23]
    - feature date: **2014-05-27**
    - bump version v0.2.27
@@ -13,7 +19,7 @@ release date: **2013-xx-xx**
    - assets js, `Clns.desk.delivery_note` fix [issue #24][#24]
 
 
-* **feature v0.2.26**,bugfix [issue #22][#22], feature [issue #12][#12]
+* **feature v0.2.26**, bugfix [issue #22][#22], feature [issue #12][#12]
    - feature date: **2014-05-23**
    - bump version v0.2.26
    - update CHANGELOG

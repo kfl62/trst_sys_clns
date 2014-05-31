@@ -25,6 +25,7 @@ module Clns
     belongs_to :signed_by,    class_name: "Clns::User",               inverse_of: :dlns
 
     index({ unit_id: 1, id_date: 1 })
+
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
     accepts_nested_attributes_for :freights,
@@ -33,7 +34,8 @@ module Clns
     class << self
       # @todo
       def pos(s)
-        where(unit_id: Clns::PartnerFirm.pos(s).id)
+        uid = Clns::PartnerFirm.pos(s).id
+        by_unit_id(uid)
       end
       # @todo
       def nonin(nin = true)
