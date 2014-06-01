@@ -3,11 +3,18 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.29**,
+   - feature date: **2014-06-01**
+   - bump version v0.2.29
+   - update CHANGELOG
+   - models fix [issue #27][#27], cleanup, optimize
+
+
 * **feature v0.2.28**, feature [issue #26][#26]
    - feature date: **2014-05-31**
    - bump version v0.2.28
    - update CHANGELOG
-   - models: fix [issue #26][#26], cleanup, optimize
+   - models fix [issue #26][#26], cleanup, optimize
 
 * **feature v0.2.27**, bugfix [issue #24][#24], feature [issue #23][#23]
    - feature date: **2014-05-27**
