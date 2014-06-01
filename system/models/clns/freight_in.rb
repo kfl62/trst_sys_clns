@@ -9,7 +9,6 @@ module Clns
     field :id_date,     type: Date
     field :id_stats,    type: String
     field :id_intern,   type: Boolean,   default: false
-    field :um,          type: String,    default: "kg"
     field :pu,          type: Float,     default: 0.00
     field :qu,          type: Float,     default: 0.00
     field :val,         type: Float,     default: 0.00
@@ -25,6 +24,7 @@ module Clns
 
     scope :by_unit_id, ->(unit_id) {where(unit_id: unit_id)}
 
+    before_save   :handle_freights_unit_id
     after_save    :'handle_stock(true)'
     after_destroy :'handle_stock(false)'
 
@@ -65,11 +65,15 @@ module Clns
 
     # @todo
     def unit
-      Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue nil
+      Clns::PartnerFirm.unit_by_unit_id(unit_id) rescue doc.unit_id
     end
     # @todo
     def name
       freight.name
+    end
+    # @todo
+    def um
+      freight.um rescue 'kg'
     end
     # @todo
     def doc
@@ -79,8 +83,11 @@ module Clns
     def key
       "#{id_stats}_#{"%.4f" % pu}"
     end
-
     protected
+    # @todo
+    def handle_freights_unit_id
+      set(:unit_id,self.doc.unit_id)
+    end
     # @todo
     def handle_stock(add_delete)
       today = Date.today; retro = id_date.month == today.month
