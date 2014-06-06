@@ -2,12 +2,14 @@
 module Clns
   class Freight < Trst::Freight
 
-    field       :tva,      type: Float,     default: 0.24
-    field       :csn,      type: Hash
+    field       :tva,         type: Float,                              default: 0.24
+    field       :csn,         type: Hash
+    # temproray solutioin, @todo  convert to Hash
+    field       :pu,          type: Float,                              default: 0.0
 
-    has_many    :ins,      class_name: "Clns::FreightIn",       inverse_of: :freight
-    has_many    :outs,     class_name: "Clns::FreightOut",      inverse_of: :freight
-    has_many    :stks,     class_name: "Clns::FreightStock",    inverse_of: :freight
+    has_many    :ins,         class_name: "Clns::FreightIn",            inverse_of: :freight
+    has_many    :outs,        class_name: "Clns::FreightOut",           inverse_of: :freight
+    has_many    :stks,        class_name: "Clns::FreightStock",         inverse_of: :freight
 
     index({ id_stats: 1 })
 
@@ -28,13 +30,6 @@ module Clns
         result
       end
       # @todo
-      def keys(p = 2)
-        p  = 0 unless p # keys(false) compatibility
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}_#{"%.#{p}f" % f.pu}"}.uniq.sort!
-        ks = all.each_with_object([]){|f,k| k << "#{f.id_stats}"}.uniq.sort! if p.zero?
-        ks
-      end
-      # @todo
       def ins
         ids = all.pluck(:id)
         Clns::FreightIn.where(:freight_id.in => ids)
@@ -51,9 +46,6 @@ module Clns
       end
     end # Class methods
 
-    def key(p)
-      "#{id_stats}_#{"%.4f" % p}"
-    end
     # @todo
     def criteria_name
       result = []
