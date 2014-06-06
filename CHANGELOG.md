@@ -3,6 +3,14 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.990**,, v0.3.0 preparation
+   - feature date: **2014-06-06**
+   - bump version v0.2.990
+   - update CHANGELOG
+   - models `Clns::Freight|In|Out|Stock` cleanup, inherit from `Trst`
+   - models `Clns::PartnerFirm` cleanup, inherit from `Trst`
+
+
 * **feature v0.2.29**,
    - feature date: **2014-06-01**
    - bump version v0.2.29
