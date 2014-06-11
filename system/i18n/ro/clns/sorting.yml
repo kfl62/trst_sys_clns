@@ -5,5 +5,5 @@ ro:
         model_name: PV Preparare
         table_header_show: ['Material', 'UM', 'PU', 'Preparat', 'Valoare', 'Destinație']
         table_header_form: ['Material', 'UM', 'Cant. preparată', ' ']
-        text: 'Explicaţii'
-        text_default: 'PV preparare nr.'
+        expl: 'Explicaţii'
+        expl_default: 'PV preparare nr.'
