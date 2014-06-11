@@ -5,5 +5,5 @@ ro:
         model_name: Bon de Consum
         table_header_show: ['Material', 'UM', 'PU', 'S-a consumat', 'Valoare']
         table_header_form: ['Material', 'UM', 'PU', 'Stoc rămas', 'Livrat', 'Valoare', ' ']
-        text: Explicații
-        text_default: Bon de consum -
+        expl: Explicații
+        expl_default: Bon de consum -
