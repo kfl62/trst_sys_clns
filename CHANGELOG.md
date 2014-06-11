@@ -3,6 +3,33 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.991**,, v0.3.0 preparation
+   - feature date: **2014-06-11**
+   - bump version v0.2.991
+   - update CHANGELOG
+   - views `Clns::PartnerFirm` query partials update
+   - models `Clns::Stock` inherit from `Trst`, only overwrite
+   - models `Clns::Payment` inherit from `Trst`, only overwrite
+   - views `Clns::Sorting` renamed field
+   - i18n `Clns::Sorting` renamed field
+   - models `Clns::Sorting` inherit from `Trst`, only overwrite
+   - views `Clns::Invoice` renamed field
+   - i18n `Clns::Invoice` renamed field
+   - models `Clns::Invoice` inherit from `Trst`, only overwrite
+   - views `Clns::Grn` renamed field
+   - i18n `Clns::Grn` renamed field
+   - models `Clns::Grn` inherit from `Trst`, only overwrite
+   - models `Clns::Freight|In|Out|Stock` update to current version from `Trst`
+   - views `Clns::DeliveryNote` renamed field
+   - i18n `Clns::DeliveryNote` renamed field
+   - models `Clns::DeliveryNote` inherit from `Trst`, only overwrite
+   - views `Clns::Consumption` renamed field
+   - i18n `Clns::Consumption` renamed field
+   - models `Clns::Consumption` inherit from `Trst`, only overwrite
+   - models `Clns::Cassation` inherit from `Trst`, only overwrite
+   - models `Clns::CacheBook` inherit from `Trst`, only overwrite
+   - models `Clns::Cache` inherit from `Trst`, only overwrite
+
 * **feature v0.2.990**,, v0.3.0 preparation
    - feature date: **2014-06-06**
    - bump version v0.2.990
