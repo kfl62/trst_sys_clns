@@ -7,10 +7,10 @@
       %tr.pdb-05
         %td{colspan: @object.id_intern == true ? '5' : '6'}
           %span.info.width-450.ju= t('intro.show.desk_grn',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,supplr_d: (@object.supplr_d.name rescue 'Anonymous'),supplr: @object.supplr.name[2])
-      - unless @object.doc_text.blank?
+      - unless @object.expl.blank?
         %tr.pdb-05
           %td{colspan: @object.id_intern == true ? '5' : '6'}
-            %span.warning.width-450= @object.doc_text
+            %span.warning.width-450= @object.expl
     = partial "#{@path}/show"
     %tfoot
       %tr
