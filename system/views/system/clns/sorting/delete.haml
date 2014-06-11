@@ -5,7 +5,7 @@
       %tr.pdb-05
         %td{colspan: "6"}
           %span.warning.width-350.ju= t('intro.delete.main',data: mat(@object,'model_name'))
-          %span.info.width-350.ju= t('intro.show.desk_sorting',id_date: l(@object.id_date,format: :trst),unit: @object.unit.name[1],signed_by: @object.signed_by.name,expl: @object.text)
+          %span.info.width-350.ju= t('intro.show.desk_sorting',id_date: l(@object.id_date,format: :trst),unit: @object.unit.name[1],signed_by: @object.signed_by.name,expl: @object.expl)
     = partial "/#{@path}/show"
     %tfoot
       %tr
