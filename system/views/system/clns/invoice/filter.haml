@@ -39,7 +39,7 @@
                 %span.width-500{style: 'display:inline-block'}
                   - grns.each_with_index do |grn,i|
                     %label{style: "border-right: solid 1px #333333;padding-right: 3px;cursor: pointer;background-color: #e6e6e6;display: inline-block",
-                           title: "#{grn.id_date}\n#{grn.name}\n#{grn.freights_list.join("\n")}"}
+                           title: "#{grn.freights_list.join("\n")}"}
                       %input.grn_ary{id:grn.id,type: 'checkbox',checked: grn_ary.include?(grn.id.to_s)}
                       = grn.doc_name
             %tr.grns.pdb-05
@@ -111,7 +111,7 @@
                 %span.width-500{style: 'display:inline-block'}
                   - dlns.each_with_index do |dln,i|
                     %label{style: "border-right: solid 1px #333333;padding-right: 3px;cursor: pointer;background-color: #{bckgrnd[dln.name.split('_')[1].downcase]};display:inline-block",
-                           title: "#{dln.id_date}\n#{dln.name}\n#{dln.freights_list.join("\n")}"}
+                           title: "#{dln.freights_list.join("\n")}"}
                       %input.dln_ary{id:dln.id,type: 'checkbox',checked: dln_ary.include?(dln.id.to_s)}
                       = dln.doc_name
             %tr.dlns.pdb-05

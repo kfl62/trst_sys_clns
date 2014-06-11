@@ -6,7 +6,7 @@
     %thead
       %tr.pdb-05
         %td{colspan: "5"}
-          %span.info.width-450.ju= t('intro.show.desk_consumption',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,expl: @object.text)
+          %span.info.width-450.ju= t('intro.show.desk_consumption',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,expl: @object.expl)
     = partial "#{@path}/show"
     %tfoot
       %tr

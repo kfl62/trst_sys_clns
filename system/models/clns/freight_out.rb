@@ -14,6 +14,8 @@ module Clns
     belongs_to  :doc_con,     class_name: 'Clns::Consumption',          inverse_of: :freights, index: true
     belongs_to  :doc_sor,     class_name: 'Clns::Sorting',              inverse_of: :from_freights, index: true
 
+    alias :unit :unit_belongs_to; alias :name :freight_name; alias :um :freight_um
+
     index({ freight_id: 1, id_date: 1, unit_id: 1 })
 
     before_save   :handle_freights_unit_id

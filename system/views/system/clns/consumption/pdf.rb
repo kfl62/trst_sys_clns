@@ -63,7 +63,7 @@ pdf.text_box "#{unit.slug} - #{unit.name[1]}",
              at: [14.mm, pdf.bounds.top - 30.mm],width: 135.mm, size: 10, align: :center
 pdf.text_box "#{unit.chief}",
              at: [149.mm, pdf.bounds.top - 30.mm],width: 135.mm, size: 10, align: :center
-pdf.text_box @object.text,
+pdf.text_box @object.expl,
              at: [45.mm, pdf.bounds.top - 41.mm],width: 270.mm, size: 10
 pdf.text_box "#{unit.chief}",
              at: [185.mm, 12.mm], size: 10, width: 40.mm, align: :center

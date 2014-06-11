@@ -129,11 +129,11 @@ pdf.text_box "#{supplier.identities["fiscal"] rescue '-'}",
              at: [183.mm, pdf.bounds.top - 30.mm], width: 38.mm, align: :center, size: 9
 pdf.text_box payment(@object),
              at: [222.mm, pdf.bounds.top - 29.mm], width: 63.mm, align: :left, size: 8
-unless @object.doc_text.blank?
+unless @object.expl.blank?
   pdf.fill_color "ffffff"
   pdf.fill_rectangle [150, pdf.bounds.top - 35.5.mm], 190.mm, 6.5.mm
   pdf.fill_color "000000"
-  pdf.text_box "Explicații: #{@object.doc_text}",
+  pdf.text_box "Explicații: #{@object.expl}",
               at: [20.mm, pdf.bounds.top - 35.5.mm], width: 255.mm, height: 6.5.mm, align: :left, valign: :center, size: 9, overflow: :shrink_to_fit
 end
 pdf.text_box "#{delegate.name rescue 'Fără delegat'}",

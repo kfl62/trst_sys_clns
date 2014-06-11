@@ -8,7 +8,7 @@
           - input_for @object, 'doc_name'
       %tr.pdb-05
         %td{colspan: @object.id_intern == true ? '5' : '6'}
-          - input_for @object, 'doc_text', {style: 'ui-state-default width-450'}
+          - input_for @object, 'expl', {style: 'ui-state-default width-450'}
     = partial "#{@path}/show"
     %tfoot
       %tr

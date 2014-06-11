@@ -19,17 +19,6 @@ module Clns
 
     class << self
       # @todo
-      def by_id_stats(ids,lst = false)
-        c = ids.scan(/\d{2}/).each{|g| g.gsub!("00","\\d{2}")}.join
-        result = where(id_stats: /#{c}/).asc(:name)
-        if lst
-          c = ids.gsub(/\d{2}$/,"\\d{2}")
-          result = where(id_stats: /#{c}/).asc(:id_stats)
-          result = ids == "00000000" ? ids : result.last.nil? ? ids.next : result.last.id_stats.next
-        end
-        result
-      end
-      # @todo
       def ins
         ids = all.pluck(:id)
         Clns::FreightIn.where(:freight_id.in => ids)

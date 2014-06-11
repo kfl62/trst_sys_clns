@@ -94,7 +94,7 @@
   %tr
     %td
       - input_for o, 'id_date',     {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: Date.today.to_s,style: 'ui-state-default ce'}
-      - input_for o, 'text',        {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: mat(@object,'pyms_text')}
+      - input_for o, 'expl',        {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: mat(@object,'pyms_expl')}
       - input_for o, 'val',         {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: mat(@object,'pyms_val'),style: 'ui-state-default ce'}
       - input_for o, 'id_intern',   {type: 'hidden',nested: 'doc_inv',index: 0,value: 'true'}
 

@@ -18,8 +18,8 @@
           - input_for @object, 'signed_by', {type: 'hidden',value: @current_user.id}
       %tr.pdb-05
         %td
-          - label_for @object, 'text'
-          - input_for @object, 'text',      {value: mat(@object,'text_default'),style: 'ui-state-default width-500'}
+          - label_for @object, 'expl'
+          - input_for @object, 'expl',      {value: mat(@object,'expl_default'),style: 'ui-state-default width-500'}
       %tr.pdb-05
         %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
           = partial "clns/shared/doc_add_freight_stock"

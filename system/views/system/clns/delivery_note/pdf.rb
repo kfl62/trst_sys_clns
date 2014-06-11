@@ -26,8 +26,8 @@ def bank_c
   b = client.banks.asc(:name).first
   b.nil? ? ["","____ "*6] : [b.name.split('#').reverse.first,b.swift]
 end
-def doc_text
-  @object.doc_text.blank? == true ? nil : @object.doc_text
+def expl
+  @object.expl.blank? == true ? nil : @object.expl
 end
 def table_goods_data
   data    = []
@@ -146,11 +146,11 @@ pdf.stamp("w2")
 box_content(pdf,0,148.5.mm)
 pdf.stroke_line(10.mm,148.5.mm,15.mm,148.5.mm)
 pdf.stroke_line(195.mm,148.5.mm,200.mm,148.5.mm)
-if doc_text
+if expl
   pdf.fill_color "e9e9e9"
   pdf.fill_rectangle [10.mm,184.mm + 11], 190.mm - 1,10
   pdf.fill_color "000000"
-  pdf.text_box "Explicații: #{doc_text}",at: [10.mm + 5,184.mm + 11],size: 8, height: 10,width: 190.mm, overflow: :shrink_to_fit,valign: :center
+  pdf.text_box "Explicații: #{expl}",at: [10.mm + 5,184.mm + 11],size: 8, height: 10,width: 190.mm, overflow: :shrink_to_fit,valign: :center
 end
 
 pdf.render()
