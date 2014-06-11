@@ -10,7 +10,7 @@ ro:
         doc_name: Aviz nr.
         doc_name_ph: (dacă este cazul)
         doc_plat: maşina nr.
-        doc_text: Explicații
-        doc_text_ph: Explicații (dacă este cazul)
+        expl: Explicații
+        expl_ph: Explicații (dacă este cazul)
         day: |
           Avize din data de:&nbsp;
