@@ -13,7 +13,7 @@ ro:
         tabs_payments: 'Condiţii plată'
         payed:     'Achitat? '
         deadl:     'Termen de plată'
-        pyms_text: 'Achitat cu...'
+        pyms_expl: 'Achitat cu...'
         pyms_val:  'Suma de...'
         day: |
           Facturi din data de:&nbsp;
