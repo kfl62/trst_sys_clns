@@ -6,6 +6,8 @@ module Clns
     belongs_to  :unit,        class_name: 'Clns::PartnerFirm::Unit',    inverse_of: :fsts, index: true
     belongs_to  :doc_stk,     class_name: 'Clns::Stock',                inverse_of: :freights, index: true
 
+    alias :unit :unit_belongs_to; alias :name :freight_name; alias :um :freight_um
+
     index({ freight_id: 1, id_date: 1, unit_id: 1 })
 
     scope :stock_now, where(id_date: Date.new(2000,1,31))
