@@ -3,6 +3,13 @@
 release date: **2013-xx-xx**
 
 
+* **feature v0.2.992**, v0.3.0 preparation
+   - feature date: **2014-06-16**
+   - bump version v0.2.992
+   - update CHANGELOG
+   - models bugfix, mostly typo
+
+
 * **feature v0.2.991**,, v0.3.0 preparation
    - feature date: **2014-06-11**
    - bump version v0.2.991
@@ -30,7 +37,7 @@ release date: **2013-xx-xx**
    - models `Clns::CacheBook` inherit from `Trst`, only overwrite
    - models `Clns::Cache` inherit from `Trst`, only overwrite
 
-* **feature v0.2.990**,, v0.3.0 preparation
+* **feature v0.2.990**, v0.3.0 preparation
    - feature date: **2014-06-06**
    - bump version v0.2.990
    - update CHANGELOG
