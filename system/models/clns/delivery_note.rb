@@ -3,12 +3,12 @@ module Clns
   class DeliveryNote < Trst::DeliveryNote
 
     has_many   :freights,     class_name: "Clns::FreightOut",           inverse_of: :doc_dln, dependent: :destroy
-    belongs_to :doc_grn,      class_name: "Clns::Grn",                  inverse_of: :docs
-    belongs_to :doc_inv,      class_name: "Clns::Invoice",              inverse_of: :docs
-    belongs_to :client,       class_name: "Clns::PartnerFirm",          inverse_of: :docs_client
-    belongs_to :client_d,     class_name: "Clns::PartnerFirm::Person",  inverse_of: :docs_client
-    belongs_to :unit,         class_name: "Clns::PartnerFirm::Unit",    inverse_of: :docs
-    belongs_to :signed_by,    class_name: "Clns::User",                 inverse_of: :docs
+    belongs_to :doc_grn,      class_name: "Clns::Grn",                  inverse_of: :dlns
+    belongs_to :doc_inv,      class_name: "Clns::Invoice",              inverse_of: :dlns
+    belongs_to :client,       class_name: "Clns::PartnerFirm",          inverse_of: :dlns_client
+    belongs_to :client_d,     class_name: "Clns::PartnerFirm::Person",  inverse_of: :dlns_client
+    belongs_to :unit,         class_name: "Clns::PartnerFirm::Unit",    inverse_of: :dlns
+    belongs_to :signed_by,    class_name: "Clns::User",                 inverse_of: :dlns
 
     alias :file_name :name; alias :unit :unit_belongs_to
 
@@ -52,5 +52,9 @@ module Clns
       end
     end # Class methods
 
+    # @todo
+    def client_d
+      Trst::PartnerFirm.person_by_person_id(client_d_id) rescue nil
+    end
   end # DeliveryNote
 end # Clns

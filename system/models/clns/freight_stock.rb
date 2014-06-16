@@ -10,8 +10,6 @@ module Clns
 
     index({ freight_id: 1, id_date: 1, unit_id: 1 })
 
-    scope :stock_now, where(id_date: Date.new(2000,1,31))
-
     before_save   :handle_freights_unit_id
     after_update  :handle_value
 
