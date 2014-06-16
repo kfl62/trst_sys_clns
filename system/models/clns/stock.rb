@@ -7,5 +7,12 @@ module Clns
 
     alias :file_name :name; alias :unit :unit_belongs_to
 
+    accepts_nested_attributes_for :freights,
+      reject_if: ->(attrs){ attrs[:qu].to_f == 0 && attrs[:pu].to_f == 0 },
+      allow_destroy: true
+
+    class << self
+    end # Class methods
+
    end # Stock
 end #Clns
