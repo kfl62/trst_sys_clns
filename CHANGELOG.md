@@ -1,6 +1,17 @@
 ## v0.3.0
 
-release date: **2013-xx-xx**
+release date: **2014-xx-xx**
+
+
+* **feature v0.2.993**, v0.3.0 preparation
+   - feature date: **2014-06-21**
+   - bump version v0.2.993
+   - update CHANGELOG
+   - views `Clns::PartnerFirm#_queryclient_dln` typo
+   - assets js, fix [issue #28][#28]
+   - config `firm.yml` update
+   - assets css,  use unique style in modules [kfl62/trst_sys_sinatra#12][trst_main#12]
+   - views `layout`, use unique layout in `public` controller [kfl62/trst_sys_sinatra#15][trst_main#15]
 
 
 * **feature v0.2.992**, v0.3.0 preparation
@@ -10,7 +21,7 @@ release date: **2013-xx-xx**
    - models bugfix, mostly typo
 
 
-* **feature v0.2.991**,, v0.3.0 preparation
+* **feature v0.2.991**, v0.3.0 preparation
    - feature date: **2014-06-11**
    - bump version v0.2.991
    - update CHANGELOG
@@ -460,6 +471,8 @@ release date: **2013-07-18**
 
 * Add version `lib/clns/version.rb`
 
+[trst_main#15]: https://github.com/kfl62/trst_sys_sinatra/issues/15
+[trst_main#12]: https://github.com/kfl62/trst_sys_sinatra/issues/12
 [#1]: https://github.com/kfl62/trst_sys_clns/issues/1
 [#2]: https://github.com/kfl62/trst_sys_clns/issues/2
 [#3]: https://github.com/kfl62/trst_sys_clns/issues/3

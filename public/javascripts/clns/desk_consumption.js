@@ -82,7 +82,7 @@
                 }
               };
             } else {
-              alert(Trst.i18n.msg.consumption_negative_stock.replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2)));
+              alert(Trst.i18n.msg.consumption_negative_stock).replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2));
               return $('.focus').focus().select();
             }
           },
@@ -216,10 +216,10 @@
                   return;
                 }
               } else {
+
                 /*
                 Buttons default handler Trst.desk.buttons
-                */
-
+                 */
               }
             });
           },

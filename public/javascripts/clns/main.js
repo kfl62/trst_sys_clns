@@ -1,10 +1,9 @@
 (function() {
-
   define(['/javascripts/libs/select2.min.js', '/javascripts/libs/jquery.ui.datepicker-ro.js', 'clns/desk'], function() {
     $.extend(Clns, {
       unit_info: {
         node: function() {
-          return $("<hr>           <li class='em st'>" + Trst.i18n.unit_info_lbl + "</li>           <li id='unit_info'>" + Trst.lst.unit_info_txt + "</>");
+          return $("<hr> <li class='em st'>" + Trst.i18n.unit_info_lbl + "</li> <li id='unit_info'>" + Trst.lst.unit_info_txt + "</>");
         },
         update: function(unit_name) {
           if (unit_name == null) {

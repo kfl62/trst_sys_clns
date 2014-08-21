@@ -1,24 +1,25 @@
 firm:
   public:
-    controller: 'public'
-    views:      'clns'
-    layout:     'clns'
+    controller:     'public'
+    views:          'trst'
+    layout:         'layout'
     page:
       title:        'Cleaning Ltd.'
       header:       'CLNS motto'
-      footer_text:  '&copy; 2005-2012 Cleaning Ltd.'
+      footer_text:  '&copy; 2005-2014 Cleaning Ltd.'
       footer_title: 'Ferenc-Loránt Kiss'
   system:
     page:
       title:        'TrustSys - Clns'
       header:       'TrustSys Clns'
-      footer_text:  '&copy; 2005-2012 kfl62'
+      footer_text:  '&copy; 2005-2014 kfl62'
       footer_title: 'Ferenc-Loránt Kiss'
 
-  sass_dir:     'system/assets/stylesheets/clns'
-  css_dir:      'public/stylesheets/clns'
+  sass_dir:     'system/assets/stylesheets'
+  css_dir:      'public/stylesheets'
+  css_path:     '/stylesheets'
+  css_file:     'clns.css'
   images_dir:   'public/images/clns'
-  css_path:     '/stylesheets/clns'
   images_path:  '/images/clns'
   i18n_path:    'clns'
   js_path:      'clns'
