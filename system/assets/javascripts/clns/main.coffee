@@ -15,8 +15,8 @@ define (['/javascripts/libs/select2.min.js','/javascripts/libs/jquery.ui.datepic
         Clns.unit_info_text
     init: () ->
       Trst.lst.setItem 'admin', $('body').data('admin')
-      $('#menu.system ul li a').filter('[id^="page"]').unbind()
-      $('#menu.system ul li a').filter('[id^="page"]').click ()->
+      $('nav.menu ul li a').filter('[id^="page"]').unbind()
+      $('nav.menu ul li a').filter('[id^="page"]').click ()->
         $('#xhr_content').load "/sys/#{$(@).attr('id')}"
         $page_id = $(@).attr('id').split('_')[1]
         $('#xhr_tasks').load "/sys/tasks/#{$page_id}", ()->

@@ -26,8 +26,8 @@
       },
       init: function() {
         Trst.lst.setItem('admin', $('body').data('admin'));
-        $('#menu.system ul li a').filter('[id^="page"]').unbind();
-        $('#menu.system ul li a').filter('[id^="page"]').click(function() {
+        $('nav.menu ul li a').filter('[id^="page"]').unbind();
+        $('nav.menu ul li a').filter('[id^="page"]').click(function() {
           var $page_id;
           $('#xhr_content').load("/sys/" + ($(this).attr('id')));
           $page_id = $(this).attr('id').split('_')[1];

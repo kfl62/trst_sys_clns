@@ -3,8 +3,15 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.994**, v0.3.0 preparation
+   - feature date: **2014-08-26**
+   - bump version v0.2.994
+   - update CHANGELOG
+   - assets js, `main.js` update, fix [issue #29][#29]
+
+
 * **feature v0.2.993**, v0.3.0 preparation
-   - feature date: **2014-06-21**
+   - feature date: **2014-08-21**
    - bump version v0.2.993
    - update CHANGELOG
    - views `Clns::PartnerFirm#_queryclient_dln` typo
