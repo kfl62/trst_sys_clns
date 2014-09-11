@@ -1,6 +1,6 @@
-%span#hidden_data.hidden{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_delivery_note'}}
+%span#hidden_data{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_delivery_note'}}
 %form{action: "/sys/#{@path}", method: "put"}
-  %table{:cellspacing => "0"}
+  %table
     %thead
       %tr
         %td{colspan: "5"}

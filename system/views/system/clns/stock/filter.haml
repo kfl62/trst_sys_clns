@@ -1,11 +1,11 @@
 :ruby
   unit_id = @current_user.unit_id || session[:unit_id]
-%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_stock'}}
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_stock'}}
 -if unit_id
   - unless @current_user.unit_id
     = partial 'clns/shared/select_unit'
   %form{action: "/sys/#{@path}",method: "get"}
-    %table{cellspacing: "0"}
+    %table
       %tbody
         %tr.pdb-05
           %td

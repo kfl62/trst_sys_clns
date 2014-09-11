@@ -6,9 +6,9 @@
     unit     = firm.units.find(unit_id)
     dln_ary  = params[:dln_ary].split(',')
     dln_ary.each{|id| @object.dlns << Clns::DeliveryNote.find(id)}
-  %span#hidden_data.hidden{data: {dialog: 'create',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn'}}
+  %span#hidden_data{data: {dialog: 'create',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn'}}
   %form{action: "/sys/#{@path}/create?id_intern=true", method: 'post'}
-    %table{cellspacing: "0"}
+    %table
       %thead
         %tr
           %td
@@ -48,9 +48,9 @@
     unit_id  = @current_user.unit_id || session[:unit_id]
     supplr   = Clns::PartnerFirm.find(params[:supplr_id])
     supplr_d = supplr.people.find(params[:supplr_d_id]) rescue nil
-  %span#hidden_data.hidden{data: {dialog: 'create',model_name: mat(@object,'model_name'),oid: 'null',js_ext: 'desk_grn'}}
+  %span#hidden_data{data: {dialog: 'create',model_name: mat(@object,'model_name'),oid: 'null',js_ext: 'desk_grn'}}
   %form{action: "/sys/#{@path}", method: 'post'}
-    %table{cellspacing: "0"}
+    %table
       %thead
         %tr
           %td

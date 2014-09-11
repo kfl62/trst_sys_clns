@@ -6,9 +6,9 @@
   dln_ary  = params[:dln_ary].nil? ? [] : params[:dln_ary].split(',')
   bckgrnd = {"dpct" => "#FFBFF0","frsg" => "#DDDDDD","trbd" => "#FFFF99","dpsb" => "#BFFFBF","hcct" => "#B0AFBF"}
 - if params[:id_intern]
-  %span#hidden_data.hidden{data: {dialog: 'filter',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn',unit_id: to_unit}}
+  %span#hidden_data{data: {dialog: 'filter',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn',unit_id: to_unit}}
   %form{action: "/sys/#{@path}/filter?id_intern=true", method: 'get'}
-    %table{cellspacing: "0"}
+    %table
       %thead
         %tr.pdb-05
           %td
@@ -42,7 +42,7 @@
         - unless dln_ary.empty?
           %tr.pdb-05
             %td
-              %table{cellspacing: "0",style: "margin:auto;font-size:12px"}
+              %table{style: "margin:auto;font-size:12px"}
                 %tbody.inner
                   %tr
                     - mat(@object,'table_header')[0..4].each do |label|
@@ -71,12 +71,12 @@
 - else
   :ruby
     unit_id = @current_user.unit_id || session[:unit_id]
-  %span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_grn'}}
+  %span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_grn'}}
   -if unit_id
     - unless @current_user.unit_id
       = partial 'clns/shared/select_unit'
     %form{action: "/sys/#{@path}", method: 'get'}
-      %table{cellspacing: "0"}
+      %table
         %thead
           %tr.pdb-05
             %td

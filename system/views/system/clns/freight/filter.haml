@@ -1,8 +1,8 @@
 :ruby
   id_stats = params[:id_stats] || "00000000"
-%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
 %form{action: "/sys/#{@path}",method: "get"}
-  %table{cellspacing: "0"}
+  %table
     %tbody
       %tr.pdb-05
         %td

@@ -4,7 +4,7 @@
   grns= firm.try(:grns_supplr)
   grns= (m == 0 ? grns.yearly(y) : grns.monthly(y,m)) if grns
   doc_ary = params[:doc_ary].try(:split, ',')
-%span#hidden_data.hidden{data: {dialog: "query",title_data: 'Furnizori',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%span#hidden_data{data: {dialog: "query",title_data: 'Furnizori',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
 %p.small
   %input.param{type: 'hidden',name: 'query_supplier', value: 'true'}
   %input.param.doc_ary{type: 'hidden',name: 'doc_ary', value: params[:doc_ary]}
@@ -24,7 +24,7 @@
       - Clns::PartnerFirm.asc(:name).find(Clns::Grn.monthly(y,m).nonin.pluck(:supplr_id).uniq).each do |f|
         %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
 - unless grns.try(:count) == 0 || grns.try(:count).nil?
-  %table{cellspacing: "0"}
+  %table
     %thead
       %tr.pdb-05
         %td

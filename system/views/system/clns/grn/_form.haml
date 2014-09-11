@@ -2,7 +2,7 @@
   %tbody
     %tr
       %td
-        %table{cellspacing: "0",style: "width:100%;font-size:12px"}
+        %table{style: "width:100%;font-size:12px"}
           %tbody.inner
             %tr
               - mat(@object,'table_header')[0..4].each do |label|
@@ -42,7 +42,7 @@
   %tbody{id: 'tabs-freights',data: {title: mat(@object,'tabs_freights')}}
     %tr
       %td
-        %table{cellspacing: "0",style: "width:100%;font-size:12px"}
+        %table{style: "width:100%;font-size:12px"}
           %tbody.inner
             %tr.grn-freight-header.hidden
               - mat(@object,'table_header').each do |label|

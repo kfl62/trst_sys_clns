@@ -1,9 +1,9 @@
 :ruby
   unit_id = @current_user.unit_id || session[:unit_id]
   unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
-%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_sorting'}}
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_sorting'}}
 %form{action: "/sys/#{@path}",method: "post"}
-  %table{:cellspacing => "0"}
+  %table
     %thead
       %tr.pdb-05
         %td{colspan: "4"}

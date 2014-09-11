@@ -3,9 +3,9 @@
   client  = Clns::PartnerFirm.find(params[:client_id])
   client_d= client.people.find(params[:client_d_id]) if params[:client_d_id]
   unit_id = @current_user.unit_id || session[:unit_id]
-%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_delivery_note'}}
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_delivery_note'}}
 %form{action: "/sys/#{@path}",method: "post"}
-  %table{:cellspacing => "0"}
+  %table
     %thead
       %tr
         %td.ce

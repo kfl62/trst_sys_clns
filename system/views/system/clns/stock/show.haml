@@ -1,6 +1,6 @@
-%span#hidden_data.hidden{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
+%span#hidden_data{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
 %form{action: "/sys/#{@path}", method: "get"}
-  %table{cellspacing: "0"}
+  %table
     %thead
       %tr
         %td

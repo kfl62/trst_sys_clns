@@ -5,10 +5,10 @@
   firm = Clns::PartnerFirm.find_by(firm: true)
   s2dt = firm.units.asc(:slug).map{|u| {id: u.id,text: u.slug}}.to_json if firm
   data = t("intro.filter.desk_report.#{ext}")
-%span#hidden_data.hidden{data: {dialog: 'report',title_data: data,model_name: mat(@object,'model_name'),oid: nil,js_ext: 'desk_report'}}
+%span#hidden_data{data: {dialog: 'report',title_data: data,model_name: mat(@object,'model_name'),oid: nil,js_ext: 'desk_report'}}
 - if ext == 'cb_monthly'
   %form{action: "/sys/clns/report/print?rb=#{ext}"}
-    %table{cellspacing: "0"}
+    %table
       %thead
         %tr.pdb-05
           %td{colspan: "2"}
@@ -27,7 +27,7 @@
             %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
 - if ext == 'stock_monthly'
   %form{action: "/sys/clns/report/print?rb=#{ext}"}
-    %table{cellspacing: "0"}
+    %table
       %thead
         %tr.pdb-05
           %td{colspan: "2"}

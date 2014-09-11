@@ -4,7 +4,7 @@
   dlns= firm.try(:dlns_client)
   dlns= (m == 0 ? dlns.yearly(y) : dlns.monthly(y,m)) if dlns
   doc_ary = params[:doc_ary].try(:split, ',')
-%span#hidden_data.hidden{data: {dialog: "query",title_data: 'Clienți',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%span#hidden_data{data: {dialog: "query",title_data: 'Clienți',model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
 %p.small
   %input.param{type: 'hidden',name: 'query_client', value: 'true'}
   %input.param.doc_ary{type: 'hidden',name: 'doc_ary', value: params[:doc_ary]}
@@ -24,7 +24,7 @@
       - Clns::PartnerFirm.asc(:name).find(Clns::DeliveryNote.monthly(y,m).nonin.pluck(:client_id).uniq).each do |f|
         %option{value: f.id, selected: firm.try(:id) == f.id}= f.name[0]
 - unless dlns.try(:count) == 0 || dlns.try(:count).nil?
-  %table{cellspacing: "0"}
+  %table
     %thead
       %tr.pdb-05
         %td

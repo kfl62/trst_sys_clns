@@ -1,8 +1,8 @@
 :ruby
   firm = Clns::PartnerFirm.find_by(firm: true)
-%span#hidden_data.hidden{data: {dialog: "show",model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_grn'}}
+%span#hidden_data{data: {dialog: "show",model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_grn'}}
 %form{action: "/sys/#{@path}", method: "get"}
-  %table{cellspacing: "0"}
+  %table
     %thead
       %tr.pdb-05
         %td{colspan: @object.id_intern == true ? '5' : '6'}

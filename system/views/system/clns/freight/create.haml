@@ -1,9 +1,9 @@
 :ruby
   id_stats = params[:id_stats] || "00000000"
   id_stats = Clns::Freight.by_id_stats(id_stats,true)
-%span#hidden_data.hidden{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
 %form{action: "/sys/#{@path}",method: "post"}
-  %table{:cellspacing => "0"}
+  %table
     %thead
       %tr.pdb-05
         %th{colspan: "3"}
