@@ -58,10 +58,10 @@ define () ->
             result:
               freight_id: fid; name: name; id_stats: ids; um: um; pu: pu; qu: qu; qus: $qus; sval: $val
           else
-            alert Trst.i18n.msg.consumption_negative_stock
+            alert(Trst.i18n.msg.consumption_negative_stock
               .replace(/%\{um\}/g,um)
               .replace('%{stck}',qus.toFixed(2))
-              .replace('%{res}',(qu - qus).toFixed(2))
+              .replace('%{res}',(qu - qus).toFixed(2)))
             $('.focus').focus().select()
         validate:
           create: ()->
@@ -123,18 +123,18 @@ define () ->
               unless Clns.desk.consumption.validate.create()
                 if $bd.action is 'save'
                   $button.button 'option', 'disabled', true
-              if $button.hasClass 'icon-refresh'
+              if $button.hasClass 'fa-refresh'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.consumption.freightCalculate()
-              if $button.hasClass 'icon-plus-sign'
+              if $button.hasClass 'fa-plus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.consumption.freightInsert()
                   $url = "/sys/partial/clns/shared/_doc_add_freight_stock?id_stats=00000000"
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.consumption.selects($('select.clns.freight'))
-              if $button.hasClass 'icon-minus-sign'
+              if $button.hasClass 'fa-minus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   $button.parentsUntil('tbody').last().remove()

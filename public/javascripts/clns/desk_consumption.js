@@ -82,7 +82,7 @@
                 }
               };
             } else {
-              alert(Trst.i18n.msg.consumption_negative_stock).replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2));
+              alert(Trst.i18n.msg.consumption_negative_stock.replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2)));
               return $('.focus').focus().select();
             }
           },
@@ -171,13 +171,13 @@
                     $button.button('option', 'disabled', true);
                   }
                 }
-                if ($button.hasClass('icon-refresh')) {
+                if ($button.hasClass('fa-refresh')) {
                   $button.off('click');
                   $button.on('click', function() {
                     return Clns.desk.consumption.freightCalculate();
                   });
                 }
-                if ($button.hasClass('icon-plus-sign')) {
+                if ($button.hasClass('fa-plus-circle')) {
                   $button.off('click');
                   $button.on('click', function() {
                     var $url;
@@ -188,7 +188,7 @@
                     });
                   });
                 }
-                if ($button.hasClass('icon-minus-sign')) {
+                if ($button.hasClass('fa-minus-circle')) {
                   $button.off('click');
                   $button.on('click', function() {
                     $button.parentsUntil('tbody').last().remove();
