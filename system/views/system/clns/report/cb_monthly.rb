@@ -1,6 +1,5 @@
 # encoding: utf-8
 # Template for Registru de casă.pdf
-require 'prawn/measurement_extensions'
 
 date = params[:date].split('-').map(&:to_i)
 

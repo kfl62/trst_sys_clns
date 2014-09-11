@@ -1,6 +1,5 @@
 # encoding: utf-8
 # Template for Listă inventar.pdf
-require 'prawn/measurement_extensions'
 
 def firm
   Clns::PartnerFirm.find_by(firm: true)

@@ -1,7 +1,5 @@
 # encoding: utf-8
 # Template for Clns::DeliveryNote#pdf
-require 'prawn/measurement_extensions'
-require "prawn/templates"
 
 def firm
   Clns::PartnerFirm.find_by(firm: true)
