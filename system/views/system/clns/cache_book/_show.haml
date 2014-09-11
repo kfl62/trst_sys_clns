@@ -5,20 +5,20 @@
         %td.ce= label
     - @object.lines.asc(:order).each do |l|
       %tr.lines
-        %td
-          %span.ord.width-20.ce=  "#{l.order}."
-        %td
-          %span.doc.width-80= l.doc
-        %td
-          %span.exp.width-400= l.expl
-        %td
-          %span.ins.width-80.ri= "%.2f" % l.in
-        %td
-          %span.out.width-80.ri= "%.2f" % l.out
+        %td.w-2rem.ta-ri
+          %span.ord=  "#{l.order}."
+        %td.w-8rem
+          %span.doc= l.doc
+        %td.w-40rem
+          %span.exp= l.expl
+        %td.w-8rem.ta-ri
+          %span.ins= "%.2f" % l.in
+        %td.w-8rem.ta-ri
+          %span.out= "%.2f" % l.out
     %tr.lines-total{class: @object.lines.count == 0 && 'hidden'}
       %td.ce{colspan: 3}
         %span TOTAL
       %td
-        %span.val.tot-in= "%.2f" % @object.lines.sum(:in)
+        %span.tot-in= "%.2f" % @object.lines.sum(:in)
       %td
-        %span.val.tot-out= "%.2f" % @object.lines.sum(:out)
+        %span.tot-out= "%.2f" % @object.lines.sum(:out)

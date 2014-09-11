@@ -9,16 +9,16 @@
     %thead
       %tr.pdb-05
         %td
-          %span.label Nr:
+          %span Nr:
           %span.name.st= "#{firm.name[0][0..2].upcase}_RC-#{date.to_s.gsub("-","")}"
-          %span.label din:
+          %span din:
           %span.date.st= date.to_s
           %br
-          %span.label Sold inițial:
+          %span Sold inițial:
           %span.ib.st.red= "%.2f" % (prev.fb rescue 0.0)
-          %span.label Sold final:
+          %span Sold final:
           %span.fb.st.red= "%.2f" % (prev.fb rescue 0.0)
-          %span.label Nr. rânduri:
+          %span Nr. rânduri:
           %span.lines.st.red 0
           - input_for @object, 'name',    {type: 'hidden',value: "#{firm.name[0][0..2].upcase}_RC-#{date.to_s.gsub("-","")}"}
           - input_for @object, 'id_date', {type: 'hidden',value: date.to_s}
@@ -30,8 +30,8 @@
             %tr
               %td
                 %span Adăugare rând la Registru de casă
-                %span.button.flri.pdr-05.red.pointer.icon-plus-sign.icon-large{title: t('button.new_row')}
-                %span.button.flri.pdr-05.red.pointer.icon-refresh.icon-large
+                %span.button.fl-ri.red.pointer.fa.fa-plus-circle.fa-lg{title: t('button.new_row')}
+                %span.button.fl-ri.red.pointer.fa.fa-refresh.fa-lg
             %tr
               %td
                 %span.add-line.ord.st 1.
@@ -45,6 +45,4 @@
           = partial "#{@path}/form", locals: {create: true}
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "6"}
-          %button.cb{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

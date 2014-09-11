@@ -4,42 +4,40 @@
     %thead
       %tr.pdb-05
         %td
-          %span.label Nr:
+          %span Nr:
           %span.name.st= @object.name
-          %span.label din:
+          %span din:
           %span.date.st= @object.id_date.to_s
           %br
-          %span.label Sold inițial:
+          %span Sold inițial:
           %span.ib.st= "%.2f" % @object.ib
-          %span.label Sold final:
+          %span Sold final:
           %span.fb.st= "%.2f" % @object.fb
-          %span.label Nr. rânduri:
+          %span Nr. rânduri:
           %span.lines.st= @object.lines.count
           - input_for @object, 'name',    {type: 'hidden',value: @object.name}
           - input_for @object, 'id_date', {type: 'hidden',value: @object.id_date.to_s}
           - input_for @object, 'ib',      {style: 'ib',type: 'hidden',value: @object.ib}
           - input_for @object, 'fb',      {style: 'fb',type: 'hidden',value: @object.fb}
-    %tr.pdb-05
-      %td.add-line-container{style: 'padding: 5px;border: solid 1px'}
-        %table
-          %tr
-            %td
-              %span Adăugare rând la Registru de casă
-              %span.button.flri.pdr-05.red.pointer.icon-plus-sign.icon-large{title: t('button.new_row')}
-              %span.button.flri.pdr-05.red.pointer.icon-refresh.icon-large
-          %tr
-            %td
-              %span.add-line.ord.st= @object.lines.count + 1
-              %input.add-line.doc{size: 10,placeholder: 'Doc. nr.'}
-              %input.add-line.exp{size: 60,placeholder: 'Explicații'}
-              %input.add-line.ins{size: 10,placeholder: 'Înc. 0.00 lei'}
-              %input.add-line.out{size: 10,placeholder: 'Plată 0.00 lei'}
+      %tr.pdb-05
+        %td.add-line-container{style: 'padding: 5px;border: solid 1px'}
+          %table
+            %tr
+              %td
+                %span Adăugare rând la Registru de casă
+                %span.button.fl-ri.red.pointer.fa.fa-plus-circle.fa-lg{title: t('button.new_row')}
+                %span.button.fl-ri.red.pointer.fa.fa-refresh.fa-lg
+            %tr
+              %td
+                %span.add-line.ord.st= @object.lines.count + 1
+                %input.add-line.doc{size: 10,placeholder: 'Doc. nr.'}
+                %input.add-line.exp{size: 60,placeholder: 'Explicații'}
+                %input.add-line.ins{size: 10,placeholder: 'Înc. 0.00 lei'}
+                %input.add-line.out{size: 10,placeholder: 'Plată 0.00 lei'}
     %tbody
       %tr
         %td
           = partial "#{@path}/form", locals: {create: false}
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button.cb{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

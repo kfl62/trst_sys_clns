@@ -2,54 +2,54 @@
   %tbody.inner
     - o = @object.lines.new
     %tr.lines.template
-      %td
-        %span.ord.width-20.ce.width-20.ce Nr.crt.
+      %td.w-2rem.ta-ri
+        %span.ord Nr.crt.
         - input_for o, 'order',   {type: 'hidden',nested: 'cb',index: 0,style: 'ord',value: 'strip'}
         - input_for o, 'doc',     {type: 'hidden',nested: 'cb',index: 0,style: 'doc',value: 'strip'}
         - input_for o, 'expl',    {type: 'hidden',nested: 'cb',index: 0,style: 'exp',value: 'strip'}
         - input_for o, 'in',      {type: 'hidden',nested: 'cb',index: 0,style: 'ins',value: 'strip'}
         - input_for o, 'out',     {type: 'hidden',nested: 'cb',index: 0,style: 'out',value: 'strip'}
-      %td
-        %span.doc.width-80 Document
-      %td
-        %span.exp.width-400 Explicații
-      %td
-        %span.ins.width-80.ri Incasare
-      %td
-        %span.out.width-80.ri Plată
-      %td
-        %span.button.flri.red.pointer.icon-minus-sign.pdlr-05
+      %td.w-8rem
+        %span.doc Document
+      %td.w-40rem
+        %span.exp Explicații
+      %td.w-8rem.ta-ri
+        %span.ins Incasare
+      %td.w-8rem.ta-ri
+        %span.out Plată
+      %td.d-in-bl
+        %span.button.fa.fa-minus-circle.red.pointer
     %tr.lines-header.scroll{class: @object.lines.count == 0 && 'hidden'}
       - mat(@object,'tbl_lines_hdr').each do |label|
-        %td.ce= label
+        %td= label
     - unless create
       - @object.lines.asc(:order).each do |l|
         - unless l.new_record?
           %tr.lines
-            %td
-              %span.ord.width-20.ce= "#{l.order}."
+            %td.w-2rem.ta-ri
+              %span.ord= "#{l.order}."
               - input_for o, 'id',      {type: 'hidden',nested: 'cb',index: l.order,style: '_id',value: l.id}
               - input_for o, 'order',   {type: 'hidden',nested: 'cb',index: l.order,style: 'ord',value: l.order}
               - input_for o, 'doc',     {type: 'hidden',nested: 'cb',index: l.order,style: 'doc',value: l.doc}
               - input_for o, 'expl',    {type: 'hidden',nested: 'cb',index: l.order,style: 'exp',value: l.expl}
               - input_for o, 'in',      {type: 'hidden',nested: 'cb',index: l.order,style: 'ins',value: l.in}
               - input_for o, 'out',     {type: 'hidden',nested: 'cb',index: l.order,style: 'out',value: l.out}
-            %td
-              %span.doc.width-80= l.doc
-            %td
-              %span.exp.width-400= l.expl
-            %td
-              %span.ins.width-80.ri= "%.2f" % l.in
-            %td
-              %span.out.width-80.ri= "%.2f" % l.out
-            %td
-              %span.button.flri.red.pointer.icon-minus-sign.pdlr-05
+            %td.w-8rem
+              %span.doc= l.doc
+            %td.w-40rem
+              %span.exp= l.expl
+            %td.w-8rem.ta-ri
+              %span.ins= "%.2f" % l.in
+            %td.w-8rem.ta-ri
+              %span.out= "%.2f" % l.out
+            %td.d-in-bl
+              %span.button.fa.fa-minus-circle.red.pointer
     %tr.lines-total{class: @object.lines.count == 0 && 'hidden'}
-      %td.ce{colspan: 3}
+      %td{colspan: 3}
         %span TOTAL
       %td
-        %span.val.tot-in= create ? '0.00' : "%.2f" % @object.lines.sum(:in)
+        %span.tot-in= create ? '0.00' : "%.2f" % @object.lines.sum(:in)
       %td
-        %span.val.tot-out= create ?  '0.00' : "%.2f" % @object.lines.sum(:out)
+        %span.tot-out= create ?  '0.00' : "%.2f" % @object.lines.sum(:out)
       %td
         %span &nbsp;

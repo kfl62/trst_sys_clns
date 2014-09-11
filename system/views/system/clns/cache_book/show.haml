@@ -2,7 +2,7 @@
 %form{action: "/sys/#{@path}",method: "get"}
   %table
     %thead
-      %tr
+      %tr.pdb-05
         %td
           %span.label Nr:
           %span.name.st= @object.name
@@ -21,8 +21,4 @@
           = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button{type: "button",data: {action: "print", icon: "print"}}= t('button.print')
-          %button{type: "button",data: {action: "edit",icon: "document",remove: 'false'}}= t('button.edit')
-          %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['print','edit','delete','cancel'],{style: 'ta-ce'})
