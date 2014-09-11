@@ -8,10 +8,10 @@
             next = $('tr.lines').not('.hidden').length + 1;
             if (next === 1) {
               $('tr.lines-header, tr.lines-total').addClass('hidden');
-              $('button.cb').button('option', 'disabled', true);
+              $('button[data-action=save]').button('option', 'disabled', true);
             } else {
               $('tr.lines-header, tr.lines-total').removeClass('hidden');
-              $('button.cb').button('option', 'disabled', false);
+              $('button[data-action=save]').button('option', 'disabled', false);
             }
             $('span.lines').text(next - 1);
             $('span.add-line').text(next + '.');
@@ -114,7 +114,7 @@
               if ($input.hasClass('add-line')) {
                 $input.on('keyup', function() {
                   if ($input.val() !== '') {
-                    $('button.cb').button('option', 'disabled', true);
+                    $('button[data-action=save]').button('option', 'disabled', true);
                   }
                 });
                 if ($input.hasClass('ins') || $input.hasClass('out')) {
@@ -156,20 +156,26 @@
                     } else {
                       $url = "sys/clns/cache_book/" + $bd.oid;
                     }
+                    $.ajax({
+                      type: 'POST',
+                      url: '/sys/session/r_path/sys!clns!cache_book!filter',
+                      async: false
+                    });
+                    Trst.lst.setItem('r_path', 'sys/clns/cache_book/filter');
                     Trst.desk.init($url);
                   });
                 }
-              } else if ($button.hasClass('icon-plus-sign')) {
+              } else if ($button.hasClass('fa-plus-circle')) {
                 $button.off('click');
                 $button.on('click', function() {
                   Clns.desk.cache_book.linesInsert();
                 });
-              } else if ($button.hasClass('icon-refresh')) {
+              } else if ($button.hasClass('fa-refresh')) {
                 $button.off('click');
                 $button.on('click', function() {
                   Clns.desk.cache_book.linesNewReset();
                 });
-              } else if ($button.hasClass('icon-minus-sign')) {
+              } else if ($button.hasClass('fa-minus-circle')) {
                 $tr = $button.parentsUntil('tbody').last();
                 $button.off('click');
                 $button.on('click', function() {
