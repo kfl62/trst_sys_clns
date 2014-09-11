@@ -1,17 +1,17 @@
 :ruby
   unit_id = @current_user.unit_id || session[:unit_id]
 %span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_consumption'}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t('intro.create.main', data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "post"}
   %table
     %thead
       %tr.pdb-05
-        %td
-          %span.warning.width-500.ju= t('intro.create.main', data: mat(@object,'model_name'))
-      %tr.pdb-05
-        %td.ce
-          %span.st Nr.
+        %td.ta-ce
+          %span Nr.
           - input_for @object, 'name',      {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
-          %span.st din data de:
+          %span din data de:
           - input_for @object, 'id_date',   {id: 'date_show',name: 'strip'}
           - input_for @object, 'id_date',   {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
           - input_for @object, 'unit_id',   {type: 'hidden',value: unit_id}
@@ -19,13 +19,11 @@
       %tr.pdb-05
         %td
           - label_for @object, 'expl'
-          - input_for @object, 'expl',      {value: mat(@object,'expl_default'),style: 'ui-state-default width-500'}
+          - input_for @object, 'expl',      {value: mat(@object,'expl_default'),style: 'ui-state-default w-50rem'}
       %tr.pdb-05
         %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
           = partial "clns/shared/doc_add_freight_stock"
     = partial "#{@path}/form"
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

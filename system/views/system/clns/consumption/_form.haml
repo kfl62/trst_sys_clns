@@ -1,11 +1,11 @@
 %tbody
   %tr
     %td
-      %table{style: "width:100%;font-size:12px"}
+      %table.w-100pr
         %tbody.inner
           %tr.consumption-freight-header.hidden
             - mat(@object,'table_header_form').each do |label|
-              %td.ce= label
+              %td= label
           %tr.consumption-freight.template
             - o = @object.freights.new
             %td
@@ -18,18 +18,18 @@
               - input_for o, 'pu',            {type: 'hidden',nested: 'doc_con',index: 0,style: 'pu',value: 'strip'}
               - input_for o, 'qu',            {type: 'hidden',nested: 'doc_con',index: 0,style: 'qu',value: 'strip'}
               - input_for o, 'val',           {type: 'hidden',nested: 'doc_con',index: 0,style: 'val',value: 'strip'}
-            %td
+            %td.ta-ce.w-4rem
               %span.um buc
-            %td
+            %td.ta-ri.w-6rem
               %span.pu 0.00
-            %td
+            %td.ta-ri.w-8rem
               %span.stk.qu 0.00
-            %td
+            %td.ta-ri.w-8rem
               %span.out.qu 0.00
-            %td
+            %td.ta-ri.w-8rem
               %span.val 0.00
-            %td
-              %span.button.flri.red.pointer.icon-minus-sign
+            %td.ta-ce.w-2rem
+              %span.button.red.pointer.fa.fa-minus-circle
           %tr.consumption-freight-total.hidden
             %td{colspan: 5}
               %span.name TOTAL

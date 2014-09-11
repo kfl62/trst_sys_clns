@@ -2,14 +2,14 @@
   unit_id = @current_user.unit_id || session[:unit_id]
 %span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_consumption'}}
 -if unit_id
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t("intro.filter.main",data: mat(@object,'model_name'))
   - unless @current_user.unit_id
     = partial 'clns/shared/select_unit'
   %form{action: "/sys/#{@path}",method: "get"}
     %table
       %tbody
-        %tr.pdb-05
-          %td
-            %span.info.width-400.ju= t("intro.filter.main",data: mat(@object,'model_name'))
         %tr.pdb-05
           %td
             %select#oid
@@ -18,9 +18,6 @@
                 %option{value: o.view_filter.first, title: o.freights_list.join("\n")}= o.view_filter.last
       %tfoot
         %tr
-          %td.buttonset.ce
-            %button{:type => "button",data: {action: "create",icon: "circle-plus"}}= t('button.create')
-            %button{:type => "button",data: {action: "show",icon: "clipboard"}}= t('button.show')
-            %button{:type => "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+          - td_buttonset(['create','show','cancel'],{style: 'ta-ce', show: {r_path: "/sys/#{@path}/filter"}})
 -else
   = partial 'clns/shared/select_unit'

@@ -2,16 +2,14 @@
 %form{action: "/sys/#{@path}", method: "put"}
   %table
     %thead
-      %tr
+      %tr.pdb-05
         %td{colspan: "5"}
           - label_for @object, 'name'
           - input_for @object, 'name'
       %tr.pdb-05
         %td{colspan: "5"}
-          - input_for @object, 'expl', {style: 'ui-state-default width-450'}
+          - input_for @object, 'expl', {style: 'ui-state-default w-45rem'}
     = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "5"}
-          %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'},'5')
