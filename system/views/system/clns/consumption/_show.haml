@@ -4,7 +4,7 @@
     %tr
       - mat(@object,'table_header_show').each do |label|
         %td= label
-    - @object.reload; @object.freights.each do |o|
+    - @object.freights.each do |o|
       %tr
         %td
           - value_for  o, 'freight',   {order: 'name',style: 'name',nested: 'doc_dln'}
