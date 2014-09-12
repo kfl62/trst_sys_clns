@@ -88,7 +88,7 @@
                 }
               };
             } else {
-              alert(Trst.i18n.msg.delivery_note_negative_stock).replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2));
+              alert(Trst.i18n.msg.delivery_note_negative_stock.replace(/%\{um\}/g, um).replace('%{stck}', qus.toFixed(2)).replace('%{res}', (qu - qus).toFixed(2)));
               return $('.focus').focus().select();
             }
           },
@@ -101,10 +101,10 @@
                 if ($('#client_d_id').val() !== '' && $('#client_d_id').val() !== 'new') {
                   $url += "&client_d_id=" + ($('#client_d_id').val());
                 }
-                $('button.dln').data('url', $url);
-                $('button.dln').button('option', 'disabled', false);
+                $('button[data-action="create"]').data('url', $url);
+                $('button[data-action="create"]').button('option', 'disabled', false);
               } else {
-                $('button.dln').button('option', 'disabled', true);
+                $('button[data-action="create"]').button('option', 'disabled', true);
               }
             },
             create: function() {
@@ -114,7 +114,7 @@
                 } else {
                   $('button[data-action="save"]').button('option', 'disabled', false);
                 }
-                $('span.icon-plus-sign').show();
+                $('span.fa-plus-circle').show();
                 return true;
               } else if ($('input[name*="doc_name"]').val() === '' && $('input[name*="doc_plat"]').val() !== '') {
                 $('input[name*="doc_name"]').val("" + ($('input.id_intern').val().split('_')[1]) + "-" + ($('input.id_intern').val().split('-')[1]));
@@ -338,13 +338,13 @@
                     $button.button('option', 'disabled', true);
                   }
                 }
-                if ($button.hasClass('icon-refresh')) {
+                if ($button.hasClass('fa-refresh')) {
                   $button.off('click');
                   $button.on('click', function() {
                     return Clns.desk.delivery_note.freightCalculate();
                   });
                 }
-                if ($button.hasClass('icon-plus-sign')) {
+                if ($button.hasClass('fa-plus-circle')) {
                   $button.off('click');
                   $button.on('click', function() {
                     var $url;
@@ -355,7 +355,7 @@
                     });
                   });
                 }
-                if ($button.hasClass('icon-minus-sign')) {
+                if ($button.hasClass('fa-minus-circle')) {
                   $button.off('click');
                   $button.on('click', function() {
                     $button.parentsUntil('tbody').last().remove();

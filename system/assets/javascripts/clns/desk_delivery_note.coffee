@@ -62,10 +62,10 @@ define () ->
             result:
               freight_id: fid; name: name; id_stats: ids; um: um; pu: pu; qu: qu; qus: $qus; sval: $val; pu_invoice: $pu_invoice; val_invoice: $val_invoice
           else
-            alert Trst.i18n.msg.delivery_note_negative_stock
+            alert(Trst.i18n.msg.delivery_note_negative_stock
               .replace(/%\{um\}/g,um)
               .replace('%{stck}',qus.toFixed(2))
-              .replace('%{res}',(qu - qus).toFixed(2))
+              .replace('%{res}',(qu - qus).toFixed(2)))
             $('.focus').focus().select()
         validate:
           filter: ()->
@@ -73,10 +73,10 @@ define () ->
               $url = Trst.desk.hdf.attr('action')
               $url += "?client_id=#{$('#client_id').val()}"
               $url += "&client_d_id=#{$('#client_d_id').val()}" if $('#client_d_id').val() isnt '' and $('#client_d_id').val() isnt 'new'
-              $('button.dln').data('url', $url)
-              $('button.dln').button 'option', 'disabled', false
+              $('button[data-action="create"]').data('url', $url)
+              $('button[data-action="create"]').button 'option', 'disabled', false
             else
-              $('button.dln').button 'option', 'disabled', true
+              $('button[data-action="create"]').button 'option', 'disabled', true
             return
           create: ()->
             if $('input[name*="doc_name"]').val() isnt '' and $('input[name*="doc_plat"]').val() isnt ''
@@ -84,7 +84,7 @@ define () ->
                 $('button[data-action="save"]').button 'option', 'disabled', true
               else
                 $('button[data-action="save"]').button 'option', 'disabled', false
-              $('span.icon-plus-sign').show()
+              $('span.fa-plus-circle').show()
               return true
             else if $('input[name*="doc_name"]').val() is '' and $('input[name*="doc_plat"]').val() isnt ''
               $('input[name*="doc_name"]').val("#{$('input.id_intern').val().split('_')[1]}-#{$('input.id_intern').val().split('-')[1]}")
@@ -242,18 +242,18 @@ define () ->
               unless Clns.desk.delivery_note.validate.create()
                 if $bd.action is 'save'
                   $button.button 'option', 'disabled', true
-              if $button.hasClass 'icon-refresh'
+              if $button.hasClass 'fa-refresh'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.delivery_note.freightCalculate()
-              if $button.hasClass 'icon-plus-sign'
+              if $button.hasClass 'fa-plus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.delivery_note.freightInsert()
                   $url = "/sys/partial/clns/shared/_doc_add_freight_stock?id_stats=00000000"
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.delivery_note.selects($('select.clns.freight'))
-              if $button.hasClass 'icon-minus-sign'
+              if $button.hasClass 'fa-minus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   $button.parentsUntil('tbody').last().remove()
