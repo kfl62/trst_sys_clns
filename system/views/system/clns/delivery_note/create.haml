@@ -7,8 +7,8 @@
 %form{action: "/sys/#{@path}",method: "post"}
   %table
     %thead
-      %tr
-        %td.ce
+      %tr.pdb-05
+        %td
           - label_for @object, 'name'
           - input_for @object, 'name', {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
           - label_for @object, 'id_date'
@@ -20,8 +20,8 @@
           - input_for @object, 'signed_by',    {type: 'hidden',value: @current_user.id}
           - if client_d
             - input_for @object, 'client_d_id',{type: 'hidden',value: client_d.id}
-      %tr
-        %td.ce
+      %tr.pdb-05
+        %td
           - label_for @object, 'doc_name'
           - input_for @object, 'doc_name',     {placeholder: mat(@object,'doc_name_ph')}
           - label_for @object, 'doc_plat'
@@ -29,15 +29,15 @@
       %tr.pdb-05
         %td
           - input_for @object, 'expl',     {style: 'ui-state-default width-500',placeholder: mat(@object,'expl_ph')}
-      %tr.pdb-05
+      %tr
         %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
           = partial "clns/shared/doc_add_freight_stock"
       %tr.pdb-05
         %td
-          %span.info.width-500.ju= t('intro.create.desk_delivery_note',firm: firm.name[2],firm_d: @current_user.name,client: client.name[2],client_d: (client_d.name rescue 'Anonymous'))
+          %detail.detail.w-50rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('intro.create.desk_delivery_note',firm: firm.name[2],firm_d: @current_user.name,client: client.name[2],client_d: (client_d.name rescue 'Anonymous'))
     = partial "#{@path}/form"
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

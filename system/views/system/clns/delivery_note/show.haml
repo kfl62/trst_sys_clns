@@ -6,21 +6,22 @@
     %thead
       %tr.pdb-05
         %td{colspan: "5"}
-          %span.info.width-450.ju= t('intro.show.desk_delivery_note',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),firm: firm.name[2],firm_d: @object.signed_by.name,client: @object.client.name[2],client_d: (@object.client_d.name rescue 'Anonymous'))
+          %detail.detail.w-45rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('intro.show.desk_delivery_note',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),firm: firm.name[2],firm_d: @object.signed_by.name,client: @object.client.name[2],client_d: (@object.client_d.name rescue 'Anonymous'))
       - unless @object.expl.blank?
         %tr.pdb-05
           %td{colspan: '5'}
-            %span.warning.width-450= @object.expl
+            %detail.warning.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = @object.expl
     = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "5"}
-          - if @object.freights.count == 0
-            %button{type: "button",data: {action: "delete",icon: "circle-minus",type: 'delete'}}= t('button.delete')
+        - if @object.freights.count == 0
+          - td_buttonset(['delete'],{style: 'ta-ce'},'5')
+        - else
+          - if @current_user.admin?
+            - td_buttonset(['print','edit','delete','cancel'],{style: 'ta-ce'},'5')
           - else
-            %button{type: "button",data: {action: "print",icon: "print"}}= t('button.print')
-            - if @current_user.admin?
-              %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
-            - if @current_user.admin? || @object.id_date == Date.today
-              %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
-            %button.focus{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+            - td_buttonset(['print','delete','cancel'],{style: 'ta-ce'},'5')
