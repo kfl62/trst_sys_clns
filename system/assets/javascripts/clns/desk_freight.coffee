@@ -15,6 +15,8 @@ define () ->
             $input = $(@)
             $sd = $input.data()
             $id = $input.attr('id')
+            $input.on 'focus', ()-> $input.removeClass 'ui-state-default'; return
+            $input.on 'blur', ()-> $input.addClass 'ui-state-default'; return
             return
           return
         selects: (slcts)->
@@ -85,6 +87,9 @@ define () ->
             $button = $(@)
             $bd = $button.data()
             $id = $button.attr('id')
+            if Trst.desk.hdo.dialog is 'filter'
+              if $bd.action in ['create','show','edit','delete']
+                $bd.r_path = 'sys/clns/freight/filter'
             if $button.hasClass 'query-firm'
               $params = jQuery.param($('.param').serializeArray())
               $url = "sys/partial/clns/freight/_data_firm?#{$params}"
@@ -130,7 +135,7 @@ define () ->
               if Trst.desk.hdo.dialog is 'filter'
                 $button.data().url = Trst.lst.url?.replace 'filter', 'create'
                 Trst.lst.removeItem 'url'
-            if $button.hasClass 'icon-minus-sign'
+            if $button.hasClass 'fa-minus-circle'
               $button.off 'click'
               $button.on 'click', ()->
                 $button.parentsUntil('tbody').last().remove()
@@ -142,5 +147,6 @@ define () ->
             Clns.desk.freight.createFreightName()
           Clns.desk.freight.buttons($('button, span.link, span.button'))
           Clns.desk.freight.selects($('select'))
+          Clns.desk.freight.inputs($('input'))
           $log 'Clns.desk.freight.init() OK...'
   Clns.desk.freight

@@ -22,6 +22,12 @@
               $input = $(this);
               $sd = $input.data();
               $id = $input.attr('id');
+              $input.on('focus', function() {
+                $input.removeClass('ui-state-default');
+              });
+              $input.on('blur', function() {
+                $input.addClass('ui-state-default');
+              });
             });
           },
           selects: function(slcts) {
@@ -103,10 +109,15 @@
           },
           buttons: function(btns) {
             btns.each(function() {
-              var $bd, $button, $id, $params, $url, _ref;
+              var $bd, $button, $id, $params, $url, _ref, _ref1;
               $button = $(this);
               $bd = $button.data();
               $id = $button.attr('id');
+              if (Trst.desk.hdo.dialog === 'filter') {
+                if ((_ref = $bd.action) === 'create' || _ref === 'show' || _ref === 'edit' || _ref === 'delete') {
+                  $bd.r_path = 'sys/clns/freight/filter';
+                }
+              }
               if ($button.hasClass('query-firm')) {
                 $params = jQuery.param($('.param').serializeArray());
                 $url = "sys/partial/clns/freight/_data_firm?" + $params;
@@ -155,11 +166,11 @@
               }
               if ($bd.action === 'create') {
                 if (Trst.desk.hdo.dialog === 'filter') {
-                  $button.data().url = (_ref = Trst.lst.url) != null ? _ref.replace('filter', 'create') : void 0;
+                  $button.data().url = (_ref1 = Trst.lst.url) != null ? _ref1.replace('filter', 'create') : void 0;
                   Trst.lst.removeItem('url');
                 }
               }
-              if ($button.hasClass('icon-minus-sign')) {
+              if ($button.hasClass('fa-minus-circle')) {
                 $button.off('click');
                 $button.on('click', function() {
                   $button.parentsUntil('tbody').last().remove();
@@ -173,6 +184,7 @@
             }
             Clns.desk.freight.buttons($('button, span.link, span.button'));
             Clns.desk.freight.selects($('select'));
+            Clns.desk.freight.inputs($('input'));
             return $log('Clns.desk.freight.init() OK...');
           }
         }
