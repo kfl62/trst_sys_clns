@@ -73,13 +73,14 @@ define () ->
           $id_intern.on 'change', ()->
             $id_intern.attr 'size', $id_intern.val().length + 4
             return
-        if Trst.desk.hdo.dialog is 'create' or Trst.desk.hdo.dialog is 'edit'
+        if Trst.desk.hdo.dialog in ['create', 'edit']
           if $('input[name*="id_pn"]').length
             Clns.desk.idPnHandle()
             $('input[name*="id_pn"]').on 'keyup', ()->
               Clns.desk.idPnHandle()
-          $('input.focus').focus()
-          $('select.focus').focus()
+          $('.focus').focus()
+        else
+          $('button').last().focus()
         if $('table.scroll').height() > 450
           Clns.desk.scrollHeader($('table.scroll'))
         $log 'Clns.desk.init() Ok...'

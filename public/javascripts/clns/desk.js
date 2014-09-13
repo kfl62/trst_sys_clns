@@ -91,7 +91,7 @@
           }
         },
         init: function() {
-          var $dsh, $ext, $id_intern;
+          var $dsh, $ext, $id_intern, _ref;
           if ($('#date_show').length) {
             $dsh = $('#date_show');
             $dsh.datepicker({
@@ -110,15 +110,16 @@
               $id_intern.attr('size', $id_intern.val().length + 4);
             });
           }
-          if (Trst.desk.hdo.dialog === 'create' || Trst.desk.hdo.dialog === 'edit') {
+          if ((_ref = Trst.desk.hdo.dialog) === 'create' || _ref === 'edit') {
             if ($('input[name*="id_pn"]').length) {
               Clns.desk.idPnHandle();
               $('input[name*="id_pn"]').on('keyup', function() {
                 return Clns.desk.idPnHandle();
               });
             }
-            $('input.focus').focus();
-            $('select.focus').focus();
+            $('.focus').focus();
+          } else {
+            $('button').last().focus();
           }
           if ($('table.scroll').height() > 450) {
             Clns.desk.scrollHeader($('table.scroll'));
