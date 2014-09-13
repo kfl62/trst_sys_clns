@@ -1,3 +1,22 @@
 /*!
  * Use this to override application.css
  */
+ @import "partials/trst_base";
+
+#deskDialog {
+  label.doc-name-list {
+    display: inline-block;
+    border-right: solid 1px #333333;
+    padding-right: 3px;
+    cursor: pointer;
+  }
+  td.add-freight-container {
+    background-color: $trst-color-bg-detail;
+    border: solid 1px $trst-color-bg-dark;
+    border-radius: .5rem;
+    box-shadow: .5rem .5rem $trst-color-bg-dark;
+    display: none;
+    padding: .5rem;
+    position: fixed;
+  }
+}
