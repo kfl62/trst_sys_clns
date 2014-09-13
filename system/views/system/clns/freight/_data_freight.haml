@@ -8,7 +8,7 @@
   uid = @current_user.unit_id ? @current_user.unit_id : params[:uid] == 'null' ? nil : params[:uid]
   fid = params[:fid] ? params[:fid] == 'null' ? nil : params[:fid] : nil
   firm= Clns::PartnerFirm.find_by(firm: true); unit= firm.units.find(uid) if uid; freight = Clns::Freight.find(fid) if fid
-%tbody.inner.stats
+%tbody.inner
   %tr
     %td
       %select.param.day{name: 'p_d'}
@@ -19,7 +19,7 @@
         %input.fid{type: 'hidden', name: 'fid', value: params[:fid]}
     - mat(Clns::Freight,'table_one')[1..-1].each do |cn|
       %td
-        %span.stats.ce= cn
+        %span= cn
   - if d > 0
     - stk_day = freight.stks.monthly(y,m).pos(unit.slug).sum(:qu) + freight.ins.period(y,m,1,d - 1).pos(unit.slug).sum(:qu) - freight.outs.period(y,m,1,d - 1).pos(unit.slug).sum(:qu); stock = stk_day
     - ins_int = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin(false).sum(:qu)
@@ -32,90 +32,134 @@
     - out_dln = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin.sum(:qu)
     %tr
       %td{:colspan => "3"}
-        %span.stats.ce= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
-      %td
-        %span.stats.ri= "%0.2f" % stk_day
+        %span= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
+      %td.ta-ri
+        %span= "%0.2f" % stk_day
     - if ins_int > 0
       - stock += ins_int
       %tr{style: 'color:blue'}
-        %td= 'Transfer gestiune'
-        %td.stats.ri= "%0.2f" % ins_int
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Transfer gestiune'
+        %td.ta-ri
+          %span= "%0.2f" % ins_int
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if ins_sor > 0
       - stock += ins_sor
       %tr{style: 'color:blue'}
-        %td= 'Intrari preparare'
-        %td.stats.ri= "%0.2f" % ins_sor
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Intrari preparare'
+        %td.ta-ri
+          %span= "%0.2f" % ins_sor
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if ins_grn > 0
       - stock += ins_grn
       %tr{style: 'color:blue'}
-        %td= 'Intrări furnizori'
-        %td.stats.ri= "%0.2f" % ins_grn
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Intrări furnizori'
+        %td.ta-ri
+          %span= "%0.2f" % ins_grn
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
       - freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin.each do |f|
         %tr
-          %td= " - " + f.doc_grn.supplr.name[0]
-          %td.stats.ri= "%0.2f" % f.qu
-          %td &nbsp;
-          %td &nbsp;
+          %td
+            %span= " - " + f.doc_grn.supplr.name[0]
+          %td.ta-ri
+            %span= "%0.2f" % f.qu
+          %td
+            %span &nbsp;
+          %td
+            %span &nbsp;
     - if out_cas > 0
       - stock -= out_cas
       %tr{style: 'color:blue'}
-        %td= 'Ieșiri casare'
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % out_cas
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Ieșiri casare'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_cas
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if out_con > 0
       - stock -= out_con
       %tr{style: 'color:blue'}
-        %td= 'Ieșiri Bon de Consum'
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % out_con
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Ieșiri Bon de Consum'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_con
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if out_sor > 0
       - stock -= out_sor
       %tr{style: 'color:blue'}
-        %td= 'Ieșiri preparare'
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % out_sor
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Ieșiri preparare'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_sor
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if out_int > 0
       - stock -= out_int
       %tr{style: 'color:blue'}
-        %td= 'Transfer gestiune'
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % out_int
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Transfer gestiune'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_int
+        %td.ta-ri
+          %span= "%0.2f" % stock
     - if out_dln > 0
       - stock -= out_dln
       %tr{style: 'color:blue'}
-        %td= 'Ieșiri clienți'
-        %td &nbsp;
-        %td.stats.ri= "%0.2f" % out_dln
-        %td.stats.ri= "%0.2f" % stock
+        %td
+          %span= 'Ieșiri clienți'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_dln
+        %td.ta-ri
+          %span= "%0.2f" % stock
       - dlns = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin.pluck(:doc_dln_id).uniq
       - Clns::DeliveryNote.where(:id.in => dlns).each do |dn|
         %tr
-          %td= " - " + dn.client.name[0]
-          %td &nbsp;
-          %td.stats.ri= "%0.2f" % dn.freights.where(id_stats: freight.id_stats).sum(:qu)
-          %td &nbsp;
+          %td
+            %span= " - " + dn.client.name[0]
+          %td
+            %span &nbsp;
+          %td.ta-ri
+            %span= "%0.2f" % dn.freights.where(id_stats: freight.id_stats).sum(:qu)
+          %td
+            %span &nbsp;
     %tr
-      %td= 'Total'
-      %td.stats.ri= "%0.2f" % (ins_int + ins_grn)
-      %td.stats.ri= "%0.2f" % (out_cas + out_con + out_int + out_dln)
-      %td.stats.ri= "%0.2f" % stock
+      %td
+        %span= 'Total'
+      %td
+        %span= "%0.2f" % (ins_int + ins_grn)
+      %td
+        %span= "%0.2f" % (out_cas + out_con + out_int + out_dln)
+      %td
+        %span= "%0.2f" % stock
   - else
     %tr
       %td{:colspan => "3"}
-        %span.stats.ce= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
-      %td
+        %span= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
+      %td.ta-ri
         - si = freight.stks.monthly(y,m).pos(unit.slug).sum(:qu); ti, to, sf = 0 , 0, si
-        %span.stats.ri= "%0.2f" % si
+        %span= "%0.2f" % si
     - (1..Time.days_in_month(m,y)).each do |day|
       - i = freight.ins.daily(y,m,day).pos(unit.slug).sum(:qu).round(2)
       - o = freight.outs.daily(y,m,day).pos(unit.slug).sum(:qu).round(2)
@@ -124,19 +168,19 @@
         - sf += r
         %tr
           %td
-            %span.stats= Date.new(y,m,day).to_s
-          %td
-            %span.stats.ri= "%0.2f" % i
-          %td
-            %span.stats.ri= "%0.2f" % o
-          %td
-            %span.stats.ri= "%0.2f" % sf
+            %span= Date.new(y,m,day).to_s
+          %td.ta-ri
+            %span= "%0.2f" % i
+          %td.ta-ri
+            %span= "%0.2f" % o
+          %td.ta-ri
+            %span= "%0.2f" % sf
     %tr
       %td
-        %span.stats.ce.st Total
+        %span Total
       %td
-        %span.stats.ri.st= "%0.2f" % ti
+        %span= "%0.2f" % ti
       %td
-        %span.stats.ri.st= "%0.2f" % to
+        %span= "%0.2f" % to
       %td
-        %span.stats.ri.st= "%0.2f" % sf
+        %span= "%0.2f" % sf

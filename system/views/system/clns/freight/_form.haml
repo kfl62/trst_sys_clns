@@ -7,9 +7,9 @@
       - else
         - tr_show_for @object,        'criteria_name'
         - if @current_user.root?
-          - tr_input_for @object,        'id_stats'
+          - tr_input_for @object,     'id_stats'
         - else
-          - tr_show_for @object,        'id_stats'
+          - tr_show_for @object,      'id_stats'
       - tr_input_for  @object,        'name', {style: 'focus'}
       - tr_input_for  @object,        'um'
       - tr_input_for  @object,        'pu'
@@ -30,7 +30,7 @@
               - Clns::PartnerFirm.where(client: true).asc(:name).each do |c|
                 %option{value: c.id.to_s}= c.name[0]
           %td
-            %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][_new_]",value: @object.csn['dflt']}
+            %input.w-25rem.ui-state-default{name: "[clns/freight][csn][_new_]",value: @object.csn['dflt']}
             - @object.csn.each do |o|
               - input_for @object, 'csn', {order: o[0], type: 'hidden'}
       - else
@@ -38,23 +38,23 @@
           %td
             %span= 'Denumire generică : '
           %td
-            %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][dflt]",value: @object.name}
+            %input.w-25rem.ui-state-default{name: "[clns/freight][csn][dflt]",value: @object.name}
     - elsif csn == 'delete'
       - @object.csn.each do |o|
-        %tr.ui-state-default
+        %tr
           %td
             %span= o.first == 'dflt' ? 'Denumire generică' : "#{Clns::PartnerFirm.find(o.first).name[0]}"
           %td
-            %span.value= o.last
+            %span.w-100pr.ui-state-default= o.last
             - input_for @object, 'csn', {order: o[0], type: 'hidden'}
-          %td
+          %td.ta-ce
             - unless o.first == 'dflt'
-              %span.button.flri.red.pointer.icon-minus-sign.pdlr-05
+              %span.button.red.pointer.fa.fa-minus-circle
     - else
       %tr
         %td
           %span= csn == 'dflt' ? 'Denumire generică : ' : "#{Clns::PartnerFirm.find(csn).name[0]} : "
         %td
-          %input.value.ui-state-error{style: 'min-width:250px',name: "[clns/freight][csn][#{csn}]",value: @object.csn[csn]}
+          %input.w-25rem{name: "[clns/freight][csn][#{csn}]",value: @object.csn[csn]}
           - @object.csn.each do |o|
             - input_for @object, 'csn', {order: o[0], type: 'hidden'} unless csn == o[0]

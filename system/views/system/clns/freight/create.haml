@@ -2,15 +2,13 @@
   id_stats = params[:id_stats] || "00000000"
   id_stats = Clns::Freight.by_id_stats(id_stats,true)
 %span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t('intro.create.main', data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "post"}
   %table
     %thead
-      %tr.pdb-05
-        %th{colspan: "3"}
-          %span.warning.width-350.ju= t('intro.create.main', data: mat(@object,'model_name'))
     = partial "#{@path}/form", locals: {id_stats: id_stats, create: true}
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "3"}
-          %button{type: "button",data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'}, '3')

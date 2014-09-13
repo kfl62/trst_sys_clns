@@ -13,23 +13,26 @@
     %tr.pdb-05
       %td{colspan: '3'}
         - if @object.csn.count == 1
-          %span.info= mat(@object,'tab_csn_one')
+          %detail.detail.w-30rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = mat(@object,'tab_csn_one')
         - else
-          %span.info= mat(@object,'tab_csn_many')
+          %detail.detail.w-30rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = mat(@object,'tab_csn_many')
     - @object.csn.each do |o|
       %tr
         %td
-          %span.value.ui-state-default= o.first == 'dflt' ? 'Denumire generică : ' : "#{Clns::PartnerFirm.find(o.first).name[0]} : "
+          %span= o.first == 'dflt' ? 'Denumire generică : ' : "#{Clns::PartnerFirm.find(o.first).name[0]} : "
         %td
-          %span.value.ui-state-error= o.last
+          %span.ui-state-default= o.last
         %td.buttonset
-          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}?csn=#{o.first}",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "document"}}= t('button.edit')
-          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}?csn=delete",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',icon: "circle-minus"}}= t('button.delete')
+          %button{type: "button",title: "#{t('button.edit')}",  data: {url: "/sys/#{@path}?csn=#{o.first}",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "fa fa-only fa-file-text-o"}}
+          %button{type: "button",title: "#{t('button.delete')}",data: {url: "/sys/#{@path}?csn=delete",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',icon: "fa fa-only fa-minus-square-o red"}}
     %tr
-      %td
-        %span.value.ui-state-default= mat(@object,'tab_csn_create')
-      %td.buttonset{colspan: '2'}
-        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+      %td{colspan: '3'}
+        %span.ui-state-default= mat(@object,'tab_csn_create')
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "fa fa-only fa-plus-square-o"}}
 
 - else
   %tbody#tabs-csn{data: {title: mat(@object, :tab_csn_title)}}
@@ -40,4 +43,4 @@
       %td
         %span.value.ui-state-default= mat(@object,'tab_csn_create')
       %td.buttonset{colspan: '2'}
-        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "circle-plus"}}= t('button.create')
+        %button{type: "button",title: "#{t('button.create')}",data: {url: "/sys/#{@path}?csn=new",r_id: @object.id,r_path: "/sys/#{@path}/#{@object.id}",tab: 1,r_mdl: 'freight',action: "edit",text: 'hidden',  icon: "fa fa-only fa-plus-square-o"}}

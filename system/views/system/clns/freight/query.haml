@@ -9,42 +9,48 @@
   firm= Clns::PartnerFirm.find_by(firm: true); unit= firm.units.find(uid) if uid; freight = Clns::Freight.find(fid) if fid
 %span#hidden_data{data: {dialog: "query",title_data: uid ? unit.name[1] : firm.name[2],model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
 - if uid && fid.nil?
-  %div.small
-    %span.info= t('intro.query.desk_freight.query_unit')
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_unit')
+  %div.pdb-05
     %span.select-date
       = partial "#{@path}/select_date"#, locals: {daily: true}
     %span.select-freight-c
       = partial "#{@path}/select_freight_c"
-    %button.query-unit{type: 'button',data: {action: "query",icon: "search",text: 'hidden'}}= "&nbsp;"
     - unless @current_user.unit_id
       %select.param.uid{name: 'uid'}
         %option{value: 'null'} Toate unităţile
         - firm.units.asc(:slug).each do |pos|
           %option{value: pos.id, selected: uid.to_s == pos.id.to_s}= pos.name[1]
-  %table.data-unit{style: "width:initial;margin:auto"}
+    %button.query-unit{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-unit.inner
     = partial "#{@path}/data_unit"
 - elsif freight
-  %div.small
-    %span.info.width-500.ju= t('intro.query.desk_freight.query_freight')
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_freight')
+  %div.pdb-05
     %span.select-date
       = partial "#{@path}/select_date"
     %span.select-freight-c
       = partial "#{@path}/select_freight_c"
-    %button.query-freight{type: 'button',data: {action: "query",icon: "search",text: 'hidden'}}= "&nbsp;"
     - unless @current_user.unit_id
       %select.param.uid{name: 'uid'}
         %option{value: 'null'} Toate unităţile
         - firm.units.asc(:slug).each do |pos|
           %option{value: pos.id, selected: uid.to_s == pos.id.to_s}= pos.name[1]
-  %table.data-freight{style: "width:initial;margin:auto"}
+    %button.query-freight{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-freight.inner
     = partial "#{@path}/data_freight"
 - else
-  %div.small
-    %span.info.width-500.ju= t('intro.query.desk_freight.query_firm')
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_firm')
+  %div.pdb-05
     %span.select-date
       = partial "#{@path}/select_date"
     %span.select-freight-c
       = partial "#{@path}/select_freight_c"
-    %button.query-firm{type: 'button',data: {action: "query",icon: "search",text: 'hidden'}}= "&nbsp;"
-  %table.data-firm{style: "width:initial;margin:auto"}
+    %button.query-firm{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-firm.inner
     = partial "#{@path}/data_firm", locals: {firm: firm, unit: unit}

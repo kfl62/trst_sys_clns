@@ -9,7 +9,4 @@
     = partial "#{@path}/form", locals: {csn: csn}
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "3"}
-          %button{type: "button",data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "delete",icon: "circle-minus",remove: 'false'}}= t('button.delete')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'}, '3')

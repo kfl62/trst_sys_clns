@@ -10,40 +10,40 @@
   %tr
     - mat(Clns::Freight,'table_all').each do |cn|
       %td
-        %span.stats.ce= cn
+        %span= cn
     - firm.units.asc(:slug).each do |cn|
       %td
-        %span.stats.ce.link.uid{id: cn.id}= cn.slug
+        %span.link.uid{id: cn.id}= cn.slug
   - if c0 == '00'
     - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
     - t("freight.c0")[1..-1].each do |c|
       - f = Clns::Freight.by_id_stats("#{c.first}000000")
       %tr
         %td
-          %span.stats{style: "color:rgb(179,17,17)"}= c.last
-        %td
+          %span{style: "color:rgb(179,17,17)"}= c.last
+        %td.ta-ri
           - s = f.stks.monthly(y,m).sum(:val); ts += s
-          %span.stats.ri= "%.2f" % s
-        %td
+          %span= "%.2f" % s
+        %td.ta-ri
           - i = f.ins.monthly(y,m).sum(:val); ti += i
-          %span.stats.ri= "%.2f" % i
-        %td
+          %span= "%.2f" % i
+        %td.ta-ri
           - o = f.outs.monthly(y,m).sum(:val); to += o
-          %span.stats.ri= "%.2f" % o
-        %td
+          %span= "%.2f" % o
+        %td.ta-ri
           - fsn = (s + i - o); tfsn += fsn
-          %span.stats.ri.st= "%.2f" % fsn
+          %span.st= "%.2f" % fsn
         - firm.units.asc(:slug).each_with_index do |u,i|
           - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
-          %td
-            %span.stats.ri= "%.2f" % psn
+          %td.ta-ri
+            %span= "%.2f" % psn
     - t = [ts,ti,to,tfsn,tpsn].flatten
     %tr
       %td
-        %span.stats.ce.st Total
+        %span Total
       - t.each do |v|
         %td
-          %span.val= "%.2f" % v
+          %span= "%.2f" % v
   - else
     - if c1 == '00'
       - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
@@ -51,30 +51,30 @@
         - f = Clns::Freight.by_id_stats("#{c0}#{c.first}0000")
         %tr
           %td
-            %span.stats{style: "color:rgb(179,17,17)"}= c.last
-          %td
+            %span{style: "color:rgb(179,17,17)"}= c.last
+          %td.ta-ri
             - s = f.stks.monthly(y,m).sum(:val); ts += s
-            %span.stats.ri= "%.2f" % s
-          %td
+            %span= "%.2f" % s
+          %td.ta-ri
             - i = f.ins.monthly(y,m).sum(:val); ti += i
-            %span.stats.ri= "%.2f" % i
-          %td
+            %span= "%.2f" % i
+          %td.ta-ri
             - o = f.outs.monthly(y,m).sum(:val); to += o
-            %span.stats.ri= "%.2f" % o
-          %td
+            %span= "%.2f" % o
+          %td.ta-ri
             - fsn = (s + i - o); tfsn += fsn
-            %span.stats.ri.st= "%.2f" % fsn
+            %span.st= "%.2f" % fsn
           - firm.units.asc(:slug).each_with_index do |u,i|
             - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
-            %td
-              %span.stats.ri= "%.2f" % psn
+            %td.ta-ri
+              %span= "%.2f" % psn
       - t = [ts,ti,to,tfsn,tpsn].flatten
       %tr
         %td
-          %span.stats.ce.st Total
+          %span Total
         - t.each do |v|
           %td
-            %span.val= "%.2f" % v
+            %span= "%.2f" % v
     - else
       - if c2 == '00'
         - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
@@ -83,77 +83,77 @@
             - f = Clns::Freight.by_id_stats("#{c0}#{c1}#{c.first}00")
             %tr
               %td
-                %span.stats{style: "color:rgb(179,17,17)"}= c.last
-              %td
+                %span{style: "color:rgb(179,17,17)"}= c.last
+              %td.ta-ri
                 - s = f.stks.monthly(y,m).sum(:val); ts += s
-                %span.stats.ri= "%.2f" % s
-              %td
+                %span= "%.2f" % s
+              %td.ta-ri
                 - i = f.ins.monthly(y,m).sum(:val); ti += i
-                %span.stats.ri= "%.2f" % i
-              %td
+                %span= "%.2f" % i
+              %td.ta-ri
                 - o = f.outs.monthly(y,m).sum(:val); to += o
-                %span.stats.ri= "%.2f" % o
-              %td
+                %span= "%.2f" % o
+              %td.ta-ri
                 - fsn = (s + i - o); tfsn += fsn
-                %span.stats.ri.st= "%.2f" % fsn
+                %span.st= "%.2f" % fsn
               - firm.units.asc(:slug).each_with_index do |u,i|
                 - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
-                %td
-                  %span.stats.ri= "%.2f" % psn
+                %td.ta-ri
+                  %span= "%.2f" % psn
         - rescue
           - Clns::Freight.by_id_stats("#{c0}#{c1}0000").each do |f|
             %tr
               %td
-                %span.stats{style: "color:blue"}= "#{f.name} (#{f.um})"
-              %td
+                %span{style: "color:blue"}= "#{f.name} (#{f.um})"
+              %td.ta-ri
                 - s = f.stks.monthly(y,m).sum(:qu); ts += s
-                %span.stats.ri= "%.2f" % s
-              %td
+                %span= "%.2f" % s
+              %td.ta-ri
                 - i = f.ins.monthly(y,m).sum(:qu); ti += i
-                %span.stats.ri= "%.2f" % i
-              %td
+                %span= "%.2f" % i
+              %td.ta-ri
                 - o = f.outs.monthly(y,m).sum(:qu); to += o
-                %span.stats.ri= "%.2f" % o
-              %td
+                %span= "%.2f" % o
+              %td.ta-ri
                 - fsn = (s + i - o); tfsn += fsn
-                %span.stats.ri.st= "%.2f" % fsn
+                %span.st= "%.2f" % fsn
               - firm.units.asc(:slug).each_with_index do |u,i|
                 - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
-                %td
-                  %span.stats.ri= "%.2f" % psn
+                %td.ta-ri
+                  %span= "%.2f" % psn
         - t = [ts,ti,to,tfsn,tpsn].flatten
         %tr
           %td
-            %span.stats.ce.st Total
+            %span Total
           - t.each do |v|
             %td
-              %span.val= "%.2f" % v
+              %span= "%.2f" % v
       - else
         - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
         - Clns::Freight.by_id_stats("#{c0}#{c1}#{c2}00").each do |f|
           %tr
             %td
-              %span.stats{style: "color:blue"}= "#{f.name} (#{f.um})"
-            %td
+              %span{style: "color:blue"}= "#{f.name} (#{f.um})"
+            %td.ta-ri
               - s = f.stks.monthly(y,m).sum(:qu); ts += s
-              %span.stats.ri= "%.2f" % s
-            %td
+              %span= "%.2f" % s
+            %td.ta-ri
               - i = f.ins.monthly(y,m).sum(:qu); ti += i
-              %span.stats.ri= "%.2f" % i
-            %td
+              %span= "%.2f" % i
+            %td.ta-ri
               - o = f.outs.monthly(y,m).sum(:qu); to += o
-              %span.stats.ri= "%.2f" % o
-            %td
+              %span= "%.2f" % o
+            %td.ta-ri
               - fsn = (s + i - o); tfsn += fsn
-              %span.stats.ri.st= "%.2f" % fsn
+              %span.st= "%.2f" % fsn
             - firm.units.asc(:slug).each_with_index do |u,i|
               - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
-              %td
-                %span.stats.ri= "%.2f" % psn
+              %td.ta-ri
+                %span= "%.2f" % psn
         - t = [ts,ti,to,tfsn,tpsn].flatten
         %tr
           %td
-            %span.stats.ce.st Total
+            %span Total
           - t.each do |v|
             %td
-              %span.val= "%.2f" % v
+              %span= "%.2f" % v
