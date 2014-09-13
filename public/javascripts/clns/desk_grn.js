@@ -75,7 +75,7 @@
             v.find('span.out').text(r.sout.toFixed(2));
             $('tr.grn-freight-header, tr.grn-freight-total').removeClass('hidden');
             $('tr.grn-freight-total').before(v);
-            Clns.desk.grn.buttons($('span.button'));
+            Clns.desk.grn.buttons($('span.button i'));
             return Clns.desk.grn.grnCalculate();
           },
           freightCalculate: function() {
@@ -127,10 +127,10 @@
                 if ($('#supplr_d_id').val() !== '' && $('#supplr_d_id').val() !== 'new') {
                   $url += "&supplr_d_id=" + ($('#supplr_d_id').val());
                 }
-                $('button.grn').data('url', $url);
-                $('button.grn').button('option', 'disabled', false);
+                $('button[data-action="create"]').data('url', $url);
+                $('button[data-action="create"]').button('option', 'disabled', false);
               } else {
-                $('button.grn').button('option', 'disabled', true);
+                $('button[data-action="create"]').button('option', 'disabled', true);
               }
             },
             create: function() {
@@ -141,7 +141,7 @@
                   } else {
                     $('button[data-action="save"]').button('option', 'disabled', false);
                   }
-                  $('span.icon-plus-sign').show();
+                  $('span.fa-plus-circle').show();
                   return true;
                 }
               }
@@ -234,8 +234,8 @@
                     return $('td.add-freight-container').load($url, function() {
                       Clns.desk.grn.selects($('select.clns.freight'));
                       if ($id_stats.slice(-2) !== '00') {
-                        $('span.button.flri').removeClass('hidden');
-                        Clns.desk.grn.buttons($('span.button'));
+                        $('span.button.fl-ri').removeClass('hidden');
+                        Clns.desk.grn.buttons($('span.button i'));
                         return $('.focus').focus().select();
                       }
                     });
@@ -397,7 +397,7 @@
                 }
                 if ($bd.action === 'create') {
                   if ($('input:checked').length === 0) {
-                    if ($button.hasClass('grn')) {
+                    if ($id === void 0) {
                       return $button.button('option', 'disabled', true);
                     }
                   } else {
@@ -417,13 +417,19 @@
                     }
                   }
                 }
-                if ($button.hasClass('icon-refresh')) {
+                if ($button.hasClass('fa-bars')) {
+                  $button.off('click');
+                  $button.on('click', function() {
+                    return $('td.add-freight-container').toggle();
+                  });
+                }
+                if ($button.hasClass('fa-calculator')) {
                   $button.off('click');
                   $button.on('click', function() {
                     return Clns.desk.grn.freightCalculate();
                   });
                 }
-                if ($button.hasClass('icon-plus-sign')) {
+                if ($button.hasClass('fa-plus-circle')) {
                   $button.off('click');
                   $button.on('click', function() {
                     Clns.desk.grn.freightInsert();
@@ -433,7 +439,7 @@
                     });
                   });
                 }
-                if ($button.hasClass('icon-minus-sign')) {
+                if ($button.hasClass('fa-minus-circle')) {
                   $button.off('click');
                   return $button.on('click', function() {
                     $button.parentsUntil('tbody').last().remove();
@@ -476,7 +482,7 @@
               $('#date_show').datepicker('option', 'minDate', min);
             }
             $('.focus').focus();
-            Clns.desk.grn.buttons($('button'));
+            Clns.desk.grn.buttons($('button, span.button i'));
             Clns.desk.grn.selects($('select.clns,input.select2,input.repair'));
             Clns.desk.grn.inputs($('input'));
             Clns.desk.grn.template = (_ref = $('tr.template')) != null ? _ref.remove() : void 0;

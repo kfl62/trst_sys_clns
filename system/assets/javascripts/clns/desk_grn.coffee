@@ -55,7 +55,7 @@ define () ->
           v.find('span.out').text r.sout.toFixed(2)
           $('tr.grn-freight-header, tr.grn-freight-total').removeClass('hidden')
           $('tr.grn-freight-total').before(v)
-          Clns.desk.grn.buttons($('span.button'))
+          Clns.desk.grn.buttons($('span.button i'))
           Clns.desk.grn.grnCalculate()
         freightCalculate: ()->
           v  = $('.add-freight')
@@ -89,10 +89,10 @@ define () ->
               $url = Trst.desk.hdf.attr('action')
               $url += "?supplr_id=#{$('#supplr_id').val()}"
               $url += "&supplr_d_id=#{$('#supplr_d_id').val()}" if $('#supplr_d_id').val() isnt '' and $('#supplr_d_id').val() isnt 'new'
-              $('button.grn').data('url', $url)
-              $('button.grn').button 'option', 'disabled', false
+              $('button[data-action="create"]').data('url', $url)
+              $('button[data-action="create"]').button 'option', 'disabled', false
             else
-              $('button.grn').button 'option', 'disabled', true
+              $('button[data-action="create"]').button 'option', 'disabled', true
             return
           create: ()->
             if $('select.doc_type').length
@@ -101,7 +101,7 @@ define () ->
                   $('button[data-action="save"]').button 'option', 'disabled', true
                 else
                   $('button[data-action="save"]').button 'option', 'disabled', false
-                $('span.icon-plus-sign').show()
+                $('span.fa-plus-circle').show()
                 return true
             return
         inputs: (inpts)->
@@ -170,8 +170,8 @@ define () ->
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.grn.selects($('select.clns.freight'))
                     if $id_stats.slice(-2) isnt '00'
-                      $('span.button.flri').removeClass('hidden')
-                      Clns.desk.grn.buttons($('span.button'))
+                      $('span.button.fl-ri').removeClass('hidden')
+                      Clns.desk.grn.buttons($('span.button i'))
                       $('.focus').focus().select()
                 else
                   alert Trst.i18n.msg.grn_not_complete
@@ -285,7 +285,7 @@ define () ->
                 $button.hide()
               if $bd.action is 'create'
                 if $('input:checked').length is 0
-                  $button.button 'option', 'disabled', true if $button.hasClass 'grn'
+                  $button.button 'option', 'disabled', true if $id is undefined
                 else
                   $bd   = $button.data()
                   $url  = '/sys/clns/grn/create?id_intern=true'
@@ -297,18 +297,22 @@ define () ->
               unless Clns.desk.grn.validate.create()
                 if $bd.action is 'save'
                   $button.button 'option', 'disabled', true  unless Clns.desk.grn.dln_ary?.length > 0
-              if $button.hasClass 'icon-refresh'
+              if $button.hasClass 'fa-bars'
+                $button.off 'click'
+                $button.on 'click', ()->
+                  $('td.add-freight-container').toggle()
+              if $button.hasClass 'fa-calculator'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.grn.freightCalculate()
-              if $button.hasClass 'icon-plus-sign'
+              if $button.hasClass 'fa-plus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   Clns.desk.grn.freightInsert()
                   $url = "/sys/partial/clns/shared/_doc_add_freight?id_stats=00000000"
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.grn.selects($('select.clns.freight'))
-              if $button.hasClass 'icon-minus-sign'
+              if $button.hasClass 'fa-minus-circle'
                 $button.off 'click'
                 $button.on 'click', ()->
                   $button.parentsUntil('tbody').last().remove()
@@ -339,7 +343,7 @@ define () ->
             $('#date_show').datepicker 'option', 'maxDate', '+0'
             $('#date_show').datepicker 'option', 'minDate', min
           $('.focus').focus()
-          Clns.desk.grn.buttons($('button'))
+          Clns.desk.grn.buttons($('button, span.button i'))
           Clns.desk.grn.selects($('select.clns,input.select2,input.repair'))
           Clns.desk.grn.inputs($('input'))
           Clns.desk.grn.template = $('tr.template')?.remove()
