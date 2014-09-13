@@ -52,7 +52,7 @@
             v.find('input.val_invoice').val(r.val_invoice);
             $('tr.dln-freight-header, tr.dln-freight-total').removeClass('hidden');
             $('tr.dln-freight-total').before(v);
-            Clns.desk.delivery_note.buttons($('span.button'));
+            Clns.desk.delivery_note.buttons($('span.button i'));
             Clns.desk.delivery_note.dlnCalculate();
           },
           freightCalculate: function() {
@@ -168,8 +168,8 @@
                     return $('td.add-freight-container').load($url, function() {
                       Clns.desk.delivery_note.selects($('select.clns.freight'));
                       if ($id_stats.slice(-2) !== '00') {
-                        $('span.button.flri').removeClass('hidden');
-                        Clns.desk.delivery_note.buttons($('span.button'));
+                        $('span.button.fl-ri').removeClass('hidden');
+                        Clns.desk.delivery_note.buttons($('span.button i'));
                         return $('.focus').focus().select();
                       }
                     });
@@ -338,6 +338,12 @@
                     $button.button('option', 'disabled', true);
                   }
                 }
+                if ($button.hasClass('fa-bars')) {
+                  $button.off('click');
+                  $button.on('click', function() {
+                    return $('td.add-freight-container').toggle();
+                  });
+                }
                 if ($button.hasClass('fa-refresh')) {
                   $button.off('click');
                   $button.on('click', function() {
@@ -400,7 +406,7 @@
               $('#date_show').datepicker('option', 'minDate', min);
             }
             $('.focus').focus();
-            Clns.desk.delivery_note.buttons($('button'));
+            Clns.desk.delivery_note.buttons($('button, span.button i'));
             Clns.desk.delivery_note.selects($('select.clns,input.select2,input.repair'));
             Clns.desk.delivery_note.template = (_ref = $('tr.template')) != null ? _ref.remove() : void 0;
             return $log('Clns.desk.delivery_note.init() OK...');
