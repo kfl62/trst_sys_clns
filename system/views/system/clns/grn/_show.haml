@@ -3,27 +3,36 @@
   %tbody.inner
     %tr
       - mat(@object,'table_header')[0..-2].each do |label|
-        %td.ce= label
+        %td
+          %span= label
     - @object.freights.each do |o|
       %tr
         - td_value_for  o, 'freight',   {order: 'name',style: 'name',nested: 'doc_grn'}
-        - td_value_for  o, 'um',        {style: 'um', nested: 'doc_grn'}
-        - td_value_for  o, 'pu',        {style: 'pu',precision: 4, nested: 'doc_grn'}
-        - td_value_for  o, 'qu',        {style: 'qu', nested: 'doc_grn'}
-        - td_value_for  o, 'val',       {style: 'val',nested: 'doc_grn'}
-        - td_value_for  o, 'tva',       {style: 'val',nested: 'doc_grn'}
-        - td_value_for  o, 'out',       {style: 'val',nested: 'doc_grn'}
+        %td.ta-ce
+          - value_for  o, 'um',        {style: 'um', nested: 'doc_grn'}
+        %td.ta-ri
+          - value_for  o, 'pu',        {style: 'pu',precision: 4, nested: 'doc_grn'}
+        %td.ta-ri
+          - value_for  o, 'qu',        {style: 'qu', nested: 'doc_grn'}
+        %td.ta-ri
+          - value_for  o, 'val',       {style: 'val',nested: 'doc_grn'}
+        %td.ta-ri
+          - value_for  o, 'tva',       {style: 'val',nested: 'doc_grn'}
+        %td.ta-ri
+          - value_for  o, 'out',       {style: 'val',nested: 'doc_grn'}
     %tr
-      %td.ce.st{colspan: '4'}
+      %td{colspan: '4'}
         %span Total
       %td
-        %span.val= "%.2f" % @object.sum_100
+        %span= "%.2f" % @object.sum_100
       %td
-        %span.val= "%.2f" % @object.sum_tva
+        %span= "%.2f" % @object.sum_tva
       %td
-        %span.val= "%.2f" % @object.sum_out
+        %span= "%.2f" % @object.sum_out
 - else
   %tbody
     %tr
       %td
-        %span.warning.width-450.ju= t('msg.no_freight_selected')
+        %detail.warning.w-45rem
+          %i.fa.fa-info-circle.fa-lg.blue
+          = t('msg.no_freight_selected')

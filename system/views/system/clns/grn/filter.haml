@@ -7,42 +7,45 @@
   bckgrnd = {"dpct" => "#FFBFF0","frsg" => "#DDDDDD","trbd" => "#FFFF99","dpsb" => "#BFFFBF","hcct" => "#B0AFBF"}
 - if params[:id_intern]
   %span#hidden_data{data: {dialog: 'filter',model_name: mat(@object,'model_name_id_intern'),oid: 'null',js_ext: 'desk_grn',unit_id: to_unit}}
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    - if @current_user.admin?
+      = t('intro.filter.desk_grn.admin',unit: unit.name[1])
+    - else
+      = t('intro.filter.desk_grn.user',unit: unit.name[1],slug: unit.slug.downcase)
   %form{action: "/sys/#{@path}/filter?id_intern=true", method: 'get'}
     %table
       %thead
         %tr.pdb-05
-          %td
-            - if @current_user.admin?
-              %span.info.info.width-450.ju= t('intro.filter.desk_grn.admin',unit: unit.name[1])
-            -else
-              %span.info.info.width-450.ju= t('intro.filter.desk_grn.user',unit: unit.name[1],slug: unit.slug)
         - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(:unit_id.ne  => to_unit)
         - dlns = Clns::DeliveryNote.nonin(false).charged(false).where(unit_id: from_unit) if from_unit
         - if dlns.empty?
           %tr.pdb-05
             %td
-              %span.info.width-250= t('intro.filter.desk_grn.no_dln')
+              %detail.detail
+                %i.fa.fa-info-circle.fa-lg.blue
+                = t('intro.filter.desk_grn.no_dln')
         - else
           %tr.pdb-05
             %td
-              %span.width-450{style: 'display:inline-block'}
+              %span.w-45rem
                 - dlns.each_with_index do |dln,i|
-                  %label{style: "border-right: solid 1px #333333;padding-right: 3px;cursor: pointer;background-color: #{bckgrnd[dln.name.split('_')[1].downcase]};display:inline-block",
+                  %labeldoc-name-list{style: "background-color: #{bckgrnd[dln.name.split('_')[1].downcase]}",
                          title: "#{dln.id_date}\n#{dln.name}\n#{dln.freights_list.join("\n")}"}
                     %input.dln_ary{id:dln.id,type: 'checkbox',checked: dln_ary.include?(dln.id.to_s)}
                     = dln.doc_name
           %tr.pdb-05
             %td
-              %span.small= t('intro.filter.desk_grn.legend')
+              %span= t('intro.filter.desk_grn.legend')
               - firm.units.asc(:slug).each do |u|
-                %span.small{:style => "background-color: #{bckgrnd[u.slug.downcase]};cursor:pointer", title: "#{u.name[1]}"}= u.name[0]
+                %span{:style => "background-color: #{bckgrnd[u.slug.downcase]};cursor:pointer", title: "#{u.name[1]}"}= u.name[0]
               %br
-              %span.small= t('intro.filter.desk_grn.hover')
+              %span= t('intro.filter.desk_grn.hover')
       %tbody
         - unless dln_ary.empty?
           %tr.pdb-05
             %td
-              %table{style: "margin:auto;font-size:12px"}
+              %table.inner
                 %tbody.inner
                   %tr
                     - mat(@object,'table_header')[0..4].each do |label|
@@ -50,48 +53,44 @@
                   - data = Clns::DeliveryNote.where(:id.in => dln_ary).sum_freights_grn; data.sort.each do |s|
                     %tr
                       %td
-                        %span.stats= s[1][0]
-                      %td
-                        %span.um= s[1][0]= s[1][2]
-                      %td
-                        %span.pu= "%.4f" % s[1][3]
-                      %td
-                        %span.qu= "%.2f" % s[1][4]
-                      %td
-                        %span.val= "%.2f" % s[1][5]
-                  %tr.result
-                    %td.ce.st{:colspan => "4"}= "Total"
+                        %span= s[1][0]
+                      %td.ta-ce.w-4rem
+                        %span= s[1][0]= s[1][2]
+                      %td.ta-ri
+                        %span= "%.4f" % s[1][3]
+                      %td.ta-ri
+                        %span= "%.2f" % s[1][4]
+                      %td.ta-ri
+                        %span= "%.2f" % s[1][5]
+                  %tr
+                    %td{:colspan => "4"}= "Total"
                     %td
-                      %span.val= "%.2f" % data.values.sum{|r| r[5]}
+                      %span= "%.2f" % data.values.sum{|r| r[5]}
       %tfoot
         %tr
-          %td.buttonset.ce
-            %button.grn{type: 'button', data: {action: 'create', icon: 'circle-plus'}}=  t('button.create') + " NIR!"
-            %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
+          - td_buttonset(['create','cancel'],{style: 'ta-ce', create: {text: t('button.create') + " NIR!"}})
 - else
   :ruby
     unit_id = @current_user.unit_id || session[:unit_id]
   %span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_grn'}}
   -if unit_id
+    %article#xhr_info.info
+      %i.fa.fa-info-circle.fa-lg.blue
+      = t('intro.filter.desk_grn.partner_firm',unit: unit.name[1])
     - unless @current_user.unit_id
       = partial 'clns/shared/select_unit'
     %form{action: "/sys/#{@path}", method: 'get'}
       %table
         %thead
-          %tr.pdb-05
-            %td
-              %span.info.width-550.ju= t('intro.filter.desk_grn.partner_firm',unit: unit.name[1])
         %tbody
           %tr.pdb-05
             %td
               %input#supplr_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '2',ph: '0',search: 'Clns::PartnerFirm',noinit: 'true'}}
               %input#supplr_d_id.select2{type: 'hidden', style: 'width:200px', data: {minlength: '0',ph: '1',search: 'Clns::PartnerFirm',noinit: 'true'}}
-              %button#supplr_d{type: "button", data: {action: "create", icon: "circle-plus"}}=  t('button.create') + " Delegat!"
+              %button#supplr_d{type: "button", data: {action: "create", icon: "fa fa-plus-square-o"}}=  t('button.create') + " Delegat!"
         %tfoot
           %tr
-            %td.buttonset.ce
-              %button.grn{type: 'button', data: {action: 'create', icon: 'circle-plus'}}=  t('button.create') + " NIR!"
-              %button{type: 'button', data: {action: "cancel", icon: 'circle-close'}}= t('button.cancel')
+          - td_buttonset(['create','cancel'],{style: 'ta-ce', create: {text: t('button.create') + " NIR!"}})
   -else
     %form{action: "/sys/#{@path}",method: "get"}
       = partial 'clns/shared/select_unit'

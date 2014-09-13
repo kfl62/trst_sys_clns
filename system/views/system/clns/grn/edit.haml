@@ -2,16 +2,14 @@
 %form{action: "/sys/#{@path}", method: "put"}
   %table
     %thead
-      %tr
-        %td{colspan: @object.id_intern == true ? '5' : '6'}
+      %tr.pdb-05
+        %td{colspan: '7'}
           - label_for @object, 'doc_name'
           - input_for @object, 'doc_name'
       %tr.pdb-05
-        %td{colspan: @object.id_intern == true ? '5' : '6'}
-          - input_for @object, 'expl', {style: 'ui-state-default width-450'}
+        %td{colspan: '7'}
+          - input_for @object, 'expl', {style: 'ui-state-default w-45rem'}
     = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: @object.id_intern == true ? '5' : '6'}
-          %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'},'7')

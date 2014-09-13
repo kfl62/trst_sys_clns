@@ -18,8 +18,7 @@
             %input.repair{type: 'hidden',style: 'width:410px',data: {search: 'Clns::Grn',ph: '4',uid: unit_id}}
       %tfoot
         %tr
-          %td.buttonset.ce
-            %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+          - td_buttonset(['cancel'],{style: 'ta-ce'})
 -else
   %form{action: "/sys/#{@path}", method: "get"}
     = partial 'clns/shared/select_unit'
