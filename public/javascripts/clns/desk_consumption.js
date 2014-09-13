@@ -50,7 +50,7 @@
             v.find('span.val').text(r.sval.toFixed(2));
             $('tr.consumption-freight-header, tr.consumption-freight-total').removeClass('hidden');
             $('tr.consumption-freight-total').before(v);
-            Clns.desk.consumption.buttons($('span.button'));
+            Clns.desk.consumption.buttons($('span.button i'));
             Clns.desk.consumption.consumptionCalculate();
           },
           freightCalculate: function() {
@@ -142,8 +142,8 @@
                     return $('td.add-freight-container').load($url, function() {
                       Clns.desk.consumption.selects($('select.clns.freight'));
                       if ($id_stats.slice(-2) !== '00') {
-                        $('span.button.flri').removeClass('hidden');
-                        Clns.desk.consumption.buttons($('span.button'));
+                        $('span.button.fl-ri').removeClass('hidden');
+                        Clns.desk.consumption.buttons($('span.button i'));
                         return $('.focus').focus().select();
                       }
                     });

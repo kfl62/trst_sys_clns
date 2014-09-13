@@ -37,7 +37,7 @@ define () ->
           v.find('span.val').text r.sval.toFixed(2)
           $('tr.consumption-freight-header, tr.consumption-freight-total').removeClass('hidden')
           $('tr.consumption-freight-total').before(v)
-          Clns.desk.consumption.buttons($('span.button'))
+          Clns.desk.consumption.buttons($('span.button i'))
           Clns.desk.consumption.consumptionCalculate()
           return
         freightCalculate: ()->
@@ -105,8 +105,8 @@ define () ->
                   $('td.add-freight-container').load $url, ()->
                     Clns.desk.consumption.selects($('select.clns.freight'))
                     if $id_stats.slice(-2) isnt '00'
-                      $('span.button.flri').removeClass('hidden')
-                      Clns.desk.consumption.buttons($('span.button'))
+                      $('span.button.fl-ri').removeClass('hidden')
+                      Clns.desk.consumption.buttons($('span.button i'))
                       $('.focus').focus().select()
                 else
                   alert Trst.i18n.msg.consumption_not_complete
