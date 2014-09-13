@@ -28,9 +28,11 @@
           - input_for @object, 'doc_plat'
       %tr.pdb-05
         %td
-          - input_for @object, 'expl',     {style: 'ui-state-default width-500',placeholder: mat(@object,'expl_ph')}
+          - input_for @object, 'expl',     {style: 'ui-state-default w-50rem',placeholder: mat(@object,'expl_ph')}
+          %span.button.red.pointer
+            %i.fa.fa-bars
       %tr
-        %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
+        %td.add-freight-container
           = partial "clns/shared/doc_add_freight_stock"
       %tr.pdb-05
         %td

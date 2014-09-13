@@ -3,7 +3,8 @@
   %tbody.inner
     %tr
       - mat(@object,'table_header_show').each do |label|
-        %td= label
+        %td
+          %span= label
     - @object.freights.asc(:id_stats).each do |o|
       %tr
         %td
