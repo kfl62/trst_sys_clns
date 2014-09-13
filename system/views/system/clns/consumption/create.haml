@@ -21,7 +21,7 @@
           - label_for @object, 'expl'
           - input_for @object, 'expl',      {value: mat(@object,'expl_default'),style: 'ui-state-default w-50rem'}
       %tr.pdb-05
-        %td.add-freight-container{style: 'padding: 5px;border: solid 1px'}
+        %td.add-freight-container.inline
           = partial "clns/shared/doc_add_freight_stock"
     = partial "#{@path}/form"
     %tfoot

@@ -18,5 +18,12 @@
     display: none;
     padding: .5rem;
     position: fixed;
+    &.inline {
+      background-color: inherit;
+      border-radius: 0;
+      box-shadow: inherit;
+      display: block;
+      position: static;
+    }
   }
 }
