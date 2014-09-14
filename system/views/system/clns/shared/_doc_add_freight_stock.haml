@@ -4,12 +4,14 @@
   pu_inv   = params[:pu_inv].to_bool if params[:pu_inv]
   unit_id  = @current_user.unit_id || session[:unit_id]
   freights = Clns::PartnerFirm.find_by(firm: true).units.find(unit_id).stock_now.freights.where(:qu.ne => 0)
-%table
+%table.w-100pr
   %tr
     %td{colspan: 6}
       %span Selectare material de adăugat la document!
-      %span.hidden.button.flri.pdr-05.red.pointer.icon-plus-sign.icon-large{title: t('button.new_row')}
-      %span.hidden.button.flri.pdr-05.red.pointer.icon-refresh.icon-large
+      %span.hidden.button.fl-ri.red.pointer
+        %i.fa.fa-plus-circle.fa-lg{title: t('button.new_row')}
+      %span.hidden.button.fl-ri.red.pointer
+        %i.fa.fa-refresh.fa-lg
   %tr
     %td{colspan: 6}
       %select.clns.freight.c0
@@ -30,30 +32,30 @@
     %tr
       %td
         %span.add-freight.name{data: {freight_id: f.freight_id.to_s,name: f.name,id_stats: f.id_stats,qu: f.qu}}= f.name
-      %td.width-50
+      %td.ta-ri.w-6rem
         %span.add-freight.pu= "%0.4f" % f.pu
-      %td.width-50
+      %td.ta-ri.w-6rem
         %span.add-freight.qu= "%0.2f" % f.qu
-      %td.width-25
-        %span.add-freight.um.pdr-05= f.um
-      %td
-        %input.add-freight.qu.focus{value: '0.00'}
+      %td.ta-ce.w-4rem
+        %span.add-freight.um= f.um
+      %td.ta-ri
+        %input.add-freight.ta-ri.w-6rem.focus.qu{value: '0.00'}
         - unless pu_inv.nil?
-          %input.add-freight.pu_inv{type: 'checkbox',checked: pu_inv}
-      %td.width-50
-        %span.add-freight.val.pdr-05 0.00
+          %input.add-freight.ta-ri.w-6rem.pu_inv{type: 'checkbox',checked: pu_inv}
+      %td.ta-ri.w-6rem
+        %span.add-freight.val 0.00
   - else
     %tr
       %td
         %span.name Material
-      %td.width-50
+      %td.w-6rem
         %span.pu PU
-      %td.width-50
+      %td.w-6rem
         %span.qu Stoc
-      %td.width-25
-        %span.um.pdr-05 UM
-      %td
-        %input.qu{disabled: true,value: 'Cant. aviz'}
-      %td.width-50
-        %span.val.pdr-05 Valoare
+      %td.w-4rem
+        %span.um UM
+      %td.w-6rem
+        %input.ta-ce.qu{disabled: true,value: 'Cant. aviz'}
+      %td.w-6rem
+        %span.val Valoare
 

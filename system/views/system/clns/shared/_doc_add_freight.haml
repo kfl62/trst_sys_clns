@@ -2,13 +2,15 @@
   id_stats = params[:id_stats] || locals[:id_stats] || "00000000"
   c0,c1,c2 = id_stats.scan(/\d{2}/)
   freights = Clns::Freight
-%table
+%table.w-100pr
   %tr
     %td{colspan: 3}
       %span Selectare material de adăugat la document!
-      %span.hidden.button.flri.pdr-05.red.pointer.icon-plus-sign.icon-large{title: t('button.new_row')}
-      %span.hidden.button.flri.pdr-05.red.pointer.icon-refresh.icon-large
-  %tr
+      %span.button.fl-ri.red.pointer.hidden{title: t('button.new_row')}
+        %i.fa.fa-plus-circle.fa-lg
+      %span.button.fl-ri.red.pointer.hidden
+        %i.fa.fa-refresh.fa-lg
+  %tr.pdb-05
     %td{colspan: 3}
       %select.clns.freight.c0
         - t("freight.c0").each do |c|
@@ -28,22 +30,22 @@
       %td
         %span.add-freight.name{data: {freight_id: f.id.to_s,name: f.name,id_stats: f.id_stats,tva: f.tva}}= f.name
       %td
-        %input.add-freight.um{value: f.um}
-        %input.add-freight.pu{value: "%.4f" % f.pu}
-        %input.add-freight.qu.focus{value: '0.00'}
+        %input.ta-ce.w-4rem.add-freight.um{value: f.um}
+        %input.ta-ri.w-6rem.add-freight.pu{value: "%.4f" % f.pu}
+        %input.ta-ri.w-6rem.add-freight.qu.focus{value: '0.00'}
       %td
-        %span.add-freight.out 0.00
-        %span.add-freight.tva 0.00
-        %input.add-freight.val{value: '0.00'}
+        %span.ta-ri.w-6rem.add-freight.out 0.00
+        %span.ta-ri.w-6rem.add-freight.tva 0.00
+        %input.ta-ri.w-6rem.add-freight.val{value: '0.00'}
   - else
     %tr
       %td
         %span.name Material
       %td
-        %input.um{disabled: true,value: 'um'}
-        %input.pu{disabled: true,value: '0.0000'}
-        %input.qu{disabled: true,value: '0.00'}
+        %input.ta-ce.w-4rem.um{disabled: true,value: 'um'}
+        %input.ta-ri.w-6rem.pu{disabled: true,value: '0.0000'}
+        %input.ta-ri.w-6rem.qu{disabled: true,value: '0.00'}
       %td
-        %span.out 0.00
-        %span.tva 0.00
-        %input.val{disabled: true,value: '0.00'}
+        %span.ta-ri.w-6rem.out 0.00
+        %span.ta-ri.w-6rem.tva 0.00
+        %input.ta-ri.w-6rem.val{disabled: true,value: '0.00'}
