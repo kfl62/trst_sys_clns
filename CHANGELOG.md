@@ -3,6 +3,36 @@
 release date: **2014-xx-xx**
 
 
+* **feature v0.2.995**, v0.3.0 preparation
+   - feature date: **2014-09-14**
+   - bump version v0.2.995
+   - update CHANGELOG
+   - views `shared/_partials` update
+   - views `Clns::Stock` CRUD, issue #31
+   - assets js, `Clns.desk.stock` update, rewrite
+   - views `Clns::Sorting` CRUD, issue #31
+   - assets js, `Clns.desk.sorting` update, rewrite
+   - views `Clns::PartnerFirm` CRUD, issue #31
+   - views `Clns::Invoicee` CRUD, issue #31
+   - assets js, `Clns.desk.invoice` update, rewrite
+   - assets, views for `Clns::DeliveryNote|Consumption` fix issue #35
+   - assets js, fix issue #36
+   - views `Clns::Grn` CRUD, issues #31, #35
+   - assets css, temporary solution for issue #35
+   - assets js, `Clns.desk.grn` update, rewrite, issue #35
+   - views `Clns::Freight` CRUD, issue #31
+   - assets js, `Clns.desk.freight` update, rewrite, fix #34
+   - views `Clns::DeliveryNote` CRUD, issue #31
+   - assets js, `Clns.desk.delivery_note` update, rewrite
+   - views `Clns::Consumption` CRUD, issue #31
+   - assets js, `Clns.desk.consumption` update, rewrite
+   - views `Clns::CacheBook` CRUD, issue #31
+   - assets js, `Clns.desk.cache_book` update, rewrite
+   - views new partial for common selects, fix #33
+   - views pdf templates, cleanup & fix #30, see also kfl62/trst_sys_sinatra#22
+   - views cleanup (`.hidden, cellspacing`) fix #32
+
+
 * **feature v0.2.994**, v0.3.0 preparation
    - feature date: **2014-08-26**
    - bump version v0.2.994
