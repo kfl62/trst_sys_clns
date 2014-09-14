@@ -10,7 +10,7 @@
   %form{action: "/sys/#{@path}", method: 'post'}
     %table
       %thead
-        %tr
+        %tr.pdb-05
           %td
             - label_for @object, 'name'
             - input_for @object, 'name',        {value: @object.increment_name,style: 'ui-state-default ce id_intern'}
@@ -28,17 +28,16 @@
             - input_for  @object,'doc_name',    {placeholder: mat(@object,'doc_name'), style: 'ui-state-default focus'}
         %tr.pdb-05
           %td
-            %span.info.width-450.ju= t('intro.create.desk_invoice.grn')
+            %detail.detail.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.create.desk_invoice.grn')
         %tr.pdb-05
           %td
-            %hr
-            %span.small.width-450{style: 'display:inline-block'}= mat(@object,'grns_name').concat @object.grns.map(&:doc_name).join(', ')
+            %span= mat(@object,'grns_name').concat @object.grns.map(&:doc_name).join(', ')
         = partial "#{@path}/form", locals: {grns: grn_ary,dlns: nil}
         %tfoot
           %tr
-            %td.buttonset.ce
-              %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-              %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+            - td_buttonset(['save','cancel'],{style: 'ta-ce'})
 - else
   :ruby
     client   = Clns::PartnerFirm.find(params[:client_id])
@@ -49,7 +48,7 @@
   %form{action: "/sys/#{@path}", method: 'post'}
     %table
       %thead
-        %tr
+        %tr.pdb-05
           %td
             - label_for @object, 'name'
             - input_for @object, 'name',        {value: @object.increment_name,style: 'ui-state-default ce id_intern'}
@@ -63,18 +62,17 @@
             - dln_ary.each do |dn|
               -input_for @object,'dln_ids',     {type: 'hidden',name: "[#{@path}][dln_ids][]",value: dn}
         %tr.pdb-05
-          %td
+          %td.w-10rem
             - input_for  @object,'doc_name',    {placeholder: mat(@object,'doc_name'), style: 'ui-state-default focus'}
         %tr.pdb-05
           %td
-            %span.info.width-550.ju= t('intro.create.desk_invoice.main')
+            %detail.detail.w-50rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.create.desk_invoice.main')
         %tr.pdb-05
           %td
-            %hr
-            %span.small.width-550{style: 'display:inline-block'}= mat(@object,'dlns_name').concat @object.dlns.map(&:doc_name).join(', ')
+            %span= mat(@object,'dlns_name').concat @object.dlns.map(&:doc_name).join(', ')
         = partial "#{@path}/form", locals: {dlns: dln_ary, grns: nil}
         %tfoot
           %tr
-            %td.buttonset.ce
-              %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}= t('button.save')
-              %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+            - td_buttonset(['save','cancel'],{style: 'ta-ce'})

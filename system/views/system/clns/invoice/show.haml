@@ -8,18 +8,21 @@
     %thead
       %tr.pdb-05
         %td
-        -if grns
-          %span.info.width-450.ju= t('intro.show.desk_invoice.grn',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
-        -else
-          %span.info.width-450.ju= t('intro.show.desk_invoice.main',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+          -if grns
+            %detail.detail.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.show.desk_invoice.grn',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+          -else
+            %detail.detail.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.show.desk_invoice.main',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
     = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce
-          - if @object.freights.count == 0
-            %button{type: "button", data: {action: "delete", icon: "circle-minus",type: 'delete'}}= t('button.delete')
+        - if @object.freights.count == 0
+          - td_buttonset(['delete'],{style: 'ta-ce'})
+        - else
+          - if @current_user.admin?
+            - td_buttonset(['print','delete','cancel'],{style: 'ta-ce'})
           - else
-            %button{type: "button", data: {action: "print",  icon: "print"}}= t('button.print')
-            - if @current_user.admin? || @object.id_date == Date.today
-              %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
-            %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+            - td_buttonset(['print','cancel'],{style: 'ta-ce'})

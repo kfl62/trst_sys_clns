@@ -13,5 +13,4 @@
           %input.repair{type: 'hidden',style: 'width:410px',data: {search: 'Clns::Invoice',ph: '2'}}
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button.focus{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['cancel'],{style: 'ta-ce'})
