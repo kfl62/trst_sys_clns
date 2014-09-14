@@ -78,6 +78,9 @@ define () ->
             $button = $(@)
             $bd = $button.data()
             $id = $button.attr('id')
+            if Trst.desk.hdo.dialog is 'filter'
+              if $bd.action in ['create','show','edit','delete']
+                $bd.r_path = 'sys/clns/sorting/filter'
             if Trst.desk.hdo.dialog is 'create'
               if $bd.action is 'save'
                 $button.button 'option', 'disabled', true
@@ -100,7 +103,7 @@ define () ->
               ###
               Buttons default handler Trst.desk.buttons
               ###
-          $('span.icon-remove-sign').each ()->
+          $('span i.fa-minus-circle').each ()->
             $button = $(@)
             $button.on 'click', ()->
               $button.parentsUntil('tbody').last().remove()

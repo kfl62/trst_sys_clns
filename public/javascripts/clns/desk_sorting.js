@@ -105,10 +105,15 @@
           },
           buttons: function(btns) {
             btns.each(function() {
-              var $bd, $button, $id;
+              var $bd, $button, $id, _ref;
               $button = $(this);
               $bd = $button.data();
               $id = $button.attr('id');
+              if (Trst.desk.hdo.dialog === 'filter') {
+                if ((_ref = $bd.action) === 'create' || _ref === 'show' || _ref === 'edit' || _ref === 'delete') {
+                  $bd.r_path = 'sys/clns/sorting/filter';
+                }
+              }
               if (Trst.desk.hdo.dialog === 'create') {
                 if ($bd.action === 'save') {
                   $button.button('option', 'disabled', true);
@@ -140,7 +145,7 @@
                  */
               }
             });
-            $('span.icon-remove-sign').each(function() {
+            $('span i.fa-minus-circle').each(function() {
               var $button;
               $button = $(this);
               $button.on('click', function() {
