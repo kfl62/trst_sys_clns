@@ -1,0 +1,8 @@
+%span#hidden_data{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id}}
+%form{action: "/sys/#{@path}",method: "put"}
+  %table
+    %thead
+    = partial "#{@path}/form"
+    %tfoot
+      %tr
+        - td_buttonset(['save','delete','cancel'],{style: 'ta-ce'},'3')
