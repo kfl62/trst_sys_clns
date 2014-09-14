@@ -1,6 +1,13 @@
 ## v0.3.0
 
-release date: **2014-xx-xx**
+release date: **2014-09-15**
+
+
+* **feature v0.2.996**, v0.3.0 preparation
+   - feature date: **2014-09-14**
+   - bump version v0.2.996
+   - update CHANGELOG
+   - views retouch fix #31
 
 
 * **feature v0.2.995**, v0.3.0 preparation
