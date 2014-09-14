@@ -1,6 +1,6 @@
 %span#hidden_data{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_cache_book'}}
 %article#xhr_info.warning
-  %i.fa.fa-warning.fa-lg
+  %i.fa.fa-fa-exclamation-triangle.fa-lg
   = t('intro.delete.main', data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "delete"}
   %table

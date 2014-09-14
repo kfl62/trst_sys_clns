@@ -49,7 +49,8 @@
                 %tbody.inner
                   %tr
                     - mat(@object,'table_header')[0..4].each do |label|
-                      %td.ce= label
+                      %td
+                        %span= label
                   - data = Clns::DeliveryNote.where(:id.in => dln_ary).sum_freights_grn; data.sort.each do |s|
                     %tr
                       %td

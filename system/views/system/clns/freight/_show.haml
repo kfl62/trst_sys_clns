@@ -38,7 +38,8 @@
   %tbody#tabs-csn{data: {title: mat(@object, :tab_csn_title)}}
     %tr.pdb-05
       %td{colspan: '3'}
-        %span.error= mat(@object,'tab_csn_empty')
+        %detail.warning
+          = mat(@object,'tab_csn_empty')
     %tr
       %td
         %span.value.ui-state-default= mat(@object,'tab_csn_create')
