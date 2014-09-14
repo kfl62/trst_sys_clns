@@ -56,14 +56,14 @@ define () ->
           return
         selectedDeliveryNotes: ()->
           @dln_ary = []
+          $params = jQuery.param($('.param').serializeArray())
           $('input:checked').each ()->
             Clns.desk.invoice.dln_ary.push(@id)
             return
           $url = Trst.desk.hdf.attr('action')
-          $url += "/filter?y=#{$('select.y').val()}"
-          $url += "&m=#{$('select.m').val()}"
+          $url += "/filter?#{$params}"
           if Clns.desk.invoice.dln_ary.length
-            $url += "&client_id=#{$('#client_id').val()}"
+            $url += "&client_id=#{$('#client_id').select2('val')}"
             $url += "&dln_ary=#{Clns.desk.invoice.dln_ary}"
             Clns.desk.tmp.clear()
             Clns.desk.tmp.set('client',$('#client_id').select2('data'))
@@ -76,12 +76,11 @@ define () ->
           return
         validate:
           filter: ()->
+            $params = jQuery.param($('.param').serializeArray())
             if Trst.desk.hdo.title_data?
               if $('#supplr_id').val() isnt '' and $('#supplr_d_id').val() isnt '' and $('#supplr_d_id').val() isnt 'new'
                 $url = Trst.desk.hdf.attr('action')
-                $url += "/filter?grn_ary=true&y=#{$('select.y').val()}"
-                $url += "&m=#{$('select.m').val()}"
-                $url += "&supplr_id=#{$('#supplr_id').val()}"
+                $url += "/filter?grn_ary=true&#{$params}"
                 Clns.desk.tmp.clear('supplr').set('supplr',$('#supplr_id').select2('data'))
                 Clns.desk.tmp.clear('supplr_d').set('supplr_d',$('#supplr_d_id').select2('data'))
                 Trst.desk.init($url)
@@ -90,9 +89,8 @@ define () ->
             else
               if $('#client_id').val() isnt '' and $('#client_d_id').val() isnt '' and $('#client_d_id').val() isnt 'new'
                 $url = Trst.desk.hdf.attr('action')
-                $url += "/filter?dln_ary=true&y=#{$('select.y').val()}"
-                $url += "&m=#{$('select.m').val()}"
-                $url += "&client_id=#{$('#client_id').val()}"
+                $url += "/filter?dln_ary=true&#{$params}"
+                $url += "&client_id=#{$('#client_id').select2('val')}"
                 Clns.desk.tmp.clear('client').set('client',$('#client_id').select2('data'))
                 Clns.desk.tmp.clear('client_d').set('client_d',$('#client_d_id').select2('data'))
                 Trst.desk.init($url)
@@ -353,7 +351,7 @@ define () ->
                 $button.hide()
               if $bd.action is 'create'
                 if $('input:checked').length is 0
-                  $button.button 'option', 'disabled', true if $button.hasClass 'inv'
+                  $button.button 'option', 'disabled', true if $bd.action is 'create'
                 else
                   $bd   = $button.data()
                   $url = Trst.desk.hdf.attr('action')

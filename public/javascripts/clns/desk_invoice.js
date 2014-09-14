@@ -64,16 +64,16 @@
             Trst.desk.init($url);
           },
           selectedDeliveryNotes: function() {
-            var $url;
+            var $params, $url;
             this.dln_ary = [];
+            $params = jQuery.param($('.param').serializeArray());
             $('input:checked').each(function() {
               Clns.desk.invoice.dln_ary.push(this.id);
             });
             $url = Trst.desk.hdf.attr('action');
-            $url += "/filter?y=" + ($('select.y').val());
-            $url += "&m=" + ($('select.m').val());
+            $url += "/filter?" + $params;
             if (Clns.desk.invoice.dln_ary.length) {
-              $url += "&client_id=" + ($('#client_id').val());
+              $url += "&client_id=" + ($('#client_id').select2('val'));
               $url += "&dln_ary=" + Clns.desk.invoice.dln_ary;
               Clns.desk.tmp.clear();
               Clns.desk.tmp.set('client', $('#client_id').select2('data'));
@@ -87,13 +87,12 @@
           },
           validate: {
             filter: function() {
-              var $url;
+              var $params, $url;
+              $params = jQuery.param($('.param').serializeArray());
               if (Trst.desk.hdo.title_data != null) {
                 if ($('#supplr_id').val() !== '' && $('#supplr_d_id').val() !== '' && $('#supplr_d_id').val() !== 'new') {
                   $url = Trst.desk.hdf.attr('action');
-                  $url += "/filter?grn_ary=true&y=" + ($('select.y').val());
-                  $url += "&m=" + ($('select.m').val());
-                  $url += "&supplr_id=" + ($('#supplr_id').val());
+                  $url += "/filter?grn_ary=true&" + $params;
                   Clns.desk.tmp.clear('supplr').set('supplr', $('#supplr_id').select2('data'));
                   Clns.desk.tmp.clear('supplr_d').set('supplr_d', $('#supplr_d_id').select2('data'));
                   Trst.desk.init($url);
@@ -103,9 +102,8 @@
               } else {
                 if ($('#client_id').val() !== '' && $('#client_d_id').val() !== '' && $('#client_d_id').val() !== 'new') {
                   $url = Trst.desk.hdf.attr('action');
-                  $url += "/filter?dln_ary=true&y=" + ($('select.y').val());
-                  $url += "&m=" + ($('select.m').val());
-                  $url += "&client_id=" + ($('#client_id').val());
+                  $url += "/filter?dln_ary=true&" + $params;
+                  $url += "&client_id=" + ($('#client_id').select2('val'));
                   Clns.desk.tmp.clear('client').set('client', $('#client_id').select2('data'));
                   Clns.desk.tmp.clear('client_d').set('client_d', $('#client_d_id').select2('data'));
                   Trst.desk.init($url);
@@ -469,7 +467,7 @@
                 }
                 if ($bd.action === 'create') {
                   if ($('input:checked').length === 0) {
-                    if ($button.hasClass('inv')) {
+                    if ($bd.action === 'create') {
                       $button.button('option', 'disabled', true);
                     }
                   } else {
@@ -515,10 +513,10 @@
                   });
                 }
               } else {
+
                 /*
                 Buttons default handler Trst.desk.buttons
-                */
-
+                 */
               }
             });
           },
