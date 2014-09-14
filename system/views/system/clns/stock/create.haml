@@ -1,0 +1,13 @@
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_stock'}}
+%form{action: "/sys/#{@path}", method: 'get'}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          %detail.detail
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('intro.filter.not_ready')
+    %tbody
+    %tfoot
+      %tr
+        - td_buttonset(['cancel'],{style: 'ta-ce'}})

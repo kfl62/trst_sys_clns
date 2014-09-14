@@ -7,26 +7,31 @@
         %tbody.inner
           %tr.scroll
             - mat(@object,'table_header').each do |label|
-              %td.ce= label
+              %td
+                %span= label
             %td
               %span &nbsp;
           - freights.each_with_index do |o,i|
             %tr.freight
               %td
-                %span.stats= o.freight.name
+                %span= o.freight.name
                 - input_for   o, 'id',         {nested: 'doc_stk',index: i,type: 'hidden',value: o.id}
                 - input_for   o, 'freight_id', {nested: 'doc_stk',index: i,type: 'hidden',value: o.freight_id}
                 - input_for   o, 'id_stats',   {nested: 'doc_stk',index: i,type: 'hidden',value: o.id_stats}
                 - input_for   o, 'id_intern',  {nested: 'doc_stk',index: i,type: 'hidden',value: 'false'}
                 - input_for   o, 'id_date',    {nested: 'doc_stk',index: i,type: 'hidden',value: @object.id_date.to_s}
-              %td
+              %td.ta-ce.w-4rem
                 %span.stats.ce= o.freight.um
                 -input_for    o, 'um',         {nested: 'doc_stk',index: i,type: 'hidden',value: o.freight.um}
-              - td_input_for  o, 'pu',         {nested: 'doc_stk',index: i,style: 'quw', value: "%.4f" % o.pu}
-              - td_input_for  o, 'qu',         {nested: 'doc_stk',index: i,style: 'quw',value: "%.2f" % o.qu}
-              %td
+              %td.ta-ce.w-8rem
+                - input_for  o, 'pu',          {nested: 'doc_stk',index: i,style: 'ta-ri w-6rem', value: "%.4f" % o.pu}
+              %td.ta-ce.w-8rem
+                - input_for  o, 'qu',          {nested: 'doc_stk',index: i,style: 'ta-ri w-6rem',value: "%.2f" % o.qu}
+              %td.ta-ri.w-8rem
                 %span.stats.ri= "%.2f" % o.val
                 - input_for  o, 'val',         {nested: 'doc_stk',index: i,type: 'hidden',value: "%.2f" % o.val}
-              %td.action-1
-                %span.icon-remove-sign{title: t('button.delete')}
-          %tr.total
+              %td.ta-ce.w-2rem
+                %span.red
+                  %i.fa.fa-minus-circle{title: t('button.delete')}
+          %tr
+            %td{colspan: '6'} &nbsp;

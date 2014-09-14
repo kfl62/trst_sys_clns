@@ -7,15 +7,14 @@
           - label_for @object, 'name',    {style: 'stats'}
           - value_for @object, 'name',    {style: 'stats st'}
           - label_for @object, 'id_date', {style: 'stats'}
-          %span.stats.width-150.ce.st= @object.id_date.to_s
+          %span= @object.id_date.to_s
       %tr.pdb-05
-        %td
-          - value_for @object, 'expl',    {style: 'stats width-250'}
+        %td.ta-le.w-25rem
+          - value_for @object, 'expl'
     = partial "#{@path}/show"
     %tfoot
       %tr
-        %td.buttonset.ce
-          - if @current_user.root?
-            %button{type: "button", data: {action: "edit",   icon: "document",remove: 'false'}}=     t('button.edit')
-            %button{type: "button", data: {action: "delete", icon: "circle-minus",remove: 'false'}}= t('button.delete')
-          %button{type: "button", data: {action: "cancel", icon: "circle-close"}}= t('button.cancel')
+        - if @current_user.root?
+          - td_buttonset(['edit','delete','cancel'],{style: 'ta-ce'})
+        -else
+          - td_buttonset(['cancel'],{style: 'ta-ce'})

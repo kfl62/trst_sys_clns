@@ -11,13 +11,11 @@
           - value_for @object, 'name',    {style: 'stats st'}
           - label_for @object, 'id_date', {style: 'stats'}
           - input_for @object, 'id_date', {type: 'hidden',value: @object.id_date.to_s}
-          %span.stats.width-150.ce.st= @object.id_date.to_s
+          %span= @object.id_date.to_s
       %tr.pdb-05
-        %td
-          - value_for @object, 'expl',    {style: 'stats width-250'}
+        %td.ta-le.w-25rem
+          - value_for @object, 'expl'
     = partial "#{@path}/form", locals: {unit: unit}
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button{type: "button", data: {action: "save",  icon: "disk",remove: 'false'}}=         t('button.save')
-          %button{type: "button", data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})
