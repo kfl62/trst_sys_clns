@@ -2,7 +2,7 @@
   firm = Clns::PartnerFirm.find_by(firm: true)
 %span#hidden_data{data: {dialog: "delete",model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_grn'}}
 %article#xhr_info.warning
-  %i.fa.fa-warning.fa-lg
+  %i.fa.fa-fa-exclamation-triangle.fa-lg
   = t('intro.delete.desk_delivery_note',data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}", method: "delete"}
   %table

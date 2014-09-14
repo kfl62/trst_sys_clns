@@ -14,7 +14,8 @@
           %tbody.inner
             %tr.scroll
               - mat(@object,'tbl_filter_hdr').each do |label|
-                %td= label
+                %td
+                  %span= label
             - range = y + m == today.year + today.month ? (1..d) : (1..Time.days_in_month(m,y)); range.each do |day|
               - cb = Clns::CacheBook.daily(y,m,day); cbc = cb.count > 0
               %tr

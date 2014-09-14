@@ -21,7 +21,8 @@
         %span.button.fa.fa-minus-circle.red.pointer
     %tr.lines-header.scroll{class: @object.lines.count == 0 && 'hidden'}
       - mat(@object,'tbl_lines_hdr').each do |label|
-        %td= label
+        %td
+          %span= label
     - unless create
       - @object.lines.asc(:order).each do |l|
         - unless l.new_record?

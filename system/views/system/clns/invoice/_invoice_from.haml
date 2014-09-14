@@ -67,7 +67,8 @@
 -#                 %tbody.inner
 -#                   %tr
 -#                     - mat(@object,'table_header_grn').each do |label|
--#                       %td.ce= label
+-#                       %td
+-#                         %span= label
 -#                   - data = Clns::Grn.where(:id.in => grn_ary).sum_freights_grn; data.sort.each do |s|
 -#                     %tr
 -#                       %td
@@ -81,7 +82,7 @@
 -#                       %td
 -#                         %span.val= "%.2f" % s[1][5]
 -#                   %tr.result
--#                     %td.ce.st{:colspan => "3"}
+-#                     %td{:colspan => "3"}
 -#                       %span Total
 -#                     %td
 -#                       %span.val= "%.2f" % data.values.sum{|r| r[4]}
