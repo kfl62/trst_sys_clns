@@ -2,14 +2,14 @@
   unit_id = @current_user.unit_id || session[:unit_id]
   unit = Clns::PartnerFirm.unit_by_unit_id(unit_id)
 %span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_sorting'}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t('intro.create.main', data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "post"}
   %table
     %thead
       %tr.pdb-05
-        %td{colspan: "4"}
-          %span.warning.width-350.ju= t('intro.create.main', data: mat(@object,'model_name'))
-      %tr.pdb-05
-        %td.ce{colspan: "4"}
+        %td
           %span.st Nr.
           - input_for @object, 'name',      {value: @object.increment_name(unit_id),style: 'ce id_intern'}
           %span.st din data de:
@@ -18,7 +18,7 @@
           - input_for @object, 'unit_id',   {type: 'hidden',value: unit_id}
           - input_for @object, 'signed_by', {type: 'hidden',value: @current_user.id}
       %tr.pdb-05
-        %td{colspan: '4'}
+        %td
           - label_for @object, 'expl'
           - input_for @object, 'expl',      {value: mat(@object,'expl_default'),style: 'width-500'}
       %tr.pdb-05.from-freight
@@ -29,24 +29,20 @@
             %option{value: 'null', data: {um: 'UM',pu: '0.0000',qu: '0.00'}} Selectare material
             - unit.stock_now.freights.where(:qu.ne => 0).by_id_stats("05030100").sort_by{|f| f.freight.name}.each do |o|
               %option{value: o.view_filter.first,title: "PU: #{"%.4f" % o.pu} - Cant.#{"%.2f" % o.qu}", data: {freight_id: o.freight.id,id_stats: o.id_stats,um: o.um,pu: o.pu,qu: o.qu}}= o.view_filter.last
-          %span &nbsp;&nbsp;
-          %span.um UM
-          %span &nbsp;&nbsp;
-          %span.pu 0.0000
-          %span &nbsp;&nbsp;Cantitate:&nbsp;&nbsp;
-          %span.qus 0.00
-          %span &nbsp;&nbsp;Stoc rămas:&nbsp;&nbsp;
-          %span.stk 0.00
-        %td
-          - input_for   o_from, 'freight_id',{type: 'hidden',nested: 'doc_sor',style: 'freight_id',value: 'strip',index: 0}
-          - input_for   o_from, 'id_stats',  {type: 'hidden',nested: 'doc_sor',style: 'id_stats',  value: 'strip',index: 0}
-          - input_for   o_from, 'id_date',   {type: 'hidden',nested: 'doc_sor',style: 'id_date',   value: 'strip',index: 0}
-          - input_for   o_from, 'um',        {type: 'hidden',nested: 'doc_sor',style: 'um',        value: 'strip',index: 0}
-          - input_for   o_from, 'pu',        {type: 'hidden',nested: 'doc_sor',style: 'pu',        value: 'strip',index: 0}
-          - input_for   o_from, 'qu',        {type: 'hidden',nested: 'doc_sor',style: 'qu',        value: 'strip',index: 0}
+          %span.st.um UM
+          %span.st.pu 0.0000
+          %span Cantitate:
+          %span.st.qus 0.00
+          %span Stoc rămas:
+          %span.st.stk 0.00
+      %tr.hidden.from-freight
+        - input_for   o_from, 'freight_id',{type: 'hidden',nested: 'doc_sor',style: 'freight_id',value: 'strip',index: 0}
+        - input_for   o_from, 'id_stats',  {type: 'hidden',nested: 'doc_sor',style: 'id_stats',  value: 'strip',index: 0}
+        - input_for   o_from, 'id_date',   {type: 'hidden',nested: 'doc_sor',style: 'id_date',   value: 'strip',index: 0}
+        - input_for   o_from, 'um',        {type: 'hidden',nested: 'doc_sor',style: 'um',        value: 'strip',index: 0}
+        - input_for   o_from, 'pu',        {type: 'hidden',nested: 'doc_sor',style: 'pu',        value: 'strip',index: 0}
+        - input_for   o_from, 'qu',        {type: 'hidden',nested: 'doc_sor',style: 'qu',        value: 'strip',index: 0}
     = partial "#{@path}/form"
     %tfoot
       %tr
-        %td.buttonset.ce{colspan: "4"}
-          %button{type: "button",data: {action: "save",icon: "disk",remove: 'false'}}= t('button.save')
-          %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

@@ -5,30 +5,40 @@
   %tbody.inner
     %tr
       - mat(@object,'table_header_show').each do |label|
-        %td.ce= label
+        %td
+          %span= label
     - @object.from_freights.each do |o|
       %tr
-        - td_value_for  o, 'freight',   {order: 'name',style: 'name'}
-        - td_value_for  o, 'um',        {style: 'um'}
-        - td_value_for  o, 'pu',        {style: 'pu'}
-        - td_value_for  o, 'qu',        {style: 'val'}
-        - td_value_for  o, 'val',       {style: 'val'}
+        - td_value_for  o, 'freight',  {order: 'name',style: 'name'}
+        %td.ta-ce
+          - value_for  o, 'um',        {style: 'um'}
+        %td.ta-ri
+          - value_for  o, 'pu',        {style: 'pu'}
+        %td.ta-ri
+          - value_for  o, 'qu',        {style: 'val'}
+        %td.ta-ri
+          - value_for  o, 'val',       {style: 'val'}
         %td
-          %span.name Sursa
+          %span Sursa
     - @object.resl_freights.each do |o|
       %tr
         - td_value_for  o, 'freight',   {order: 'name',style: 'name'}
-        - td_value_for  o, 'um',        {style: 'um'}
-        - td_value_for  o, 'pu',        {style: 'pu'}
-        - td_value_for  o, 'qu',        {style: 'val'}
-        - td_value_for  o, 'val',       {style: 'val'}
+        %td.ta-ce
+          - value_for  o, 'um',        {style: 'um'}
+        %td.ta-ri
+          - value_for  o, 'pu',        {style: 'pu'}
+        %td.ta-ri
+          - value_for  o, 'qu',        {style: 'val'}
+        %td.ta-ri
+          - value_for  o, 'val',       {style: 'val'}
         %td
-          %span.name Rezultat
+          %span Rezultat
     %tr
-      %td.ce.st{colspan: '6'}
+      %td{colspan: '6'}
         %span &nbsp;
 - else
   %tbody
     %tr.pdb-05
       %td
-        %span.warning.width-350= t('msg.no_freight_selected')
+        %detail.warning
+          = t('msg.no_freight_selected')
