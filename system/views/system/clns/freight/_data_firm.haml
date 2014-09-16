@@ -1,0 +1,159 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:p_y].nil? ? today.year  : params[:p_y].to_i
+  m   = params[:p_m].nil? ? today.month : params[:p_m].to_i
+  id_stats    = params[:id_stats] || locals[:id_stats] || "00000000"
+  c0,c1,c2,c3 = id_stats.scan(/\d{2}/)
+  firm= Clns::PartnerFirm.find_by(firm: true)
+
+%tbody.inner
+  %tr
+    - mat(Clns::Freight,'table_all').each do |cn|
+      %td
+        %span= cn
+    - firm.units.asc(:slug).each do |cn|
+      %td
+        %span.link.uid{id: cn.id}= cn.slug
+  - if c0 == '00'
+    - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
+    - t("freight.c0")[1..-1].each do |c|
+      - f = Clns::Freight.by_id_stats("#{c.first}000000")
+      %tr
+        %td
+          %span{style: "color:rgb(179,17,17)"}= c.last
+        %td.ta-ri
+          - s = f.stks.monthly(y,m).sum(:val); ts += s
+          %span= "%.2f" % s
+        %td.ta-ri
+          - i = f.ins.monthly(y,m).sum(:val); ti += i
+          %span= "%.2f" % i
+        %td.ta-ri
+          - o = f.outs.monthly(y,m).sum(:val); to += o
+          %span= "%.2f" % o
+        %td.ta-ri
+          - fsn = (s + i - o); tfsn += fsn
+          %span.st= "%.2f" % fsn
+        - firm.units.asc(:slug).each_with_index do |u,i|
+          - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
+          %td.ta-ri
+            %span= "%.2f" % psn
+    - t = [ts,ti,to,tfsn,tpsn].flatten
+    %tr
+      %td
+        %span Total
+      - t.each do |v|
+        %td
+          %span= "%.2f" % v
+  - else
+    - if c1 == '00'
+      - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
+      - t("freight.c1.#{c0}")[1..-1].each do |c|
+        - f = Clns::Freight.by_id_stats("#{c0}#{c.first}0000")
+        %tr
+          %td
+            %span{style: "color:rgb(179,17,17)"}= c.last
+          %td.ta-ri
+            - s = f.stks.monthly(y,m).sum(:val); ts += s
+            %span= "%.2f" % s
+          %td.ta-ri
+            - i = f.ins.monthly(y,m).sum(:val); ti += i
+            %span= "%.2f" % i
+          %td.ta-ri
+            - o = f.outs.monthly(y,m).sum(:val); to += o
+            %span= "%.2f" % o
+          %td.ta-ri
+            - fsn = (s + i - o); tfsn += fsn
+            %span.st= "%.2f" % fsn
+          - firm.units.asc(:slug).each_with_index do |u,i|
+            - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
+            %td.ta-ri
+              %span= "%.2f" % psn
+      - t = [ts,ti,to,tfsn,tpsn].flatten
+      %tr
+        %td
+          %span Total
+        - t.each do |v|
+          %td
+            %span= "%.2f" % v
+    - else
+      - if c2 == '00'
+        - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
+        - begin
+          - t("freight.c2.#{c0}.#{c1}")[1..-1].each do |c|
+            - f = Clns::Freight.by_id_stats("#{c0}#{c1}#{c.first}00")
+            %tr
+              %td
+                %span{style: "color:rgb(179,17,17)"}= c.last
+              %td.ta-ri
+                - s = f.stks.monthly(y,m).sum(:val); ts += s
+                %span= "%.2f" % s
+              %td.ta-ri
+                - i = f.ins.monthly(y,m).sum(:val); ti += i
+                %span= "%.2f" % i
+              %td.ta-ri
+                - o = f.outs.monthly(y,m).sum(:val); to += o
+                %span= "%.2f" % o
+              %td.ta-ri
+                - fsn = (s + i - o); tfsn += fsn
+                %span.st= "%.2f" % fsn
+              - firm.units.asc(:slug).each_with_index do |u,i|
+                - psn = f.stks.monthly(y,m).pos(u.slug).sum(:val) + f.ins.monthly(y,m).pos(u.slug).sum(:val) - f.outs.monthly(y,m).pos(u.slug).sum(:val); tpsn[i] += psn
+                %td.ta-ri
+                  %span= "%.2f" % psn
+        - rescue
+          - Clns::Freight.by_id_stats("#{c0}#{c1}0000").each do |f|
+            %tr
+              %td
+                %span{style: "color:blue"}= "#{f.name} (#{f.um})"
+              %td.ta-ri
+                - s = f.stks.monthly(y,m).sum(:qu); ts += s
+                %span= "%.2f" % s
+              %td.ta-ri
+                - i = f.ins.monthly(y,m).sum(:qu); ti += i
+                %span= "%.2f" % i
+              %td.ta-ri
+                - o = f.outs.monthly(y,m).sum(:qu); to += o
+                %span= "%.2f" % o
+              %td.ta-ri
+                - fsn = (s + i - o); tfsn += fsn
+                %span.st= "%.2f" % fsn
+              - firm.units.asc(:slug).each_with_index do |u,i|
+                - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
+                %td.ta-ri
+                  %span= "%.2f" % psn
+        - t = [ts,ti,to,tfsn,tpsn].flatten
+        %tr
+          %td
+            %span Total
+          - t.each do |v|
+            %td
+              %span= "%.2f" % v
+      - else
+        - ts,ti,to,tfsn,tpsn,t = 0,0,0,0,Array.new(firm.units.count,0),[]
+        - Clns::Freight.by_id_stats("#{c0}#{c1}#{c2}00").each do |f|
+          %tr
+            %td
+              %span{style: "color:blue"}= "#{f.name} (#{f.um})"
+            %td.ta-ri
+              - s = f.stks.monthly(y,m).sum(:qu); ts += s
+              %span= "%.2f" % s
+            %td.ta-ri
+              - i = f.ins.monthly(y,m).sum(:qu); ti += i
+              %span= "%.2f" % i
+            %td.ta-ri
+              - o = f.outs.monthly(y,m).sum(:qu); to += o
+              %span= "%.2f" % o
+            %td.ta-ri
+              - fsn = (s + i - o); tfsn += fsn
+              %span.st= "%.2f" % fsn
+            - firm.units.asc(:slug).each_with_index do |u,i|
+              - psn = f.stks.monthly(y,m).pos(u.slug).sum(:qu) + f.ins.monthly(y,m).pos(u.slug).sum(:qu) - f.outs.monthly(y,m).pos(u.slug).sum(:qu); tpsn[i] += psn
+              %td.ta-ri
+                %span= "%.2f" % psn
+        - t = [ts,ti,to,tfsn,tpsn].flatten
+        %tr
+          %td
+            %span Total
+          - t.each do |v|
+            %td
+              %span= "%.2f" % v

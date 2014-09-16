@@ -1,0 +1,56 @@
+%table.scroll
+  %tbody.inner
+    - o = @object.lines.new
+    %tr.lines.template
+      %td.w-2rem.ta-ri
+        %span.ord Nr.crt.
+        - input_for o, 'order',   {type: 'hidden',nested: 'cb',index: 0,style: 'ord',value: 'strip'}
+        - input_for o, 'doc',     {type: 'hidden',nested: 'cb',index: 0,style: 'doc',value: 'strip'}
+        - input_for o, 'expl',    {type: 'hidden',nested: 'cb',index: 0,style: 'exp',value: 'strip'}
+        - input_for o, 'in',      {type: 'hidden',nested: 'cb',index: 0,style: 'ins',value: 'strip'}
+        - input_for o, 'out',     {type: 'hidden',nested: 'cb',index: 0,style: 'out',value: 'strip'}
+      %td.w-8rem
+        %span.doc Document
+      %td.w-40rem
+        %span.exp Explicații
+      %td.w-8rem.ta-ri
+        %span.ins Incasare
+      %td.w-8rem.ta-ri
+        %span.out Plată
+      %td.d-in-bl
+        %span.button.fa.fa-minus-circle.red.pointer
+    %tr.lines-header.scroll{class: @object.lines.count == 0 && 'hidden'}
+      - mat(@object,'tbl_lines_hdr').each do |label|
+        %td
+          %span= label
+    - unless create
+      - @object.lines.asc(:order).each do |l|
+        - unless l.new_record?
+          %tr.lines
+            %td.w-2rem.ta-ri
+              %span.ord= "#{l.order}."
+              - input_for o, 'id',      {type: 'hidden',nested: 'cb',index: l.order,style: '_id',value: l.id}
+              - input_for o, 'order',   {type: 'hidden',nested: 'cb',index: l.order,style: 'ord',value: l.order}
+              - input_for o, 'doc',     {type: 'hidden',nested: 'cb',index: l.order,style: 'doc',value: l.doc}
+              - input_for o, 'expl',    {type: 'hidden',nested: 'cb',index: l.order,style: 'exp',value: l.expl}
+              - input_for o, 'in',      {type: 'hidden',nested: 'cb',index: l.order,style: 'ins',value: l.in}
+              - input_for o, 'out',     {type: 'hidden',nested: 'cb',index: l.order,style: 'out',value: l.out}
+            %td.w-8rem
+              %span.doc= l.doc
+            %td.w-40rem
+              %span.exp= l.expl
+            %td.w-8rem.ta-ri
+              %span.ins= "%.2f" % l.in
+            %td.w-8rem.ta-ri
+              %span.out= "%.2f" % l.out
+            %td.d-in-bl
+              %span.button.fa.fa-minus-circle.red.pointer
+    %tr.lines-total{class: @object.lines.count == 0 && 'hidden'}
+      %td{colspan: 3}
+        %span TOTAL
+      %td
+        %span.tot-in= create ? '0.00' : "%.2f" % @object.lines.sum(:in)
+      %td
+        %span.tot-out= create ?  '0.00' : "%.2f" % @object.lines.sum(:out)
+      %td
+        %span &nbsp;

@@ -1,0 +1,186 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:p_y].nil? ? today.year  : params[:p_y].to_i
+  m   = params[:p_m].nil? ? today.month : params[:p_m].to_i
+  d   = params[:p_d].to_i
+  id_stats    = params[:id_stats] || locals[:id_stats] || "00000000"
+  c0,c1,c2,c3 = id_stats.scan(/\d{2}/)
+  uid = @current_user.unit_id ? @current_user.unit_id : params[:uid] == 'null' ? nil : params[:uid]
+  fid = params[:fid] ? params[:fid] == 'null' ? nil : params[:fid] : nil
+  firm= Clns::PartnerFirm.find_by(firm: true); unit= firm.units.find(uid) if uid; freight = Clns::Freight.find(fid) if fid
+%tbody.inner
+  %tr
+    %td
+      %select.param.day{name: 'p_d'}
+        %option{value: 0}= 'Analitic zilnic'
+        - (1..Time.days_in_month(m,y)).each do |day|
+          - if freight.ins.daily(y,m,day).pos(unit.slug).count > 0 || freight.outs.daily(y,m,day).pos(unit.slug).count > 0
+            %option{value: day, selected: d == day,title: l(Date.new(y,m,day), format: "%a, %Y-%m-%d")}= Date.new(y,m,day).to_s
+        %input.fid{type: 'hidden', name: 'fid', value: params[:fid]}
+    - mat(Clns::Freight,'table_one')[1..-1].each do |cn|
+      %td
+        %span= cn
+  - if d > 0
+    - stk_day = freight.stks.monthly(y,m).pos(unit.slug).sum(:qu) + freight.ins.period(y,m,1,d - 1).pos(unit.slug).sum(:qu) - freight.outs.period(y,m,1,d - 1).pos(unit.slug).sum(:qu); stock = stk_day
+    - ins_int = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin(false).sum(:qu)
+    - ins_sor = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_sor_id.ne => nil).sum(:qu)
+    - ins_grn = freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin.sum(:qu)
+    - out_cas = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_cas_id.ne => nil).sum(:qu)
+    - out_con = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_con_id.ne => nil).sum(:qu)
+    - out_sor = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_sor_id.ne => nil).sum(:qu)
+    - out_int = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin(false).sum(:qu)
+    - out_dln = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin.sum(:qu)
+    %tr
+      %td{:colspan => "3"}
+        %span= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
+      %td.ta-ri
+        %span= "%0.2f" % stk_day
+    - if ins_int > 0
+      - stock += ins_int
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Transfer gestiune'
+        %td.ta-ri
+          %span= "%0.2f" % ins_int
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if ins_sor > 0
+      - stock += ins_sor
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Intrari preparare'
+        %td.ta-ri
+          %span= "%0.2f" % ins_sor
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if ins_grn > 0
+      - stock += ins_grn
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Intrări furnizori'
+        %td.ta-ri
+          %span= "%0.2f" % ins_grn
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % stock
+      - freight.ins.daily(y,m,d).pos(unit.slug).where(:doc_grn_id.ne => nil).nonin.each do |f|
+        %tr
+          %td
+            %span= " - " + f.doc_grn.supplr.name[0]
+          %td.ta-ri
+            %span= "%0.2f" % f.qu
+          %td
+            %span &nbsp;
+          %td
+            %span &nbsp;
+    - if out_cas > 0
+      - stock -= out_cas
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Ieșiri casare'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_cas
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if out_con > 0
+      - stock -= out_con
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Ieșiri Bon de Consum'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_con
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if out_sor > 0
+      - stock -= out_sor
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Ieșiri preparare'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_sor
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if out_int > 0
+      - stock -= out_int
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Transfer gestiune'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_int
+        %td.ta-ri
+          %span= "%0.2f" % stock
+    - if out_dln > 0
+      - stock -= out_dln
+      %tr{style: 'color:blue'}
+        %td
+          %span= 'Ieșiri clienți'
+        %td
+          %span &nbsp;
+        %td.ta-ri
+          %span= "%0.2f" % out_dln
+        %td.ta-ri
+          %span= "%0.2f" % stock
+      - dlns = freight.outs.daily(y,m,d).pos(unit.slug).where(:doc_dln_id.ne => nil).nonin.pluck(:doc_dln_id).uniq
+      - Clns::DeliveryNote.where(:id.in => dlns).each do |dn|
+        %tr
+          %td
+            %span= " - " + dn.client.name[0]
+          %td
+            %span &nbsp;
+          %td.ta-ri
+            %span= "%0.2f" % dn.freights.where(id_stats: freight.id_stats).sum(:qu)
+          %td
+            %span &nbsp;
+    %tr
+      %td
+        %span= 'Total'
+      %td
+        %span= "%0.2f" % (ins_int + ins_grn)
+      %td
+        %span= "%0.2f" % (out_cas + out_con + out_int + out_dln)
+      %td
+        %span= "%0.2f" % stock
+  - else
+    %tr
+      %td{:colspan => "3"}
+        %span= "#{freight.name} (#{mat(Clns::Freight,'stock_start')})"
+      %td.ta-ri
+        - si = freight.stks.monthly(y,m).pos(unit.slug).sum(:qu); ti, to, sf = 0 , 0, si
+        %span= "%0.2f" % si
+    - (1..Time.days_in_month(m,y)).each do |day|
+      - i = freight.ins.daily(y,m,day).pos(unit.slug).sum(:qu).round(2)
+      - o = freight.outs.daily(y,m,day).pos(unit.slug).sum(:qu).round(2)
+      - r = i - o; ti += i; to += o;
+      - if i != 0 || o != 0
+        - sf += r
+        %tr
+          %td
+            %span= Date.new(y,m,day).to_s
+          %td.ta-ri
+            %span= "%0.2f" % i
+          %td.ta-ri
+            %span= "%0.2f" % o
+          %td.ta-ri
+            %span= "%0.2f" % sf
+    %tr
+      %td
+        %span Total
+      %td
+        %span= "%0.2f" % ti
+      %td
+        %span= "%0.2f" % to
+      %td
+        %span= "%0.2f" % sf

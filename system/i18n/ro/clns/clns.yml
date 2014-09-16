@@ -2,15 +2,175 @@ ro:
   clns:
     unit_info_lbl: Punct de lucru selectat
     unit_info_all: Toate unităţile
+    title:
+      filter:
+        desk_delivery_note: |
+          Configurare &raquo;%{data}&laquo;
+        desk_grn: |
+          Configurare &raquo;%{data}&laquo;
+        desk_invoice: |
+          Configurare &raquo;%{data}&laquo;
+        desk_payment: |
+          Configurare &raquo;%{data}&laquo;
     intro:
       no_unit: |
         Nu aveţi nici un Punct de lucru selectat!
       has_unit: |
         Punctul de lucru selectat:&nbsp;&nbsp;
+      filter:
+        desk_cache: |
+          Puteţi modifica "Suma primită" la o &raquo;Dispoziţie de plată&laquo; după ce
+          o alegeţi din listă, sau alegând <b>Creare</b> veţi crea una nouă.
+        desk_delivery_note: |
+          Pentru a crea o &raquo;Anexa Aviz de expediţie&laquo; este nevoie să selectaţi un "Destinatar"
+          opţional un "Delegat" ptr. acest "Destinatar"
+        desk_freight: |
+          Puteţi modifica preţul unitar la un &raquo;%{data}&laquo; după ce îl alegeţi din listă!
+        desk_grn:
+          admin: |
+            Pentru a transfera în gestiunea <b>%{unit}</b>, trebuie
+            selectatate <b>Avizele de expediţie</b>, care vă interesează.
+          user: |
+            Pentru a transfera în gestiunea <b>%{unit}</b>, trebuie
+            selectat <b>Avizul de expediţie</b>, cu nr. care v-a fost comunicat telefonic.
+            (în principiu al cărui nume conține <b>%{slug}</b>)
+          partner_firm: |
+            Pentru a a crea un &raquo;NIR - Persoane juridice&laquo; este nevoie să selectaţi un "Furnizor"
+            opţional un "Delegat" ptr. acest "Furnizor". În cazul în care
+            recepţionaţi pe bază de <b>Factură Fiscală</b> recomandăm să selectaţi şi "Delegat" ptr. "Furnizor"
+          no_dln: |
+            Nu aveţi nici un Aviz de expediţie!
+          legend: |
+            Legendă:
+          hover: |
+            Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+        desk_invoice:
+          main: |
+            Pentru a factura marfă prima dată este nevoie să selectaţi AE,
+            iar pentru aceasta trebuie să specificaţi <b>anul, luna</b>, respectiv <b>Clientul</b>
+            şi <b>Delegat</b> din partea clientului (cine semnează factura) sau Poşta Română dacă
+            este cazul.
+          no_dln: |
+            Nu aveţi nici un Aviz de expediţie!
+          legend: |
+            Legendă:
+          hover: |
+            Ptr.detalii despre aviz poziţionaţi mouse-ul deasupra denumirii...
+          grn: |
+            Factură furnizor se operează în cazul în care, în decursul lunii aţi făcut recepţii pe bază de
+            Avize de expediţie.
+          no_grn: |
+            Nu aveţi nici o recepţie!
+        desk_report:
+          cb_monthly: Registru de casă
+          stock_monthly: Stoc iniţial lunar / curent
+          stock_monthly_expl: |
+            Pentr stoc iniţial lunar alegeți <b>AAAA-LL</b>, pentru stocul curent treceți <b>2000-01</b>
+        desk_stock: |
+            În cazul &raquo;Stocurilor iniţiale lunare&laquo; trebuie să ştiţi următoarele:<br>
+            1.) Crearea unui nou &raquo;Stoc iniţial lunar&laquo; presupune copierea <b>Stocului curent</b> întro
+            nouă înregistrare, datată în prima zi a lunii următoare. Din acest motiv operaţiunea nu este
+            permisă decât în ultima zi a lunii curente şi după ce toţi în cauză au încetat activitatea!<br>
+            2.) Operaţiunea de <b>Editare</b> îşi are rostul numai ptr. <b>Stocul curent</b>.
+            Pentru a modifica alte stocuri sunaţi la inginerul de sistem. Aveţi mare grijă!<br>
+            3.) Operaţiunea de <b>Ştergere</b> este activă numai pentru &raquo;Stocul iniţial lunar&laquo; nou creat
+            şi numai în ziua creării! Pentru a şterge alte stocuri sunaţi la inginerul de sistem. Aveţi mare grijă!
+      create:
+        desk_expenditure: |
+          S-au primit de la <b>%{name}</b> CNP <b>%{id_pn}</b><br>
+          cu domiciliul: str.%{street}, nr.%{nr}, bl.%{bl}, sc.%{sc}, et.%{et}, ap.%{ap}, loc.%{city}<br>
+          legitimat cu: CI/BI seria.%{dsr}, nr.%{dnr}, %{dby}/%{don}<br>
+          următoarele deşeuri reciclabile:
+        desk_delivery_note: |
+          Firma <b>%{firm}</b> reprezentat de %{firm_d} expediază clientului,
+          <b>%{client}</b> reprezentat de %{client_d}, următoarele materiale:
+        desk_grn:
+          id_intern: |
+            Transfer în gestiunea <b>%{unit}</b> prin delegatul:
+          partner_firm: |
+            În gestiunea <b>%{unit}</b> Dn-ul/Dna <b>%{signed_by}</b> recepţionează
+            de la furnizorul  <b>%{supplr}</b>, în prezenţa delegatului <b>%{supplr_d}</b>,
+            în baza actelor(completate mai sus), următoarele:<br>
+            *La recepţia pe bază de Factură Fiscală nu uitaţi de <b>Condiţii plată</b>
+          pyms_no: |
+            Nu este cazul! Numai la recepţii facturi...
+          pyms_ok: |
+            Termenul de plată este obligatoriu (aaaa-ll-zz)!<br>
+            Se completează numai dacă există chitanţă sau OP.<br>
+            Se trece suma achitată efectiv (Valoare + TVA)!
+        desk_invoice:
+            main: |
+              Completați <b>Preţ Vânzare</b> și click pe <b>Salvare</b> dacă
+              v-aţi convins că totul este completat corect!
+            grn: |
+              Aveţi grijă la <b>Condiţii plată</b> la completarea sumei să luaţi în considerare
+              <b>Taxa de mediu 3%</b>! Se trece suma achitată efectiv (Valoare - Taxă mediu),
+              dacă este cazul!
+        desk_stock:
+          too_soon: |
+            Crearea unui nou &raquo;Stoc iniţial lunar&laquo; presupune copierea <b>Stocului curent</b> întro
+            nouă înregistrare, datată în prima zi a lunii următoare. Din acest motiv operaţiunea nu este
+            permisă decât în ultima zi a lunii curente şi după ce toţi în cauză au încetat activitatea!<br>
+            Aşteptaţi până în data de %{data}
+      edit:
+        desk_freight: |
+          Puteţi modifica doar câmpul<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;Preţ unitar&laquo;
+        desk_stock:
+          forbidden: |
+            Acest &raquo;Stoc iniţial lunar&laquo; nu se poate edita numai de către inginerul de sistem!
+      show:
+        desk_delivery_note: |
+          Cu Avizul de expediţie nr.<b>%{doc_name}</b> în data de <b>%{id_date}</b>.
+          Firma <b>%{firm}</b> reprezentat de %{firm_d} expediază clientului,
+          <b>%{client}</b> reprezentat de %{client_d}, următoarele materiale:
+        desk_grn: |
+          În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
+          <b>%{signed_by}</b> în prezenţa delegatului <b>%{supplr_d}</b>, s-au recepţionat următoarele
+          materiale provenind de la <b>%{supplr}</b> :
+        desk_consumption: |
+          În ziua de <b>%{id_date}</b> Dna/Dn-l <b>%{signed_by}</b> din gestiunea <b>%{unit}</b>
+          a scăzut (în baza Bonului de consum) următoarele: <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
+        desk_cassation: |
+          În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
+          s-au casat/degradat următoarele: <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
+        desk_sorting: |
+          În ziua de <b>%{id_date}</b> în gestiunea <b>%{unit}</b> de către
+          <b>%{signed_by}</b> s-au preparat următoarele: <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Notă: %{expl}
+        desk_invoice:
+          main: |
+            În ziua de <b>%{id_date}</b> cu Factura nr.<b>%{doc_name}</b> se facturează clientului
+            <b>%{client}</b> următoarele materiale:
+          grn: |
+            În ziua de <b>%{id_date}</b> cu Factura nr.<b>%{doc_name}</b> se recepţionează de la furnizorul
+            <b>%{client}</b> următoarele materiale:
+      delete:
+        desk_delivery_note: |
+          Atenţie!!! Se va şterge &raquo;%{data}&laquo;!!!
+        desk_grn: |
+          Atenţie!!! Se va şterge &raquo;%{data}&laquo;!!!
+        desk_stock:
+          forbidden: |
+            Acest &raquo;Stoc iniţial lunar&laquo; nu se poate şterge numai de către inginerul de sistem!
+      query:
+        desk_freight:
+          query_firm: |
+            Stocuri materiale firmă
+          query_unit: |
+            Stocuri materiale gestiune
+          query_freight: |
+            Fișa de magazie material
     select:
       freight_all: Toate materialele
       unit_all: Toate unităţile
       desk_partner_firm: ['Alegeţi - Partener Persoană Juridică']
+      desk_delivery_note: ['Alegeţi - Destinatar', 'Alegeţi - Delegat (opţional)', 'Alegeţi - Transportator', 'Alegeţi - Delegat', 'Selectaţi - Aviz de expediţie']
+      desk_grn: ['Alegeţi - Furnizor', 'Alegeţi - Delegat (opţional)', 'Alegeţi - Transportator', 'Alegeţi - Delegat', 'Selectaţi - Notă de recepţie']
+      desk_invoice: ['Alegeţi - Client', 'Alegeţi - Delegat', 'Selectaţi - Factură', 'Alegeţi - Furnizor']
+      desk_hmrs_employee: ['Alegeţi - Angajat / Salariat']
     msg:
       input_too_short_strt: |
         Vă rugăm întroduceţi min. %{nr} caractere!
@@ -26,5 +186,40 @@ ro:
         Hmmm... Se pare că nu aţi ales niciun material!
         Sau aţi uitat să introduceţi cantitatea!
         Apăsaţi <b>"Ştergere"</b> şi încercaţi din nou :)
+      no_freight_in_stock: |
+        <br>
+        Hmmm... Se pare că nu aveți niciun material îm stoc!
       no_payments: |
         Nu există nici o plată!
+      consumption_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Bon de Consum,
+          modificaţi bonul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"!
+          Puteţi reface Bonul de Consum după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Aviz,
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Aviz,
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_negative_stock: |
+          Cantitatea introdusă este mai mare decât stocul disponibil!
+          În cazul în care puteţi modifica cantitatea pe Aviz,
+          modificaţi avizul cu cantitatea corectă ( %{stck} %{um} )!
+          În caz contrar apăsaţi "Renunţare"! Puteţi reface Anexa3
+          după ce faceţi o intrare de cel puţin ( %{res} %{um} ).
+      delivery_note_not_complete: |
+          Nu aţi completat sau aţi completat greşit
+          unul din câmpurile "Aviz nr.", "maşina nr."!
+          "Aviz nr." poate fi lăsat gol caz în care
+          va completat cu valoarea implicită.
+      grn_not_complete: |
+          Nu aţi selectat "Tip document", sau nu aţi completat
+          unul din câmpurile "Document nr.", "Maşina nr."!

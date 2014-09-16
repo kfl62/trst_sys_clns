@@ -1,0 +1,25 @@
+%table.scroll
+  %tbody.inner
+    %tr.lines-header.scroll{class: @object.lines.count == 0 && 'hidden'}
+      - mat(@object,'tbl_lines_hdr')[0..4].each do |label|
+        %td
+          %span= label
+    - @object.lines.asc(:order).each do |l|
+      %tr.lines
+        %td.w-2rem.ta-ri
+          %span.ord=  "#{l.order}."
+        %td.w-8rem
+          %span.doc= l.doc
+        %td.w-40rem
+          %span.exp= l.expl
+        %td.w-8rem.ta-ri
+          %span.ins= "%.2f" % l.in
+        %td.w-8rem.ta-ri
+          %span.out= "%.2f" % l.out
+    %tr.lines-total{class: @object.lines.count == 0 && 'hidden'}
+      %td{colspan: 3}
+        %span TOTAL
+      %td
+        %span.tot-in= "%.2f" % @object.lines.sum(:in)
+      %td
+        %span.tot-out= "%.2f" % @object.lines.sum(:out)

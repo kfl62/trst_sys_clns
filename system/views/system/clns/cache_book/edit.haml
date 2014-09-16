@@ -1,0 +1,43 @@
+%span#hidden_data{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_cache_book'}}
+%form{action: "/sys/#{@path}", method: "put"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          %span Nr:
+          %span.name.st= @object.name
+          %span din:
+          %span.date.st= @object.id_date.to_s
+          %br
+          %span Sold inițial:
+          %span.ib.st= "%.2f" % @object.ib
+          %span Sold final:
+          %span.fb.st= "%.2f" % @object.fb
+          %span Nr. rânduri:
+          %span.lines.st= @object.lines.count
+          - input_for @object, 'name',    {type: 'hidden',value: @object.name}
+          - input_for @object, 'id_date', {type: 'hidden',value: @object.id_date.to_s}
+          - input_for @object, 'ib',      {style: 'ib',type: 'hidden',value: @object.ib}
+          - input_for @object, 'fb',      {style: 'fb',type: 'hidden',value: @object.fb}
+      %tr.pdb-05
+        %td.add-line-container{style: 'padding: 5px;border: solid 1px'}
+          %table
+            %tr
+              %td
+                %span Adăugare rând la Registru de casă
+                %span.button.fl-ri.red.pointer.fa.fa-plus-circle.fa-lg{title: t('button.new_row')}
+                %span.button.fl-ri.red.pointer.fa.fa-refresh.fa-lg
+            %tr
+              %td
+                %span.add-line.ord.st= @object.lines.count + 1
+                %input.add-line.doc{size: 10,placeholder: 'Doc. nr.'}
+                %input.add-line.exp{size: 60,placeholder: 'Explicații'}
+                %input.add-line.ins{size: 10,placeholder: 'Înc. 0.00 lei'}
+                %input.add-line.out{size: 10,placeholder: 'Plată 0.00 lei'}
+    %tbody
+      %tr
+        %td
+          = partial "#{@path}/form", locals: {create: false}
+    %tfoot
+      %tr
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

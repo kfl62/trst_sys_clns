@@ -1,0 +1,28 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+  grns = @object.dlns.empty?
+  tdat = grns ? mat(@object,'model_name_grn') : mat(@object,'model_name')
+%span#hidden_data{data: {dialog: 'show',title_data: tdat,model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_invoice'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          -if grns
+            %detail.detail.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.show.desk_invoice.grn',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+          -else
+            %detail.detail.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.show.desk_invoice.main',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        - if @object.freights.count == 0
+          - td_buttonset(['delete'],{style: 'ta-ce'})
+        - else
+          - if @current_user.admin?
+            - td_buttonset(['print','delete','cancel'],{style: 'ta-ce'})
+          - else
+            - td_buttonset(['print','cancel'],{style: 'ta-ce'})

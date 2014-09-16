@@ -16,16 +16,18 @@
   %tr
     - td_label_for @object, 'client'
     %td.boolean
-      %input.before-yes{type: 'radio',name: "[#{@path}][client]",checked: @object.client,value: 'true'}
-      %input.before-no{type: 'radio',name: "[#{@path}][client]",checked: !@object.client,value: 'false'}
+      %input.true_ro{ type: 'radio',name: "[#{@path}][client]",checked: @object.client,value: 'true'}
+      %input.false_ro{type: 'radio',name: "[#{@path}][client]",checked: !@object.client,value: 'false'}
     - td_error_for @object, 'client'
   %tr
     - td_label_for @object, 'supplr'
     %td.boolean
-      %input.before-yes{type: 'radio',name: "[#{@path}][supplr]",checked: @object.supplr,value: 'true'}
-      %input.before-no{type: 'radio',name: "[#{@path}][supplr]",checked: !@object.supplr,value: 'false'}
+      %input.true_ro{ type: 'radio',name: "[#{@path}][supplr]",checked: @object.supplr,value: 'true'}
+      %input.false_ro{type: 'radio',name: "[#{@path}][supplr]",checked: !@object.supplr,value: 'false'}
     - td_error_for @object, 'supplr'
 %tbody#tabs-2{data: {title: mat(@object, :tab_notes_title)}}
   %tr
     %td
-      %span.info.width-350.ju= mat(@object,'tab_notes_content')
+      %detail.detail.w-35rem
+        %i.fa.fa-info-circle.fa-lg.blue
+        = mat(@object,'tab_notes_content')

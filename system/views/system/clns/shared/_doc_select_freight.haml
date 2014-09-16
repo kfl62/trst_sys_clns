@@ -1,0 +1,17 @@
+:ruby
+  c0,c1,c2 = locals[:id_stats].scan(/\d{2}/)
+%tr.pdb-05
+  - if locals[:label]
+    - td_label_for @object, 'criteria'
+  %td
+    %select.clns.freight.c0
+      - t("freight.c0").each do |c|
+        %option{value: c.first, selected: c.first == c0}= c.last
+    %select.clns.freight.c1
+      - t("freight.c1.#{c0}",default: [:'clns.freight.missing']).each do |c|
+        %option{value: c.first, selected: c.first == c1}= c.last
+    %select.clns.freight.c2
+      - t("freight.c2.#{c0}.#{c1}",default: [:'clns.freight.missing']).each do |c|
+        %option{value: c.first, selected: c.first == c2}= c.last
+  - if locals[:error]
+    - td_error_for @object, 'criteria'

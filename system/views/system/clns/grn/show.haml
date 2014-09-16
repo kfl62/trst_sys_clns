@@ -1,0 +1,28 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+
+%span#hidden_data{data: {dialog: "show",model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_grn'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td{colspan: '7'}
+          %detail.detail.w-45rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('intro.show.desk_grn',id_date: l(@object.id_date,format: :trst),unit: firm.units.find(@object.unit_id).name[1],signed_by: @object.signed_by.name,supplr_d: (@object.supplr_d.name rescue 'Anonymous'),supplr: @object.supplr.name[2])
+      - unless @object.expl.blank?
+        %tr.pdb-05
+          %td{colspan: '7'}
+            %detail.warning.w-45rem
+              %i.fa.fa-info-circle.fa-lg.blue
+              = @object.expl
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        - if @object.freights.count == 0
+          - td_buttonset(['delete'],{style: 'ta-ce'}, '7')
+        - else
+          - if @current_user.admin?
+            - td_buttonset(['print','edit','delete','cancel'],{style: 'ta-ce'}, '7')
+          - else
+            - td_buttonset(['print','delete','cancel'],{style: 'ta-ce'}, '7')

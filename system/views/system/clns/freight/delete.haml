@@ -1,0 +1,12 @@
+%span#hidden_data{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id}}
+%article#xhr_info.warning
+  %i.fa.fa-warning.fa-lg
+  = t('intro.delete.main',data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}",method: "delete"}
+  %table
+    %thead
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['delete','cancel'],{style: 'ta-ce'},'2')
+

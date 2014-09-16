@@ -1,0 +1,102 @@
+%tbody{id: 'tabs-freights',data: {title: mat(@object,'tabs_freights')}}
+  %tr
+    %td
+      %table.w-100pr
+        - if grns
+          %tbody.inner
+            %tr
+              - mat(@object,'table_header_grn').each do |label|
+                %td
+                  %span= label
+            - data = Clns::Grn.where(:id.in => grns).sum_freights_grn; data.sort.each_with_index do |s,i|
+              - o = @object.freights.new
+              %tr.freight
+                %td
+                  %span.stats= s[1][0]
+                  - input_for o, 'name',      {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][0]}
+                  - input_for o, 'id_stats',  {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][1]}
+                  - input_for o, 'um',        {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][2]}
+                %td
+                  %span.um= s[1][2]
+                %td
+                  %span.pu= "%.2f" % s[1][3]
+                  - input_for o,  'pu',     {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][3]}
+                %td
+                  %span.qu= "%.2f" % s[1][4]
+                  - input_for o,  'qu',       {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][4]}
+                %td
+                  %span.val= "%.2f" % s[1][5]
+            %tr.total
+              %td{:colspan => "3"}= "Total"
+              %td
+                %span.val= "%.2f" % data.values.sum{|r| r[4]}
+              %td
+                %span.val= "%.2f" % data.values.sum{|r| r[5]}
+                - input_for @object, 'sum_100', {type: 'hidden',value: data.values.sum{|r| r[5]}}
+        -else
+          %tbody.inner
+            %tr
+              - mat(@object,'table_header').each do |label|
+                %td
+                  %span= label
+            - data = Clns::DeliveryNote.where(:id.in => dlns).sum_freights_inv; data.sort.each_with_index do |s,i|
+              - o = @object.freights.new
+              %tr.freight
+                %td
+                  %span= s[1][0]
+                  - input_for o, 'name',      {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][0]}
+                  - input_for o, 'id_stats',  {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][1]}
+                  - input_for o, 'um',        {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][2]}
+                %td.ta-ce
+                  %span.um=s[1][2]
+                %td.ta-ri
+                  %span.pu= "%.4f" % s[1][3]
+                %td.ta-ri
+                  %span.qu= "%.2f" % s[1][4]
+                  - input_for o,  'qu',       {type: 'hidden',nested: 'doc_inv',index: i,value: s[1][4]}
+                %td.ta-ri
+                  %span.val= "%.2f" % s[1][5]
+                %td.ta-ce.w-8rem
+                  - input_for o,  'pu',       {style: 'pu ta-ri w-6rem',nested: 'doc_inv',index: i,value: "%.4f" % s[1][6], data: {tva: s[1][10]}}
+                %td.ta-ri
+                  %span.val_invoice= "%.2f" % s[1][7]
+                  - input_for o,  'val',      {type: 'hidden',style:'val',nested: 'doc_inv',index: i,value: "%.4f" % s[1][7]}
+                %td.ta-ri
+                  %span.tva_invoice= "%.2f" % s[1][8]
+                  - input_for o,  'tva',      {type: 'hidden',style:'tva',nested: 'doc_inv',index: i,value: "%.4f" % s[1][8]}
+                %td.ta-ri
+                  %span.out_invoice= "%.2f" % s[1][9]
+                  - input_for o,  'tot',      {type: 'hidden',style:'tot',nested: 'doc_inv',index: i,value: "%.4f" % s[1][9]}
+            %tr.total
+              %td{:colspan => "4"}= "Total"
+              %td
+                %span= "%.2f" % data.values.sum{|r| r[5]}
+              %td
+                %span
+              %td
+                %span.sum_100= "%.2f" % data.values.sum{|r| r[7]}
+                - input_for @object, 'sum_100', {type: 'hidden',value: data.values.sum{|r| r[7]}}
+              %td
+                %span.sum_tva= "%.2f" % data.values.sum{|r| r[8]}
+                - input_for @object, 'sum_tva', {type: 'hidden',value: data.values.sum{|r| r[8]}}
+              %td
+                %span.sum_out= "%.2f" % data.values.sum{|r| r[9]}
+                - input_for @object, 'sum_out', {type: 'hidden',value: data.values.sum{|r| r[9]}}
+  %tr
+    %td
+%tbody{id: 'tabs-payments',data: {title: mat(@object,'tabs_payments')}}
+  %tr
+    %td
+      - label_for @object, 'payed'
+      %input.before-yes{type: 'radio',name: "[#{@path}][payed]",checked:  @object.payed,value: 'true'}
+      %input.before-no{type: 'radio', name: "[#{@path}][payed]",checked: !@object.payed,value: 'false'}
+      %span.stats= mat(@object,'deadl')
+      - input_for @object, 'deadl', {type: 'tel',style: 'ui-state-default ce',value: (Date.today + 30.days).to_s}
+  - o = @object.pyms.new
+  %tr
+    %td
+      - input_for o, 'id_date',     {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: Date.today.to_s,style: 'ui-state-default ce'}
+      - input_for o, 'expl',        {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: mat(@object,'pyms_expl')}
+      - input_for o, 'val',         {type: 'tel',   nested: 'doc_inv',index: 0,value: 'strip',placeholder: mat(@object,'pyms_val'),style: 'ui-state-default ce'}
+      - input_for o, 'id_intern',   {type: 'hidden',nested: 'doc_inv',index: 0,value: 'true'}
+

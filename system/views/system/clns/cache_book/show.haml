@@ -1,0 +1,24 @@
+%span#hidden_data{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_cache_book'}}
+%form{action: "/sys/#{@path}",method: "get"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          %span.label Nr:
+          %span.name.st= @object.name
+          %span.label din:
+          %span.date.st= @object.id_date.to_s
+          %br
+          %span.label Sold inițial:
+          %span.ib.st= "%.2f" % @object.ib
+          %span.label Sold final:
+          %span.fb.st= "%.2f" % @object.fb
+          %span.label Nr. rânduri:
+          %span.lines.st= @object.lines.count
+    %tbody
+      %tr
+        %td
+          = partial "#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['print','edit','delete','cancel'],{style: 'ta-ce'})

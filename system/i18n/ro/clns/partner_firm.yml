@@ -20,6 +20,11 @@ ro:
         chief: Responsabil
         env_auth: Autorizaţie mediu
         main: Principală?
+      'clns/partner_firm/bank':
+        name: Banca
+        name_ph: "00#Banca"
+        swift: Cont
+        swift_ph: "0000 0000 0000 0000 0000 0000"
       'clns/partner_firm':
         model_name: Partener Firmă
         tab_title: Date firmă
@@ -27,7 +32,7 @@ ro:
         supplr: Furnizor
         tab_notes_title: Alte date
         tab_notes_content: |
-          Pentru a modifica/adăuga Adresă/Persoană/Unitate la
+          Pentru a modifica/adăuga Adresă/Persoană/Unitate/Cont la
           acest Partener (Firmă) alegeţi opţiunea &raquo;Detalii&laquo; după
           selectarea Partenerului (Firmă).<br>
           În cazul în care aţi făcut modificări la &raquo;Date Firmă&laquo;
@@ -51,4 +56,14 @@ ro:
           Viziona/Edita/Şterge folosiţi butoanele din dreapta!
         tab_units_create: |
           Ptr. a crea o &raquo;Unitate&laquo; apăsaţi butonul din dreapta!
+        tab_banks_title: Conturi bancare
+        tab_banks_not_exists: |
+          Partener (Firmă) nu are cont bancar definit!
+        tab_banks_exists: |
+          Mai jos aveţi Conturile asociate Partenerului (Firmă), pentru a le <br>
+          Viziona/Edita/Şterge folosiţi butoanele din dreapta!
+        tab_banks_create: |
+          Ptr. a crea o &raquo;Cont bancar&laquo; apăsaţi butonul din dreapta!
+        table_header_grn: ['Material', 'UM', 'PU', 'Cant.', 'Valoare', 'TVA', 'Total']
+        table_header_inv: ['Material', 'UM', 'PU<br>Cump.', 'Cantitate', 'Valoare<br>Cump.', 'PU<br>Vânz.', 'Valoare<br>Vânz.', 'TVA', 'Total']
         <<: *trst_firm

@@ -1,0 +1,61 @@
+:ruby
+  id_stats = params[:id_stats] || locals[:id_stats] || "00000000"
+  c0,c1,c2 = id_stats.scan(/\d{2}/)
+  pu_inv   = params[:pu_inv].to_bool if params[:pu_inv]
+  unit_id  = @current_user.unit_id || session[:unit_id]
+  freights = Clns::PartnerFirm.find_by(firm: true).units.find(unit_id).stock_now.freights.where(:qu.ne => 0)
+%table.w-100pr
+  %tr
+    %td{colspan: 6}
+      %span Selectare material de adăugat la document!
+      %span.hidden.button.fl-ri.red.pointer
+        %i.fa.fa-plus-circle.fa-lg{title: t('button.new_row')}
+      %span.hidden.button.fl-ri.red.pointer
+        %i.fa.fa-refresh.fa-lg
+  %tr
+    %td{colspan: 6}
+      %select.clns.freight.c0
+        - t("freight.c0").each do |c|
+          %option{value: c.first, selected: c.first == c0}= c.last
+      %select.clns.freight.c1
+        - t("freight.c1.#{c0}",default: [:'clns.freight.missing']).each do |c|
+          %option{value: c.first, selected: c.first == c1}= c.last
+      %select.clns.freight.c2
+        - t("freight.c2.#{c0}.#{c1}",default: [:'clns.freight.missing']).each do |c|
+          %option{value: c.first, selected: c.first == c2}= c.last
+      %select.clns.freight.oid
+        %option{value: "null"}= t("select.option",data: mat(freights,'model_name'))
+        - freights.by_id_stats(id_stats).sort_by{|f| f.freight.name}.each do |o|
+          %option{value: o.view_filter.first, selected: o.id_stats == id_stats,title: "PU: #{"%.4f" % o.pu} - Cant.#{"%.2f" % o.qu}", data: {freight_id: o.freight.id,id_stats: o.id_stats,pu: o.pu,qu: o.qu}}= o.view_filter.last
+  - if params[:oid]
+    - f = freights.find(params[:oid])
+    %tr
+      %td
+        %span.add-freight.name{data: {freight_id: f.freight_id.to_s,name: f.name,id_stats: f.id_stats,qu: f.qu}}= f.name
+      %td.ta-ri.w-6rem
+        %span.add-freight.pu= "%0.4f" % f.pu
+      %td.ta-ri.w-6rem
+        %span.add-freight.qu= "%0.2f" % f.qu
+      %td.ta-ce.w-4rem
+        %span.add-freight.um= f.um
+      %td.ta-ri
+        %input.add-freight.ta-ri.w-6rem.focus.qu{value: '0.00'}
+        - unless pu_inv.nil?
+          %input.add-freight.ta-ri.w-6rem.pu_inv{type: 'checkbox',checked: pu_inv}
+      %td.ta-ri.w-6rem
+        %span.add-freight.val 0.00
+  - else
+    %tr
+      %td
+        %span.name Material
+      %td.w-6rem
+        %span.pu PU
+      %td.w-6rem
+        %span.qu Stoc
+      %td.w-4rem
+        %span.um UM
+      %td.w-6rem
+        %input.ta-ce.qu{disabled: true,value: 'Cant. aviz'}
+      %td.w-6rem
+        %span.val Valoare
+

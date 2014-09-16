@@ -1,0 +1,74 @@
+:ruby
+  ext  = params[:report]
+  uid  = @current_user.unit_id
+  unit = Clns::PartnerFirm.unit_by_unit_id(uid) if uid
+  firm = Clns::PartnerFirm.find_by(firm: true)
+  s2dt = firm.units.asc(:slug).map{|u| {id: u.id,text: u.slug}}.to_json if firm
+  data = t("intro.filter.desk_report.#{ext}")
+%span#hidden_data{data: {dialog: 'report',title_data: data,model_name: mat(@object,'model_name'),oid: nil,js_ext: 'desk_report'}}
+- if ext == 'cb_monthly'
+  %form{action: "/sys/clns/report/print?rb=#{ext}"}
+    %table
+      %thead
+        %tr.pdb-05
+          %td{colspan: "2"}
+            %detail.info.w-30rem
+              = t("intro.filter.desk_report.#{ext}")
+      %tbody
+        %tr.pdb-05
+          %td
+            %span Alegeţi luna:
+          %td
+            %input#date_send.ui-state-default.ce{name: 'date',value: l(Date.today,format: '%Y-%m')}
+            %input#file_name{type: 'hidden',name: 'fn',value: "#{firm.name[0][0..2].upcase}_RC-"}
+      %tfoot
+        %tr
+          %td.buttonset.ce{colspan: "2"}
+            %button{type: "button",data: {action: "print", icon: "print"}}= t('button.print')
+            %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+- if ext == 'stock_monthly'
+  %form{action: "/sys/clns/report/print?rb=#{ext}"}
+    %table
+      %thead
+        %tr.pdb-05
+          %td{colspan: "2"}
+            %detail.info.w-30rem
+              = t("intro.filter.desk_report.#{ext}_expl")
+      %tbody
+        %tr.pdb-05
+          %td
+            %span Alegeţi luna:
+          %td
+            %input#date_send.ui-state-default.ce{name: 'date',value: l(Date.today,format: '%Y-%m')}
+            %input#file_name{type: 'hidden',name: 'fn',value: "#{firm.name[0][0..2].upcase}_Inventar-"}
+        %tr.pdb-05
+          %td
+            %label
+              Complet ( Toate categoriile )
+              %input{type: 'radio', name: 'type_0',value: 'all'}
+          %td
+            %label
+              Parțial ( Accesorii etc. )
+              %input{type: 'radio', name: 'type_0',value: 'sel',checked: true}
+        %tr.pdb-05
+          %td
+            %label
+              Cumulat ( id )
+              %input{type: 'radio', name: 'type_1',value: 'id',checked: true}
+          %td
+            %label
+              Detailat ( id_pu )
+              %input{type: 'radio', name: 'type_1',value: 'id_pu'}
+        - unless uid
+          %tr.pdb-05
+            %td{colspan: '2'}
+              %input#unit_ids.ui-state-default{type: 'hidden',name: 'unit_ids',style: 'width:350px',data: {data: s2dt}}
+        -else
+          %tr.pdb-05
+            %td{colspan: '2'}
+              %input{type: 'hidden',name: 'unit_ids',value: uid}
+      %tfoot
+        %tr
+          %td.buttonset.ce{colspan: "2"}
+            %button{type: "button",data: {action: "print", icon: "print"}}= t('button.print')
+            %button{type: "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')

@@ -1,0 +1,64 @@
+- @object.reload
+- if @object.freights.count > 0
+  %tbody{id: 'tabs-freights',data: {title: mat(@object,'tabs_freights')}}
+    %tr
+      %td
+        %table{:style => "width:100%;font-size:12px"}
+          %tbody.inner
+            %tr
+              - mat(@object,'table_header_show').each do |label|
+                %td
+                  %span= label
+            - @object.reload; @object.freights.each do |o|
+              %tr
+                - td_value_for  o, 'name',{style: 'stats',nested: 'doc_inv'}
+                %td.ta-ce
+                  - value_for  o, 'um',   {style: 'um', nested: 'doc_inv'}
+                %td.ta-ri
+                  - value_for  o, 'qu',   {style: 'val',nested: 'doc_inv'}
+                %td.ta-ri
+                  - value_for  o, 'pu',   {style: 'pu', nested: 'doc_inv',precision: 4}
+                %td.ta-ri
+                  - value_for  o, 'val',  {style: 'val',nested: 'doc_inv'}
+                %td.ta-ri
+                  - value_for  o, 'tva',  {style: 'val',nested: 'doc_inv'}
+                %td.ta-ri
+                  - value_for  o, 'tot',  {style: 'val',nested: 'doc_inv'}
+            %tr
+              %td{colspan: '4'}
+                %span Total
+              - td_value_for  @object, 'sum_100',  {style: 'val'}
+              - td_value_for  @object, 'sum_tva',  {style: 'val'}
+              - td_value_for  @object, 'sum_out',  {style: 'val'}
+    %tr
+      %td
+  %tbody{id: 'tabs-payments',data: {title: mat(@object,'tabs_payments')}}
+    %tr.pdb-05
+      %td
+        - label_for @object, 'payed'
+        - value_for @object, 'payed', {style: 'st'}
+        &nbsp;| &nbsp;
+        - label_for @object, 'deadl'
+        - value_for @object, 'deadl', {style: 'st'}
+    - if @object.pyms.count > 0
+      - @object.pyms.each do |o|
+        %tr
+          %td
+            - value_for o, 'id_date', {style: 'st'}
+            &nbsp;| &nbsp;
+            - value_for o, 'expl',    {style: 'st'}
+            &nbsp;| &nbsp;
+            - value_for o, 'val',     {style: 'st'}
+    - else
+      %tr.pdb-05
+        %td
+          %detail.detail.w-45rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('msg.no_payments')
+- else
+  %tbody
+    %tr.pdb-05
+      %td
+        %detail.warning
+          %i.fa.fa-fa-exclamation-triangle.fa-lg
+          = t('msg.no_freight_selected')

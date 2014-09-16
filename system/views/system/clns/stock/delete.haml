@@ -1,0 +1,22 @@
+:ruby
+  unit_id = @current_user.unit_id || session[:unit_id]
+%span#hidden_data{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
+%article#xhr_info.warning
+  %i.fa.fa-warning.fa-lg
+  = t('intro.delete.main',data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}", method: "delete"}
+  %table
+    %thead
+      %tr
+        %td
+          - label_for @object, 'name',    {style: 'stats'}
+          - value_for @object, 'name',    {style: 'stats st'}
+          - label_for @object, 'id_date', {style: 'stats'}
+          %span= @object.id_date.to_s
+      %tr.pdb-05
+        %td.ta-le.w-25rem
+          - value_for @object,  'expl'
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['delete','cancel'],{style: 'ta-ce'})

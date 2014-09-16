@@ -1,0 +1,19 @@
+:ruby
+  id_stats = params[:id_stats] || "00000000"
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t("intro.filter.main",data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}",method: "get"}
+  %table
+    %tbody
+      = partial "clns/shared/doc_select_freight", locals: {label: false,error: false,id_stats: id_stats}
+      %tr.pdb-05
+        %td
+          %select#oid
+            %option{value: "null"}= t("select.option",data: mat(@object,'model_name'))
+            - @object.default_sort.by_id_stats(id_stats).each do |o|
+              %option{value: o.view_filter.first,title: o.id_stats}= o.view_filter.last
+    %tfoot
+      %tr
+        - td_buttonset(['create','show','edit','delete','cancel'],{style: 'ta-ce'})

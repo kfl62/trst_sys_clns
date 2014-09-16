@@ -1,0 +1,70 @@
+ro:
+  clns:
+    freight:
+      missing: [["00", "---"]]
+      c0: [["00", "Toate"], ["01", "Masini/Aparate"], ["02", "Ustensile"], ["03", "Accesorii"], ["04", "Piese"], ["05", "Detergenti"], ["06", "Consumabile"], ["07", "Firma"]]
+      c1:
+        "00": [["00", "Toate"]]
+        "01": [["00", "Toate"], ["01", "Monodisc"], ["02", "Automat"], ["03", "Injectie-Extractie"], ["04", "Aspirator praf"], ["05", "Aspirator lichid"], ["06", "Altele"]]
+        "02": [["00", "Toate"], ["01", "Carucior"], ["02", "Galeata cu storcator"], ["03", "Suport umezitor geam"], ["04", "Suport racleta geam"], ["05", "Suport mop 40 cm"], ["07", "Suport pad dreptunghiular"], ["08", "Suport lama"], ["06", "Perie frecat cu miner"], ["09", "Scara Aluminiu"], ["10", "Tija telescop"], ["11", "Matura"]]
+        "03": [["00", "Toate"], ["01", "Furtun flexibil "], ["02", "Disc antrenare pad 16\""], ["03", "Perie PPL 16\""], ["04", "Perie Tynnex 16\""], ["05", "Perie covor 16\""], ["06", "Coada"], ["07", "Sac filtrant hirtie"], ["08", "Lama cauciuc automata"],["09", "Diverse"]]
+        "04": [["00", "Toate"], ["01", "Motor"], ["02", "Dispersor sapun"]]
+        "05": [["00", "Toate"], ["01", "Curetenie zilnica"], ["02", "Curatenie de baza"], ["03", "Altele"]]
+        "06": [["00", "Toate"], ["01", "Hartie WC"], ["02", "Hartie WC MIDI"], ["12", "Prosop"], ["03", "Laveta"], ["04", "Burete"], ["05", "Lama Warner"], ["06", "Mop plat 40cm"], ["07", "Mop rotund 250g"], ["08", "Mop Kentucky"], ["09", "Pad monodisk 16\""], ["10", "Pad dreptunghiular"], ["11", "Saci menaj"], ["13", "Pisoar"], ["14", "Cap pulverizare"], ["15", "Diverse"]]
+        "07": [["00", "Toate"], ["01", "Sediu"], ["06", "Parc auto"], ["02", "Energie"], ["03", "Telefonie"], ["04", "Banca"], ["05", "Protocol"]]
+      c2:
+        "00":
+          "00": [["00", "Toate"]]
+        "02":
+          "01": [["00", "Toate"], ["01", "Mono"], ["02", "Dublu"], ["03", "Complex"]]
+          "05": [["00", "Toate"], ["01", "Suport mop cu urechi"], ["02", "Suport mop cu buzunar"], ["03", "Suport mop special"]]
+          "11": [["00", "Toate"], ["01", "Plastic"], ["02", "Altele"]]
+        "03":
+          "01": [["00", "Toate"], ["01", "Furtun 38mm"], ["02", "Furtun 42mm"]]
+          "06": [["00", "Toate"], ["01", "Coada lemn 110"], ["02", "Coada lemn 150"], ["03", "Coada metal Alu"], ["04", "Coada metal Altele"]]
+          "07": [["00", "Toate"], ["01", "Nilfisk GD2000"], ["02", "Nilfisk S100"], ["03", "Numatic 470"], ["04", "Numatic Henry"], ["05", "Altele"]]
+        "04":
+          "01": [["00", "Toate"], ["01", "Motor A40"], ["02", "Motor Soteco"]]
+          "02": [["00", "Toate"], ["01", "Dispersor sapun Pompa"], ["02", "Dispersor sapun Placa spate"]]
+        "05":
+          "01": [["00", "Toate"], ["01", "Sanitar"], ["02", "Mobilier"], ["03", "Pardoseala"], ["07", "Geam"], ["04", "Parfumat"], ["05", "Vesela"], ["06", "Automata"]]
+          "02": [["00", "Toate"], ["01", "Sanitar"], ["02", "Alcalin"], ["03", "Altele"]]
+          "03": [["00", "Toate"], ["01", "Sapun lichid"], ["02", "Dispersie polimerica"], ["03", "Mocheta"], ["04", "Diverse"]]
+        "06":
+          "01": [["00", "Toate"], ["01", "HWCS alb"], ["02", "HWCS color"]]
+          "02": [["00", "Toate"], ["01", "HWCM alb"], ["02", "HWCM color"]]
+          "03": [["00", "Toate"], ["01", "Microfibra"], ["02", "Umeda"]]
+          "04": [["00", "Toate"], ["01", "BSB alb"], ["02", "BSB verde"]]
+          "06": [["00", "Toate"], ["01", "MP40 bumbac cu urechi"], ["02", "MP40 bumbac cu buzunare"], ["03", "MP40 micro cu urechi"], ["04", "MP40 micro cu buzunare"]]
+          "07": [["00", "Toate"], ["01", "MR profesional"], ["02", "MR Metro"]]
+          "09": [["00", "Toate"], ["01", "PM rosu"], ["02", "PM albastru"], ["03", "PM verde"], ["04", "PM maro"], ["05", "PM negru"]]
+          "10": [["00", "Toate"], ["01", "PD albastru"], ["02", "PD verde"], ["03", "PD maro"]]
+          "11": [["00", "Toate"], ["01", "SM 20L"], ["02", "SM 30L"], ["03", "SM 60L"], ["04", "SM 120L"], ["05", "SM altele"]]
+          "12": [["00", "Toate"], ["01", "PHS alb"], ["02", "PHS color"], ["03", "PHB rola 10M"], ["04", "PHB rola 200M"], ["05", "PHB rola 300M"], ["06", "PHI rola KC7200"]]
+          "13": [["00", "Toate"], ["01", "Pastila"], ["02","Placa"]]
+        "07":
+          "02": [["00", "Toate"], ["01", "Electrica"], ["02", "Gaz metan"], ["03", "Combustibil"]]
+  mongoid:
+    attributes:
+      'trst/freight': &trst_freight
+        << : *trst_freight
+      'clns/freight':
+        criteria_name: Categoria/Grupa
+        table_all: ['Material', 'Iniţial', 'Intrări', 'Ieşiri', 'Stoc']
+        table_one: ['Data', 'Intrări', 'Ieşiri', 'Stoc']
+        stock_start: Stoc initial
+        table_all_with_pu: ['Material', 'PU', 'Iniţial', 'Valoare', 'Intrări', 'Valoare', 'Ieşiri', 'Valoare', 'Stoc', 'Valoare']
+        tab_main_title: Date generale
+        tab_csn_title: Denumiri specifice
+        tab_csn_empty: |
+          Nu există denumiri specifice, Se va tipării denumirea materialului.
+        tab_csn_one: |
+          Există doar denumirea generică, care se va tipării ptr. fiecare client.
+        tab_csn_many: |
+          Denumirea generică se va tipării la toți cei care nu au o altă denumire definită.
+        tab_csn_create: |
+          Adăugați o denumire spicifică clientului.
+        << : *trst_freight
+      'clns/freight_stock':
+        model_name: Material în stoc
+        << : *trst_freight

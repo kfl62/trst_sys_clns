@@ -1,0 +1,25 @@
+:ruby
+  firm = Clns::PartnerFirm.find_by(firm: true)
+  grns = @object.dlns.empty?
+  tdat = grns ? mat(@object,'model_name_grn') : mat(@object,'model_name')
+%span#hidden_data{data: {dialog: "delete",title_data: tdat,model_name: mat(@object,@object.id_intern == true ? 'model_name_id_intern' : 'model_name'),oid: @object.id,js_ext: 'desk_invoice'}}
+%article#xhr_info.warning
+  %i.fa.fa-fa-exclamation-triangle.fa-lg
+  = t('intro.delete.main', data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}", method: "delete"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          - if grns
+            %detail.detail.w-45rem
+              %i.fa.fa-bomb.fa-lg.red
+              = t('intro.show.desk_invoice.grn',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+          - else
+            %detail.detail.w-45rem
+              %i.fa.fa-bomb.fa-lg.red
+              = t('intro.show.desk_invoice.main',doc_name: @object.doc_name,id_date: l(@object.id_date,format: :trst),client: @object.client.name[2])
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['delete','cancel'],{style: 'ta-ce'},'7')

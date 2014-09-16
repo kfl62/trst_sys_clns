@@ -1,0 +1,56 @@
+:ruby
+  today = Date.today;   cols = 0
+  y   = params[:p_y].nil? ? today.year  : params[:p_y].to_i
+  m   = params[:p_m].nil? ? today.month : params[:p_m].to_i
+  id_stats    = params[:id_stats] || locals[:id_stats] || "00000000"
+  c0,c1,c2,c3 = id_stats.scan(/\d{2}/)
+  uid = @current_user.unit_id ? @current_user.unit_id : params[:uid] == 'null' ? nil : params[:uid]
+  fid = params[:fid] ? params[:fid] == 'null' ? nil : params[:fid] : nil
+  firm= Clns::PartnerFirm.find_by(firm: true); unit= firm.units.find(uid) if uid; freight = Clns::Freight.find(fid) if fid
+%span#hidden_data{data: {dialog: "query",title_data: uid ? unit.name[1] : firm.name[2],model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_freight'}}
+- if uid && fid.nil?
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_unit')
+  %div.pdb-05
+    %span.select-date
+      = partial "#{@path}/select_date"#, locals: {daily: true}
+    %span.select-freight-c
+      = partial "#{@path}/select_freight_c"
+    - unless @current_user.unit_id
+      %select.param.uid{name: 'uid'}
+        %option{value: 'null'} Toate unităţile
+        - firm.units.asc(:slug).each do |pos|
+          %option{value: pos.id, selected: uid.to_s == pos.id.to_s}= pos.name[1]
+    %button.query-unit{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-unit.inner
+    = partial "#{@path}/data_unit"
+- elsif freight
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_freight')
+  %div.pdb-05
+    %span.select-date
+      = partial "#{@path}/select_date"
+    %span.select-freight-c
+      = partial "#{@path}/select_freight_c"
+    - unless @current_user.unit_id
+      %select.param.uid{name: 'uid'}
+        %option{value: 'null'} Toate unităţile
+        - firm.units.asc(:slug).each do |pos|
+          %option{value: pos.id, selected: uid.to_s == pos.id.to_s}= pos.name[1]
+    %button.query-freight{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-freight.inner
+    = partial "#{@path}/data_freight"
+- else
+  %article#xhr_info.info
+    %i.fa.fa-info-circle.fa-lg.blue
+    = t('intro.query.desk_freight.query_firm')
+  %div.pdb-05
+    %span.select-date
+      = partial "#{@path}/select_date"
+    %span.select-freight-c
+      = partial "#{@path}/select_freight_c"
+    %button.query-firm{type: 'button',data: {action: "query",icon: "fa fa-search",text: 'hidden'}}
+  %table.data-firm.inner
+    = partial "#{@path}/data_firm", locals: {firm: firm, unit: unit}

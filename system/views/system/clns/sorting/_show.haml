@@ -1,0 +1,45 @@
+- @object.reload
+- @object.from_freights.each{|f| f.set(:id_intern,true); f.set(:val,(f.pu*f.qu).round(2))}
+- @object.resl_freights.each{|f| f.set(:id_intern,true); f.set(:val,(f.pu*f.qu).round(2))}
+- if @object.resl_freights.count > 0
+  %tbody.inner
+    %tr
+      - mat(@object,'table_header_show').each do |label|
+        %td
+          %span= label
+    - @object.from_freights.each do |o|
+      %tr
+        - td_value_for  o, 'freight',  {order: 'name',style: 'name'}
+        %td.ta-ce
+          - value_for  o, 'um',        {style: 'um'}
+        %td.ta-ri
+          - value_for  o, 'pu',        {style: 'pu'}
+        %td.ta-ri
+          - value_for  o, 'qu',        {style: 'val'}
+        %td.ta-ri
+          - value_for  o, 'val',       {style: 'val'}
+        %td
+          %span Sursa
+    - @object.resl_freights.each do |o|
+      %tr
+        - td_value_for  o, 'freight',   {order: 'name',style: 'name'}
+        %td.ta-ce
+          - value_for  o, 'um',        {style: 'um'}
+        %td.ta-ri
+          - value_for  o, 'pu',        {style: 'pu'}
+        %td.ta-ri
+          - value_for  o, 'qu',        {style: 'val'}
+        %td.ta-ri
+          - value_for  o, 'val',       {style: 'val'}
+        %td
+          %span Rezultat
+    %tr
+      %td{colspan: '6'}
+        %span &nbsp;
+- else
+  %tbody
+    %tr.pdb-05
+      %td
+        %detail.warning
+          %i.fa.fa-fa-exclamation-triangle.fa-lg
+          = t('msg.no_freight_selected')

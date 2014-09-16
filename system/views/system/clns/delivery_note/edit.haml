@@ -1,0 +1,15 @@
+%span#hidden_data{data: {dialog: "edit",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_delivery_note'}}
+%form{action: "/sys/#{@path}", method: "put"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td{colspan: "5"}
+          - label_for @object, 'doc_name'
+          - input_for @object, 'doc_name'
+      %tr.pdb-05
+        %td{colspan: "5"}
+          - input_for @object, 'expl', {style: 'ui-state-default w-45rem'}
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'},'5')

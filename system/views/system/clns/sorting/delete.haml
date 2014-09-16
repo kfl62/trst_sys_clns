@@ -1,0 +1,16 @@
+%span#hidden_data{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_sorting'}}
+%article#xhr_info.warning
+  %i.fa.fa-fa-exclamation-triangle.fa-lg
+  = t('intro.delete.main',data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}",method: "delete"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td{colspan: "6"}
+          %detail.detail.w-35rem
+            %i.fa.fa-bomb.fa-lg.red
+            = t('intro.show.desk_sorting',id_date: l(@object.id_date,format: :trst),unit: @object.unit.name[1],signed_by: @object.signed_by.name,expl: @object.expl)
+    = partial "/#{@path}/show"
+    %tfoot
+      %tr
+        - td_buttonset(['delete','cancel'],{style: 'ta-ce'},'6')

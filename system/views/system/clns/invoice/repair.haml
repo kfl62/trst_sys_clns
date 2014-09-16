@@ -1,0 +1,16 @@
+%span#hidden_data{data: {dialog: "repair",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_invoice'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          %span= mat(@object,'day')
+          %input#date_show.ui-state-default{type: 'text',value: l(Date.today,format: :trst)}
+          %input#date_send{type: 'hidden', value: Date.today.to_s}
+    %tbody
+      %tr.pdb-05
+        %td
+          %input.repair{type: 'hidden',style: 'width:410px',data: {search: 'Clns::Invoice',ph: '2'}}
+    %tfoot
+      %tr
+        - td_buttonset(['cancel'],{style: 'ta-ce'})

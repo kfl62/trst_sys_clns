@@ -1,0 +1,20 @@
+%span#hidden_data{data: {dialog: "show",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_stock'}}
+%form{action: "/sys/#{@path}", method: "get"}
+  %table
+    %thead
+      %tr
+        %td
+          - label_for @object, 'name',    {style: 'stats'}
+          - value_for @object, 'name',    {style: 'stats st'}
+          - label_for @object, 'id_date', {style: 'stats'}
+          %span= @object.id_date.to_s
+      %tr.pdb-05
+        %td.ta-le.w-25rem
+          - value_for @object, 'expl'
+    = partial "#{@path}/show"
+    %tfoot
+      %tr
+        - if @current_user.root?
+          - td_buttonset(['edit','delete','cancel'],{style: 'ta-ce'})
+        -else
+          - td_buttonset(['cancel'],{style: 'ta-ce'})

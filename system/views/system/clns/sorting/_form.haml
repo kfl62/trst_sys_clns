@@ -1,0 +1,41 @@
+%tbody.hidden
+  %tr
+    %td
+      %table.inner
+        %tbody.inner
+          %tr
+            - mat(@object,'table_header_form').each do |label|
+              %td
+                %span= label
+          - if @object.resl_freights.empty?
+            - for i in 0..4 do; o = @object.resl_freights.new
+              %tr.resl-freight
+                %td.w-8rem
+                  %select.resl-freight.select
+                    %option{value: 'null'} Selectare material
+                    - Clns::Freight.by_id_stats("05030100").sort_by{|f| f.name}.each do |o|
+                      %option{value: o.view_filter.first, data: {freight_id: o.id,id_stats: o.id_stats,um: o.um,pu: o.pu}}= o.view_filter.last
+                  - input_for   o, 'freight_id',{type: 'hidden',nested: 'doc_sor',style: 'freight_id',value: 'strip',index: i}
+                  - input_for   o, 'id_stats',  {type: 'hidden',nested: 'doc_sor',style: 'id_stats',  value: 'strip',index: i}
+                  - input_for   o, 'id_date',   {type: 'hidden',nested: 'doc_sor',style: 'id_date',   value: 'strip',index: i}
+                  - input_for   o, 'um',        {type: 'hidden',nested: 'doc_sor',style: 'um',        value: 'strip',index: i}
+                  - input_for   o, 'pu',        {type: 'hidden',nested: 'doc_sor',style: 'pu',        value: 'strip',index: i}
+                %td.ta-ce.w-4rem
+                  %span.um &nbsp;
+                %td.ta-ce.w-6rem
+                  - input_for  o, 'qu',        {nested: 'doc_sor',style: 'ta-ri w-4rem qu',value: '0.00',index: i}
+                %td.ta-ce.w-2rem
+                  %span.red
+                    %i.fa.fa-minus-circle{title: t('button.delete')}
+            %tr.total
+              %td{colspan: '2'}
+                %span Total
+              %td
+                %span.res 0.00
+              %td
+                %span &nbsp;
+          - else
+            %tr.pdb-05
+              %td{colspan: '4'}
+                %detail.detail
+                  = 'Editing not allowed!'

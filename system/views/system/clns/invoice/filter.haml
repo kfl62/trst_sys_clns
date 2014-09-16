@@ -1,0 +1,46 @@
+- if params[:grn_ary]
+  = partial "#{@path}/invoice_from"
+- elsif params[:dln_ary]
+  = partial "#{@path}/invoice_to"
+- elsif params[:inv_ary] == 'payable'
+  %span#hidden_data{data: {dialog: "filter",title_data:mat(@object,'title_data_payable'),model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_payment'}}
+  %form{action: "/sys/#{@path}", method: 'get'}
+    %table
+      %thead
+        %tr.pdb-05
+          %td
+            %detail.detail
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.filter.not_ready')
+      %tbody
+      %tfoot
+        %tr
+          - td_buttonset(['cancel'],{style: 'ta-ce', create: {text: t('button.create') + " NIR!"}})
+- elsif params[:inv_ary] == 'receivable'
+  %span#hidden_data{data: {dialog: "filter",title_data:mat(@object,'title_data_receivable'),model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_payment'}}
+  %form{action: "/sys/#{@path}", method: 'get'}
+    %table
+      %thead
+        %tr.pdb-05
+          %td
+            %detail.detail
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.filter.not_ready')
+      %tbody
+      %tfoot
+        %tr
+          - td_buttonset(['cancel'],{style: 'ta-ce', create: {text: t('button.create') + " NIR!"}})
+- else
+  %span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_payment'}}
+  %form{action: "/sys/#{@path}", method: 'get'}
+    %table
+      %thead
+        %tr.pdb-05
+          %td
+            %detail.detail
+              %i.fa.fa-info-circle.fa-lg.blue
+              = t('intro.filter.not_ready')
+      %tbody
+      %tfoot
+        %tr
+          - td_buttonset(['cancel'],{style: 'ta-ce', create: {text: t('button.create') + " NIR!"}})

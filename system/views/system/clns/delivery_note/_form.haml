@@ -1,0 +1,43 @@
+%tbody
+  %tr
+    %td
+      %table.w-100pr
+        %tbody.inner
+          %tr.dln-freight-header.hidden
+            - mat(@object,'table_header_form').each do |label|
+              %td
+                %span= label
+          %tr.dln-freight.template
+            - o = @object.freights.new
+            %td
+              %span.name Material
+              - input_for o, 'freight_id',    {type: 'hidden',nested: 'doc_dln',index: 0,style: 'freight_id',value: 'strip'}
+              - input_for o, 'id_date',       {type: 'hidden',nested: 'doc_dln',index: 0,style: 'id_date',value: 'strip'}
+              - input_for o, 'id_stats',      {type: 'hidden',nested: 'doc_dln',index: 0,style: 'id_stats',value: 'strip'}
+              - input_for o, 'id_intern',     {type: 'hidden',nested: 'doc_dln',index: 0,style: 'id_intern',value: 'false'}
+              - input_for o, 'um',            {type: 'hidden',nested: 'doc_dln',index: 0,style: 'um',value: 'strip'}
+              - input_for o, 'pu',            {type: 'hidden',nested: 'doc_dln',index: 0,style: 'pu',value: 'strip'}
+              - input_for o, 'qu',            {type: 'hidden',nested: 'doc_dln',index: 0,style: 'qu',value: 'strip'}
+              - input_for o, 'val',           {type: 'hidden',nested: 'doc_dln',index: 0,style: 'val',value: 'strip'}
+              - input_for o, 'pu_invoice',    {type: 'hidden',nested: 'doc_dln',index: 0,style: 'pu_invoice',value: 0.0}
+              - input_for o, 'val_invoice',   {type: 'hidden',nested: 'doc_dln',index: 0,style: 'val_invoice',value: 0.0}
+            %td.ta-ce.w-4rem
+              %span.um buc
+            %td.ta-ri.w-6rem
+              %span.pu 0.00
+            %td.ta-ri.w-8rem
+              %span.stk.qu 0.00
+            %td.ta-ri.w-8rem
+              %span.out.qu 0.00
+            %td.ta-ri.w-8rem
+              %span.val 0.00
+            %td.ta-ce.w-2rem
+              %span.button.red.pointer
+                %i.fa.fa-minus-circle
+          %tr.dln-freight-total.hidden
+            %td{colspan: 5}
+              %span TOTAL
+            %td
+              %span.val 0.00
+            %td
+              %span &nbsp

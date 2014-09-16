@@ -1,0 +1,45 @@
+:ruby
+  firm    = Clns::PartnerFirm.find_by(firm: true)
+  client  = Clns::PartnerFirm.find(params[:client_id])
+  client_d= client.people.find(params[:client_d_id]) if params[:client_d_id]
+  unit_id = @current_user.unit_id || session[:unit_id]
+%span#hidden_data{data: {dialog: "create",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_delivery_note'}}
+%form{action: "/sys/#{@path}",method: "post"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          - label_for @object, 'name'
+          - input_for @object, 'name', {value: @object.increment_name(unit_id),style: 'ui-state-default ce id_intern'}
+          - label_for @object, 'id_date'
+          - input_for @object, 'id_date',      {id: 'date_show',name: 'strip'}
+          - input_for @object, 'id_date',      {id: 'date_send',type: 'hidden',value: @object.id_date.to_s}
+          - input_for @object, 'client_id',    {type: 'hidden',value: client.id}
+          - input_for @object, 'unit_id',      {type: 'hidden',value: unit_id}
+          - input_for @object, 'id_intern',    {type: 'hidden',value: client.firm.to_s}
+          - input_for @object, 'signed_by',    {type: 'hidden',value: @current_user.id}
+          - if client_d
+            - input_for @object, 'client_d_id',{type: 'hidden',value: client_d.id}
+      %tr.pdb-05
+        %td
+          - label_for @object, 'doc_name'
+          - input_for @object, 'doc_name',     {placeholder: mat(@object,'doc_name_ph')}
+          - label_for @object, 'doc_plat'
+          - input_for @object, 'doc_plat'
+      %tr.pdb-05
+        %td
+          - input_for @object, 'expl',     {style: 'ui-state-default w-50rem',placeholder: mat(@object,'expl_ph')}
+          %span.button.red.pointer
+            %i.fa.fa-bars
+      %tr
+        %td.add-freight-container
+          = partial "clns/shared/doc_add_freight_stock"
+      %tr.pdb-05
+        %td
+          %detail.detail.w-50rem
+            %i.fa.fa-info-circle.fa-lg.blue
+            = t('intro.create.desk_delivery_note',firm: firm.name[2],firm_d: @current_user.name,client: client.name[2],client_d: (client_d.name rescue 'Anonymous'))
+    = partial "#{@path}/form"
+    %tfoot
+      %tr
+        - td_buttonset(['save','cancel'],{style: 'ta-ce'})

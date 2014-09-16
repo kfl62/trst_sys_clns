@@ -12,24 +12,30 @@ define () ->
               delete @[k] unless k in ['set','clear']
       scrollHeader: (tbl,h=450)->
         $table = $(tbl)
-        tblHdr   = $("<table style='width:auto;font-size:12px'><tbody class='inner'><tr></tr><tr></tr></tbody></table>")
-        tblCntnr = $("<div id='scroll-container' style='height:#{h}px;overflow-x:hidden;overflow-y:scroll'></div>")
-        tblClmnW = []
-        $table.find('tr.scroll td').each (i)->
-          tblClmnW[i] = $(this).width()
-          return
-        tblscrll = $table.find('tr.scroll').html()
-        $table.find('tr.scroll').html('')
-        $table.css('width','auto')
-        tblHdr.find('tr:first').html(tblscrll)
-        tblHdr.find('tr:first td').each (i)->
-          $(this).css('width', tblClmnW[i])
-          return
-        $table.find('tr.scroll').next().find('td').each (i)->
-          $(this).css('width', tblClmnW[i])
-          return
-        $table.before(tblHdr)
-        $table.wrap(tblCntnr)
+        if h isnt 0
+          tblHdr   = $("<table style='width:auto'><tbody class='inner'><tr></tr><tr></tr></tbody></table>")
+          tblCntnr = $("<div id='scroll-container' style='height:#{h}px;overflow-x:hidden;overflow-y:scroll'></div>")
+          tblClmnW = []
+          $table.find('tr.scroll td').each (i)->
+            tblClmnW[i] = $(this).width()
+            return
+          tblscrll = $table.find('tr.scroll').html()
+          $table.find('tr.scroll').html('')
+          $table.css('width','auto')
+          tblHdr.find('tr:first').html(tblscrll)
+          tblHdr.find('tr:first td').each (i)->
+            $(this).css('width', tblClmnW[i])
+            return
+          $table.find('tr.scroll').next().find('td').each (i)->
+            $(this).css('width', tblClmnW[i])
+            return
+          $table.before(tblHdr)
+          $table.wrap(tblCntnr)
+        else
+          tblscrll = $('div#scroll-container').prev().find('tr:first').html()
+          $('div#scroll-container').prev().remove()
+          $table.find('tr.scroll').html(tblscrll)
+          $table.unwrap()
         return
       idPnHandle: ()->
         $input = $('input[name*="id_pn"]')
@@ -67,13 +73,14 @@ define () ->
           $id_intern.on 'change', ()->
             $id_intern.attr 'size', $id_intern.val().length + 4
             return
-        if Trst.desk.hdo.dialog is 'create' or Trst.desk.hdo.dialog is 'edit'
+        if Trst.desk.hdo.dialog in ['create', 'edit']
           if $('input[name*="id_pn"]').length
             Clns.desk.idPnHandle()
             $('input[name*="id_pn"]').on 'keyup', ()->
               Clns.desk.idPnHandle()
-          $('input.focus').focus()
-          $('select.focus').focus()
+          $('.focus').focus()
+        else
+          $('button').last().focus()
         if $('table.scroll').height() > 450
           Clns.desk.scrollHeader($('table.scroll'))
         $log 'Clns.desk.init() Ok...'

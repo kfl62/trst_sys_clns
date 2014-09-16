@@ -1,18 +1,13 @@
-%span#hidden_data.hidden{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_partner_firm'}}
+%article#xhr_info.info
+  %i.fa.fa-info-circle.fa-lg.blue
+  = t("intro.filter.main",data: mat(@object,'model_name'))
 %form{action: "/sys/#{@path}",method: "get"}
-  %table{cellspacing: "0"}
+  %table
     %tbody
       %tr.pdb-05
         %td
-          %span.info.width-400.ju= t("intro.filter.main",data: mat(@object,'model_name'))
-      %tr.pdb-05
-        %td
-          %input.select2{type: 'hidden',style: 'width:300px',data: {minlength: 2,ph: 0,search: @path.classify}}
+          %input.select2{type: 'hidden',style: 'width:300px',data: {minlength: '2',ph: '0',search: @path.classify}}
     %tfoot
       %tr
-        %td.buttonset.ce
-          %button{:type => "button",data: {action: "create",icon: "circle-plus"}}= t('button.create')
-          %button{:type => "button",data: {action: "show",icon: "clipboard"}}= t('button.show')
-          %button{:type => "button",data: {action: "edit",icon: "document"}}= t('button.edit')
-          %button{:type => "button",data: {action: "delete",icon: "circle-minus"}}= t('button.delete')
-          %button{:type => "button",data: {action: "cancel",icon: "circle-close"}}= t('button.cancel')
+        - td_buttonset(['create','show','edit','delete','cancel'],{style: 'ta-ce'})

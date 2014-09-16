@@ -1,0 +1,37 @@
+:ruby
+  today = Date.today;
+  y = params[:p_y].nil? ? today.year  : params[:p_y].to_i
+  m = params[:p_m].nil? ? today.month : params[:p_m].to_i
+  d = params[:p_d].nil? ? today.day   : params[:p_d].to_i
+
+%span#hidden_data{data: {dialog: "filter",model_name: mat(@object,'model_name'),oid: "null",js_ext: 'desk_cache_book'}}
+%table
+  %tbody
+    = partial 'clns/shared/select_params', locals: {colspan: '6'}
+    %tr
+      %td
+        %table.scroll
+          %tbody.inner
+            %tr.scroll
+              - mat(@object,'tbl_filter_hdr').each do |label|
+                %td
+                  %span= label
+            - range = y + m == today.year + today.month ? (1..d) : (1..Time.days_in_month(m,y)); range.each do |day|
+              - cb = Clns::CacheBook.daily(y,m,day); cbc = cb.count > 0
+              %tr
+                %td
+                  %span.link{data: {oid: cbc ? cb.first.id : 'nil', action: cbc && (cb.first.lines.count > 0 ? 'show' : 'edit'), id_date: Date.new(y,m,day).to_s}}= cbc ? cb.first.id_date.to_s : "* #{Date.new(y,m,day).to_s}"
+                %td.ta-ri
+                  %span= cbc ? "%.2f" % cb.first.ib : "-"
+                %td.ta-ri
+                  %span= cbc ? "%.2f" % cb.first.lines.sum(:in)  : "-"
+                %td.ta-ri
+                  %span= cbc ? "%.2f" % cb.first.lines.sum(:out) : "-"
+                %td.ta-ri
+                  %span= cbc ? "%.2f" % cb.first.fb : "-"
+                %td.ta-ri
+                  %span= cbc ? cb.first.lines.count : "-"
+            %tr.hidden
+  %tfoot
+    %tr
+      - td_buttonset(['cancel'],{style: 'ta-ce'})

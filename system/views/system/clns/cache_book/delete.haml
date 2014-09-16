@@ -1,0 +1,23 @@
+%span#hidden_data{data: {dialog: "delete",model_name: mat(@object,'model_name'),oid: @object.id,js_ext: 'desk_cache_book'}}
+%article#xhr_info.warning
+  %i.fa.fa-fa-exclamation-triangle.fa-lg
+  = t('intro.delete.main', data: mat(@object,'model_name'))
+%form{action: "/sys/#{@path}",method: "delete"}
+  %table
+    %thead
+      %tr.pdb-05
+        %td
+          %span Nr:
+          %span.st= @object.name
+          %span din:
+          %span.st= @object.id_date.to_s
+          %br
+          %span Sold inițial:
+          %span.st= "%.2f" % @object.ib
+          %span Sold final:
+          %span.st= "%.2f" % @object.fb
+          %span Nr. rânduri:
+          %span.st= @object.lines.count
+    %tfoot
+      %tr
+        - td_buttonset(['delete','cancel'],{style: 'ta-ce'})
