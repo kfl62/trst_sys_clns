@@ -1,6 +1,8 @@
 ## v0.3.0
 
-release date: **2014-09-15**
+release date: **2014-09-16**
+&nbsp;&nbsp;&nbsp;&nbsp;- bump version v0.3.0
+&nbsp;&nbsp;&nbsp;&nbsp;- update CHANGELOG
 
 
 * **feature v0.2.996**, v0.3.0 preparation
@@ -15,29 +17,29 @@ release date: **2014-09-15**
    - bump version v0.2.995
    - update CHANGELOG
    - views `shared/_partials` update
-   - views `Clns::Stock` CRUD, issue #31
+   - views `Clns::Stock` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.stock` update, rewrite
-   - views `Clns::Sorting` CRUD, issue #31
+   - views `Clns::Sorting` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.sorting` update, rewrite
-   - views `Clns::PartnerFirm` CRUD, issue #31
-   - views `Clns::Invoicee` CRUD, issue #31
+   - views `Clns::PartnerFirm` CRUD, [issue #31][#31]
+   - views `Clns::Invoicee` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.invoice` update, rewrite
-   - assets, views for `Clns::DeliveryNote|Consumption` fix issue #35
+   - assets, views for `Clns::DeliveryNote|Consumption` fix [issue #35][#35]
    - assets js, fix issue #36
-   - views `Clns::Grn` CRUD, issues #31, #35
-   - assets css, temporary solution for issue #35
-   - assets js, `Clns.desk.grn` update, rewrite, issue #35
-   - views `Clns::Freight` CRUD, issue #31
-   - assets js, `Clns.desk.freight` update, rewrite, fix #34
-   - views `Clns::DeliveryNote` CRUD, issue #31
+   - views `Clns::Grn` CRUD, issues [#31][#31], [#35][#35]
+   - assets css, temporary solution for [issue #35][#35]
+   - assets js, `Clns.desk.grn` update, rewrite, [issue #35][#35]
+   - views `Clns::Freight` CRUD, [issue #31][#31]
+   - assets js, `Clns.desk.freight` update, rewrite, fix [issue #34][#34]
+   - views `Clns::DeliveryNote` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.delivery_note` update, rewrite
-   - views `Clns::Consumption` CRUD, issue #31
+   - views `Clns::Consumption` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.consumption` update, rewrite
-   - views `Clns::CacheBook` CRUD, issue #31
+   - views `Clns::CacheBook` CRUD, [issue #31][#31]
    - assets js, `Clns.desk.cache_book` update, rewrite
-   - views new partial for common selects, fix #33
-   - views pdf templates, cleanup & fix #30, see also kfl62/trst_sys_sinatra#22
-   - views cleanup (`.hidden, cellspacing`) fix #32
+   - views new partial for common selects, fix [issue #33][#33]
+   - views pdf templates, cleanup & fix [#30][#30], see also [kfl62/trst_sys_sinatra#22][trst_main#22]
+   - views cleanup (`.hidden, cellspacing`) fix [issue #32][#32]
 
 
 * **feature v0.2.994**, v0.3.0 preparation
@@ -515,6 +517,7 @@ release date: **2013-07-18**
 
 * Add version `lib/clns/version.rb`
 
+[trst_main#22]: https://github.com/kfl62/trst_sys_sinatra/issues/22
 [trst_main#15]: https://github.com/kfl62/trst_sys_sinatra/issues/15
 [trst_main#12]: https://github.com/kfl62/trst_sys_sinatra/issues/12
 [#1]: https://github.com/kfl62/trst_sys_clns/issues/1
@@ -557,3 +560,13 @@ release date: **2013-07-18**
 [#38]: https://github.com/kfl62/trst_sys_clns/issues/38
 [#39]: https://github.com/kfl62/trst_sys_clns/issues/39
 [#40]: https://github.com/kfl62/trst_sys_clns/issues/40
+[#41]: https://github.com/kfl62/trst_sys_clns/issues/41
+[#42]: https://github.com/kfl62/trst_sys_clns/issues/42
+[#43]: https://github.com/kfl62/trst_sys_clns/issues/43
+[#44]: https://github.com/kfl62/trst_sys_clns/issues/44
+[#45]: https://github.com/kfl62/trst_sys_clns/issues/45
+[#46]: https://github.com/kfl62/trst_sys_clns/issues/46
+[#47]: https://github.com/kfl62/trst_sys_clns/issues/47
+[#48]: https://github.com/kfl62/trst_sys_clns/issues/48
+[#49]: https://github.com/kfl62/trst_sys_clns/issues/49
+[#50]: https://github.com/kfl62/trst_sys_clns/issues/50
